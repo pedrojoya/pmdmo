@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">PR022-ToastPersonalizado</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Toast Personalizado</string>
+    <string name="pulsame_para_ver_el_toast">Púlsame para ver el Toast</string>
+    <string name="esta_tostada_esta_personalizada">Esta tostada está personalizada</string>
+
+</resources>

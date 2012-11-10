@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">ListView de selección</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="title_activity_main">ListView de selección</string>
+    <string name="listado_de_alumnos">Listado de alumnos</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="alumno">Alumno</string>
+    <string name="ciclo">Ciclo</string>
+    <string name="curso">Curso</string>
+    <string name="no_ha_seleccionado_ningun_alumno">No ha seleccionado ningún alumno</string>
+
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rojo">#FF0000</color>
+    <color name="negro">#000000</color>
+    <color name="seleccionado">#FBF2EF</color>
+    <color name="desseleccionado">#FFFFFF</color>
+    <color name="fondo_encabezado">#F2F2F2</color>
+</resources>

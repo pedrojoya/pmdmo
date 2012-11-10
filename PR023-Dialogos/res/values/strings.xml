@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">PR023-Dialogos</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="datepicker">DatePicker</string>
+    <string name="ha_seleccionado">"Ha seleccionado: "</string>
+    <string name="timepicker">TimePicker</string>
+    <string name="alerta_de_pregunta_si_no">Alerta de pregunta Si/No</string>
+    <string name="eliminar_usuario">Eliminar usuario</string>
+    <string name="esta_seguro_de_que_quiere_eliminar_el_usuario">¿Está seguro de que quiere eliminar el usuario?</string>
+    <string name="si">Sí</string>
+    <string name="usuario_borrado">Usuario borrado</string>
+    <string name="no">No</string>
+
+</resources>

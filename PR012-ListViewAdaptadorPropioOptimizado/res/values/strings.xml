@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">ListView con adaptador propio optimizado</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="title_activity_main">ListView con adaptador propio optimizado</string>
+    <string name="listado_de_alumnos">Listado de alumnos</string>
+
+</resources>

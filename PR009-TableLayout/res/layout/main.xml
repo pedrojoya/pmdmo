@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tlTabla"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="15dp"
+    android:stretchColumns="1,2,3">
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/conexion"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#00FF00" 
+        android:layout_marginBottom="15dp" />
+    <TableRow
+        android:layout_marginBottom="3dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_usuario"
+            android:layout_marginRight="25dp"/>
+        <EditText
+            android:id="@+id/txtUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"  
+            android:layout_span="3" >
+            <requestFocus />
+        </EditText>
+    </TableRow>
+    <TableRow 
+	    android:layout_marginBottom="3dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clave" />
+        <EditText
+            android:id="@+id/txtClave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"  
+            android:layout_span="3" >
+        </EditText>
+    </TableRow>
+    <TableRow
+        android:layout_weight="1"
+        android:gravity="bottom" >
+        <Button
+            android:text="@string/aceptar"
+            android:id="@+id/btnAceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_span="2"  >
+        </Button>
+        <Button
+            android:text="@string/cancelar"
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_span="2" >
+        </Button>
+    </TableRow>   
+</TableLayout>

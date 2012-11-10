@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">PR017-AutoCompleteTextView</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">AutoCompleteTextView</string>
+    <string name="album">Álbum</string>
+    <string name="nombre_del_album">Nombre del álbum</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="arte_del_album">Arte del álbum</string>
+
+</resources>

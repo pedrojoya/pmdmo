@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:padding="15dp" >
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/conexion"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#00FF00"
+        android:paddingBottom="20dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" >
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_usuario"
+            android:layout_width="fill_parent"
+            android:layout_weight="3" />
+        <EditText
+            android:id="@+id/txtUsuario"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text" >
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" >
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="@string/clave"
+            android:layout_weight="3"
+            android:layout_width="fill_parent" />
+        <EditText
+            android:id="@+id/txtClave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textPassword" >
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="bottom|center">
+        <Button
+            android:text="@string/aceptar"
+            android:id="@+id/btnAceptar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" >
+        </Button>
+        <Button
+            android:text="@string/cancelar"
+            android:id="@+id/btnCancelar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+        </Button>
+    </LinearLayout>
+</LinearLayout>

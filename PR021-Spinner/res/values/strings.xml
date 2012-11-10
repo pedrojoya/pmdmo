@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">PR021-Spinner</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Spinner personalizado</string>
+    <string name="album">Álbum</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="arte_del_album">Arte del álbum</string>
+
+</resources>

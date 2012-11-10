@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"   >
+    <TextView
+        android:id="@+id/lblAlbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/album" />
+    <Spinner
+        android:id="@+id/spnAlbum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/lblAlbum"
+        android:layout_marginTop="5dp" />
+    <Button
+        android:id="@+id/btnMostrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spnAlbum"
+        android:layout_marginTop="10dp"
+        android:onClick="btnMostrarOnClick"
+        android:layout_centerHorizontal="true"
+        android:text="@string/mostrar" />
+</RelativeLayout>
