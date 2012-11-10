@@ -13,5 +13,16 @@
     <string name="si">Sí</string>
     <string name="usuario_borrado">Usuario borrado</string>
     <string name="no">No</string>
+    <string name="alerta_de_seleccion_simple">Alerta de selección simple</string>
+    <string-array name="turnos">
+        <item >Mañana</item>
+        <item >Tarde</item>
+        <item >Noche</item>
+    </string-array>
+        <string name="turno">Turno</string>
+        <string name="selecciona_el_turno_de_trabajo">Selecciona el turno de trabajo</string>
+        <string name="alerta_de_seleccion_directa">Alerta de selección directa</string>
+        <string name="alerta_de_seleccion_multiple">Alerta de selección múltiple</string>
+        <string name="no_ha_seleccionado_ningun_turno">No ha seleccionado ningún turno</string>
 
 </resources>

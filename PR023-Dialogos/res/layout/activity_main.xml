@@ -27,4 +27,25 @@
         android:layout_marginBottom="10dp"
         android:onClick="btnAlertaSiNoOnClick" 
         android:text="@string/alerta_de_pregunta_si_no" />
+    <Button
+        android:id="@+id/btnAlertaSeleccionDirecta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnAlertaSeleccionDirectaOnClick" 
+        android:text="@string/alerta_de_seleccion_directa" />
+    <Button
+        android:id="@+id/btnAlertaSeleccionSimple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnAlertaSeleccionSimpleOnClick" 
+        android:text="@string/alerta_de_seleccion_simple" />
+    <Button
+        android:id="@+id/btnAlertaSeleccionMultiple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnAlertaSeleccionMultipleOnClick" 
+        android:text="@string/alerta_de_seleccion_multiple" />
 </LinearLayout>
