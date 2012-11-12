@@ -33,7 +33,6 @@ public class PrincipalActivity extends Activity implements OnClickListener {
         btnSolicitar.setOnClickListener(this);
     }
 
-	@Override
 	public void onClick(View vista) {
 		// Dependiendo de sobre qué botón se ha hecho click.
 		switch (vista.getId()) {

@@ -38,7 +38,6 @@ public class AlumnoActivity extends Activity {
 		}
 		// Establezco el listener del click del botón.
 		btnAceptar.setOnClickListener(new View.OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				retornar();
 			}
