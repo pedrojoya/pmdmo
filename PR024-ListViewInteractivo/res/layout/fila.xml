@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="#F7F2E0"
+    android:padding="2dp"
+	android:descendantFocusability="blocksDescendants"
+    tools:ignore="HardcodedText" >
+
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:contentDescription="Carátula"
+        android:src="@drawable/cantecito" />
+
+    <TextView
+        android:id="@+id/lblNombre"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="2dp"
+        android:layout_toRightOf="@+id/imgFoto"
+        android:gravity="center"
+        android:text="Échate un cantecito"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/lblAnio"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lblNombre"
+        android:layout_toRightOf="@+id/imgFoto"
+        android:gravity="center"
+        android:text="1992"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:id="@+id/llValoracion"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lblAnio"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/imgFoto">
+	    <RatingBar
+	        android:id="@+id/rtbValoracion"
+	        style="?android:attr/ratingBarStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="20dp"
+	        android:isIndicator="false"
+	        android:max="5"
+	        android:numStars="5"
+	        android:rating="2"
+ 	        android:stepSize="1" />
+    </LinearLayout>
+</RelativeLayout>

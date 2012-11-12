@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         // Establezco el layout que mostrará la actividad.
         setContentView(R.layout.main);
-        // Obtengo e inicializo las vistas.
+        // Obtengo e inicializa las vistas.
         getVistas();
     }
 
