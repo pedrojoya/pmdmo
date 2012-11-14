@@ -24,5 +24,13 @@
         <string name="alerta_de_seleccion_directa">Alerta de selección directa</string>
         <string name="alerta_de_seleccion_multiple">Alerta de selección múltiple</string>
         <string name="no_ha_seleccionado_ningun_turno">No ha seleccionado ningún turno</string>
+        <string name="usuario">Usuario</string>
+        <string name="contrasena">Contraseña</string>
+        <string name="cancelar">Cancelar</string>
+        <string name="aceptar">Aceptar</string>
+        <string name="conectar">Conectar</string>
+        <string name="alerta_personalizada">Alerta personalizada</string>
+        <string name="conexion">Conexión</string>
+        <string name="conectando">Conectando...</string>
 
 </resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:padding="5dp">
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+        android:textColor="#FFF"
+	    android:text="@string/usuario" />
+	<EditText
+	    android:id="@+id/txtUsuario"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+	    android:inputType="text" >
+	    <requestFocus />
+	</EditText>
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#FFF"
+	    android:text="@string/contrasena" />
+	<EditText
+	    android:id="@+id/txtClave"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+	    android:inputType="textPassword" >
+	</EditText>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center" >
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnCancelarOnClick"
+            android:text="@string/cancelar" />
+        <Button
+            android:id="@+id/btnConectar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnConectarOnClick"
+            android:text="@string/conectar" />
+	</LinearLayout>    
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -33,56 +34,50 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 	private static final int DLG_ALERTA_SELECCION_DIRECTA = 3; 
 	private static final int DLG_ALERTA_SELECCION_SIMPLE = 4;
 	private static final int DLG_ALERTA_SELECCION_MULTIPLE = 5;
+	private static final int DLG_ALERTA_PERSONALIZADA = 6;
 	private int turnoSeleccionado;	// Selección simple.
 	private boolean[] turnosSeleccionados;	// Selección múltiple.
 
+	// Variables a nivel de clase.
+	Dialog dialogo = null;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-	// Al hacer click sobre btnDatePicker.
-	public void btnDatePickerOnClick(View v) {
+	// Al hacer click sobre cualquier botón.
+	public void btnOnClick(View v) {
 		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_DATEPICKER);
-    	
+		switch (v.getId()) {
+		case R.id.btnDatePicker:
+			showDialog(DLG_DATEPICKER);
+			break;
+		case R.id.btnTimePicker:
+			showDialog(DLG_TIMEPICKER);
+			break;
+		case R.id.btnAlertaSiNo:
+			showDialog(DLG_ALERTA_SINO);
+			break;
+		case R.id.btnAlertaSeleccionDirecta:
+			showDialog(DLG_ALERTA_SELECCION_DIRECTA);
+			break;
+		case R.id.btnAlertaSeleccionSimple:
+			showDialog(DLG_ALERTA_SELECCION_SIMPLE);
+			break;
+		case R.id.btnAlertaSeleccionMultiple:
+			showDialog(DLG_ALERTA_SELECCION_MULTIPLE);
+			break;
+		case R.id.btnAlertaPersonalizada:
+			showDialog(DLG_ALERTA_PERSONALIZADA);
+			break;
+		}
 	}
 
-	// Al hacer click sobre btnTimePicker.
-	public void btnTimePickerOnClick(View v) {
-		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_TIMEPICKER);
-	}
-	
-	// Al hacer click sobre btnAlertaSiNo.
-	public void btnAlertaSiNoOnClick(View v) {
-		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_ALERTA_SINO);
-	}
-
-	// Al hacer click sobre btnAlertaSeleccionDirecta.
-	public void btnAlertaSeleccionDirectaOnClick(View v) {
-		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_ALERTA_SELECCION_DIRECTA);
-	}
-	
-	// Al hacer click sobre btnAlertaSeleccionSimple.
-	public void btnAlertaSeleccionSimpleOnClick(View v) {
-		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_ALERTA_SELECCION_SIMPLE);
-	}
-
-	// Al hacer click sobre btnAlertaSeleccionMultiple.
-	public void btnAlertaSeleccionMultipleOnClick(View v) {
-		// Muestro el diálogo correspondiente.
-		this.showDialog(DLG_ALERTA_SELECCION_MULTIPLE);
-	}
-	
 	@Override
 	protected Dialog onCreateDialog(int idDialogo) {
 		// Creo el diálogo correspondiente.
-		Dialog dialogo = null;
 		Calendar calendario;
 		AlertDialog.Builder b;
 		switch (idDialogo) {
@@ -187,6 +182,13 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 			});
 			dialogo = b.create();
 			break;
+		case DLG_ALERTA_PERSONALIZADA:
+			b = new AlertDialog.Builder(this);
+			b.setTitle(R.string.conexion);
+			b.setIcon(R.drawable.ic_launcher);
+			b.setView((LayoutInflater.from(this)).inflate(R.layout.dialog_login, null));
+			dialogo = b.create();
+			break;
 		}
 		return dialogo;
 	}
@@ -206,6 +208,17 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 				R.drawable.ic_launcher);
 	}
 
+	// Al hacer click sobre btnConectar.
+	public void btnConectarOnClick(View v) {
+    	mostrarTostada(getString(R.string.conectando), R.drawable.ic_launcher);
+    	dialogo.dismiss();
+	}
+
+	// Al hacer click sobre btnCancelar.
+	public void btnCancelarOnClick(View v) {
+    	dialogo.dismiss();
+	}
+	
 	// Muestra un Toast.
 	private void mostrarTostada(String mensaje, int drawableResId) {
 		// Obtengo el contexto.
