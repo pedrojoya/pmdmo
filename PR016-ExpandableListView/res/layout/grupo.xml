@@ -4,24 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/fondo_encabezado"
-    android:orientation="vertical"
-    tools:ignore="HardcodedText" >
-
-    <TextView
-        android:id="@+id/lblEncCiclo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:text="CFGM SMR"
-        android:textStyle="bold" />
-
+    android:orientation="vertical" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp" >
-
+	    <TextView
+	        android:id="@+id/lblEncCiclo"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:padding="5dp"
+	        android:layout_weight="1"
+	        android:textStyle="bold" />
+	    <ImageView
+	        android:id="@+id/imgIndicador"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:layout_gravity="center_vertical" />	        
+	</LinearLayout>
+	<View
+	    android:id="@+id/separador" 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#3AAA" />    	    
+    <LinearLayout
+        android:id="@+id/llEncColumnas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
         <TextView
             android:id="@+id/lblEncNombre"
             android:layout_width="0dp"
@@ -29,7 +42,6 @@
             android:layout_weight="4"
             android:text="@string/alumno"
             android:textStyle="bold" />
-
         <TextView
             android:id="@+id/lblEncCurso"
             android:layout_width="0dp"
@@ -39,5 +51,4 @@
             android:text="@string/curso"
             android:textStyle="bold" />
     </LinearLayout>
-
 </LinearLayout>

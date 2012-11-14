@@ -23,19 +23,24 @@ public final class R {
         public static final int padding_small=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int expander_ic_maximized=0x7f020000;
+        public static final int expander_ic_minimized=0x7f020001;
+        public static final int ic_action_search=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f090005;
+        public static final int LinearLayout1=0x7f090008;
+        public static final int imgIndicador=0x7f090003;
         public static final int lblCurso=0x7f090001;
         public static final int lblEncCiclo=0x7f090002;
-        public static final int lblEncCurso=0x7f090004;
-        public static final int lblEncNombre=0x7f090003;
-        public static final int lblListado=0x7f090006;
+        public static final int lblEncCurso=0x7f090007;
+        public static final int lblEncNombre=0x7f090006;
+        public static final int lblListado=0x7f090009;
         public static final int lblNombre=0x7f090000;
-        public static final int lstAlumnos=0x7f090007;
-        public static final int menu_settings=0x7f090008;
+        public static final int llEncColumnas=0x7f090005;
+        public static final int lstAlumnos=0x7f09000a;
+        public static final int menu_settings=0x7f09000b;
+        public static final int separador=0x7f090004;
     }
     public static final class layout {
         public static final int fila=0x7f030000;

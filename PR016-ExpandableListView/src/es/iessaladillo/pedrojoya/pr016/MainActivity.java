@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
     private void getVistas() {
 		lstAlumnos = (ExpandableListView) this.findViewById(R.id.lstAlumnos);
-		// No se usará indicador para el grupo ni para hijo (flechita).
+		// Indico que NO se usen los indicadores por defecto para grupos e hijos.
 		lstAlumnos.setGroupIndicator(null);
 		lstAlumnos.setChildIndicator(null);
 		// Creo los datos.
@@ -58,10 +58,10 @@ public class MainActivity extends Activity {
 		AdaptadorAlumnos adaptador = new AdaptadorAlumnos(this, lstAlumnos, grupos, alumnos);
 		// Establezco el adaptador de la lista.
 		lstAlumnos.setAdapter(adaptador);
-		// Expando todos los grupos.
-		for (int i = 0; i < adaptador.getGroupCount(); i++) {
-			lstAlumnos.expandGroup(i);
-		}
+//		// Si quiero que inicialmente todos los grupos aparezcan expandidos.
+//		for (int i = 0; i < adaptador.getGroupCount(); i++) {
+//			lstAlumnos.expandGroup(i);
+//		}
 		// Establezco el onClick sobre un elemento de la lista.
 		lstAlumnos.setOnChildClickListener(new OnChildClickListener() {
 			@Override
