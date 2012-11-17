@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.pr016;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.LayoutInflater;

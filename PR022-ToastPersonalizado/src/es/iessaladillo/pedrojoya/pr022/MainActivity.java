@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,10 +21,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
-	// Al hacer click sobre btnTostada.
-	public void btnTostadaOnClick(View v) {
-		// Muestro la tostada personalizada.
+	// Al hacer click sobre btnToastDinamico.
+	public void btnToastDinamicoOnClick(View v) {
+		// Muestro un toast creado dinámicamente.
 		mostrarTostada(R.string.esta_tostada_esta_personalizada, R.drawable.ic_launcher);	
+	}
+
+	// Al hacer click sobre btnToastDinamico.
+	public void btnToastLayoutOnClick(View v) {
+		// Muestro un toast con layout personalizado.
+		mostrarTostadaLayout(R.string.esta_tostada_esta_personalizada, R.layout.toast);	
 	}
 
 	// Recrea el layout res/layout/transient_notification.xml de la
@@ -40,7 +47,7 @@ public class MainActivity extends Activity {
         // Creo un ImageView, la asigno la imagen pasada como parámetro
         // y se la añado al LinearLayout.
         ImageView imagen = new ImageView(contexto);
-        LayoutParams params = new LayoutParams(60, 60, 0);
+        LayoutParams params = new LayoutParams(40, 40, 0);
         params.gravity = Gravity.CENTER_VERTICAL;
         imagen.setLayoutParams(params);
         imagen.setImageResource(drawableResId);
@@ -64,5 +71,25 @@ public class MainActivity extends Activity {
         // Muestro la tostada.
         tostada.show();
 	}
+	
+	private void mostrarTostadaLayout(int stringResId, int layoutId) {
+		// Obtengo el contexto.
+		Context contexto = getApplicationContext();
+		// Creo un objeto tostada.
+		Toast tostada = new Toast(contexto);
+		// Inflo el layout.
+        View padre = LayoutInflater.from(contexto).inflate(layoutId, null);
+        // Escribo el mensaje en el TextView.
+        TextView lblMensaje = (TextView) padre.findViewById(R.id.lblMensaje);
+        lblMensaje.setText(stringResId);
+        // Establezco el LinarLayout como la vista 
+        // que debe mostrar la tostada.
+        tostada.setView(padre);
+        // Establezco la duración de la tostada.
+        tostada.setDuration(Toast.LENGTH_SHORT);
+        // Muestro la tostada.
+        tostada.show();
+	}
+	
 
 }

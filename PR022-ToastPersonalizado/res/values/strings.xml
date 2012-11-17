@@ -4,7 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Toast Personalizado</string>
-    <string name="pulsame_para_ver_el_toast">Púlsame para ver el Toast</string>
     <string name="esta_tostada_esta_personalizada">Esta tostada está personalizada</string>
+    <string name="icono">Icono</string>
+    <string name="toast_creado_dinamicamente">Toast creado dinámicamente</string>
+    <string name="toast_con_layout_propio">Toast con layout propio</string>
 
 </resources>

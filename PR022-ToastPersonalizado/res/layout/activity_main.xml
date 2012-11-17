@@ -1,14 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="10dp" >
     <Button
-        android:id="@+id/btnTostada"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnToastDinamico"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/pulsame_para_ver_el_toast"
-        android:onClick="btnTostadaOnClick"
+        android:layout_alignParentTop="true"
+        android:text="@string/toast_creado_dinamicamente"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnToastDinamicoOnClick"
+        tools:context=".MainActivity" />
+    <Button
+        android:id="@+id/btnToastLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnToastDinamico"
+        android:text="@string/toast_con_layout_propio"
+        android:onClick="btnToastLayoutOnClick"
         tools:context=".MainActivity" />
 </RelativeLayout>
 
