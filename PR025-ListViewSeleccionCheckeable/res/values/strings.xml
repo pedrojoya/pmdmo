@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">PR025-ListViewSeleccionCheckeable</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">ListView de Selección con interfaz Checkeable</string>
+
+</resources>

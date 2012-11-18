@@ -34,10 +34,10 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 	private static final int DLG_ALERTA_SELECCION_SIMPLE = 4;
 	private static final int DLG_ALERTA_SELECCION_MULTIPLE = 5;
 	private static final int DLG_ALERTA_PERSONALIZADA = 6;
-	private int turnoSeleccionado;	// Selección simple.
-	private boolean[] turnosSeleccionados;	// Selección múltiple.
 
 	// Variables a nivel de clase.
+	private int turnoSeleccionado;	// Selección simple.
+	private boolean[] turnosSeleccionados;	// Selección múltiple.
 	Dialog dialogo = null;
 	
 	@Override
