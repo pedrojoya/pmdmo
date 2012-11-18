@@ -18,7 +18,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -227,26 +226,18 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 		Toast tostada = new Toast(contexto);
 		// Creo un LinearLayout como padre del layout para la tostada.
         LinearLayout padre = new LinearLayout(contexto);
-        padre.setOrientation(LinearLayout.HORIZONTAL);
         padre.setBackgroundResource(R.drawable.toast_frame);
-        // Creo un ImageView, la asigno la imagen pasada como parámetro
-        // y se la añado al LinearLayout.
-        ImageView imagen = new ImageView(contexto);
-        LayoutParams params = new LayoutParams(60, 60, 0);
-        params.gravity = Gravity.CENTER_VERTICAL;
-        imagen.setLayoutParams(params);
-        imagen.setImageResource(drawableResId);
-        padre.addView(imagen);
         // Creo un TextView, le asigno el texto del mensaje y
-        // se lo añado al LinearLayout.
+        // el icono y se lo añado al LinearLayout.
         TextView texto = new TextView(contexto);
         texto.setText(mensaje);
         texto.setTextAppearance(contexto, android.R.style.TextAppearance_Small);
-        params = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
-        params.gravity = Gravity.CENTER;
-        params.leftMargin = 20;
+        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 0);
         texto.setLayoutParams(params);
+        texto.setGravity(Gravity.CENTER);
         texto.setShadowLayer(2.75f, 0, 0, Color.parseColor("#BB000000"));
+        texto.setCompoundDrawablesWithIntrinsicBounds(drawableResId, 0, 0, 0);
+        texto.setCompoundDrawablePadding(10);
         padre.addView(texto);
         // Establezco el LinarLayout como la vista 
         // que debe mostrar la tostada.
