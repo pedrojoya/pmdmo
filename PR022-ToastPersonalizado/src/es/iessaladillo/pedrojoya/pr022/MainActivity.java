@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -24,13 +23,13 @@ public class MainActivity extends Activity {
 	// Al hacer click sobre btnToastDinamico.
 	public void btnToastDinamicoOnClick(View v) {
 		// Muestro un toast creado dinámicamente.
-		mostrarTostada(R.string.esta_tostada_esta_personalizada, R.drawable.ic_launcher);	
+		mostrarTostada(R.string.toast_creado_dinamicamente, R.drawable.ic_launcher);	
 	}
 
 	// Al hacer click sobre btnToastDinamico.
 	public void btnToastLayoutOnClick(View v) {
 		// Muestro un toast con layout personalizado.
-		mostrarTostadaLayout(R.string.esta_tostada_esta_personalizada, R.layout.toast);	
+		mostrarTostadaLayout(R.string.toast_con_layout_propio, R.layout.toast, R.id.lblMensaje);	
 	}
 
 	// Recrea el layout res/layout/transient_notification.xml de la
@@ -42,26 +41,18 @@ public class MainActivity extends Activity {
 		Toast tostada = new Toast(contexto);
 		// Creo un LinearLayout como padre del layout para la tostada.
         LinearLayout padre = new LinearLayout(contexto);
-        padre.setOrientation(LinearLayout.HORIZONTAL);
         padre.setBackgroundResource(R.drawable.toast_frame);
-        // Creo un ImageView, la asigno la imagen pasada como parámetro
-        // y se la añado al LinearLayout.
-        ImageView imagen = new ImageView(contexto);
-        LayoutParams params = new LayoutParams(40, 40, 0);
-        params.gravity = Gravity.CENTER_VERTICAL;
-        imagen.setLayoutParams(params);
-        imagen.setImageResource(drawableResId);
-        padre.addView(imagen);
         // Creo un TextView, le asigno el texto del mensaje y
-        // se lo añado al LinearLayout.
+        // el icono y se lo añado al LinearLayout.
         TextView texto = new TextView(contexto);
         texto.setText(stringResId);
         texto.setTextAppearance(contexto, android.R.style.TextAppearance_Small);
-        params = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1);
-        params.gravity = Gravity.CENTER;
-        params.leftMargin = 20;
+        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 0);
         texto.setLayoutParams(params);
+        texto.setGravity(Gravity.CENTER);
         texto.setShadowLayer(2.75f, 0, 0, Color.parseColor("#BB000000"));
+        texto.setCompoundDrawablesWithIntrinsicBounds(drawableResId, 0, 0, 0);
+        texto.setCompoundDrawablePadding(10);
         padre.addView(texto);
         // Establezco el LinarLayout como la vista 
         // que debe mostrar la tostada.
@@ -72,23 +63,34 @@ public class MainActivity extends Activity {
         tostada.show();
 	}
 	
-	private void mostrarTostadaLayout(int stringResId, int layoutId) {
+	private void mostrarTostadaLayout(int stringResId, int layoutId, int textViewId) {
 		// Obtengo el contexto.
 		Context contexto = getApplicationContext();
-		// Creo un objeto tostada.
-		Toast tostada = new Toast(contexto);
-		// Inflo el layout.
-        View padre = LayoutInflater.from(contexto).inflate(layoutId, null);
-        // Escribo el mensaje en el TextView.
-        TextView lblMensaje = (TextView) padre.findViewById(R.id.lblMensaje);
-        lblMensaje.setText(stringResId);
-        // Establezco el LinarLayout como la vista 
-        // que debe mostrar la tostada.
-        tostada.setView(padre);
-        // Establezco la duración de la tostada.
-        tostada.setDuration(Toast.LENGTH_SHORT);
-        // Muestro la tostada.
-        tostada.show();
+		try {
+			// Inflo el layout.
+			View padre = LayoutInflater.from(contexto).inflate(layoutId, null);
+			// Escribo el mensaje en el TextView.
+			TextView lblMensaje = (TextView) padre.findViewById(textViewId);
+			if (lblMensaje != null) {
+				lblMensaje.setText(stringResId);
+				// Creo un objeto tostada.
+				Toast tostada = new Toast(contexto);
+				// Establezco el LinarLayout como la vista 
+				// que debe mostrar la tostada.
+				tostada.setView(padre);
+				// Establezco la duración de la tostada.
+				tostada.setDuration(Toast.LENGTH_SHORT);
+				// Muestro la tostada.
+				tostada.show();
+			}
+			else {
+				// Si hay problema muestro un Toast estándar
+				Toast.makeText(contexto, stringResId, Toast.LENGTH_LONG).show();
+			}
+		} catch (Exception e) {
+			// Si hay problema muestro un Toast estándar.
+			Toast.makeText(contexto, stringResId, Toast.LENGTH_LONG).show();			
+		}
 	}
 	
 
