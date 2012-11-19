@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools" 
+	android:id="@+id/LinearLayout1"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:padding="5dp" >
+	<EditText 
+	    android:id="@+id/txtAlumno" 
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:hint="@string/alumno"  
+		tools:context=".MainActivity" />
+	<ListView 
+	    android:id="@+id/lstAlumnos" 
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+</LinearLayout>
