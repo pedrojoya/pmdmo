@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="45dp" >
-
     <TextView
         android:id="@+id/lblAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/album"
         tools:context=".MainActivity" />
-
     <AutoCompleteTextView
         android:id="@+id/txtAlbum"
         android:layout_width="0dp"
@@ -21,12 +19,9 @@
         android:layout_marginTop="14dp"
         android:textColor="#000000"
         android:completionThreshold="1"
-        android:hint="@string/nombre_del_album"
-        >
-
+        android:hint="@string/nombre_del_album" >
         <requestFocus />
     </AutoCompleteTextView>
-
     <Button
         android:id="@+id/btnMostrar"
         android:layout_width="0dp"
@@ -37,5 +32,4 @@
         android:layout_marginTop="14dp"
         android:onClick="btnMostrarOnClick"
         android:text="@string/mostrar" />
-
 </RelativeLayout>
