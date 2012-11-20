@@ -1,8 +1,5 @@
 <resources>
-
     <string name="app_name">PR023-Dialogos</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="datepicker">DatePicker</string>
     <string name="ha_seleccionado">"Ha seleccionado: "</string>
@@ -19,18 +16,15 @@
         <item >Tarde</item>
         <item >Noche</item>
     </string-array>
-        <string name="turno">Turno</string>
-        <string name="selecciona_el_turno_de_trabajo">Selecciona el turno de trabajo</string>
-        <string name="alerta_de_seleccion_directa">Alerta de selección directa</string>
-        <string name="alerta_de_seleccion_multiple">Alerta de selección múltiple</string>
-        <string name="no_ha_seleccionado_ningun_turno">No ha seleccionado ningún turno</string>
-        <string name="usuario">Usuario</string>
-        <string name="contrasena">Contraseña</string>
-        <string name="cancelar">Cancelar</string>
-        <string name="aceptar">Aceptar</string>
-        <string name="conectar">Conectar</string>
-        <string name="alerta_personalizada">Alerta personalizada</string>
-        <string name="conexion">Conexión</string>
-        <string name="conectando">Conectando…</string>
-
+	<string name="turno">Turno</string>
+	<string name="alerta_de_seleccion_directa">Alerta de selección directa</string>
+	<string name="alerta_de_seleccion_multiple">Alerta de selección múltiple</string>
+	<string name="no_ha_seleccionado_ningun_turno">No ha seleccionado ningún turno</string>
+	<string name="usuario">Usuario</string>
+	<string name="contrasena">Contraseña</string>
+	<string name="cancelar">Cancelar</string>
+	<string name="conectar">Conectar</string>
+	<string name="alerta_personalizada">Alerta personalizada</string>
+	<string name="conexion">Conexión</string>
+	<string name="conectando">Conectando…</string>
 </resources>

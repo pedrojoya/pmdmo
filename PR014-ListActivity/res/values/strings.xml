@@ -1,7 +1,5 @@
 <resources>
-
     <string name="app_name">ListActivity</string>
-    <string name="menu_settings">Ajustes</string>
     <string name="title_activity_main">ListActivity</string>
     <string name="listado_de_alumnos">Listado de alumnos</string>
     <string name="alumno">Alumno</string>
@@ -9,5 +7,4 @@
     <string name="curso">Curso</string>
     <string name="no_hay_alumnos_que_mostrar">No hay alumnos que mostrar</string>
     <string name="se_ha_eliminado">"Se ha eliminado "</string>
-
 </resources>

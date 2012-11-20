@@ -1,9 +1,11 @@
 package es.iessaladillo.pedrojoya.pr017;
 
 import java.util.ArrayList;
-import android.os.Bundle;
+import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +67,7 @@ public class MainActivity extends Activity {
 		                // OJO compruebo en el ArrayList con TODOS los álbumes.
 		                for (Album album : todos) {
 		                	// Si comienza igual.
-		                    if (album.getNombre().toLowerCase().contains(constraint.toString().toLowerCase())) {
+		                    if (album.getNombre().toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
 		                        sugerencias.add(album);
 		                    }
 		                }

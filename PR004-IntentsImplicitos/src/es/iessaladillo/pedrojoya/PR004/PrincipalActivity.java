@@ -99,7 +99,7 @@ public class PrincipalActivity extends Activity {
 				 * y la muestro en un Toast.
 				 */
 				String uriFoto = data.toURI();
-				Toast.makeText(this, this.getString(R.string.uri_foto) + ": " + uriFoto, Toast.LENGTH_LONG);
+				Toast.makeText(this, this.getString(R.string.uri_foto) + ": " + uriFoto, Toast.LENGTH_LONG).show();
 			}
 		}
 	}

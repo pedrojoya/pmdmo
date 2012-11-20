@@ -22,15 +22,14 @@ public final class R {
         public static final int main=0x7f030000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int buenos_dias=0x7f040004;
-        public static final int hello=0x7f040000;
-        public static final int introduzca_nombre=0x7f040002;
-        public static final int modo_educado=0x7f040006;
-        public static final int off=0x7f040008;
-        public static final int on=0x7f040007;
-        public static final int saludar=0x7f040003;
-        public static final int saludar_educadamente=0x7f040005;
-        public static final int tenga_usted=0x7f040009;
+        public static final int app_name=0x7f040000;
+        public static final int buenos_dias=0x7f040003;
+        public static final int introduzca_nombre=0x7f040001;
+        public static final int modo_educado=0x7f040005;
+        public static final int off=0x7f040007;
+        public static final int on=0x7f040006;
+        public static final int saludar=0x7f040002;
+        public static final int saludar_educadamente=0x7f040004;
+        public static final int tenga_usted=0x7f040008;
     }
 }
