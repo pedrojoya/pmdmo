@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, PrincipalActivity!</string>
     <string name="app_name">Saludar</string>
     <string name="introduzca_nombre">Introduzca su nombre:</string>
     <string name="saludar">Saludar</string>

@@ -31,6 +31,6 @@
         <string name="conectar">Conectar</string>
         <string name="alerta_personalizada">Alerta personalizada</string>
         <string name="conexion">Conexión</string>
-        <string name="conectando">Conectando...</string>
+        <string name="conectando">Conectando…</string>
 
 </resources>

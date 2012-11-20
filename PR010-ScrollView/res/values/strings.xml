@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">PR010-ScrollView</string>
     <string name="rojo">#FF0000</string>
     <string name="verde">#00FF00</string>
     <string name="azul">#0000FF</string>
     <string name="gris">#0F0F0F</string>
     <string name="blanco">#F0F0F0</string>
-
 </resources>

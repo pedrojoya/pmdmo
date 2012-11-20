@@ -22,7 +22,8 @@
 	        android:id="@+id/imgIndicador"
 	        android:layout_width="30dp"
 	        android:layout_height="30dp"
-	        android:layout_gravity="center_vertical" />	        
+	        android:layout_gravity="center_vertical" 
+	        android:contentDescription="@string/expandir_contraer_grupo" />	        
 	</LinearLayout>
 	<View
 	    android:id="@+id/separador" 

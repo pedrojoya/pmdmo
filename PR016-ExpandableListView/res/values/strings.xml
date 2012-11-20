@@ -1,12 +1,9 @@
 <resources>
-
     <string name="app_name">PR016-ExpandableListView</string>
     <string name="menu_settings">Ajustes</string>
     <string name="listado_de_alumnos">Listado de alumnos</string>
-    <string name="mostrar">Mostrar</string>
     <string name="alumno">Alumno</string>
-    <string name="ciclo">Ciclo</string>
     <string name="curso">Curso</string>
     <string name="title_activity_main">ExapandableListView</string>
-
+    <string name="expandir_contraer_grupo">Expandir / Contraer grupo</string>
 </resources>

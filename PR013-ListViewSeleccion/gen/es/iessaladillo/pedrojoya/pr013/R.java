@@ -19,8 +19,8 @@ public final class R {
     }
     public static final class dimen {
         public static final int padding_large=0x7f050002;
-        public static final int padding_medium=0x7f050001;
-        public static final int padding_small=0x7f050000;
+        public static final int padding_medium=0x7f050000;
+        public static final int padding_small=0x7f050001;
     }
     public static final class drawable {
         public static final int ic_action_search=0x7f020000;
