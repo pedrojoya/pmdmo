@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <View
+        android:id="@+id/separador"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_centerInParent="true" />
+    <RelativeLayout 
+        android:id="@+id/panel1"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/separador"
+        android:layout_alignRight="@+id/separador" >
+	    <TextView
+	        android:id="@+id/btnNuevo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+	        android:text="@string/nuevo_alumno"
+	        android:textStyle="bold"
+	        android:drawableTop="@drawable/ic_menu_add"
+	        android:drawablePadding="10dp"
+	        android:gravity="center_horizontal"
+	        android:onClick="btnNuevoOnClick"
+        />
+    </RelativeLayout>	 
+    <RelativeLayout 
+        android:id="@+id/panel2"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/separador"
+        android:layout_alignLeft="@+id/separador" >
+        <TextView
+            android:id="@+id/btnListado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/listado_alumnos"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/ic_menu_search"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:onClick="btnListadoOnClick"
+        />
+    </RelativeLayout>    
+    <RelativeLayout 
+        android:id="@+id/panel3"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/separador"
+        android:layout_alignRight="@+id/separador" >
+        <TextView
+            android:id="@+id/btnConfigurar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/configurar"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/ic_menu_share"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:onClick="btnConfigurarOnClick"
+        />
+    </RelativeLayout>    
+    <RelativeLayout 
+        android:id="@+id/panel4"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/separador"
+        android:layout_alignLeft="@+id/separador" >
+        <TextView
+            android:id="@+id/btnSalir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/salir"
+            android:textStyle="bold"
+            android:drawableTop="@drawable/ic_menu_upload"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:onClick="btnSalirOnClick"
+        />
+    </RelativeLayout>    
+    
+</RelativeLayout>

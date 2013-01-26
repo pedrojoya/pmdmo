@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <TextView
+        android:id="@+id/lblAlumno"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/alumno" />
+    <Spinner
+        android:id="@+id/spnAlumno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+    </Spinner>
+    <Button
+        android:id="@+id/btnConsultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/consultar_alumno"
+        android:onClick="btnConsultarOnClick"  />
+    <TextView
+        android:id="@+id/lblNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre" />
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:editable="false" />
+    <TextView
+        android:id="@+id/lblTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telefono" />
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:editable="false" />
+    <Button
+        android:id="@+id/btnLlamar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="false"
+        android:text="@string/llamar" 
+        android:onClick="btnLlamarOnClick" />
+</LinearLayout>
