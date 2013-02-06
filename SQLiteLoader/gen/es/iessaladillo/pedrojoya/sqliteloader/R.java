@@ -8,6 +8,9 @@
 package es.iessaladillo.pedrojoya.sqliteloader;
 
 public final class R {
+    public static final class array {
+        public static final int cursos=0x7f040000;
+    }
     public static final class attr {
     }
     public static final class drawable {
@@ -21,33 +24,86 @@ public final class R {
         public static final int ic_menu_upload=0x7f020007;
     }
     public static final class id {
-        public static final int btnConfigurar=0x7f070006;
-        public static final int btnListado=0x7f070004;
-        public static final int btnNuevo=0x7f070002;
-        public static final int btnSalir=0x7f070008;
-        public static final int menu_settings=0x7f070009;
-        public static final int panel1=0x7f070001;
-        public static final int panel2=0x7f070003;
-        public static final int panel3=0x7f070005;
-        public static final int panel4=0x7f070007;
-        public static final int separador=0x7f070000;
+        public static final int btnAgregar=0x7f080008;
+        public static final int btnConfigurar=0x7f080011;
+        public static final int btnListado=0x7f08000f;
+        public static final int btnNuevo=0x7f08000d;
+        public static final int btnSalir=0x7f080013;
+        public static final int lblCurso=0x7f080002;
+        public static final int lblDireccion=0x7f080006;
+        public static final int lblMensaje=0x7f08000a;
+        public static final int lblNombre=0x7f080000;
+        public static final int lblTelefono=0x7f080004;
+        public static final int lstAlumnos=0x7f080009;
+        public static final int mnuEditar=0x7f080015;
+        public static final int mnuEliminar=0x7f080016;
+        public static final int mnuLlamar=0x7f080017;
+        public static final int mnuMapa=0x7f080018;
+        public static final int mnuVer=0x7f080014;
+        public static final int panel1=0x7f08000c;
+        public static final int panel2=0x7f08000e;
+        public static final int panel3=0x7f080010;
+        public static final int panel4=0x7f080012;
+        public static final int separador=0x7f08000b;
+        public static final int spnCurso=0x7f080003;
+        public static final int txtDireccion=0x7f080007;
+        public static final int txtNombre=0x7f080001;
+        public static final int txtTelefono=0x7f080005;
     }
     public static final class layout {
-        public static final int activity_alumno=0x7f030000;
-        public static final int activity_main=0x7f030001;
+        public static final int activity_crualumno=0x7f030000;
+        public static final int activity_listaalumnos=0x7f030001;
+        public static final int activity_main=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_alumno=0x7f060000;
+        public static final int menu_lista=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int configurar=0x7f040005;
-        public static final int hello_world=0x7f040001;
-        public static final int listado_alumnos=0x7f040004;
-        public static final int menu_settings=0x7f040002;
-        public static final int nuevo_alumno=0x7f040003;
-        public static final int salir=0x7f040006;
-        public static final int title_activity_alumno=0x7f040007;
+        public static final int BotonAddAlumno=0x7f05000d;
+        public static final int BotonCosulta=0x7f05000e;
+        public static final int actualizacion_correcta=0x7f050022;
+        public static final int actualizacion_incorrecta=0x7f050023;
+        public static final int agregar_alumno=0x7f050010;
+        public static final int alumno=0x7f050009;
+        public static final int alumno_cab=0x7f05001a;
+        public static final int alumno_no_encontrado=0x7f050027;
+        public static final int app_name=0x7f050000;
+        public static final int bienvenida=0x7f05000f;
+        public static final int borrar_bd=0x7f050018;
+        public static final int click_largo=0x7f050028;
+        public static final int configurar=0x7f050005;
+        public static final int confirmar_eliminar=0x7f050029;
+        public static final int confirmar_eliminar_bd=0x7f05002a;
+        public static final int consultar_alumno=0x7f050016;
+        public static final int curso=0x7f05000a;
+        public static final int curso_cab=0x7f05001b;
+        public static final int datos_obligatorios=0x7f05001e;
+        public static final int direccion=0x7f05000c;
+        public static final int direccion_cab=0x7f05001d;
+        public static final int editar_alumno=0x7f050011;
+        public static final int eliminacion_correcta=0x7f050024;
+        public static final int eliminacion_incorrecta=0x7f050025;
+        public static final int eliminar_alumno=0x7f050013;
+        public static final int error_apertura_bd=0x7f05001f;
+        public static final int hello_world=0x7f050001;
+        public static final int id_cab=0x7f050019;
+        public static final int insercion_correcta=0x7f050020;
+        public static final int insercion_incorrecta=0x7f050021;
+        public static final int listado_alumnos=0x7f050004;
+        public static final int llamar=0x7f050017;
+        public static final int llamar_alumno=0x7f050014;
+        public static final int mapa_alumno=0x7f050015;
+        public static final int menu_settings=0x7f050002;
+        public static final int no=0x7f05002b;
+        public static final int nombre=0x7f050008;
+        public static final int nuevo_alumno=0x7f050003;
+        public static final int salir=0x7f050006;
+        public static final int si=0x7f05002c;
+        public static final int sin_alumnos=0x7f050026;
+        public static final int telefono=0x7f05000b;
+        public static final int telefono_cab=0x7f05001c;
+        public static final int title_activity_alumno=0x7f050007;
+        public static final int ver_alumno=0x7f050012;
     }
     public static final class style {
         /** 
@@ -60,10 +116,10 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }

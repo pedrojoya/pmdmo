@@ -16,10 +16,10 @@ import android.widget.TextView;
 class AdaptadorAlbumes extends BaseAdapter {
 
 	// Variables miembro.
-	private Activity contexto;			// Actividad que lo usa.
-	private ArrayList<Album> albumes;	// Array de datos.
-	private LayoutInflater inflador;	// Inflador de layouts.
-	
+	private Activity contexto; // Actividad que lo usa.
+	private ArrayList<Album> albumes; // Array de datos.
+	private LayoutInflater inflador; // Inflador de layouts.
+
 	public AdaptadorAlbumes(Activity contexto, ArrayList<Album> albumes) {
 		// Hago una copia de los parámetros del constructor.
 		this.contexto = contexto;
@@ -61,7 +61,7 @@ class AdaptadorAlbumes extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// Variables locales.
-		ContenedorVistas contenedor;	// Contenedor de vistas.
+		ContenedorVistas contenedor; // Contenedor de vistas.
 		// Intento reutilizar.
 		View fila = convertView;
 		if (fila == null) {
@@ -73,10 +73,10 @@ class AdaptadorAlbumes extends BaseAdapter {
 			contenedor.imgFoto = (ImageView) fila.findViewById(R.id.imgFoto);
 			contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
 			contenedor.lblAnio = (TextView) fila.findViewById(R.id.lblAnio);
-			contenedor.rtbValoracion = (RatingBar) fila.findViewById(R.id.rtbValoracion);
+			contenedor.rtbValoracion = (RatingBar) fila
+					.findViewById(R.id.rtbValoracion);
 			fila.setTag(contenedor);
-		} 
-		else {
+		} else {
 			// Obtengo el contenedor desde la propiedad Tag de la vista-fila.
 			contenedor = (ContenedorVistas) fila.getTag();
 		}
@@ -86,16 +86,18 @@ class AdaptadorAlbumes extends BaseAdapter {
 		contenedor.lblNombre.setText(album.getNombre());
 		contenedor.lblAnio.setText(album.getAnio());
 		contenedor.rtbValoracion.setRating(album.getValoracion());
-		contenedor.rtbValoracion.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-			@Override
-			public void onRatingChanged(RatingBar rtb, float rating, boolean fromUser) {
-				if (fromUser) {
-					album.setValoracion(rating);
-				}
-			}
-		});
+		contenedor.rtbValoracion
+				.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+					@Override
+					public void onRatingChanged(RatingBar rtb, float rating,
+							boolean fromUser) {
+						if (fromUser) {
+							album.setValoracion(rating);
+						}
+					}
+				});
 		// Retorno la vista-fila.
 		return fila;
 	}
-	
+
 }

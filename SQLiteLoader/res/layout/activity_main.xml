@@ -22,6 +22,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:clickable="true"
 	        android:text="@string/nuevo_alumno"
 	        android:textStyle="bold"
 	        android:drawableTop="@drawable/ic_menu_add"
@@ -48,6 +49,7 @@
             android:drawableTop="@drawable/ic_menu_search"
             android:drawablePadding="10dp"
             android:gravity="center_horizontal"
+            android:clickable="true"
             android:onClick="btnListadoOnClick"
         />
     </RelativeLayout>    

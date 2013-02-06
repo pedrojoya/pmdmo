@@ -14,8 +14,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void btnNuevoOnClick(View v) {
-		Intent i = new Intent(this, AlumnoActivity.class);
-		i.putExtra("modo", AlumnoActivity.MODO_AGREGAR);
+		// Creo un intent explícito con la acción NEW_STUDENT.
+		Intent i = new Intent(this, CRUAlumnoActivity.class);
+		i.setAction("es.iessaladillo.AGREGAR_ALUMNO");
+		// Llamo a la actividad.
+		startActivity(i);
+	}
+
+	public void btnListadoOnClick(View v) {
+		// Creo un intent explícito.
+		Intent i = new Intent(this, ListaAlumnosActivity.class);
+		// Llamo a la actividad.
+		startActivity(i);
 	}
 
 }

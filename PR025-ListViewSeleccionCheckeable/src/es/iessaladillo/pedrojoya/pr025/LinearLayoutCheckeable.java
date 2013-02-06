@@ -8,17 +8,16 @@ import android.widget.LinearLayout;
 public class LinearLayoutCheckeable extends LinearLayout implements Checkable {
 
 	// Constantes.
-    // Estados adicionales a los que deben reaccionar los drawables.
-    private final int[] ESTADOS_ADICIONALES = {
-        android.R.attr.state_checked
-    };	
+	// Estados adicionales a los que deben reaccionar los drawables.
+	private final int[] ESTADOS_ADICIONALES = { android.R.attr.state_checked };
 	// Variables miembro.
 	boolean checked = false;
-	
+
 	// Constructores.
 	public LinearLayoutCheckeable(Context context) {
 		super(context);
 	}
+
 	public LinearLayoutCheckeable(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
@@ -44,7 +43,7 @@ public class LinearLayoutCheckeable extends LinearLayout implements Checkable {
 	public void toggle() {
 		setChecked(!checked);
 	}
-	
+
 	// Al crear los estados de los drawables
 	@Override
 	protected int[] onCreateDrawableState(int extraSpace) {
@@ -54,7 +53,7 @@ public class LinearLayoutCheckeable extends LinearLayout implements Checkable {
 		// Si está checkeado.
 		if (isChecked()) {
 			// Agrego el estado de checkeado.
-			mergeDrawableStates(estados, ESTADOS_ADICIONALES);			
+			mergeDrawableStates(estados, ESTADOS_ADICIONALES);
 		}
 		// Retorno el array de estados.
 		return estados;

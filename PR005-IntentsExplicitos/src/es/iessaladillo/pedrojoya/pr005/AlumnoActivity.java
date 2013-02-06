@@ -24,7 +24,8 @@ public class AlumnoActivity extends Activity {
 		btnAceptar = (Button) this.findViewById(R.id.btnAceptar);
 		txtNombre = (EditText) this.findViewById(R.id.txtNombre);
 		txtEdad = (EditText) this.findViewById(R.id.txtEdad);
-		// Obtengo los datos del intent con el que me han llamado y los escribo en los EditText.
+		// Obtengo los datos del intent con el que me han llamado y los escribo
+		// en los EditText.
 		Bundle datos = this.getIntent().getExtras();
 		if (datos != null) {
 			String nombre = datos.getString("nombre");
@@ -46,13 +47,14 @@ public class AlumnoActivity extends Activity {
 
 	// Empaqueta los datos de retorno y finaliza la actividad.
 	private void retornar() {
-		// Creo un nuevo intent sin acción ni destinatario y le agrego los datos.
+		// Creo un nuevo intent sin acción ni destinatario y le agrego los
+		// datos.
 		Intent datos = new Intent();
 		datos.putExtra("nombre", txtNombre.getText().toString());
 		try {
-			datos.putExtra("edad", Integer.parseInt(txtEdad.getText().toString()));
-		}
-		catch (NumberFormatException e) {
+			datos.putExtra("edad",
+					Integer.parseInt(txtEdad.getText().toString()));
+		} catch (NumberFormatException e) {
 			datos.putExtra("edad", 0);
 		}
 		// Establezco que todo ha ido bien.
@@ -60,5 +62,5 @@ public class AlumnoActivity extends Activity {
 		// Finalizo la actividad.
 		this.finish();
 	}
-	
+
 }

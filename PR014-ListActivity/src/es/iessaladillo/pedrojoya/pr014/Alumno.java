@@ -8,7 +8,7 @@ class Alumno {
 	private int edad;
 	private String ciclo;
 	private String curso;
-	
+
 	// Constructores.
 	public Alumno(String nombre, int edad, String ciclo, String curso) {
 		this.nombre = nombre;
@@ -16,30 +16,39 @@ class Alumno {
 		this.ciclo = ciclo;
 		this.curso = curso;
 	}
-	public Alumno() {}
-		
+
+	public Alumno() {
+	}
+
 	// Getters and Setters.
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public int getEdad() {
 		return edad;
 	}
+
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
+
 	public String getCiclo() {
 		return ciclo;
 	}
+
 	public void setCiclo(String ciclo) {
 		this.ciclo = ciclo;
 	}
+
 	public String getCurso() {
 		return curso;
 	}
+
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}

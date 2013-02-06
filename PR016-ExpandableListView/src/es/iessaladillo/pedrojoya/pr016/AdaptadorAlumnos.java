@@ -16,33 +16,32 @@ import android.widget.TextView;
 class AdaptadorAlumnos extends BaseExpandableListAdapter {
 
 	// Variables miembro.
-	private Activity contexto;						// Actividad que lo usa.
-	private ExpandableListView lista;				// Lista que usa el adaptador.
-	private ArrayList<String> grupos;				// Nombres de los grupos.
-	private ArrayList<ArrayList<Alumno>> alumnos;	// Alumnos por grupo.
-	private LayoutInflater inflador;				// Inflador de layouts.
-	private int colorMenorDeEdad;					// Color para alumno menor de edad.
-	private int colorMayorDeEdad;					// Color para alumno mayor de edad.
+	private Activity contexto; // Actividad que lo usa.
+	private ExpandableListView lista; // Lista que usa el adaptador.
+	private ArrayList<String> grupos; // Nombres de los grupos.
+	private ArrayList<ArrayList<Alumno>> alumnos; // Alumnos por grupo.
+	private LayoutInflater inflador; // Inflador de layouts.
+	private int colorMenorDeEdad; // Color para alumno menor de edad.
+	private int colorMayorDeEdad; // Color para alumno mayor de edad.
 
-    // Clase interna privada contenedor de vistas de hijo.
-    private class ContenedorVistasHijo {
+	// Clase interna privada contenedor de vistas de hijo.
+	private class ContenedorVistasHijo {
 		// Variables miembro.
-    	TextView lblNombre;
-    	TextView lblCurso;
-    }
+		TextView lblNombre;
+		TextView lblCurso;
+	}
 
-    // Clase interna privada contenedor de vistas de grupo.
-    private class ContenedorVistasGrupo {
-    	TextView lblEncCiclo;
-    	ImageView imgIndicador;
-    	View separador;
-    	LinearLayout llEncColumnas;
-    }
+	// Clase interna privada contenedor de vistas de grupo.
+	private class ContenedorVistasGrupo {
+		TextView lblEncCiclo;
+		ImageView imgIndicador;
+		View separador;
+		LinearLayout llEncColumnas;
+	}
 
-    // Constructor.
-	public AdaptadorAlumnos(Activity contexto, ExpandableListView lista, 
-			                ArrayList<String> grupos, 
-			                ArrayList<ArrayList<Alumno>> alumnos) {
+	// Constructor.
+	public AdaptadorAlumnos(Activity contexto, ExpandableListView lista,
+			ArrayList<String> grupos, ArrayList<ArrayList<Alumno>> alumnos) {
 		// Hago una copia de los parámetros del constructor.
 		this.contexto = contexto;
 		this.lista = lista;
@@ -72,8 +71,8 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 
 	// Cuando se va a pintar un hijo de un grupo.
 	@Override
-	public View getChildView(int posGrupo, int posHijo, boolean isLastChild, View convertview,
-			ViewGroup parent) {
+	public View getChildView(int posGrupo, int posHijo, boolean isLastChild,
+			View convertview, ViewGroup parent) {
 		ContenedorVistasHijo contenedor;
 		// Intento reciclar.
 		View fila = convertview;
@@ -85,8 +84,7 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 			contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
 			contenedor.lblCurso = (TextView) fila.findViewById(R.id.lblCurso);
 			fila.setTag(contenedor);
-		}
-		else {
+		} else {
 			// Obtengo el contenedor desde la prop Tag.
 			contenedor = (ContenedorVistasHijo) fila.getTag();
 		}
@@ -96,9 +94,8 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 		contenedor.lblCurso.setText(alumno.getCurso());
 		if (alumno.getEdad() < 18) {
 			contenedor.lblNombre.setTextColor(colorMenorDeEdad);
-		}
-		else {
-			contenedor.lblNombre.setTextColor(colorMayorDeEdad);				
+		} else {
+			contenedor.lblNombre.setTextColor(colorMayorDeEdad);
 		}
 		// Retorno la vista-fila.
 		return fila;
@@ -134,8 +131,8 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 
 	// Cuando se va a pintar el encabezado de un grupo.
 	@Override
-	public View getGroupView(int posGrupo, boolean isExpanded, View convertview,
-			ViewGroup parent) {
+	public View getGroupView(int posGrupo, boolean isExpanded,
+			View convertview, ViewGroup parent) {
 		ContenedorVistasGrupo contenedor;
 		// Intento reciclar.
 		View fila = convertview;
@@ -144,42 +141,45 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 			fila = inflador.inflate(R.layout.grupo, null);
 			// Creo el contenedor de vistas para la fila.
 			contenedor = new ContenedorVistasGrupo();
-			contenedor.lblEncCiclo = (TextView) fila.findViewById(R.id.lblEncCiclo);
-			contenedor.imgIndicador = (ImageView) fila.findViewById(R.id.imgIndicador);
+			contenedor.lblEncCiclo = (TextView) fila
+					.findViewById(R.id.lblEncCiclo);
+			contenedor.imgIndicador = (ImageView) fila
+					.findViewById(R.id.imgIndicador);
 			contenedor.separador = (View) fila.findViewById(R.id.separador);
-			contenedor.llEncColumnas = (LinearLayout) fila.findViewById(R.id.llEncColumnas);
+			contenedor.llEncColumnas = (LinearLayout) fila
+					.findViewById(R.id.llEncColumnas);
 			fila.setTag(contenedor);
-		}
-		else {
+		} else {
 			// Obtengo el contenedor desde la prop Tag de la fila.
 			contenedor = (ContenedorVistasGrupo) fila.getTag();
 		}
 		// Establezco los valores en las vistas.
 		contenedor.lblEncCiclo.setText(grupos.get(posGrupo));
-		// Si el grupo no tiene hijos oculto el icono de despliegue y la cabecera de columnas.
-		if ( getChildrenCount(posGrupo) == 0 ) {
+		// Si el grupo no tiene hijos oculto el icono de despliegue y la
+		// cabecera de columnas.
+		if (getChildrenCount(posGrupo) == 0) {
 			contenedor.imgIndicador.setVisibility(View.INVISIBLE);
 			contenedor.separador.setVisibility(View.GONE);
-			contenedor.llEncColumnas.setVisibility(View.GONE);			
-		} 
-		else {
+			contenedor.llEncColumnas.setVisibility(View.GONE);
+		} else {
 			// Hago visible el indicador de expansión.
 			contenedor.imgIndicador.setVisibility(View.VISIBLE);
-			// Si el grupo está expandido muestro el icono de ya expandido 
+			// Si el grupo está expandido muestro el icono de ya expandido
 			// y la cabecera de columnas.
 			if (isExpanded) {
-				contenedor.imgIndicador.setImageResource(R.drawable.expander_ic_maximized);
-				contenedor.separador.setVisibility(View.VISIBLE);			
-				contenedor.llEncColumnas.setVisibility(View.VISIBLE);			
-			}
-			else {
+				contenedor.imgIndicador
+						.setImageResource(R.drawable.expander_ic_maximized);
+				contenedor.separador.setVisibility(View.VISIBLE);
+				contenedor.llEncColumnas.setVisibility(View.VISIBLE);
+			} else {
 				// Si el grupo no está expandido muestro el icono de expandir
 				// y oculto la cabecera de columnas.
-				contenedor.imgIndicador.setImageResource(R.drawable.expander_ic_minimized);
+				contenedor.imgIndicador
+						.setImageResource(R.drawable.expander_ic_minimized);
 				contenedor.separador.setVisibility(View.GONE);
-				contenedor.llEncColumnas.setVisibility(View.GONE);			
+				contenedor.llEncColumnas.setVisibility(View.GONE);
 			}
-		}		
+		}
 		// Retorno la vista-fila.
 		return fila;
 	}
@@ -196,12 +196,12 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 		return true;
 	}
 
-//	// Si quiero hacer que mi lista siempre aparezca expandida puedo volver a
-//	// a expandir el grupo cuando se trate de plegar.
-//	@Override
-//	public void onGroupCollapsed(int posGrupo) {
-//		// Hago que el grupo se expanda.
-//		lista.expandGroup(posGrupo);
-//	}
-	
+	// // Si quiero hacer que mi lista siempre aparezca expandida puedo volver a
+	// // a expandir el grupo cuando se trate de plegar.
+	// @Override
+	// public void onGroupCollapsed(int posGrupo) {
+	// // Hago que el grupo se expanda.
+	// lista.expandGroup(posGrupo);
+	// }
+
 }

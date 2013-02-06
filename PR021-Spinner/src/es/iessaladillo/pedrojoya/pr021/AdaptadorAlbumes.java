@@ -14,10 +14,10 @@ import android.widget.TextView;
 class AdaptadorAlbumes extends BaseAdapter {
 
 	// Variables miembro.
-	private Activity contexto;			// Actividad que lo usa.
-	private ArrayList<Album> albumes;	// Array de datos.
-	private LayoutInflater inflador;	// Inflador de layouts.
-	
+	private Activity contexto; // Actividad que lo usa.
+	private ArrayList<Album> albumes; // Array de datos.
+	private LayoutInflater inflador; // Inflador de layouts.
+
 	public AdaptadorAlbumes(Activity contexto, ArrayList<Album> albumes) {
 		// Hago una copia de los parámetros del constructor.
 		this.contexto = contexto;
@@ -57,11 +57,12 @@ class AdaptadorAlbumes extends BaseAdapter {
 	// Cuando se va a pintar un elemento de la lista.
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ContenedorVistas contenedor;	// Contenedor de vistas.
+		ContenedorVistas contenedor; // Contenedor de vistas.
 		// Intento reutilizar.
 		View fila = convertView;
 		if (fila == null) {
-			// Inflo la vista-fila a partir de la especificación XML estándar de Android.
+			// Inflo la vista-fila a partir de la especificación XML estándar de
+			// Android.
 			fila = inflador.inflate(R.layout.caja, null);
 			// Creo un objeto contenedor con las referencias a las vistas
 			// de la fila y lo almaceno en el Tag de la vista-fila.
@@ -69,22 +70,22 @@ class AdaptadorAlbumes extends BaseAdapter {
 			contenedor.imgFoto = (ImageView) fila.findViewById(R.id.imgFoto);
 			contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
 			fila.setTag(contenedor);
-		}
-		else {
+		} else {
 			// Obtengo el contenedor desde la propiedad Tag de la vista-fila.
 			contenedor = (ContenedorVistas) fila.getTag();
 		}
 		// Escribo lo valores correspondientes de las vistas de la fila.
 		Album album = albumes.get(position);
 		contenedor.imgFoto.setImageResource(album.fotoResId);
-		contenedor.lblNombre.setText(album.getNombre() + " (" + album.getAnio() + ")");
+		contenedor.lblNombre.setText(album.getNombre() + " (" + album.getAnio()
+				+ ")");
 		// Retorno la vista-fila.
 		return fila;
 	}
 
 	@Override
 	public View getDropDownView(int position, View convertView, ViewGroup parent) {
-		ContenedorVistas contenedor;	// Contenedor de vistas.
+		ContenedorVistas contenedor; // Contenedor de vistas.
 		// Intento reutilizar.
 		View fila = convertView;
 		if (fila == null) {
@@ -97,8 +98,7 @@ class AdaptadorAlbumes extends BaseAdapter {
 			contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
 			contenedor.lblAnio = (TextView) fila.findViewById(R.id.lblAnio);
 			fila.setTag(contenedor);
-		}
-		else {
+		} else {
 			// Obtengo el contenedor desde la propiedad Tag de la vista-fila.
 			contenedor = (ContenedorVistas) fila.getTag();
 		}
@@ -110,5 +110,5 @@ class AdaptadorAlbumes extends BaseAdapter {
 		// Retorno la vista-fila.
 		return fila;
 	}
-	
+
 }

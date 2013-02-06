@@ -24,27 +24,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnDateSetListener, OnTimeSetListener {
+public class MainActivity extends Activity implements OnDateSetListener,
+		OnTimeSetListener {
 
 	// Constantes
-    private static final int DLG_DATEPICKER = 0;
+	private static final int DLG_DATEPICKER = 0;
 	private static final int DLG_TIMEPICKER = 1;
 	private static final int DLG_ALERTA_SINO = 2;
-	private static final int DLG_ALERTA_SELECCION_DIRECTA = 3; 
+	private static final int DLG_ALERTA_SELECCION_DIRECTA = 3;
 	private static final int DLG_ALERTA_SELECCION_SIMPLE = 4;
 	private static final int DLG_ALERTA_SELECCION_MULTIPLE = 5;
 	private static final int DLG_ALERTA_PERSONALIZADA = 6;
 
 	// Variables a nivel de clase.
-	private int turnoSeleccionado;	// Selección simple.
-	private boolean[] turnosSeleccionados;	// Selección múltiple.
+	private int turnoSeleccionado; // Selección simple.
+	private boolean[] turnosSeleccionados; // Selección múltiple.
 	Dialog dialogo = null;
-	
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
 
 	// Al hacer click sobre cualquier botón.
 	public void btnOnClick(View v) {
@@ -81,18 +82,17 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 		AlertDialog.Builder b;
 		switch (idDialogo) {
 		case DLG_DATEPICKER:
-			calendario = Calendar.getInstance(); 
-			dialogo = new DatePickerDialog(this, this, 
-							calendario.get(Calendar.YEAR), 
-							calendario.get(Calendar.MONTH), 
-							calendario.get(Calendar.DAY_OF_MONTH));
+			calendario = Calendar.getInstance();
+			dialogo = new DatePickerDialog(this, this,
+					calendario.get(Calendar.YEAR),
+					calendario.get(Calendar.MONTH),
+					calendario.get(Calendar.DAY_OF_MONTH));
 			break;
 		case DLG_TIMEPICKER:
-			calendario = Calendar.getInstance(); 
-			dialogo = new TimePickerDialog(this, this, 
-							calendario.get(Calendar.HOUR), 
-							calendario.get(Calendar.MINUTE), 
-							true);
+			calendario = Calendar.getInstance();
+			dialogo = new TimePickerDialog(this, this,
+					calendario.get(Calendar.HOUR),
+					calendario.get(Calendar.MINUTE), true);
 			break;
 		case DLG_ALERTA_SINO:
 			b = new AlertDialog.Builder(this);
@@ -102,7 +102,8 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 			b.setPositiveButton(R.string.si, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					mostrarTostada(getString(R.string.usuario_borrado), R.drawable.ic_launcher);
+					mostrarTostada(getString(R.string.usuario_borrado),
+							R.drawable.ic_launcher);
 				}
 			});
 			b.setNegativeButton(R.string.no, null);
@@ -114,9 +115,10 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 			b.setItems(R.array.turnos, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					String[] turnos = getResources().getStringArray(R.array.turnos);
-					mostrarTostada(getString(R.string.ha_seleccionado) + turnos[which], 
-							R.drawable.ic_launcher);
+					String[] turnos = getResources().getStringArray(
+							R.array.turnos);
+					mostrarTostada(getString(R.string.ha_seleccionado)
+							+ turnos[which], R.drawable.ic_launcher);
 				}
 			});
 			b.setIcon(R.drawable.ic_launcher);
@@ -125,40 +127,44 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 		case DLG_ALERTA_SELECCION_SIMPLE:
 			b = new AlertDialog.Builder(this);
 			b.setTitle(R.string.turno);
-			b.setSingleChoiceItems(R.array.turnos, 0, new OnClickListener(){
+			b.setSingleChoiceItems(R.array.turnos, 0, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					turnoSeleccionado = which;
 				}
 			});
 			b.setIcon(R.drawable.ic_launcher);
-			b.setNeutralButton("Aceptar", new OnClickListener(){
+			b.setNeutralButton("Aceptar", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface d, int arg1) {
 					d.dismiss();
-					String[] turnos = getResources().getStringArray(R.array.turnos);
-					mostrarTostada(getString(R.string.ha_seleccionado) + turnos[turnoSeleccionado], 
-							R.drawable.ic_launcher);
+					String[] turnos = getResources().getStringArray(
+							R.array.turnos);
+					mostrarTostada(getString(R.string.ha_seleccionado)
+							+ turnos[turnoSeleccionado], R.drawable.ic_launcher);
 				}
 			});
 			dialogo = b.create();
 			break;
 		case DLG_ALERTA_SELECCION_MULTIPLE:
-			turnosSeleccionados = new boolean[] {true, false, false};
+			turnosSeleccionados = new boolean[] { true, false, false };
 			b = new AlertDialog.Builder(this);
 			b.setTitle(R.string.turno);
-			b.setMultiChoiceItems(R.array.turnos, turnosSeleccionados , new OnMultiChoiceClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					turnosSeleccionados[which] = isChecked;
-				}
-			});
+			b.setMultiChoiceItems(R.array.turnos, turnosSeleccionados,
+					new OnMultiChoiceClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which,
+								boolean isChecked) {
+							turnosSeleccionados[which] = isChecked;
+						}
+					});
 			b.setIcon(R.drawable.ic_launcher);
-			b.setNeutralButton("Aceptar", new OnClickListener(){
+			b.setNeutralButton("Aceptar", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface d, int arg1) {
 					d.dismiss();
-					String[] turnos = getResources().getStringArray(R.array.turnos);
+					String[] turnos = getResources().getStringArray(
+							R.array.turnos);
 					String mensaje = "";
 					boolean primero = true;
 					for (int i = 0; i < turnosSeleccionados.length; i++) {
@@ -166,8 +172,7 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 							if (primero) {
 								mensaje += getString(R.string.ha_seleccionado);
 								primero = false;
-							}
-							else {
+							} else {
 								mensaje += ", ";
 							}
 							mensaje += turnos[i];
@@ -185,7 +190,8 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 			b = new AlertDialog.Builder(this);
 			b.setTitle(R.string.conexion);
 			b.setIcon(R.drawable.ic_launcher);
-			b.setView((LayoutInflater.from(this)).inflate(R.layout.dialog_login, null));
+			b.setView((LayoutInflater.from(this)).inflate(
+					R.layout.dialog_login, null));
 			dialogo = b.create();
 			break;
 		}
@@ -195,29 +201,27 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
-		mostrarTostada(getString(R.string.ha_seleccionado) + 
-				dayOfMonth + "/" +  (monthOfYear + 1) + "/" + year, 
-				R.drawable.ic_launcher);
+		mostrarTostada(getString(R.string.ha_seleccionado) + dayOfMonth + "/"
+				+ (monthOfYear + 1) + "/" + year, R.drawable.ic_launcher);
 	}
-	
+
 	@Override
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-		mostrarTostada(getString(R.string.ha_seleccionado) + 
-				hourOfDay + ":" +  minute, 
-				R.drawable.ic_launcher);
+		mostrarTostada(getString(R.string.ha_seleccionado) + hourOfDay + ":"
+				+ minute, R.drawable.ic_launcher);
 	}
 
 	// Al hacer click sobre btnConectar.
 	public void btnConectarOnClick(View v) {
-    	mostrarTostada(getString(R.string.conectando), R.drawable.ic_launcher);
-    	dialogo.dismiss();
+		mostrarTostada(getString(R.string.conectando), R.drawable.ic_launcher);
+		dialogo.dismiss();
 	}
 
 	// Al hacer click sobre btnCancelar.
 	public void btnCancelarOnClick(View v) {
-    	dialogo.dismiss();
+		dialogo.dismiss();
 	}
-	
+
 	// Muestra un Toast.
 	private void mostrarTostada(String mensaje, int drawableResId) {
 		// Obtengo el contexto.
@@ -225,27 +229,28 @@ public class MainActivity extends Activity implements OnDateSetListener, OnTimeS
 		// Creo un objeto tostada.
 		Toast tostada = new Toast(contexto);
 		// Creo un LinearLayout como padre del layout para la tostada.
-        LinearLayout padre = new LinearLayout(contexto);
-        padre.setBackgroundResource(R.drawable.toast_frame);
-        // Creo un TextView, le asigno el texto del mensaje y
-        // el icono y se lo añado al LinearLayout.
-        TextView texto = new TextView(contexto);
-        texto.setText(mensaje);
-        texto.setTextAppearance(contexto, android.R.style.TextAppearance_Small);
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 0);
-        texto.setLayoutParams(params);
-        texto.setGravity(Gravity.CENTER);
-        texto.setShadowLayer(2.75f, 0, 0, Color.parseColor("#BB000000"));
-        texto.setCompoundDrawablesWithIntrinsicBounds(drawableResId, 0, 0, 0);
-        texto.setCompoundDrawablePadding(10);
-        padre.addView(texto);
-        // Establezco el LinarLayout como la vista 
-        // que debe mostrar la tostada.
-        tostada.setView(padre);
-        // Establezco la duración de la tostada.
-        tostada.setDuration(Toast.LENGTH_SHORT);
-        // Muestro la tostada.
-        tostada.show();
+		LinearLayout padre = new LinearLayout(contexto);
+		padre.setBackgroundResource(R.drawable.toast_frame);
+		// Creo un TextView, le asigno el texto del mensaje y
+		// el icono y se lo añado al LinearLayout.
+		TextView texto = new TextView(contexto);
+		texto.setText(mensaje);
+		texto.setTextAppearance(contexto, android.R.style.TextAppearance_Small);
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT, 0);
+		texto.setLayoutParams(params);
+		texto.setGravity(Gravity.CENTER);
+		texto.setShadowLayer(2.75f, 0, 0, Color.parseColor("#BB000000"));
+		texto.setCompoundDrawablesWithIntrinsicBounds(drawableResId, 0, 0, 0);
+		texto.setCompoundDrawablePadding(10);
+		padre.addView(texto);
+		// Establezco el LinarLayout como la vista
+		// que debe mostrar la tostada.
+		tostada.setView(padre);
+		// Establezco la duración de la tostada.
+		tostada.setDuration(Toast.LENGTH_SHORT);
+		// Muestro la tostada.
+		tostada.show();
 	}
 
 }

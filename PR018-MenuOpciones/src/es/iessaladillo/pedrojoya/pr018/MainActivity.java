@@ -10,47 +10,47 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	// Variables miembro.
-    private EditText txtAlumno;
+	private EditText txtAlumno;
 
-    // Cuando se crea la actividad.
+	// Cuando se crea la actividad.
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// Llamo al constructor del padre.
-        super.onCreate(savedInstanceState);
-        // Establezco el layout que mostrará la actividad.
-        setContentView(R.layout.main);
-        // Obtengo las vistas.
-        getVistas();
-    }
+		super.onCreate(savedInstanceState);
+		// Establezco el layout que mostrará la actividad.
+		setContentView(R.layout.main);
+		// Obtengo las vistas.
+		getVistas();
+	}
 
 	// Obtiene e inicializa las vistas.
-    private void getVistas() {
+	private void getVistas() {
 		txtAlumno = (EditText) this.findViewById(R.id.txtAlumno);
 	}
 
-    // Al crear la primera vez el menú.
+	// Al crear la primera vez el menú.
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	// Inflo el menú a partir del XML.
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflo el menú a partir del XML.
 		getMenuInflater().inflate(R.menu.main, menu);
-        // Retorno lo que devuelva la actividad.
-        return super.onCreateOptionsMenu(menu);
-    }
+		// Retorno lo que devuelva la actividad.
+		return super.onCreateOptionsMenu(menu);
+	}
 
 	// Antes de mostrar el menú.
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// Obtengo el nombre del alumno.
-		String alumno = txtAlumno.getText().toString(); 
+		String alumno = txtAlumno.getText().toString();
 		// Obtengo los menús cuyo título quiero modificar.
 		MenuItem item = menu.findItem(R.id.mnuEditar);
 		// Si se ha introducido un alumno.
 		if (!alumno.equals("")) {
 			// Activo el grupo de alumno.
 			menu.setGroupEnabled(R.id.mnugrpAlumno, true);
-			item.setTitle(getResources().getString(R.string.editar) + " " + alumno);
-		}
-		else {
+			item.setTitle(getResources().getString(R.string.editar) + " "
+					+ alumno);
+		} else {
 			// Desctivo el grupo de alumno.
 			menu.setGroupEnabled(R.id.mnugrpAlumno, false);
 			item.setTitle(R.string.editar);
@@ -68,10 +68,12 @@ public class MainActivity extends Activity {
 			mostrarTostada(getResources().getString(R.string.agregar));
 			break;
 		case R.id.mnuRefrescarCompleto:
-			mostrarTostada(getResources().getString(R.string.refrescar_completamente));
+			mostrarTostada(getResources().getString(
+					R.string.refrescar_completamente));
 			break;
 		case R.id.mnuRefrescarParcial:
-			mostrarTostada(getResources().getString(R.string.refrescar_parcialmente));
+			mostrarTostada(getResources().getString(
+					R.string.refrescar_parcialmente));
 			break;
 		case R.id.mnuCargar:
 			mostrarTostada(getResources().getString(R.string.cargar));
@@ -87,17 +89,18 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.mnuCompartir:
 			mostrarTostada(getResources().getString(R.string.compartir));
-			break;			
+			break;
 		default:
-			return super.onOptionsItemSelected(item);			
+			return super.onOptionsItemSelected(item);
 		}
 		// Retorno que lo he gestionado yo.
 		return true;
 	}
-	
+
 	// Muestra una tostada.
 	private void mostrarTostada(String mensaje) {
-		Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT)
+				.show();
 	}
 
 }

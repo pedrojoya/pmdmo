@@ -14,26 +14,33 @@ class Album {
 		this.nombre = nombre;
 		this.anio = anio;
 	}
-	public Album() {}
-	
+
+	public Album() {
+	}
+
 	// Getters y Setters.
 	public int getFotoResId() {
 		return fotoResId;
 	}
+
 	public void setFotoResId(int fotoResId) {
 		this.fotoResId = fotoResId;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getAnio() {
 		return anio;
 	}
+
 	public void setAnio(String anio) {
 		this.anio = anio;
 	}
-	
+
 }

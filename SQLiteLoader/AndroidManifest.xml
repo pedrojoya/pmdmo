@@ -23,9 +23,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="es.iessaladillo.pedrojoya.sqliteloader.AlumnoActivity"
-            android:label="@string/title_activity_alumno" >
+            android:name="es.iessaladillo.pedrojoya.sqliteloader.CRUAlumnoActivity"
+            android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="es.iessaladillo.pedrojoya.sqliteloader.ListaAlumnosActivity"
+            android:label="@string/app_name" >
+        </activity>        
+        <provider
+            android:name="es.iessaladillo.pedrojoya.sqliteloader.AlumnosContentProvider"
+            android:authorities="es.iessaladillo.alumnos"
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>
