@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRaiz"
+	android:orientation="vertical"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" >
+	<LinearLayout
+		android:id="@+id/llBotonera"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal">
+		<EditText
+		    android:id="@+id/txtPath"
+		    android:inputType="text"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"		    
+		    android:layout_weight="1" >
+		    <requestFocus />
+		</EditText>
+	    <ImageButton android:id="@+id/btnPlay"
+		    android:contentDescription="@string/boton_play"  
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="btnPlayOnClick"
+			android:src="@drawable/play"/>
+	</LinearLayout>
+	<SurfaceView
+	    android:id="@+id/swVisor"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_gravity="center" />
+</LinearLayout>

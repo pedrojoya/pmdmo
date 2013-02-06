@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/mnuVer" 
+        android:title="@string/ver_alumno">
+    </item>
+    <item 
+        android:id="@+id/mnuEditar" 
+        android:title="@string/editar_alumno">
+    </item>
+    <item 
+        android:id="@+id/mnuEliminar" 
+        android:title="@string/eliminar_alumno">
+    </item>    
+    <item 
+        android:id="@+id/mnuLlamar" 
+        android:title="@string/llamar_alumno">
+    </item>    
+</menu>

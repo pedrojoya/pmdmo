@@ -1,0 +1,88 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+#  Internal Error (classFileParser.cpp:2923), pid=5964, tid=8012
+#  Error: ShouldNotReachHere()
+#
+# Java VM: Java HotSpot(TM) Client VM (11.3-b02 mixed mode windows-x86)
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00219000):  JavaThread "Unknown thread" [_thread_in_vm, id=8012, stack(0x00340000,0x00390000)]
+
+Stack: [0x00340000,0x00390000]
+
+[error occurred during error reporting (printing native stack), id 0xc0000005]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00219000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=8012, stack(0x00340000,0x00390000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\Program Files\Java\jre6\bin\javaw.exe
+0x76e40000 - 0x76f68000 	C:\Windows\system32\ntdll.dll
+0x75950000 - 0x75a2c000 	C:\Windows\system32\kernel32.dll
+0x76090000 - 0x76156000 	C:\Windows\system32\ADVAPI32.dll
+0x761b0000 - 0x76273000 	C:\Windows\system32\RPCRT4.dll
+0x758a0000 - 0x7593d000 	C:\Windows\system32\USER32.dll
+0x76160000 - 0x761ab000 	C:\Windows\system32\GDI32.dll
+0x76f70000 - 0x76f8e000 	C:\Windows\system32\IMM32.DLL
+0x75b20000 - 0x75be8000 	C:\Windows\system32\MSCTF.dll
+0x75fb0000 - 0x7605a000 	C:\Windows\system32\msvcrt.dll
+0x75940000 - 0x75949000 	C:\Windows\system32\LPK.DLL
+0x76f90000 - 0x7700d000 	C:\Windows\system32\USP10.dll
+0x10000000 - 0x10015000 	C:\Windows\system32\APSHOOK.DLL
+0x75e10000 - 0x75e69000 	C:\Windows\system32\SHLWAPI.dll
+0x75360000 - 0x75368000 	C:\Windows\system32\VERSION.dll
+0x754d0000 - 0x754d7000 	C:\Windows\system32\PSAPI.DLL
+0x74f60000 - 0x750fe000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.6002.18305_none_5cb72f2a088b0ed3\comctl32.dll
+0x7c340000 - 0x7c396000 	C:\Program Files\Java\jre6\bin\msvcr71.dll
+0x6d800000 - 0x6da56000 	C:\Program Files\Java\jre6\bin\client\jvm.dll
+0x74670000 - 0x746a2000 	C:\Windows\system32\WINMM.dll
+0x75570000 - 0x756b5000 	C:\Windows\system32\ole32.dll
+0x754e0000 - 0x7556d000 	C:\Windows\system32\OLEAUT32.dll
+0x74630000 - 0x7466e000 	C:\Windows\system32\OLEACC.dll
+0x75300000 - 0x7532c000 	C:\Windows\system32\apphelp.dll
+0x6d290000 - 0x6d298000 	C:\Program Files\Java\jre6\bin\hpi.dll
+0x6d7b0000 - 0x6d7bc000 	C:\Program Files\Java\jre6\bin\verify.dll
+0x6d330000 - 0x6d34f000 	C:\Program Files\Java\jre6\bin\java.dll
+0x6d7f0000 - 0x6d7ff000 	C:\Program Files\Java\jre6\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:C:\android-sdk\platforms\android-7\android.jar 
+java_command: es.iessaladillo.pedrojoya.ormlitetest.DatabaseConfigUtil
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:/Program Files/Java/jre6/bin/client;C:/Program Files/Java/jre6/bin;C:/Program Files/Java/jre6/lib/i386;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\ASUS Security Center\ASUS Security Protect Manager\bin;C:\Program Files\Maestro Learning\Common;C:\Program Files\Calibre2\;C:\Program Files\QT Lite\QTSystem;C:\Program Files\MKVToolNix;C:\android-sdk\tools;C:\eclipse;
+USERNAME=Pedro
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 23 Stepping 6, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows Vista Build 6002 Service Pack 2
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 7 stepping 6, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 2097151k(851200k free), swap 4194303k(3108404k free)
+
+vm_info: Java HotSpot(TM) Client VM (11.3-b02) for windows-x86 JRE (1.6.0_13-b03), built on Mar  9 2009 01:15:24 by "java_re" with MS VC++ 7.1
+
+time: Wed May 09 11:44:46 2012
+elapsed time: 0 seconds
+

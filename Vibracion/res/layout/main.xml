@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <Button
+        android:id="@+id/btnMedio"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnMedioOnClick"
+        android:text="@string/vibrar_durante_medio_segundo" />
+    <Button
+        android:id="@+id/btnPatron"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnPatronOnClick"
+        android:text="@string/vibrar_con_patron" />
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnCancelarOnClick"        
+        android:text="@string/cancelar_vibracion" />
+</LinearLayout>

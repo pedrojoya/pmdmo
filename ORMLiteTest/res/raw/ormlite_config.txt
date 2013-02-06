@@ -1,0 +1,23 @@
+#
+# generated on 2012/05/09 11:02:29
+#
+# --table-start--
+dataClass=es.iessaladillo.pedrojoya.ormlitetest.Alumno
+tableName=alumno
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+# --field-end--
+# --field-start--
+fieldName=telefono
+# --field-end--
+# --field-start--
+fieldName=curso
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

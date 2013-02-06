@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Vibración</string>
+    <string name="vibrar_durante_medio_segundo">Vibrar durante medio segundo</string>
+    <string name="vibrar_con_patron">Vibrar repetidamente con un patron concreto</string>
+    <string name="cancelar_vibracion">Cancelar vibración</string>
+    
+</resources>

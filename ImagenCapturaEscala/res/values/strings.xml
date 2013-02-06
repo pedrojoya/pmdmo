@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Captura y escala de imagen</string>
+    <string name="foto">Foto realizada por el usuario</string>
+    <string name="capturar">Hacer foto</string>
+</resources>

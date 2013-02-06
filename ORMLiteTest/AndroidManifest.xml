@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="es.iessaladillo.pedrojoya.ormlitetest"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    <uses-sdk android:minSdkVersion="7" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name=".AddAlumnos"
+            android:label="@string/agregar_alumno">
+            <intent-filter>
+                <action android:name="es.uma.SQL.NEW_STUDENT" />
+                <action android:name="es.uma.SQL.EDIT_STUDENT" />
+                <action android:name="es.uma.SQL.VIEW_STUDENT" />
+            </intent-filter>         
+        </activity>
+        <activity 
+            android:name=".ListaAlumnosActivity"
+            android:label="@string/consultar_alumno">            
+        </activity>
+	</application>
+</manifest>

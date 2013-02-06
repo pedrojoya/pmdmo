@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MySQLDroidlogin</string>
+    <string name="logo_de_android">Logo de Android</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="olvido_su_password">¿Olvido su Password?</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="error_vacios">Debe especificar el nombre de usuario y el password</string>
+    <string name="login_no_valido">Login no válido</string>
+    <string name="error_comprobacion">No se ha podido comprobar el login</string>
+    <string name="comprobando">Comprobando....</string>
+</resources>

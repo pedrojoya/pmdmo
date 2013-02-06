@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRaiz"
+	android:orientation="vertical"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent" >
+	<LinearLayout
+		android:id="@+id/llBotonera"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal">
+		<ImageButton android:id="@+id/btnPlay"
+		    android:contentDescription="@string/boton_play"  
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="btnPlayOnClick"
+			android:src="@drawable/play"/>
+		<ImageButton 
+		    android:id="@+id/btnPause"
+		    android:contentDescription="@string/boton_pausa"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="btnPauseOnClick"
+			android:src="@drawable/pause"/>
+		<ImageButton 
+		    android:id="@+id/btnStop"
+		    android:contentDescription="@string/boton_stop"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:onClick="btnStopOnClick"
+			android:src="@drawable/stop"/>
+		<EditText
+		    android:id="@+id/txtPath"
+		    android:inputType="text"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"		    
+		    android:layout_weight="1" >
+		    <requestFocus />
+		</EditText>
+	</LinearLayout>
+	<SeekBar
+	    android:id="@+id/skbBarra"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="5dp"
+	    android:paddingRight="5dp" />
+	<SurfaceView
+	    android:id="@+id/swVisor"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_gravity="center" />
+</LinearLayout>
