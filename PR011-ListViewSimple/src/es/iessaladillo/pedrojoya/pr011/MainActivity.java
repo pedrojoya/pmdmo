@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
 		lstAlumnos.setAdapter(adaptador);
 		// Creo el listener para cuando se hace click en un item de la lista.
 		lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
-			@Override
 			public void onItemClick(AdapterView<?> lst, View vistafila,
 					int posicion, long id) {
 				// Informo al usuario sobre que alumno ha pulsado.

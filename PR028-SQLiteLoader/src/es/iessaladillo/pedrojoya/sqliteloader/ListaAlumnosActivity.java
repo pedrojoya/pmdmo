@@ -199,7 +199,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		return b.create();
 	}
 
-	@Override
 	public void onClick(DialogInterface arg0, int arg1) {
 		// Borro el alumno a través del content provider.
 		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos/"
@@ -214,7 +213,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		cargarLista();
 	}
 
-	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma
 		// de cursor.
@@ -228,7 +226,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 	}
 
 	// Crea el cursor.
-	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		// Consulto todos los alumnos a través del content provider.
 		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos");
@@ -238,14 +235,12 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 	}
 
 	// Cuando el cursor ha terminado de cargar los datos.
-	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		// Cambio el cursor del adaptador por el que tiene datos.
 		adaptador.changeCursor(data);		
 	}
 
 	// Cuando se resetea el cargador.
-	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Cambio el cursor del adaptador por el que tiene datos.
 		adaptador.changeCursor(null);				

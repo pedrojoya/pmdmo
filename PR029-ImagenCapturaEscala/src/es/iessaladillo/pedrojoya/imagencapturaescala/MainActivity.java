@@ -15,12 +15,12 @@ import android.widget.ImageView;
 public class MainActivity extends Activity {
 
 	// Constantes.
-	final static int RC_CAPTURAR_IMAGEN = 0;	// Request code del intent de captura.
+	final static int RC_CAPTURAR_IMAGEN = 0; // Código solicitud Intent.
 
 	// Variables a nivel de clase.
 	private ImageView imgFoto;
-	String imgPath="";
-	
+	String imgPath = "";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,8 +34,7 @@ public class MainActivity extends Activity {
 	// Al hacer click en el botón btnCapturar.
 	public void btnCapturarOnClick(View v) {
 		// Obtenemos el nombre del archivo con el que debe almacenarse la foto.
-		imgPath = Environment.getExternalStorageDirectory()
-				.getAbsolutePath()
+		imgPath = Environment.getExternalStorageDirectory().getAbsolutePath()
 				+ "/mifoto.jpg";
 		// Creo el descriptor del archivo.
 		File ficheroFoto = new File(imgPath);
@@ -48,12 +47,13 @@ public class MainActivity extends Activity {
 		// Envío el intent esperando respuesta.
 		startActivityForResult(i, RC_CAPTURAR_IMAGEN);
 	}
-	
+
 	// Al retornar resultados.
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		// Si todo ha ido bien y el código de petición corresponde al de captura.
+		// Si todo ha ido bien y el código de petición corresponde al de
+		// captura.
 		if (resultCode == RESULT_OK && requestCode == RC_CAPTURAR_IMAGEN) {
 			mostrarImagen();
 		}
@@ -61,32 +61,9 @@ public class MainActivity extends Activity {
 
 	// Escala y muestra la imagen en el visor.
 	private void mostrarImagen() {
-//		// Obtengo las dimensiones del visor.
-//		int anchuraVisor = imgFoto.getWidth();
-//		int alturaVisor = imgFoto.getHeight();
-//		// Obtengo las dimensiones de la imagen (inJustDecodeBounds = true)
+		// Escalo la imagen a 1/4 de su tamaño.
 		BitmapFactory.Options opcionesImagen = new BitmapFactory.Options();
-//		opcionesImagen.inJustDecodeBounds = true;	// Se simula.
-//		Bitmap imagen = BitmapFactory.decodeFile(imgPath, opcionesImagen);
-//		// Obtengo la ratio de la imagen respecto al tamaño de la pantalla.
-//		int ratioAltura = (int) Math.ceil(opcionesImagen.outHeight
-//				/ (float) alturaVisor);
-//		int ratioAnchura = (int) Math.ceil(opcionesImagen.outWidth
-//				/ (float) anchuraVisor);
-//		Log.v("Ratio de Altura", "" + ratioAltura);
-//		Log.v("Ratio de Anchura", "" + ratioAnchura);
-//		/* Si ambos ratios son mayores que 1 es porque uno de los lados de
-//		 * la imagen es más grande que la imagen.
-//		 */
-//		if (ratioAltura > 1 && ratioAnchura > 1) {
-//			// Escalo la imagen a la ratio mayor.
-//			if (ratioAltura > ratioAnchura) {
-//				opcionesImagen.inSampleSize = ratioAltura;
-//			} else {
-//				opcionesImagen.inSampleSize = ratioAnchura;
-//			}
-//		}
-		opcionesImagen.inJustDecodeBounds = false;	// Se hace realmente el escalado.
+		opcionesImagen.inJustDecodeBounds = false;
 		opcionesImagen.inSampleSize = 4;
 		Bitmap imagen = BitmapFactory.decodeFile(imgPath, opcionesImagen);
 		// Muestro la foto
@@ -107,6 +84,5 @@ public class MainActivity extends Activity {
 		}
 		super.onResume();
 	}
-
 
 }

@@ -107,7 +107,6 @@ public class MainActivity extends Activity {
 				new Alumno("Antonio", 16, "CFGM", "1º") };
 		lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
 		lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
-			@Override
 			public void onItemClick(AdapterView<?> lst, View v, int posicion,
 					long id) {
 				// Obtengo el alumno sobre el que se ha pulsado.

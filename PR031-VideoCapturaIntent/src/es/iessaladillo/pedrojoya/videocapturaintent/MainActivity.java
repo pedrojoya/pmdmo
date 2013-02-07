@@ -12,7 +12,7 @@ import android.widget.VideoView;
 public class MainActivity extends Activity {
 
 	// Constantes.
-	public static int RC_CAPTURAR_VIDEO = 1;	// Request Code Intent.
+	public static int RC_CAPTURAR_VIDEO = 1; // Request Code Intent.
 
 	// Variables a nivel de clase.
 	Button btnCapturar;
@@ -38,8 +38,9 @@ public class MainActivity extends Activity {
 		btnReproducir = (Button) findViewById(R.id.btnReproducir);
 		vvReproductor = (VideoView) this.findViewById(R.id.vvReproductor);
 		vvReproductor.setMediaController(new MediaController(this));
-		// El botón de reproducir no debe estar activo hasta que haya un vídeo capturado.
-		btnReproducir.setEnabled(false);		
+		// El botón de reproducir no debe estar activo hasta que haya un vídeo
+		// capturado.
+		btnReproducir.setEnabled(false);
 	}
 
 	// Al hacer click sobre btnCapturar.
@@ -47,19 +48,21 @@ public class MainActivity extends Activity {
 		// Creo un intent con la acción de captura de vídeo.
 		Intent i = new Intent(android.provider.MediaStore.ACTION_VIDEO_CAPTURE);
 		// Envío el intent a alguna actividad, esperando respuesta.
-		startActivityForResult(i, RC_CAPTURAR_VIDEO);		
+		startActivityForResult(i, RC_CAPTURAR_VIDEO);
 	}
-	
+
 	// Al hacer click sobre btnReproducir.
 	public void btnReproducirOnClick(View v) {
-		// Establezco la uri del vídeo en el reproductor y comienzo la reprodución.
+		// Establezco la uri del vídeo en el reproductor y comienzo la
+		// reprodución.
 		vvReproductor.setVideoURI(uriVideo);
 		vvReproductor.start();
 	}
 
 	// Al recibir la respuesta.
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Si todo ha ido bien y la respuesta corresponde a la petición de captura.
+		// Si todo ha ido bien y la respuesta corresponde a la petición de
+		// captura.
 		if (resultCode == RESULT_OK && requestCode == RC_CAPTURAR_VIDEO) {
 			// Obtengo de los datos del intent resultado la uri del vídeo.
 			uriVideo = data.getData();
@@ -70,7 +73,10 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putString("uri", uriVideo.toString());
+		// Almaceno la uri del vídeo (si ya la tenía).
+		if (uriVideo != null) {
+			outState.putString("uri", uriVideo.toString());
+		}
 		super.onSaveInstanceState(outState);
 	}
 
