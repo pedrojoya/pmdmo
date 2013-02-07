@@ -38,10 +38,13 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		// Establezco el layout que utilizará la actividad.
 		setContentView(R.layout.activity_listaalumnos);
-		// Registro la lista para menú contextual
+		// Obtengo las vistas.
 		lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
-		lstAlumnos.setOnItemClickListener(this);
 		this.registerForContextMenu(lstAlumnos);
+		// Cargo la lista.
+		cargarLista();
+		// Registro la lista para menú contextual
+		lstAlumnos.setOnItemClickListener(this);		
 	}
 
 	// Obtiene los datos de la BD y los carga en la lista.
@@ -187,13 +190,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 	}
 
 	@Override
-	protected void onResume() {
-		// Consulto los datos.
-		cargarLista();
-		super.onResume();
-	}
-
-	@Override
 	protected Dialog onCreateDialog(int id) {
 		// Creo un AlertDialog para confirmar la eliminación
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
@@ -255,5 +251,12 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		// Cambio el cursor del adaptador por el que tiene datos.
 		adaptador.changeCursor(null);				
 	}
+
+	@Override
+	protected void onResume() {
+		getSupportLoaderManager().restartLoader(0, null, this);
+		super.onResume();
+	}
+	
 
 }
