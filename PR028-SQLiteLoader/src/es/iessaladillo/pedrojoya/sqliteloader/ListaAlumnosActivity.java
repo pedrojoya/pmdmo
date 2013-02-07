@@ -27,7 +27,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		OnClickListener, OnItemClickListener,
 		LoaderManager.LoaderCallbacks<Cursor> {
 
-	private static final int DLG_ELIMINAR = 0;
 	long idAlumno;
 	private ListView lstAlumnos;
 	SimpleCursorAdapter adaptador;
@@ -59,6 +58,8 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		// Asigno el adaptador a la ListActivity.
 		lstAlumnos.setAdapter(adaptador);
 
+//		MÉTODO SIMPLE SIN QUE LA ACTIVIDAD CONTROLE LOS CURSOR LOADER.
+//		
 //		// Consulto todos los alumnos a través del content provider.
 //		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos");
 //		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.ALU_TODOS,
@@ -154,7 +155,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 
 	// Elimina de la BD el alumno con dicho id.
 	private void eliminarAlumno(long id) {
-//		this.showDialog(DLG_ELIMINAR);
 		// Borro el alumno a través del content provider.
 		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos/"
 				+ idAlumno);
@@ -166,7 +166,6 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 					R.string.eliminacion_incorrecta, Toast.LENGTH_LONG).show();
 		}
 		getSupportLoaderManager().restartLoader(0, null, this);
-//		cargarLista();
 	}
 
 	// Envía el intent necesario para llamar por teléfono al alumno.
@@ -258,5 +257,4 @@ public class ListaAlumnosActivity extends FragmentActivity implements
 		super.onResume();
 	}
 	
-
 }

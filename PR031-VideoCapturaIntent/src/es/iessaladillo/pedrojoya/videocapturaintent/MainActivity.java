@@ -26,6 +26,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 		// Obtengo la referencia a las vistas y la inicializo.
 		initVistas();
+		if (savedInstanceState != null) {
+			uriVideo = Uri.parse(savedInstanceState.getString("uri"));
+			btnReproducir.setEnabled(true);
+		}
 	}
 
 	// Obtiene la referencia las vistas y las inicializa.
@@ -62,6 +66,12 @@ public class MainActivity extends Activity {
 			// Activo el botón de reproducir porque ya hay vídeo.
 			btnReproducir.setEnabled(true);
 		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putString("uri", uriVideo.toString());
+		super.onSaveInstanceState(outState);
 	}
 
 }
