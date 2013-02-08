@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnPreparedListener,
 		OnCompletionListener {

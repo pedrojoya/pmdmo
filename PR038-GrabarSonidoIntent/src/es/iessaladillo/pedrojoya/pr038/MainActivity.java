@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr036;
+package es.iessaladillo.pedrojoya.pr038;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,23 +9,29 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnPreparedListener,
 		OnCompletionListener {
 
-	private static final int RC_SELECCIONAR_CANCION = 0;
+	private static final int RC_GRABAR = 0;
 	// Variables a nivel de clase.
 	private SeekBar skbBarra;
 	private MediaPlayer reproductor;
 	private boolean enPausa = false;
 	private Handler manejador = new Handler();
 	private Runnable notificacion;
-	private Uri uriCancion;
+	private Uri uriGrabacion;
+	private ImageButton btnPlay;
+	private ImageButton btnPause;
+	private ImageButton btnStop;
+	private Button btnGrabar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,20 @@ public class MainActivity extends Activity implements OnPreparedListener,
 		setContentView(R.layout.activity_main);
 		// Obtengo la referencia a las vistas.
 		getVistas();
+		// Deshabilito el Stop y Pause.
+		btnStop.setEnabled(false);
+		btnPause.setEnabled(false);
+		// Habilito o deshabilito el Play.
+		if (savedInstanceState != null) {
+			btnPlay.setEnabled(savedInstanceState.getBoolean("btnPlayEnabled"));
+			// Obtengo la uri de la grabación.
+			String sUriGrabacion = savedInstanceState.getString("uriGrabacion");
+			if (!sUriGrabacion.equals("")) {
+				uriGrabacion = Uri.parse(savedInstanceState.getString("uriGrabacion"));
+			}
+		} else {
+			btnPlay.setEnabled(false);
+		}		
 		// Cuando se desplaza la seekbar.
 		skbBarra.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -62,24 +82,45 @@ public class MainActivity extends Activity implements OnPreparedListener,
 	// Obtiene las referencias a las vistas del layout.
 	private void getVistas() {
 		skbBarra = (SeekBar) this.findViewById(R.id.skbBarra);
+		btnPlay = (ImageButton) this.findViewById(R.id.btnPlay);
+		btnPause = (ImageButton) this.findViewById(R.id.btnPause);
+		btnStop = (ImageButton) this.findViewById(R.id.btnStop);
+		btnGrabar = (Button) this.findViewById(R.id.btnGrabar);
 	}
 
-	// Al hacer click en btnSeleccionar.
-	public void btnSeleccionarOnClick(View v) {
-		// Lanzo un intent para seleccionar una canción.
-		Intent i = new Intent(android.content.Intent.ACTION_GET_CONTENT);
-		i.setType("audio/mp3");
-		startActivityForResult(i, RC_SELECCIONAR_CANCION);
+	// Al hacer click en btnGrabar.
+	public void btnGrabarOnClick(View v) {
+		// Deshabilito los botones de reproducción.
+		btnPlay.setEnabled(false);
+		btnStop.setEnabled(false);
+		btnPause.setEnabled(false);
+		// Lanzo un intent para grabar sonido.
+		Intent i = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+		startActivityForResult(i, RC_GRABAR);
 	}
 
-	// Al retornar de la selección de la canción
+	// Al retornar de la grabación del sonido
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// Si todo ha ido bien.
-		if (resultCode == RESULT_OK && requestCode == RC_SELECCIONAR_CANCION) {
-			// Obtengo la uri de la canción.
-			uriCancion = data.getData();
+		if (resultCode == RESULT_OK && requestCode == RC_GRABAR) {
+			// Obtengo la uri de la grabación.
+			uriGrabacion = data.getData();
 		}
+		// Habilito el botón de play.
+		btnPlay.setEnabled(true);		
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// Guardo el estado de enabled del Play.
+		outState.putBoolean("btnPlayEnabled", btnPlay.isEnabled());
+		// Guardo la uri de la grabación.
+		String sUriGrabacion = "";
+		if (uriGrabacion != null) {
+			sUriGrabacion = uriGrabacion.toString();
+		}
+		outState.putString("uriGrabacion", sUriGrabacion);
 	}
 
 	// Al hacer click en el botón btnPlay.
@@ -116,13 +157,18 @@ public class MainActivity extends Activity implements OnPreparedListener,
 			// Coloco la barra al principio y elimino los callbacks.
 			skbBarra.setProgress(0);
 			manejador.removeCallbacks(notificacion);
+			// Deshabilito los botones de Pause y de Parar.
+			btnPause.setEnabled(false);
+			btnStop.setEnabled(false);
+			// Habilito el botón de grabar.
+			btnGrabar.setEnabled(true);
 		}
 	}
 
 	// Prepara al reproductor para poder reproducir.
 	private void prepararReproductor() {
 		// Si tengo canción para reproducir.
-		if (uriCancion != null) {
+		if (uriGrabacion != null) {
 			// Si ya tenía reproductor, lo elimino.
 			if (reproductor != null) {
 				reproductor.reset();
@@ -133,7 +179,7 @@ public class MainActivity extends Activity implements OnPreparedListener,
 			reproductor = new MediaPlayer();
 			try {
 				// Indico al reproductor la uri de la canción.
-				reproductor.setDataSource(this, uriCancion);
+				reproductor.setDataSource(this, uriGrabacion);
 				// Establezco el stream de audio que utilizará el reproductor.
 				reproductor.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				// Cuando ya esté preparado el reproductor se generará un evento
@@ -163,6 +209,11 @@ public class MainActivity extends Activity implements OnPreparedListener,
 		repr.start();
 		// Inicio el hilo de notificación para actualizar la barra.
 		actualizarProgreso();
+		// Activo el botón de Pause y de Stop.
+		btnPause.setEnabled(true);
+		btnStop.setEnabled(true);
+		// Desactivo el botón de grabación.
+		btnGrabar.setEnabled(false);
 	}
 
 	// Actualiza la barra en base al progreso del contenido del mediaplayer.
@@ -196,6 +247,11 @@ public class MainActivity extends Activity implements OnPreparedListener,
 		skbBarra.setProgress(0);
 		// Cancelo los mensajes al hilo de notificación.
 		manejador.removeCallbacks(notificacion);
+		// Deshabilito los botones de Pause y de Parar.
+		btnPause.setEnabled(false);
+		btnStop.setEnabled(false);
+		// Habilito el botón de grabar.
+		btnGrabar.setEnabled(true);
 	}
 
 	@Override

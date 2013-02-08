@@ -1,45 +1,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llRaiz"
-    android:orientation="vertical"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_width="fill_parent" >
+    android:orientation="vertical" >
+
     <LinearLayout
         android:id="@+id/llBotonera"
-        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:orientation="horizontal">
-        <ImageButton android:id="@+id/btnPlay"
-            android:contentDescription="@string/reproducir"  
-            android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnRec"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/grabar"
+            android:onClick="btnRecOnClick"
+            android:src="@drawable/rec" />
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/reproducir"
             android:onClick="btnPlayOnClick"
-            android:src="@drawable/play"/>
-        <ImageButton 
+            android:saveEnabled="true"
+            android:src="@drawable/play" />
+
+        <ImageButton
             android:id="@+id/btnPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/pausar"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:onClick="btnPauseOnClick"
-            android:src="@drawable/pause"/>
-        <ImageButton 
+            android:saveEnabled="true"
+            android:src="@drawable/pause" />
+
+        <ImageButton
             android:id="@+id/btnStop"
-            android:contentDescription="@string/parar"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/parar"
             android:onClick="btnStopOnClick"
-            android:src="@drawable/stop"/>
-        <Button
-            android:id="@+id/btnSeleccionar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"            
-            android:layout_weight="1" 
-            android:onClick="btnSeleccionarOnClick"
-            android:text="@string/seleccionar_cancion"   />
+            android:saveEnabled="true"
+            android:src="@drawable/stop" />
     </LinearLayout>
+
     <SeekBar
         android:id="@+id/skbBarra"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" />
+
 </LinearLayout>
