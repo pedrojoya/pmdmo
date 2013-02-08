@@ -37,6 +37,7 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
     // Obtiene las referencias a las vistas del layout.
     private void getVistas() {
     	txtPath = (EditText) findViewById(R.id.txtPath);
+    	txtPath.setText("sdcard/video.3gp");
     	swVisor = (SurfaceView) this.findViewById(R.id.swVisor);
 		// Obtengo la ventana de reproducción.
 		ventanaReproduccion = swVisor.getHolder();

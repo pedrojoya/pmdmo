@@ -66,6 +66,7 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
     // Obtiene las referencias a las vistas del layout.
     private void getVistas() {
     	txtPath = (EditText) findViewById(R.id.txtPath);
+    	txtPath.setText("sdcard/video.3gp");
     	swVisor = (SurfaceView) this.findViewById(R.id.swVisor);
 		// Obtengo la ventana de reproducción.
 		ventanaReproduccion = swVisor.getHolder();
@@ -188,7 +189,7 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
 		actualizarProgreso();
 	}
 
-	// Actualiza la barra en base al pogreso del contenido del mediaplayer.
+	// Actualiza la barra en base al progreso del contenido del mediaplayer.
 	private void actualizarProgreso() {
 		// Actualizo la posición en la barra.
 		skbBarra.setProgress(reproductor.getCurrentPosition());

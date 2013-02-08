@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PR035-ImagenCrop</string>
+    <string name="intro">Captura una imagen para recortar</string>
+    <string name="imagen">Imagen</string>
+    <string name="capturar">Capturar</string>
+    <string name="no_se_pueden_capturar_imagenes">No se pueden capturar imágenes</string>
+    <string name="no_se_permite_el_recorte_de_imagenes">No se permite el recorte de imágenes</string>
+
+</resources>
