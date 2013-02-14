@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Google Books</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="buscar_libros_sobre">Buscar libros sobre...</string>
+    <string name="buscar_libros_sobre_el_termino">Buscar libros sobre el término</string>
+    <string name="resultados">Resultados:</string>
+
+</resources>
