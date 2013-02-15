@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, AndroidJSONParsingActivity!</string>
     <string name="app_name">AndroidJSONParsing</string>
+    <string name="movil">"Móvil: "</string>
+    <string name="no_hay_elementos_que_mostrar">No hay elementos que mostrar</string>
 
 </resources>

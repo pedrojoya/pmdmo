@@ -10,7 +10,7 @@
         android:orientation="vertical">
 		<!-- Name Label -->
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/lblNombre"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#43bd00"
@@ -20,7 +20,7 @@
             android:paddingBottom="2dip" />
 		<!-- Description label -->
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/lblEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#acacac"
@@ -38,11 +38,11 @@
             android:textColor="#5d5d5d"
             android:gravity="left"
             android:textStyle="bold"
-            android:text="Mobile: " >
+            android:text="@string/movil" >
         </TextView>
         <!-- Price Label -->
         <TextView
-            android:id="@+id/mobile"
+            android:id="@+id/lblTlfMovil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#acacac" 
