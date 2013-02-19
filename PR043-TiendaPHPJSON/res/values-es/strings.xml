@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <string name="app_name">Android Store</string>
+    <string name="bienvenido">Bienvenidos a la</string>
+    <string name="acceder_al_catalogo">Acceder al catálogo</string>
+    <string name="AnadirCarrito">Añadir al carrito</string>
+    <string name="SeguirComprando">Seguir comprando</string>
+    <string name="CarritoCompra">Carrito compra</string>
+    <string name="UnidadesAlCarrito">unidades anadidas al carrito</string>
+    <string name="ErrorSeleccionaProducto">Error al seleccionar el producto</string>
+    <string name="MinimoUnidad">Mínimo debe indicar una unidad</string>
+    <string name="NoHayProductos">No hay productos en el carrito de la compra</string>
+    <string name="PedidoInsertado">Su pedido se ha insertado\nGracias por su compra</string>
+    <string name="ErrorConectaServidor">Error al conectar con el servidor</string>
+    <string name="ResumenCompra">Resumen de su compra</string>
+    <string name="AnadirMasProductos">Añadir más productos</string>
+    <string name="MisDatos">Mis datos</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Email">Email</string>
+    <string name="Telefono">Teléfono</string>
+    <string name="Observaciones">Observaciones</string>
+    <string name="EnviarPedido">Enviar</string>
+    <string name="actualizar_catalogo">Actualizar catalogo</string>
+    <string name="PulseActualizarCatalogo">Pulse en el botón Actualizar catálogo</string>
+    <string name="copyright">Desarrollado por Joserra\nbajo licencia Academic Free Licence v3.0\njoserracj@gmail.com\n\nAdaptado por Pedro Joya Máñez para el IES Saladillo</string>
+    <string name="salir">Salir</string>
+    <string name="acerca_de">Acerca de...</string>
+    <string name="importar_catalogo">Importar catálogo</string>
+    <string name="iniciando">Iniciando...</string>
+    <string name="leyendo_respuesta">Leyendo respuesta</string>
+    <string name="respuesta_obtenida">Respuesta obtenida</string>
+    <string name="procesando_respuesta">Procesando respuesta</string>
+    <string name="sin_conexion_a_internet">Sin conexión a Internet</string>
+
+</resources>

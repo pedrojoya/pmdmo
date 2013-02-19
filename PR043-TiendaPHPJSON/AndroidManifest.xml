@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="es.iessaladillo.pedrojoya.pr043"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="4"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="es.iessaladillo.pedrojoya.pr043.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="Catalogo"
+            android:label="Catálogo de productos" >
+        </activity>
+        <activity
+            android:name="Ficha"
+            android:label="Ficha de producto" >
+        </activity>
+        <activity
+            android:name="ResumenCompra"
+            android:label="Resumen de la Compra" >
+        </activity>
+        <activity
+            android:name="Observaciones"
+            android:label="Observaciones" >
+        </activity>
+        <activity
+            android:name="ActualizaCatalogo"
+            android:label="Actualiza Catalogo" >
+        </activity>
+        <activity
+            android:name="AcercaDe"
+            android:label="Acerca de..." >
+        </activity>
+        <provider
+            android:name="es.iessaladillo.pedrojoya.pr043.ProductosContentProvider"
+            android:authorities="es.iessaladillo.tienda"
+            android:exported="false" >
+        </provider>
+    </application>
+
+</manifest>

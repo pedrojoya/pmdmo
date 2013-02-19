@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_aplicacion"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/productoNombre"
+        style="@style/FichasTitulo" />
+
+    <ImageView
+        android:id="@+id/productoImagen"
+        style="@style/FicProImagen" />
+
+    <TextView
+        android:id="@+id/productoDescripcion"
+        style="@style/FicProDescripcion" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <TableRow >
+
+            <EditText
+                android:id="@+id/productoUnidades"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:inputType="numberSigned" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/anadirCarro"
+                style="@style/CKButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AnadirCarrito" />
+        </TableRow>
+
+        <TableRow >
+
+            <Button
+                android:id="@+id/listadoProductos"
+                style="@style/CKButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SeguirComprando" />
+
+            <Button
+                android:id="@+id/resumenCompra"
+                style="@style/CKButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CarritoCompra" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

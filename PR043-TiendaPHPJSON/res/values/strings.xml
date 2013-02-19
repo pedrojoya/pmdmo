@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <string name="app_name">Android Store</string>
+    <string name="bienvenido">Welcome to</string>
+    <string name="acceder_al_catalogo">Access the catalog</string>
+    <string name="AnadirCarrito">Add to cart</string>
+    <string name="SeguirComprando">Continue shopping</string>
+    <string name="CarritoCompra">Shopping cart</string>
+    <string name="UnidadesAlCarrito">units added to cart</string>
+    <string name="ErrorSeleccionaProducto">Failed to select the product</string>
+    <string name="MinimoUnidad">Minimum must indicate a unit</string>
+    <string name="NoHayProductos">There are no products in shopping cart</string>
+    <string name="PedidoInsertado">Your order has been inserted \nThanks for purchase</string>
+    <string name="ErrorConectaServidor">Error connecting to server</string>
+    <string name="ResumenCompra">Summary of your purchase</string>
+    <string name="AnadirMasProductos">Add more products</string>
+    <string name="MisDatos">My details</string>
+    <string name="Nombre">Name</string>
+    <string name="Email">Email</string>
+    <string name="Telefono">Phone</string>
+    <string name="Observaciones">Observations</string>
+    <string name="EnviarPedido">Submit Order</string>
+    <string name="actualizar_catalogo">Update catalog</string>
+    <string name="PulseActualizarCatalogo">Click the Refresh button catalog</string>
+    <string name="copyright">Developed by Joserra\nunder Academic Free Licence v3.0\njoserracj@gmail.com\n\nAdapted by Pedro Joya Máñez for IES Saladillo</string>
+    <string name="salir">Exit</string>
+    <string name="acerca_de">About...</string>
+    <string name="importar_catalogo">Import catalog</string>
+    <string name="iniciando">Conecting...</string>
+    <string name="leyendo_respuesta">Getting the answer</string>
+    <string name="respuesta_obtenida">Answer obtained</string>
+    <string name="procesando_respuesta">Processing answer</string>
+    <string name="sin_conexion_a_internet">No Internet connection</string>
+    <string name="se_ha_solicitado_un_campo_desconocido">Se ha solicitado un campo desconocido</string>
+    <string name="uri_desconocida">"URI desconocida: "</string>
+    <string name="productos">productos</string>
+    <string name="catalogo_actualizado_con">"Catálogo actualizado con "</string>
+    <string name="foto">foto</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    
+</resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_aplicacion"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:gravity="center"
+        android:text="@string/MisDatos"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="@string/Nombre" />
+
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="text"
+        android:isScrollContainer="true"
+        android:lines="5" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="@string/Email" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="text"
+        android:isScrollContainer="true"
+        android:lines="5" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="@string/Telefono" />
+
+    <EditText
+        android:id="@+id/telefono"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="text"
+        android:isScrollContainer="true"
+        android:lines="5" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="@string/Observaciones" />
+
+    <EditText
+        android:id="@+id/observaciones"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="text"
+        android:isScrollContainer="true"
+        android:lines="5" >
+    </EditText>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <TableRow>
+            <Button
+                android:id="@+id/anadirMasProductos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AnadirMasProductos"
+                style="@style/CKButton" />
+            <Button
+                android:id="@+id/enviarCorreo"
+                style="@style/CKButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/EnviarPedido" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

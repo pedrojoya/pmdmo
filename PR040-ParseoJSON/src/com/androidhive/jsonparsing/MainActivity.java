@@ -68,6 +68,14 @@ public class MainActivity extends Activity {
 		}
 
 		@Override
+		protected void onPreExecute() {
+			// Creo un diálogo de progreso.
+			pd = ProgressDialog.show(contexto, "Carga de datos",
+					"Iniciando...", true, false);
+			super.onPreExecute();
+		}
+
+		@Override
 		protected ArrayList<HashMap<String, String>> doInBackground(
 				String... arg0) {
 
@@ -81,8 +89,7 @@ public class MainActivity extends Activity {
 			// Obtengo la url a partir del array de parámetros del método.
 			String url = arg0[0];
 			// Realizo la petición POST por HTTP obteniendo como resultado un
-			// flujo
-			// de datos con la respuesta.
+			// flujo de datos con la respuesta.
 			try {
 				publishProgress("Realizando petición...");
 				DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -172,14 +179,6 @@ public class MainActivity extends Activity {
 				Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_LONG).show();
 			}
 			super.onPostExecute(result);
-		}
-
-		@Override
-		protected void onPreExecute() {
-			// Creo un diálogo de progreso.
-			pd = ProgressDialog.show(contexto, "Carga de datos",
-					"Iniciando...", true, false);
-			super.onPreExecute();
 		}
 
 		@Override

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- PANTALLA PRINCIPAL -->
+    <style name="entradaTitulo01">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#d7d6d6</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="entradaTitulo02">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">80dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:textSize">40dp</item>
+    </style>
+
+    <style name="CKButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#3982c6</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:drawingCacheQuality">high</item>
+    </style>
+    
+    <!-- GRIDVIEW -->
+    <style name="SGridView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:columnWidth">90dp</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:verticalSpacing">10dp</item>
+        <item name="android:horizontalSpacing">10dp</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="FichasTitulo">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+    
+    <!-- FICHA -->
+    <style name="FicProImagen">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">220dp</item>
+		<item name="android:layout_marginTop">50dp</item>
+		<item name="android:adjustViewBounds">true</item>
+		<item name="android:src">@drawable/pro01</item>
+    </style>
+    <style name="FicProDescripcion">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">10dp</item>
+		<item name="android:layout_marginTop">280dp</item>
+    </style>
+    
+    <!-- RESUMEN COMPRA -->
+    <style name="ResDetalle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">TextView</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+</resources>
+
+
+
+
+    
+    

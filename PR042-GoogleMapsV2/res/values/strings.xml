@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PR042-GoogleMapsV2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="nota_legal">Nota legal</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="nuevo_marcador">"Nuevo marcador: "</string>
+    <string name="desplazando_marcador">"Desplazando marcador "</string>
+    <string name="marcador">"Marcador "</string>
+    <string name="en">" en "</string>
+    <string name="desplazamiento_de_marcador">"Desplazamiento de marcador "</string>
+    <string name="finalizada">" finalizada"</string>
+    <string name="icono_de_info">Icono de Info</string>
+    <string name="snippet">En un país multicolor nació una abeja bajo el sol. Y fue famosa en el lugar por su alegría y su bondad.</string>
+    <string name="todas">Todas</string>
+    <string name="posicion">Posición</string>
+
+</resources>

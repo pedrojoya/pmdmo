@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/imgInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/icono_de_info"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/lblTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgInfo"
+        android:layout_alignTop="@+id/imgInfo"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="Quillo que" />
+
+    <TextView
+        android:id="@+id/lblInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgInfo"
+        android:layout_below="@+id/lblTitulo"
+        android:textSize="12sp"
+        android:text = "Na aqui" />
+
+</RelativeLayout>
