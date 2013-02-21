@@ -165,9 +165,9 @@ public class ProductosContentProvider extends ContentProvider {
 	}
 
 	private void comprobarColumnas(String[] columnas) {
-		String[] disponibles = { GestorBD.FLD_PRO_ID, GestorBD.FLD_PRO_NOMBRE,
-				GestorBD.FLD_PRO_DESCRIPCION, GestorBD.FLD_PRO_IMAGEN,
-				GestorBD.FLD_PRO_VENDIDAS };
+		String[] disponibles = { GestorBD.FLD_PRO_ID, GestorBD.FLD_PRO_NOM,
+				GestorBD.FLD_PRO_DES, GestorBD.FLD_PRO_IMA,
+				GestorBD.FLD_PRO_VEN };
 		if (columnas != null) {
 			HashSet<String> columnasSolicitadas = new HashSet<String>(
 					Arrays.asList(columnas));

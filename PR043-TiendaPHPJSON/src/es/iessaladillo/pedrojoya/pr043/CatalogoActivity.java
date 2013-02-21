@@ -1,47 +1,46 @@
 package es.iessaladillo.pedrojoya.pr043;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.DialogInterface;
+import java.io.File;
+
+import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuItem;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class CatalogoActivity extends FragmentActivity implements
 		OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
-	long idAlumno;
-	private ListView lstAlumnos;
-	SimpleCursorAdapter adaptador;
+	long idProducto;
+	private ListView lstProductos;
+	ProductosCursorAdapter adaptador;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// Llamo al onCreate del padre.
 		super.onCreate(savedInstanceState);
 		// Establezco el layout que utilizará la actividad.
-		setContentView(R.layout.fila_catalogo_activity);
+		setContentView(R.layout.catalogo_activity);
 		// Obtengo las vistas.
-		lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
-		this.registerForContextMenu(lstAlumnos);
+		lstProductos = (ListView) this.findViewById(R.id.lstProductos);
 		// Cargo la lista.
 		cargarLista();
-		// Registro la lista para menú contextual
-		lstAlumnos.setOnItemClickListener(this);
+		// La propia actividad responderá a los click en la lista.
+		lstProductos.setOnItemClickListener(this);
 	}
 
 	// Obtiene los datos de la BD y los carga en la lista.
@@ -49,185 +48,37 @@ public class CatalogoActivity extends FragmentActivity implements
 		// Inicializo el cargador.
 		getSupportLoaderManager().initLoader(0, null, this);
 		// Creo un adaptador para la lista (con el cursor nulo inicialmente).
-		adaptador = new SimpleCursorAdapter(this,
-				android.R.layout.simple_list_item_1, null,
-				new String[] { GestorBD.FLD_ALU_NOM },
-				new int[] { android.R.id.text1 });
+		adaptador = new ProductosCursorAdapter(this, null);
 		// Asigno el adaptador a la ListActivity.
-		lstAlumnos.setAdapter(adaptador);
-
-		// MÉTODO SIMPLE SIN QUE LA ACTIVIDAD CONTROLE LOS CURSOR LOADER.
-		//
-		// // Consulto todos los alumnos a través del content provider.
-		// Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos");
-		// CursorLoader cLoader = new CursorLoader(this, uri,
-		// GestorBD.ALU_TODOS,
-		// null, null, null);
-		// Cursor cursor = cLoader.loadInBackground();
-		// // Indico que el sistema gestione el cursor respecto al ciclo de vida
-		// de
-		// // la actividad.
-		// startManagingCursor(cursor);
-		// // Creo un adaptador para la lista.
-		// SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this,
-		// android.R.layout.simple_list_item_1, cursor,
-		// new String[] { GestorBD.FLD_ALU_NOM },
-		// new int[] { android.R.id.text1 });
-		// // Asigno el adaptador a la ListActivity.
-		// lstAlumnos.setAdapter(adaptador);
-
-	}
-
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		// Llamo al padre por si quiere añadir alguna opción de menú.
-		super.onCreateContextMenu(menu, v, menuInfo);
-		// Inflo el menú en el parámetro de salida, gracias a un MenuInflater
-		// (inflador).
-		getMenuInflater().inflate(R.menu.menu_lista, menu);
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		// Obtengo la info del item de menú seleccionado
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-				.getMenuInfo();
-		// Obtengo el registro correspondiente al alumno seleccionado en forma
-		// de cursor.
-		Cursor cursor = (Cursor) lstAlumnos.getItemAtPosition(info.position);
-		// Obtengo el id del alumno seleccionado.
-		idAlumno = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_ALU_ID));
-		String telefono = cursor.getString(cursor
-				.getColumnIndex(GestorBD.FLD_ALU_TEL));
-		String direccion = cursor.getString(cursor
-				.getColumnIndex(GestorBD.FLD_ALU_DIR));
-		// Cierro el cursor.
-		cursor.close();
-		// Dependiendo de la opción de menú seleccionada.
-		switch (item.getItemId()) {
-		// Opción de menú Ver alumno.
-			case R.id.mnuVer:
-				verAlumno(idAlumno);
-				break;
-			// Opción de menú Editar alumno.
-			case R.id.mnuEditar:
-				editarAlumno(idAlumno);
-				break;
-			case R.id.mnuEliminar:
-				eliminarAlumno(idAlumno);
-				break;
-			case R.id.mnuLlamar:
-				llamarAlumno(telefono);
-				break;
-			case R.id.mnuMapa:
-				verMapaAlumno(direccion);
-				break;
-			default:
-				return super.onContextItemSelected(item);
-		}
-		return true;
-	}
-
-	// Envía el intent necesario para llamar a la actividad para editar el
-	// alumno.
-	private void verAlumno(long id) {
-		// Creo un intent explícito con la acción EDIT_STUDENT.
-		Intent i = new Intent(this, CRUAlumnoActivity.class);
-		i.setAction("es.iessaladillo.VER_ALUMNO");
-		// Le añado como extra el id del alumno que queremos editar.
-		i.putExtra("id", id);
-		// Llamo a la actividad.
-		startActivity(i);
-	}
-
-	// Envía el intent necesario para llamar a la actividad para editar el
-	// alumno.
-	private void editarAlumno(long id) {
-		// Creo un intent explícito con la acción EDIT_STUDENT.
-		Intent i = new Intent(this, CRUAlumnoActivity.class);
-		i.setAction("es.iessaladillo.EDITAR_ALUMNO");
-		// Le añado como extra el id del alumno que queremos editar.
-		i.putExtra("id", id);
-		// Llamo a la actividad.
-		startActivity(i);
-	}
-
-	// Elimina de la BD el alumno con dicho id.
-	private void eliminarAlumno(long id) {
-		// Borro el alumno a través del content provider.
-		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos/"
-				+ idAlumno);
-		if (getContentResolver().delete(uri, null, null) > 0) {
-			Toast.makeText(getApplicationContext(),
-					R.string.eliminacion_correcta, Toast.LENGTH_LONG).show();
-		}
-		else {
-			Toast.makeText(getApplicationContext(),
-					R.string.eliminacion_incorrecta, Toast.LENGTH_LONG).show();
-		}
-		getSupportLoaderManager().restartLoader(0, null, this);
-	}
-
-	// Envía el intent necesario para llamar por teléfono al alumno.
-	private void llamarAlumno(String telefono) {
-		/* Creo un intent implícito para llamar al teléfono del alumno
-		 * (convetido a URI) y llamo a la actividad. */
-		startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-				+ telefono)));
-	}
-
-	// Envía el intent necesario para ver la dirección del alumno en un mapa.
-	private void verMapaAlumno(String direccion) {
-		/* Creo un intent implícito para ver la dirección del alumo en un mapa y
-		 * llamo a la actividad. */
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="
-				+ direccion)));
-	}
-
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		// Creo un AlertDialog para confirmar la eliminación
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setMessage(R.string.confirmar_eliminar);
-		b.setCancelable(false);
-		b.setNegativeButton(R.string.no, null);
-		b.setPositiveButton(R.string.si, this);
-		return b.create();
-	}
-
-	public void onClick(DialogInterface arg0, int arg1) {
-		// Borro el alumno a través del content provider.
-		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos/"
-				+ idAlumno);
-		if (getContentResolver().delete(uri, null, null) > 0) {
-			Toast.makeText(getApplicationContext(),
-					R.string.eliminacion_correcta, Toast.LENGTH_LONG).show();
-		}
-		else {
-			Toast.makeText(getApplicationContext(),
-					R.string.eliminacion_incorrecta, Toast.LENGTH_LONG).show();
-		}
-		cargarLista();
+		lstProductos.setAdapter(adaptador);
 	}
 
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma
 		// de cursor.
-		Cursor cursor = (Cursor) lstAlumnos.getItemAtPosition(position);
-		// Obtengo el id del alumno seleccionado.
-		idAlumno = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_ALU_ID));
+		Cursor cursor = (Cursor) lstProductos.getItemAtPosition(position);
+		// Obtengo el id del producto seleccionado.
+		idProducto = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_PRO_ID));
 		// Cierro el cursor.
-		cursor.close();
+		// cursor.close();
 		// Envío el intent correspondiente.
-		editarAlumno(idAlumno);
+		mostrarFichaProducto(idProducto);
+	}
+
+	// Lanza la actividad Ficha.
+	private void mostrarFichaProducto(long idProducto) {
+		// Creo un intent explícito para mostrar la actividad Ficha y le paso
+		// como extra el id del producto que debe mostrar.
+		Intent i = new Intent(this, Ficha.class);
+		i.putExtra("idProducto", idProducto);
+		startActivity(i);
 	}
 
 	// Crea el cursor.
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		// Consulto todos los alumnos a través del content provider.
-		Uri uri = Uri.parse("content://es.iessaladillo.alumnos/alumnos");
-		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.ALU_TODOS,
+		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos");
+		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.PRO_TODOS,
 				null, null, null);
 		return cLoader;
 	}
@@ -248,6 +99,76 @@ public class CatalogoActivity extends FragmentActivity implements
 	protected void onResume() {
 		getSupportLoaderManager().restartLoader(0, null, this);
 		super.onResume();
+	}
+
+	private class ProductosCursorAdapter extends CursorAdapter {
+
+		// Variables miembro.
+		LayoutInflater inflador;
+
+		// Contenedor de vistas de la fila.
+		private class ContenedorVistas {
+			ImageView imgFoto;
+			TextView lblNombre;
+			TextView lblDescripcion;
+		}
+
+		// Constructor.
+		public ProductosCursorAdapter(Context contexto, Cursor c) {
+			// Llamo al constructor del padre.
+			super(contexto, c, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			// Obtengo un inflador.
+			inflador = LayoutInflater.from(contexto);
+		}
+
+		@Override
+		public void bindView(View vistaFila, Context contexto, Cursor c) {
+			// Recupero el contenedor de vistas de la fila desde la propiedad
+			// Tag de la vista-fila.
+			ContenedorVistas contenedor = (ContenedorVistas) vistaFila.getTag();
+			// Obtengo los datos desde el cursor y los escribo en las vistas
+			// correspondientes.
+			contenedor.lblNombre.setText(c.getString(c
+					.getColumnIndex(GestorBD.FLD_PRO_NOM)));
+			contenedor.lblDescripcion.setText(c.getString(c
+					.getColumnIndex(GestorBD.FLD_PRO_DES)));
+			// Obtengo el nombre del archivo de la foto.
+			String sNombreImagen = c.getString(c
+					.getColumnIndex(GestorBD.FLD_PRO_IMA));
+			// Si el producto tiene foto la pongo, y si no pongo una por
+			// defecto.
+			if (sNombreImagen != null && !sNombreImagen.equals("")) {
+				String sPath = Environment.getExternalStorageDirectory()
+						+ "/tienda/" + sNombreImagen;
+				File archivo = new File(sPath);
+				if (archivo.exists()) {
+					contenedor.imgFoto.setImageURI(Uri.fromFile(archivo));
+				}
+				else {
+					contenedor.imgFoto.setImageResource(R.drawable.ic_iconopp);
+				}
+			}
+		}
+
+		@Override
+		public View newView(Context contexto, Cursor c, ViewGroup parent) {
+			// Inflo el layout y obtengo la vista-fila correspondiente.
+			View vistaFila = inflador.inflate(R.layout.fila_catalogo_activity,
+					null);
+			// Creo el contenedor de vista, lo relleno y lo almaceno en la
+			// propiedad Tag de la vista-fila.
+			ContenedorVistas contenedor = new ContenedorVistas();
+			contenedor.imgFoto = (ImageView) vistaFila
+					.findViewById(R.id.imgFoto);
+			contenedor.lblNombre = (TextView) vistaFila
+					.findViewById(R.id.lblNombre);
+			contenedor.lblDescripcion = (TextView) vistaFila
+					.findViewById(R.id.lblDescripcion);
+			vistaFila.setTag(contenedor);
+			// Retorno la vista-fila.
+			return vistaFila;
+		}
+
 	}
 
 }

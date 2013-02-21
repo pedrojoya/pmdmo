@@ -110,13 +110,13 @@ public class MainActivity extends Activity {
 			ContentValues valores = new ContentValues();
 			valores.put(GestorBD.FLD_PRO_ID,
 					jProducto.getString(ConexionServidor.TAG_PRO_ID));
-			valores.put(GestorBD.FLD_PRO_NOMBRE,
+			valores.put(GestorBD.FLD_PRO_NOM,
 					jProducto.getString(ConexionServidor.TAG_PRO_NOMBRE));
-			valores.put(GestorBD.FLD_PRO_DESCRIPCION,
+			valores.put(GestorBD.FLD_PRO_DES,
 					jProducto.getString(ConexionServidor.TAG_PRO_DESCRIPCION));
 			String sProImagen = jProducto
 					.getString(ConexionServidor.TAG_PRO_IMAGEN);
-			valores.put(GestorBD.FLD_PRO_IMAGEN, sProImagen);
+			valores.put(GestorBD.FLD_PRO_IMA, sProImagen);
 			// Inserto el producto en la BD.
 			Uri uriInsercion = Uri
 					.parse("content://es.iessaladillo.tienda/productos");

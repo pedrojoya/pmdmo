@@ -74,7 +74,7 @@ public final class R {
     public static final class layout {
         public static final int acerca_de=0x7f030000;
         public static final int actualizacatalogo=0x7f030001;
-        public static final int catalogo=0x7f030002;
+        public static final int catalogo_activity=0x7f030002;
         public static final int ficha=0x7f030003;
         public static final int fila_catalogo_activity=0x7f030004;
         public static final int main=0x7f030005;

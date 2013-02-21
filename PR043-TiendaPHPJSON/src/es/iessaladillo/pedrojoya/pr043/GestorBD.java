@@ -11,13 +11,16 @@ public class GestorBD extends SQLiteOpenHelper {
 	static final String BD_NOMBRE = "Tienda";
 	static final int BD_VERSION = 1;
 	static final String TBL_PRODUCTOS = "PRODUCTOS";
-	static final String FLD_PRO_ID = "PRO_ID";
-	static final String FLD_PRO_NOMBRE = "PRO_NOM";
-	static final String FLD_PRO_DESCRIPCION = "PRO_DES";
-	static final String FLD_PRO_IMAGEN = "PRO_IMA";
-	static final String FLD_PRO_VENDIDAS = "PRO_VEN";
-	private final String CREATE_T_PRODUCTOS = "CREATE TABLE PRODUCTOS (PRO_ID INTEGER, PRO_NOM TEXT, "
-			+ "PRO_DES TEXT, PRO_IMA TEXT, PRO_VEN INTEGER);";
+	static final String FLD_PRO_ID = "_id"; // MUY IMPORTANTE QUE SE LLAME ASÍ.
+	static final String FLD_PRO_NOM = "pro_nom";
+	static final String FLD_PRO_DES = "pro_des";
+	static final String FLD_PRO_IMA = "pro_ima";
+	static final String FLD_PRO_VEN = "pro_ven";
+	private final String CREATE_T_PRODUCTOS = "CREATE TABLE PRODUCTOS ("
+			+ FLD_PRO_ID + " INTEGER, " + FLD_PRO_NOM + " TEXT, " + FLD_PRO_DES
+			+ " TEXT, " + FLD_PRO_IMA + " TEXT, " + FLD_PRO_VEN + " INTEGER);";
+	public static final String[] PRO_TODOS = new String[] { FLD_PRO_ID,
+			FLD_PRO_NOM, FLD_PRO_DES, FLD_PRO_IMA, FLD_PRO_VEN };
 	private final String DROP_T_PRODUCTOS = "DROP TABLE IF EXISTS PRODUCTOS";
 
 	// Constructor. Recibe el contexto.
@@ -28,7 +31,7 @@ public class GestorBD extends SQLiteOpenHelper {
 	// Cuando se debe crear la BD.
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// Se ejecuta la sentencia SQL de creaciÃ³n de la tabla
+		// Se ejecuta la sentencia SQL de creación de la tabla
 		db.execSQL(CREATE_T_PRODUCTOS);
 	}
 
