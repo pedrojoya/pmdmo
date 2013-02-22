@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ResumenCompra extends Activity {
+public class CarritoActivity extends Activity {
 	private TextView cresumenDetalle;
 	private String resumen;
 	private Button bAnadirMasProductos;
@@ -21,7 +21,7 @@ public class ResumenCompra extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.resumencompra);
+		setContentView(R.layout.carrito_activity);
 
 		// ProductosSQLiteHelper usdbh = new ProductosSQLiteHelper(this,
 		// "DBTienda", null, 1);
@@ -72,7 +72,7 @@ public class ResumenCompra extends Activity {
 	}
 
 	public void lanzarObservaciones() {
-		Intent i = new Intent(this, Observaciones.class);
+		Intent i = new Intent(this, PedidoActivity.class);
 		startActivityForResult(i, 1234);
 	}
 }

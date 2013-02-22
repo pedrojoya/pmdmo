@@ -38,5 +38,14 @@
     <string name="catalogo_actualizado_con">"Catálogo actualizado con "</string>
     <string name="foto">foto</string>
     <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="producto_no_encontrado">Producto no encontrado</string>
+    <string name="catalogo_de_productos">Catálogo de productos</string>
+    <string name="ficha_del_producto">Ficha del producto</string>
+    <string name="carrito_de_la_compra">Carrito de la Compra</string>
+    <string name="pedido">Pedido</string>
+    <string name="agregar_al_carrito">Agregar al carrito</string>
+    <string name="ver_carrito">Ver carrito</string>
+    <string name="volver_al_catalogo">Volver al catálogo</string>
+    <string name="foto_del_producto">Foto del producto</string>
     
 </resources>

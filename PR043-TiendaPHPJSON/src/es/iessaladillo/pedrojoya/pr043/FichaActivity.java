@@ -3,14 +3,17 @@ package es.iessaladillo.pedrojoya.pr043;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.CursorLoader;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Ficha extends Activity {
+public class FichaActivity extends Activity {
 	private String vproductoNombre;
 	private String vproductoFoto;
 	private String vproductoDescripcion;
@@ -35,21 +38,39 @@ public class Ficha extends Activity {
 	private Bitmap loadedImage;
 	private GestorBD usdbh = new GestorBD(this);
 
-	/** Called when the activity is first created. */
+	// Al mostrar el menú de opciones.
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_ficha_activity, menu);
+		return true;
+	}
+	
+	// Obtiene la referencia a las vistas.
+	private void getVistas() {
+		
+	}
+	
+	// Al crear la actividad.
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ficha);
-
+		setContentView(R.layout.ficha_activity);
+		// Obtengo los extras con los que me han llamado.
 		Bundle extras = getIntent().getExtras();
-		String s = extras.getString("idProducto");
+		long idProducto = extras.getLong("idProducto");
+		// Obtengo la referencia a las vistas.
+		getVistas();
+		// Cargo los datos del producto.
+		
 
 		// ProductosSQLiteHelper usdbh = new ProductosSQLiteHelper(this,
 		// "DBTienda", null, 1);
 		SQLiteDatabase db = usdbh.getWritableDatabase();
 
 		String sql = "SELECT pro_nombre, pro_descripcion, pro_imagen, pk_producto, pro_unidades_sel FROM t_producto WHERE pk_producto='"
-				+ s + "'";
+				+ idProducto + "'";
 		Cursor c = db.rawQuery(sql, null);
 
 		int numRegistros = c.getCount();
@@ -151,9 +172,33 @@ public class Ficha extends Activity {
 			}
 		});
 	}
-
+	
+	// Carga los datos del producto provenientes de la BD.
+	private void cargarProducto(long id) {
+		// Consulto en el content provider los datos del producto.
+		Uri uri = Uri.parse("content://es.iessaladillo.tienda/producto/" + id);
+		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.PRO_TODOS,
+				null, null, null);
+		Cursor cursor = cLoader.loadInBackground();
+		if (cursor.getCount() == 1) {
+			// Lo muestro en las vistas correspondientes.
+			cursor.moveToFirst();
+			
+			
+			
+			alumno = GestorBD.cursorToAlumno(cursor);
+		} else {
+			// Si no se ha encontrado el alumno en la BD, informo y paso al modo
+			// Agregar.
+			Toast.makeText(this, R.string.producto_no_encontrado,
+					Toast.LENGTH_LONG).show();
+		}
+		// Cierro el cursor.
+		cursor.close();
+	}
+	
 	public void lanzarResumenCompra() {
-		Intent i = new Intent(this, ResumenCompra.class);
+		Intent i = new Intent(this, CarritoActivity.class);
 		startActivityForResult(i, 1234);
 	}
 

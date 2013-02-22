@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_aplicacion" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/lblNombre"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:=""
+            android:gravity="center"
+            android:text="Fuji"
+            android:textColor="#ffffff"
+            android:textIsSelectable="true"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblNombre"
+            android:contentDescription="@string/foto_del_producto"
+            android:src="@drawable/ic_iconopp" />
+
+        <TextView
+            android:id="@+id/lblDescripcion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgFoto"
+            android:text="dlfjadsklfjadslkfjadslkñfjaslñkdfjalñskdjflsakdjflñkasdjflkasdjflkjdsklfjasdlkfjaslkdjflñsakdjfñlakdsjflaksdjflñaksdjflñkasjdflkjasdlfkjsalkdfjlksda klfdjasldf  dslkfjl fdsa"
+            android:textIsSelectable="true" />
+    </RelativeLayout>
+
+</ScrollView>

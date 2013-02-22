@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Observaciones extends Activity {
+public class PedidoActivity extends Activity {
 	private Button bEnviarPedido;
 	private String detallePedido;
 	private EditText cNombre;
@@ -27,7 +27,7 @@ public class Observaciones extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.observaciones);
+		setContentView(R.layout.pedido_activity);
 
 		bAnadirMasProductos = (Button) findViewById(R.id.anadirMasProductos);
 		bAnadirMasProductos.setOnClickListener(new OnClickListener() {

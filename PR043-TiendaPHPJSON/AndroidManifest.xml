@@ -27,27 +27,27 @@
         </activity>
         <activity
             android:name=".CatalogoActivity"
-            android:label="Catálogo de productos" >
+            android:label="@string/catalogo_de_productos" >
         </activity>
         <activity
-            android:name="Ficha"
-            android:label="Ficha de producto" >
+            android:name=".FichaActivity"
+            android:label="@string/ficha_del_producto" >
         </activity>
         <activity
-            android:name="ResumenCompra"
-            android:label="Resumen de la Compra" >
+            android:name=".CarritoActivity"
+            android:label="@string/carrito_de_la_compra" >
         </activity>
         <activity
-            android:name="Observaciones"
-            android:label="Observaciones" >
+            android:name=".PedidoActivity"
+            android:label="@string/pedido" >
         </activity>
         <activity
             android:name="ActualizaCatalogo"
             android:label="Actualiza Catalogo" >
         </activity>
         <activity
-            android:name="AcercaDe"
-            android:label="Acerca de..." >
+            android:name=".AcercaDeActivity"
+            android:label="@string/acerca_de" >
         </activity>
         <provider
             android:name="es.iessaladillo.pedrojoya.pr043.ProductosContentProvider"

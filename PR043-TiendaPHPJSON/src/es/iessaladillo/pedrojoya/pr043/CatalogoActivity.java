@@ -69,7 +69,7 @@ public class CatalogoActivity extends FragmentActivity implements
 	private void mostrarFichaProducto(long idProducto) {
 		// Creo un intent explícito para mostrar la actividad Ficha y le paso
 		// como extra el id del producto que debe mostrar.
-		Intent i = new Intent(this, Ficha.class);
+		Intent i = new Intent(this, FichaActivity.class);
 		i.putExtra("idProducto", idProducto);
 		startActivity(i);
 	}
