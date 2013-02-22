@@ -37,10 +37,9 @@ public class MainActivity extends Activity {
 	// Al mostrar el menú de opciones.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_main_activity, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	// Al seleccionar una opción del menú de opciones.
@@ -55,8 +54,7 @@ public class MainActivity extends Activity {
 				actualizarCatalogo();
 				break;
 		}
-		return true;
-
+		return super.onOptionsItemSelected(item);
 	}
 
 	// Muestra la actividad AcercaDeActivity

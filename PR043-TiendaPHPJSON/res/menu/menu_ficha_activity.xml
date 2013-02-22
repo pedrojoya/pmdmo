@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/mnuAgregarAlCarrito"
-        android:icon="@drawable/ab_holodark_refresh"
+        android:icon="@drawable/ic_action_carrito_agregar"
         android:showAsAction="ifRoom|withText"
         android:title="@string/agregar_al_carrito" />
     <item
         android:id="@+id/mnuVerCarrito"
-        android:icon="@drawable/ab_holodark_people"
+        android:icon="@drawable/ic_action_carrito_agregar"
         android:showAsAction="ifRoom|withText"
         android:title="@string/ver_carrito" />
     <item
         android:id="@+id/mnuVolverAlCatalogo"
-        android:icon="@drawable/ab_holodark_refresh"
+        android:icon="@drawable/ic_action_carrito_agregar"
         android:showAsAction="ifRoom|withText"
         android:title="@string/volver_al_catalogo" />
     
