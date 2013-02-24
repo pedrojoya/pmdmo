@@ -8,13 +8,8 @@
         android:title="@string/agregar_al_carrito" />
     <item
         android:id="@+id/mnuVerCarrito"
-        android:icon="@drawable/ic_action_carrito_agregar"
+        android:icon="@drawable/ic_action_carrito"
         android:showAsAction="ifRoom|withText"
         android:title="@string/ver_carrito" />
-    <item
-        android:id="@+id/mnuVolverAlCatalogo"
-        android:icon="@drawable/ic_action_carrito_agregar"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/volver_al_catalogo" />
     
 </menu>

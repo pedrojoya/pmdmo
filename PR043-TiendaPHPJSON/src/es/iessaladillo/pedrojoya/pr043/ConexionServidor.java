@@ -12,8 +12,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 
 class ConexionServidor {
@@ -115,6 +119,17 @@ class ConexionServidor {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// Retorna si el dispositivo tiene conexión a Internet.
+	static public boolean isOnline(Activity contexto) {
+		ConnectivityManager cm = (ConnectivityManager) contexto
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+		return false;
 	}
 
 }

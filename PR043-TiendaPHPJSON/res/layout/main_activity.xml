@@ -1,44 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/fondo_aplicacion"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/lblBienvenido"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#d7d6d6"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
+    <View
+        android:id="@+id/vMedio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:id="@+id/rlPanel1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@+id/vMedio"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textSize="25sp"
-        android:text="@string/bienvenido" />
+        android:layout_alignRight="@+id/vMedio" >
 
-    <TextView
-        android:id="@+id/lblNombreTienda"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/lblBienvenido"
-        android:textSize="40sp"
-        android:text="@string/app_name" />
-    
-    <TextView
-        android:id="@+id/btnAcceder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:drawableTop="@drawable/ic_iconopp"
-        android:drawablePadding="15dp"
-        android:onClick="btnAccederOnClick"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:text="@string/acceder_al_catalogo" />
+        <RelativeLayout
+            android:id="@+id/rlBoton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:contentDescription="@string/catalogo"
+                android:onClick="btnCatalogoOnClick"
+                android:src="@drawable/ic_catalogo" />
+
+            <TextView
+                android:id="@+id/lblCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgCatalogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:onClick="btnCatalogoOnClick"
+                android:textStyle="bold"
+                android:text="@string/catalogo" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPanel2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@+id/vMedio"
+        android:layout_alignLeft="@+id/vMedio"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+        <RelativeLayout
+            android:id="@+id/rlBoton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:contentDescription="@string/carrito_de_la_compra"
+                android:onClick="btnCarritoOnClick"
+                android:src="@drawable/ic_carrito" />
+
+            <TextView
+                android:id="@+id/lblCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgCarrito"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:onClick="btnCarritoOnClick"
+                android:textStyle="bold"
+                android:text="@string/carrito_de_la_compra" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPanel3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/vMedio"
+        android:layout_alignTop="@+id/vMedio" >
+        <RelativeLayout
+            android:id="@+id/rlBoton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgActualizarCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:contentDescription="@string/actualizar_catalogo"
+                android:onClick="btnActualizarCatalogoOnClick"
+                android:src="@drawable/ic_catalogo_actualizar" />
+
+            <TextView
+                android:id="@+id/lblActualizarCatalogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgActualizarCatalogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:onClick="btnActualizarCatalogoOnClick"
+                android:textStyle="bold"
+                android:text="@string/actualizar_catalogo" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPanel4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignLeft="@+id/vMedio"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/vMedio" >
+        <RelativeLayout
+            android:id="@+id/rlBoton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgAcercaDe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:contentDescription="@string/acerca_de"
+                android:onClick="btnAcercaDeOnClick"
+                android:src="@drawable/ic_acerca_de" />
+
+            <TextView
+                android:id="@+id/lblAcercaDe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgAcercaDe"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:onClick="btnAcercaDeOnClick"
+                android:textStyle="bold"
+                android:text="@string/acerca_de" />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lstProductos"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" />
+    android:layout_height="fill_parent" >
+
+    <ListView
+        android:id="@+id/lstProductos"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rlCatalogoVacio"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:id="@+id/btnCatalogoVacio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgCatalogoVacio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/no_hay_ningun_producto_en_el_catalogo"
+                android:clickable="true"
+                android:onClick="btnCatalogoVacioOnClick"
+                android:src="@drawable/ic_catalogo_vacio" />
+
+            <TextView
+                android:id="@+id/lblCatalogoVacio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imgCatalogoVacio"
+                android:clickable="true"
+                android:onClick="btnCatalogoVacioOnClick"
+                android:text="@string/no_hay_ningun_producto_en_el_catalogo" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

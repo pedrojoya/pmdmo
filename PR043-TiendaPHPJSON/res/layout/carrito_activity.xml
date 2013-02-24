@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@drawable/fondo_aplicacion" >
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:text="@string/ResumenCompra"
-        style="@style/FichasTitulo" />
-
-    <TextView
-        android:id="@+id/resumenDetalle"
-        android:text="@string/ResumenCompra"
-        style="@style/ResDetalle" />
-
-    <TableLayout
+    <ListView
+        android:id="@+id/lstProductos"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_height="fill_parent" />
 
-        <TableRow >
+    <RelativeLayout
+        android:id="@+id/rlCarritoVacio"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-            <Button
-                android:id="@+id/anadirMasProductos"
+        <RelativeLayout
+            android:id="@+id/btnCarritoVacio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:id="@+id/imgCarritoVacio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/AnadirMasProductos"
-                style="@style/CKButton" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/no_hay_ningun_producto_en_el_carrito"
+                android:clickable="true"
+                android:onClick="btnCarritoVacioOnClick"
+                android:src="@drawable/ic_carrito_vacio" />
 
-            <Button
-                android:id="@+id/anadirObservaciones"
+            <TextView
+                android:id="@+id/lblCarritoVacio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/MisDatos"
-                style="@style/CKButton" />
-        </TableRow>
-    </TableLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imgCarritoVacio"
+                android:clickable="true"
+                android:onClick="btnCarritoVacioOnClick"
+                android:text="@string/no_hay_ningun_producto_en_el_carrito" />
+        </RelativeLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</FrameLayout>

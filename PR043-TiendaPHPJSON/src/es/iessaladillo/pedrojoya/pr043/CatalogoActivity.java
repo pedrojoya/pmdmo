@@ -2,10 +2,12 @@ package es.iessaladillo.pedrojoya.pr043;
 
 import java.io.File;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
@@ -14,13 +16,16 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CatalogoActivity extends FragmentActivity implements
 		OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
@@ -29,14 +34,23 @@ public class CatalogoActivity extends FragmentActivity implements
 	private ListView lstProductos;
 	ProductosCursorAdapter adaptador;
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// Llamo al onCreate del padre.
 		super.onCreate(savedInstanceState);
 		// Establezco el layout que utilizará la actividad.
 		setContentView(R.layout.catalogo_activity);
+		// Activo el botón de Home en la Action Bar (si la versión lo permite).
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 		// Obtengo las vistas.
 		lstProductos = (ListView) this.findViewById(R.id.lstProductos);
+		// Establezco la vista a mostrar cuando la lista esté vacía.
+		RelativeLayout rlCatalogoVacio = (RelativeLayout) this
+				.findViewById(R.id.rlCatalogoVacio);
+		lstProductos.setEmptyView(rlCatalogoVacio);
 		// Cargo la lista.
 		cargarLista();
 		// La propia actividad responderá a los click en la lista.
@@ -53,14 +67,24 @@ public class CatalogoActivity extends FragmentActivity implements
 		lstProductos.setAdapter(adaptador);
 	}
 
+	// Al seleccionar una opción del menú de opciones.
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Dependiendo de la opción de menú seleccionada.
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				onBackPressed();
+				break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma
 		// de cursor.
 		Cursor cursor = (Cursor) lstProductos.getItemAtPosition(position);
 		// Obtengo el id del producto seleccionado.
 		idProducto = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_PRO_ID));
-		// Cierro el cursor.
-		// cursor.close();
 		// Envío el intent correspondiente.
 		mostrarFichaProducto(idProducto);
 	}
@@ -72,6 +96,19 @@ public class CatalogoActivity extends FragmentActivity implements
 		Intent i = new Intent(this, FichaActivity.class);
 		i.putExtra("idProducto", idProducto);
 		startActivity(i);
+	}
+
+	public void btnCatalogoVacioOnClick(View v) {
+		// Si hay conexión a Internet.
+		if (ConexionServidor.isOnline(this)) {
+			// Creo la tarea asíncrona para importar los datos.
+			ImportarCatalogo tarea = new ImportarCatalogo(this);
+			tarea.execute();
+		}
+		else {
+			Toast.makeText(this, R.string.sin_conexion_a_internet,
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	// Crea el cursor.
