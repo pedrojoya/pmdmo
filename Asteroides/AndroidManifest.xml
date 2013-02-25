@@ -5,14 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/TemaAsteroides" >
         <activity
             android:name="es.iessaladillo.pedrojoya.MainActivity"
             android:label="@string/app_name" >
@@ -21,6 +21,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="es.iessaladillo.pedrojoya.AcercaDeActivity"
+            android:label="@string/title_activity_acerca_de"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="es.iessaladillo.pedrojoya.PreferenciasActivity"
+            android:label="@string/title_activity_preferencias" >
+        </activity>
+        <activity
+            android:name="es.iessaladillo.pedrojoya.PuntuacionesActivity"
+            android:label="@string/title_activity_puntuaciones" >
         </activity>
     </application>
 

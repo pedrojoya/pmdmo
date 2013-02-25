@@ -3,9 +3,6 @@ package es.iessaladillo.pedrojoya.pr043;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -52,7 +49,7 @@ class EnviarPedido extends AsyncTask<String, String, Boolean> {
 			if (respuesta != null && respuesta.trim() != "") {
 				publishProgress(contexto
 						.getString(R.string.procesando_respuesta));
-				recibido = procesarRespuesta(respuesta);
+				recibido = procesarRespuesta(respuesta.trim());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,12 +68,14 @@ class EnviarPedido extends AsyncTask<String, String, Boolean> {
 					contexto,
 					contexto.getString(R.string.el_pedido_se_ha_realizado_correctamente),
 					Toast.LENGTH_LONG).show();
+			// Vacío el carrito.
+			vaciarCarrito();
 		}
 		else {
 			Toast.makeText(
 					contexto,
 					contexto.getString(R.string.no_se_ha_podido_realizar_el_pedido),
-					Toast.LENGTH_LONG).show();			
+					Toast.LENGTH_LONG).show();
 		}
 		super.onPostExecute(result);
 	}
@@ -92,6 +91,16 @@ class EnviarPedido extends AsyncTask<String, String, Boolean> {
 	// satisfactoriamente.
 	private boolean procesarRespuesta(String respuesta) {
 		return (respuesta.equals("Insertado"));
+	}
+
+	// Actualiza la BD para que no haya productos en el carrito.
+	private void vaciarCarrito() {
+		// Realizo el update en la base de datos a través del content provider.
+		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos/");
+		ContentValues valores = new ContentValues();
+		valores.put(GestorBD.FLD_PRO_VEN, 0);
+		contexto.getContentResolver().update(uri, valores,
+				GestorBD.FLD_PRO_VEN + " > 0", null);
 	}
 
 }

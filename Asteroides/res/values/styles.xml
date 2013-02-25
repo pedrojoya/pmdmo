@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -17,4 +17,17 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="TextoAsteroides" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">20dip</item>
+        <item name="android:textSize">25sp </item>
+    </style>
+    <style name="TextoAsteroides.Botones" parent="TextoAsteroides">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:textSize">20sp </item>
+        <item name="android:padding">5dp</item>TemaAsteroides TemaAsteroides android:style/Theme.NoTitleBar
+    </style>
+    <style parent="android:style/Theme.NoTitleBar" name="TemaAsteroides"></style>
+    
 </resources>

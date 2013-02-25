@@ -9,5 +9,23 @@
     <string name="salir">Salir</string>
     <string name="configurar">Configurar</string>
     <string name="jugar">Jugar</string>
+    <string name="texto_acerca_de">Este programa ha sido desarrollado como ejemplo en el curso de Android para demostrar cómo se pueden lanzar nuevas actividades desde la actividad principal.</string>
+    <string name="title_activity_acerca_de">Acerca de...</string>
+    <string name="action_settings">Settings</string>
+    <string name="se_reproduce_musica_de_fondo">Se reproduce música de fondo</string>
+    <string name="reproducir_musica">Reproducir música</string>
+    <string name="se_escoge_la_representacion_de_graficos">Se escoge la representación de gráficos</string>
+    <string name="en_cuantos_trozos_se_divide_un_asteroide">En cuantos trozos se divide un asteroide</string>
+    <string name="numero_de_fragmentos">Número de Fragmentos</string>
+    <string name="modo_multijugador">Modo multijugador</string>
+    <string name="activar_o_desacticar_el_modo_multijugador">Activar o desacticar el modo multijugador</string>
+    <string name="activar_modo_multijugador">Activar modo multijugador</string>
+    <string name="numero_maximo_de_jugadores">Número máximo de jugadores</string>
+    <string name="maximo_de_jugadores">Máximo de jugadores</string>
+    <string name="tipo_de_conexion_entre_los_jugadores">Tipo de conexión entre los jugadores</string>
+    <string name="tipo_de_conexion">Tipo de conexión</string>
+    <string name="puntuaciones">Puntuaciones</string>
+    <string name="no_hay_puntuaciones">No hay puntuaciones</string>
+    <string name="title_activity_puntuaciones">Puntuaciones</string>
 
 </resources>

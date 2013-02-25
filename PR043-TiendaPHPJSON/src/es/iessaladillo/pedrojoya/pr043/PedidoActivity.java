@@ -56,12 +56,12 @@ public class PedidoActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Dependiendo de la opción de menú seleccionada.
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			onBackPressed();
-			break;
-		case R.id.mnuEnviarPedido:
-			enviarPedido();
-			break;
+			case android.R.id.home:
+				onBackPressed();
+				break;
+			case R.id.mnuEnviarPedido:
+				enviarPedido();
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -77,7 +77,7 @@ public class PedidoActivity extends Activity {
 			b.append("e-mail: " + txtEmail.getText().toString() + "\n");
 			b.append("Teléfono: " + txtTelefono.getText().toString() + "\n");
 			b.append("Observaciones: " + txtObservaciones.getText().toString()
-					+ "\n\n");
+					+ "\n");
 			b.append("Productos pedidos:\n");
 			// Consulto a través del content provider los registros con unidades
 			// a
@@ -104,7 +104,8 @@ public class PedidoActivity extends Activity {
 			// Creo la tarea asíncrona para enviar el pedido.
 			EnviarPedido tarea = new EnviarPedido(this);
 			tarea.execute(sNombrePedido, sTextoPedido);
-		} else {
+		}
+		else {
 			Toast.makeText(this, R.string.sin_conexion_a_internet,
 					Toast.LENGTH_LONG).show();
 		}
