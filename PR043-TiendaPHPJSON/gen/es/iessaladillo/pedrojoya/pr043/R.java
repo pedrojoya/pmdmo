@@ -34,23 +34,23 @@ public final class R {
         public static final int ic_acerca_de=0x7f020005;
         public static final int ic_action_carrito=0x7f020006;
         public static final int ic_action_carrito_agregar=0x7f020007;
-        public static final int ic_carrito=0x7f020008;
-        public static final int ic_carrito_vacio=0x7f020009;
-        public static final int ic_catalogo=0x7f02000a;
-        public static final int ic_catalogo_actualizar=0x7f02000b;
-        public static final int ic_catalogo_vacio=0x7f02000c;
-        public static final int ic_download=0x7f02000d;
-        public static final int ic_iconopp=0x7f02000e;
-        public static final int ic_launcher=0x7f02000f;
-        public static final int pro01=0x7f020010;
+        public static final int ic_action_pagar=0x7f020008;
+        public static final int ic_action_pedido=0x7f020009;
+        public static final int ic_action_pedido_enviar=0x7f02000a;
+        public static final int ic_carrito=0x7f02000b;
+        public static final int ic_carrito_vacio=0x7f02000c;
+        public static final int ic_catalogo=0x7f02000d;
+        public static final int ic_catalogo_actualizar=0x7f02000e;
+        public static final int ic_catalogo_vacio=0x7f02000f;
+        public static final int ic_download=0x7f020010;
+        public static final int ic_iconopp=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int pro01=0x7f020013;
     }
     public static final class id {
         public static final int actualizarCatalogo=0x7f090002;
-        public static final int anadirMasProductos=0x7f09002a;
         public static final int btnCarritoVacio=0x7f090006;
         public static final int btnCatalogoVacio=0x7f09000a;
-        public static final int email=0x7f090025;
-        public static final int enviarCorreo=0x7f09002b;
         public static final int imgAcercaDe=0x7f09001f;
         public static final int imgActualizarCatalogo=0x7f09001c;
         public static final int imgCarrito=0x7f090018;
@@ -66,16 +66,18 @@ public final class R {
         public static final int lblCatalogo=0x7f090015;
         public static final int lblCatalogoVacio=0x7f09000c;
         public static final int lblDescripcion=0x7f09000f;
+        public static final int lblDireccion=0x7f090022;
+        public static final int lblEmail=0x7f090024;
         public static final int lblMensaje=0x7f090001;
         public static final int lblNombre=0x7f09000d;
+        public static final int lblObservaciones=0x7f090028;
+        public static final int lblTelefono=0x7f090026;
         public static final int lblUnidades=0x7f090010;
         public static final int lstProductos=0x7f090004;
-        public static final int mnuAcercaDe=0x7f09002f;
-        public static final int mnuActualizarCatalogo=0x7f09002e;
-        public static final int mnuAgregarAlCarrito=0x7f09002c;
-        public static final int mnuVerCarrito=0x7f09002d;
-        public static final int nombre=0x7f090023;
-        public static final int observaciones=0x7f090029;
+        public static final int mnuAgregarAlCarrito=0x7f09002b;
+        public static final int mnuEnviarPedido=0x7f09002d;
+        public static final int mnuHacerPedido=0x7f09002a;
+        public static final int mnuVerCarrito=0x7f09002c;
         public static final int procesoInforma=0x7f090003;
         public static final int rlBoton1=0x7f090013;
         public static final int rlBoton2=0x7f090017;
@@ -86,12 +88,11 @@ public final class R {
         public static final int rlPanel2=0x7f090016;
         public static final int rlPanel3=0x7f09001a;
         public static final int rlPanel4=0x7f09001e;
-        public static final int telefono=0x7f090027;
-        public static final int textView1=0x7f090021;
-        public static final int textView2=0x7f090022;
-        public static final int textView3=0x7f090024;
-        public static final int textView4=0x7f090026;
-        public static final int textView5=0x7f090028;
+        public static final int txtDireccion=0x7f090023;
+        public static final int txtEmail=0x7f090025;
+        public static final int txtNombre=0x7f090021;
+        public static final int txtObservaciones=0x7f090029;
+        public static final int txtTelefono=0x7f090027;
         public static final int vMedio=0x7f090011;
     }
     public static final class layout {
@@ -107,8 +108,9 @@ public final class R {
         public static final int pedido_activity=0x7f030009;
     }
     public static final class menu {
-        public static final int menu_ficha_activity=0x7f080000;
-        public static final int menu_main_activity=0x7f080001;
+        public static final int menu_carrito_activity=0x7f080000;
+        public static final int menu_ficha_activity=0x7f080001;
+        public static final int menu_pedido_activity=0x7f080002;
     }
     public static final class string {
         public static final int AnadirCarrito=0x7f060003;
@@ -141,15 +143,21 @@ public final class R {
         public static final int catalogo_actualizado_con=0x7f060022;
         public static final int catalogo_de_productos=0x7f060026;
         public static final int copyright=0x7f060016;
+        public static final int direccion=0x7f060035;
+        public static final int e_mail=0x7f060036;
+        public static final int el_pedido_se_ha_realizado_correctamente=0x7f060038;
+        public static final int enviar=0x7f060037;
         public static final int ficha_del_producto=0x7f060027;
         public static final int foto=0x7f060023;
         public static final int foto_del_producto=0x7f06002d;
+        public static final int hacer_pedido=0x7f060034;
         public static final int importar_catalogo=0x7f060019;
         public static final int iniciando=0x7f06001a;
         public static final int leyendo_respuesta=0x7f06001b;
         public static final int logo=0x7f06002f;
         public static final int no_hay_ningun_producto_en_el_carrito=0x7f060032;
         public static final int no_hay_ningun_producto_en_el_catalogo=0x7f060033;
+        public static final int no_se_ha_podido_realizar_el_pedido=0x7f060039;
         public static final int nombre_del_producto=0x7f060024;
         public static final int pedido=0x7f060029;
         public static final int procesando_respuesta=0x7f06001d;

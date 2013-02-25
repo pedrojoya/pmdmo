@@ -16,6 +16,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +68,15 @@ public class CarritoActivity extends FragmentActivity implements
 		lstProductos.setAdapter(adaptador);
 	}
 
+	// Al mostrar el menú de opciones.
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_carrito_activity, menu);
+		return true;
+	}
+
 	// Al seleccionar una opción del menú de opciones.
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -74,10 +85,18 @@ public class CarritoActivity extends FragmentActivity implements
 			case android.R.id.home:
 				onBackPressed();
 				break;
+			case R.id.mnuHacerPedido:
+				mostrarPedido();
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void mostrarPedido() {
+		// Creo un intent explícito para mostrar la actividad Pedido.
+		Intent i = new Intent(this, PedidoActivity.class);
+		startActivity(i);		
+	}
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma
 		// de cursor.

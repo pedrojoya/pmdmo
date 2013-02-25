@@ -53,5 +53,11 @@
     <string name="catalogo">Catálogo</string>
     <string name="no_hay_ningun_producto_en_el_carrito">No hay ningún producto en el carrito\nPulse para ver el catálogo</string>
     <string name="no_hay_ningun_producto_en_el_catalogo">No hay ningún producto en el catálogo\nPulse para actualizarlo</string>
+    <string name="hacer_pedido">Hacer pedido</string>
+    <string name="direccion">Dirección</string>
+    <string name="e_mail">e-mail</string>
+    <string name="enviar">Enviar</string>
+    <string name="el_pedido_se_ha_realizado_correctamente">El pedido se ha realizado correctamente</string>
+    <string name="no_se_ha_podido_realizar_el_pedido">No se ha podido realizar el pedido</string>
     
 </resources>

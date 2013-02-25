@@ -56,7 +56,7 @@ class ConexionServidor {
 		// Escribo el resto de parámetros en el flujo de salida.
 		if (parametros != null) {
 			for (Map.Entry<String, String> p : parametros.entrySet()) {
-				escritor.write(URLEncoder.encode(p.getKey(), "UTF-8") + "="
+				escritor.write("&" + URLEncoder.encode(p.getKey(), "UTF-8") + "="
 						+ URLEncoder.encode(p.getValue(), "UTF-8"));
 			}
 		}

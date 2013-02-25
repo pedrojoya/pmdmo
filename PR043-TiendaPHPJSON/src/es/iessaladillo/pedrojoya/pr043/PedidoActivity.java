@@ -1,113 +1,113 @@
 package es.iessaladillo.pedrojoya.pr043;
 
-import java.util.ArrayList;
-
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.support.v4.content.CursorLoader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class PedidoActivity extends Activity {
-	private Button bEnviarPedido;
-	private String detallePedido;
-	private EditText cNombre;
-	private EditText cEmail;
-	private EditText cTelefono;
-	private EditText cObservaciones;
-	private Button bAnadirMasProductos;
-	private GestorBD usdbh = new GestorBD(this);
 
-	/** Called when the activity is first created. */
+	// Variables miembro.
+	private EditText txtNombre;
+	private EditText txtDireccion;
+	private EditText txtEmail;
+	private EditText txtTelefono;
+	private EditText txtObservaciones;
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pedido_activity);
-
-		bAnadirMasProductos = (Button) findViewById(R.id.anadirMasProductos);
-		bAnadirMasProductos.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				lanzarListadoProductos();
-			}
-		});
-
-		bEnviarPedido = (Button) findViewById(R.id.enviarCorreo);
-		bEnviarPedido.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				lanzarEnvioPedido();
-			}
-		});
-	}
-
-	public void lanzarEnvioPedido() {
-
-		cNombre = (EditText) findViewById(R.id.nombre);
-		cEmail = (EditText) findViewById(R.id.email);
-		cTelefono = (EditText) findViewById(R.id.telefono);
-		cObservaciones = (EditText) findViewById(R.id.observaciones);
-
-		detallePedido = "";
-		detallePedido = detallePedido + "Nombre: "
-				+ cNombre.getText().toString() + "\n";
-		detallePedido = detallePedido + "Email: " + cEmail.getText().toString()
-				+ "\n";
-		detallePedido = detallePedido + "TelÃ©fono: "
-				+ cTelefono.getText().toString() + "\n";
-		detallePedido = detallePedido + "Observaciones: "
-				+ cObservaciones.getText().toString() + "\n";
-		detallePedido = detallePedido + "Productos Seleccionados:\n";
-
-		SQLiteDatabase db = usdbh.getWritableDatabase();
-
-		String sql = "SELECT pro_nombre, pro_unidades_sel FROM t_producto WHERE pro_unidades_sel>0";
-		Cursor c = db.rawQuery(sql, null);
-
-		int numRegistros = c.getCount();
-
-		if (numRegistros > 0) {
-			if (c.moveToFirst()) {
-				// Recorremos el cursor hasta que no haya mÃ¡s registros
-				do {
-					detallePedido += c.getString(0) + " - " + c.getString(1)
-							+ " unidades\n";
-				} while (c.moveToNext());
-			}
+		// Activo el botón de Home en la Action Bar (si la versión lo permite).
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+		getVistas();
+	}
 
-		ArrayList parametros = new ArrayList();
-		parametros.add("clave_acceso");
-		parametros.add("alri23aklLL");
-		parametros.add("nombre");
-		parametros.add(cNombre.getText().toString());
-		parametros.add("texto");
-		parametros.add(detallePedido);
+	private void getVistas() {
+		txtNombre = (EditText) findViewById(R.id.txtNombre);
+		txtDireccion = (EditText) findViewById(R.id.txtDireccion);
+		txtEmail = (EditText) findViewById(R.id.txtEmail);
+		txtTelefono = (EditText) findViewById(R.id.txtTelefono);
+		txtObservaciones = (EditText) findViewById(R.id.txtObservaciones);
+	}
 
-		// Llamada a Servidor Web PHP
-		try {
-			Post post = new Post();
-			String datos = post.getServerData(parametros,
-					"http://www.jrcj.com/android/guarda.php");
-			Toast.makeText(getApplicationContext(),
-					this.getString(R.string.PedidoInsertado),
-					Toast.LENGTH_SHORT).show();
-		} catch (Exception e) {
-			Toast.makeText(getBaseContext(),
-					this.getString(R.string.ErrorConectaServidor),
-					Toast.LENGTH_SHORT).show();
+	// Al mostrar el menú de opciones.
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_pedido_activity, menu);
+		return true;
+	}
+
+	// Al seleccionar una opción del menú de opciones.
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Dependiendo de la opción de menú seleccionada.
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			break;
+		case R.id.mnuEnviarPedido:
+			enviarPedido();
+			break;
 		}
-		// FIN Llamada a Servidor Web PHP
-
-		Intent i = new Intent(this, MainActivity.class);
-		startActivityForResult(i, 1234);
+		return super.onOptionsItemSelected(item);
 	}
 
-	public void lanzarListadoProductos() {
-		Intent i = new Intent(this, CatalogoActivity.class);
-		startActivityForResult(i, 1234);
+	public void enviarPedido() {
+		// Si hay conexión a Internet.
+		if (ConexionServidor.isOnline(this)) {
+			// Agrego a la cadena los datos del pedido.
+			StringBuilder b = new StringBuilder();
+			String sNombrePedido = txtNombre.getText().toString();
+			b.append("Nombre: " + sNombrePedido + "\n");
+			b.append("Dirección: " + txtDireccion.getText().toString() + "\n");
+			b.append("e-mail: " + txtEmail.getText().toString() + "\n");
+			b.append("Teléfono: " + txtTelefono.getText().toString() + "\n");
+			b.append("Observaciones: " + txtObservaciones.getText().toString()
+					+ "\n\n");
+			b.append("Productos pedidos:\n");
+			// Consulto a través del content provider los registros con unidades
+			// a
+			// pedir.
+			Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos");
+			CursorLoader cLoader = new CursorLoader(this, uri,
+					GestorBD.PRO_TODOS, GestorBD.FLD_PRO_VEN + " > 0", null,
+					null);
+			Cursor c = cLoader.loadInBackground();
+			if (c != null) {
+				c.moveToFirst();
+				while (!c.isAfterLast()) {
+					b.append(c.getString(c.getColumnIndex(GestorBD.FLD_PRO_NOM))
+							+ " - "
+							+ c.getString(c
+									.getColumnIndex(GestorBD.FLD_PRO_VEN))
+							+ " unidades\n");
+					c.moveToNext();
+				}
+				c.close();
+			}
+			// Obtengo la cadena final.
+			String sTextoPedido = b.toString();
+			// Creo la tarea asíncrona para enviar el pedido.
+			EnviarPedido tarea = new EnviarPedido(this);
+			tarea.execute(sNombrePedido, sTextoPedido);
+		} else {
+			Toast.makeText(this, R.string.sin_conexion_a_internet,
+					Toast.LENGTH_LONG).show();
+		}
 	}
+
 }

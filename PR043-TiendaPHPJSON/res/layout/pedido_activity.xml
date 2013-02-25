@@ -1,110 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/fondo_aplicacion"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:gravity="center"
-        android:text="@string/MisDatos"
-        android:textSize="25dp" />
+        android:orientation="vertical"
+        android:padding="15dp" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/Nombre" />
+        <TextView
+            android:id="@+id/lblNombre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Nombre" />
 
-    <EditText
-        android:id="@+id/nombre"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:inputType="text"
-        android:isScrollContainer="true"
-        android:lines="5" >
+        <EditText
+            android:id="@+id/txtNombre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPersonName" >
 
-        <requestFocus />
-    </EditText>
+            <requestFocus />
+        </EditText>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/Email" />
+        <TextView
+            android:id="@+id/lblDireccion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/direccion" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:inputType="text"
-        android:isScrollContainer="true"
-        android:lines="5" >
-    </EditText>
+        <EditText
+            android:id="@+id/txtDireccion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPostalAddress"
+            android:lines="5" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/Telefono" />
+        <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/e_mail" />
 
-    <EditText
-        android:id="@+id/telefono"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:inputType="text"
-        android:isScrollContainer="true"
-        android:lines="5" >
-    </EditText>
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/Observaciones" />
+        <TextView
+            android:id="@+id/lblTelefono"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Telefono" />
 
-    <EditText
-        android:id="@+id/observaciones"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:inputType="text"
-        android:isScrollContainer="true"
-        android:lines="5" >
-    </EditText>
+        <EditText
+            android:id="@+id/txtTelefono"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="phone" />
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        <TextView
+            android:id="@+id/lblObservaciones"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Observaciones" />
 
-        <TableRow>
-            <Button
-                android:id="@+id/anadirMasProductos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/AnadirMasProductos"
-                style="@style/CKButton" />
-            <Button
-                android:id="@+id/enviarCorreo"
-                style="@style/CKButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/EnviarPedido" />
-        </TableRow>
-    </TableLayout>
+        <EditText
+            android:id="@+id/txtObservaciones"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="textLongMessage"
+            android:lines="5" />
+    </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>
