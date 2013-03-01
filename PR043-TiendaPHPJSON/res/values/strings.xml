@@ -59,5 +59,7 @@
     <string name="enviar">Enviar</string>
     <string name="el_pedido_se_ha_realizado_correctamente">El pedido se ha realizado correctamente</string>
     <string name="no_se_ha_podido_realizar_el_pedido">No se ha podido realizar el pedido</string>
+    <string name="quitar_del_carrito">Quitar del carrito</string>
+    <string name="seleccionados">" seleccionados"</string>
     
 </resources>

@@ -15,21 +15,26 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CarritoActivity extends FragmentActivity implements
-		OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+		OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>,
+		MultiChoiceModeListener {
 
 	private long idProducto;
 	private ListView lstProductos;
@@ -56,6 +61,9 @@ public class CarritoActivity extends FragmentActivity implements
 		cargarLista();
 		// La propia actividad responderá a los click en la lista.
 		lstProductos.setOnItemClickListener(this);
+		// Hago que se puedan seleccionar varios elementos de la lista.
+		lstProductos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		lstProductos.setMultiChoiceModeListener(this);
 	}
 
 	// Obtiene los datos de la BD y los carga en la lista.
@@ -95,8 +103,9 @@ public class CarritoActivity extends FragmentActivity implements
 	private void mostrarPedido() {
 		// Creo un intent explícito para mostrar la actividad Pedido.
 		Intent i = new Intent(this, PedidoActivity.class);
-		startActivity(i);		
+		startActivity(i);
 	}
+
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma
 		// de cursor.
@@ -220,6 +229,50 @@ public class CarritoActivity extends FragmentActivity implements
 			return vistaFila;
 		}
 
+	}
+
+	// Al pulsar un elemento del menú contextual.
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		// Obtengo un array que indica para cada elemento de la lista si está
+		// seleccionado o no.
+		SparseBooleanArray elementos = lstProductos.getCheckedItemPositions();
+		// Switch on the item’s ID to find the action the user selected
+		switch (item.getItemId()) {
+			case R.id.mnuQuitar:
+				Toast.makeText(this, "Vas a eliminar", Toast.LENGTH_LONG)
+						.show();
+				break;
+			default:
+				return false;
+		}
+		return true;
+	}
+
+	// Al crear el menú contextual.
+	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		// Inflo la especificación del menú contextual sobre el menú.
+		MenuInflater inflater = this.getMenuInflater();
+		inflater.inflate(R.menu.contextual_carrito_activity, menu);
+		return true;
+	}
+
+	public void onDestroyActionMode(ActionMode mode) {
+	}
+
+	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		// Comportamiento por defecto.
+		return true;
+	}
+
+	// Al cambiar el número de elementos seleccionados.
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public void onItemCheckedStateChanged(ActionMode mode, int position,
+			long id, boolean checked) {
+		// Obtengo el número de elementos seleccionados en la lista.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			int seleccionados = lstProductos.getCheckedItemCount();
+			mode.setTitle(seleccionados + getString(R.string.seleccionados));
+		}
 	}
 
 }

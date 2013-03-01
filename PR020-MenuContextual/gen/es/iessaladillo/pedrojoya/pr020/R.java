@@ -35,6 +35,7 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int editar=0x7f050004;
+        public static final int elija_una_opcion=0x7f050006;
         public static final int eliminar=0x7f050005;
         public static final int ha_pulsado_sobre=0x7f050003;
         public static final int listado_de_alumnos=0x7f050002;

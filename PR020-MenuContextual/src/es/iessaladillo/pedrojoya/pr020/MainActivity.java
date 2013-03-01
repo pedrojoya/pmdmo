@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr020;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -66,6 +66,8 @@ public class MainActivity extends Activity {
 			menu.findItem(R.id.mnuEliminar).setTitle(
 					getString(R.string.eliminar)
 							+ lstAlumnos.getItemAtPosition(position));
+			// Establezco el título que se muestra en el encabezado del menú.
+			menu.setHeaderTitle(R.string.elija_una_opcion);
 		}
 		// Llamo al OnCreateContextMenu del padre por si quiere
 		// añadir algún elemento.
@@ -78,17 +80,17 @@ public class MainActivity extends Activity {
 		int position = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
 		// Dependiendo del menú sobre el que se ha pulsado informo al usuario.
 		switch (item.getItemId()) {
-		case R.id.mnuEditar:
-			mostrarTostada(getString(R.string.editar)
-					+ lstAlumnos.getItemAtPosition(position));
-			break;
-		case R.id.mnuEliminar:
-			mostrarTostada(getString(R.string.eliminar)
-					+ lstAlumnos.getItemAtPosition(position));
-			break;
-		default:
-			// Retorno lo que retorne el padre.
-			return super.onContextItemSelected(item);
+			case R.id.mnuEditar:
+				mostrarTostada(getString(R.string.editar)
+						+ lstAlumnos.getItemAtPosition(position));
+				break;
+			case R.id.mnuEliminar:
+				mostrarTostada(getString(R.string.eliminar)
+						+ lstAlumnos.getItemAtPosition(position));
+				break;
+			default:
+				// Retorno lo que retorne el padre.
+				return super.onContextItemSelected(item);
 		}
 		// Retorno que he gestionado yo el evento.
 		return true;

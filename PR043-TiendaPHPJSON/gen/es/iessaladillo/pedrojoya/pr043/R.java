@@ -74,10 +74,11 @@ public final class R {
         public static final int lblTelefono=0x7f090026;
         public static final int lblUnidades=0x7f090010;
         public static final int lstProductos=0x7f090004;
-        public static final int mnuAgregarAlCarrito=0x7f09002b;
-        public static final int mnuEnviarPedido=0x7f09002d;
-        public static final int mnuHacerPedido=0x7f09002a;
-        public static final int mnuVerCarrito=0x7f09002c;
+        public static final int mnuAgregarAlCarrito=0x7f09002c;
+        public static final int mnuEnviarPedido=0x7f09002e;
+        public static final int mnuHacerPedido=0x7f09002b;
+        public static final int mnuQuitar=0x7f09002a;
+        public static final int mnuVerCarrito=0x7f09002d;
         public static final int procesoInforma=0x7f090003;
         public static final int rlBoton1=0x7f090013;
         public static final int rlBoton2=0x7f090017;
@@ -108,9 +109,10 @@ public final class R {
         public static final int pedido_activity=0x7f030009;
     }
     public static final class menu {
-        public static final int menu_carrito_activity=0x7f080000;
-        public static final int menu_ficha_activity=0x7f080001;
-        public static final int menu_pedido_activity=0x7f080002;
+        public static final int contextual_carrito_activity=0x7f080000;
+        public static final int menu_carrito_activity=0x7f080001;
+        public static final int menu_ficha_activity=0x7f080002;
+        public static final int menu_pedido_activity=0x7f080003;
     }
     public static final class string {
         public static final int AnadirCarrito=0x7f060003;
@@ -163,9 +165,11 @@ public final class R {
         public static final int procesando_respuesta=0x7f06001d;
         public static final int producto_no_encontrado=0x7f060025;
         public static final int productos=0x7f060021;
+        public static final int quitar_del_carrito=0x7f06003a;
         public static final int respuesta_obtenida=0x7f06001c;
         public static final int salir=0x7f060017;
         public static final int se_ha_solicitado_un_campo_desconocido=0x7f06001f;
+        public static final int seleccionados=0x7f06003b;
         public static final int sin_conexion_a_internet=0x7f06001e;
         public static final int unidades_pedidas=0x7f060030;
         public static final int uri_desconocida=0x7f060020;

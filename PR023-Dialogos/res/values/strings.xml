@@ -27,4 +27,7 @@
 	<string name="alerta_personalizada">Alerta personalizada</string>
 	<string name="conexion">Conexión</string>
 	<string name="conectando">Conectando…</string>
+	<string name="alerta_con_adaptador">Alerta con adaptador</string>
+	<string name="arte_del_album">Arte del álbum</string>
+	<string name="album">Álbum</string>
 </resources>

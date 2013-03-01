@@ -55,4 +55,11 @@
         android:layout_marginBottom="10dp"
         android:onClick="btnOnClick"
         android:text="@string/alerta_personalizada" />
+    <Button
+        android:id="@+id/btnAlertaAdaptador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnOnClick"
+        android:text="@string/alerta_con_adaptador" />
 </LinearLayout>

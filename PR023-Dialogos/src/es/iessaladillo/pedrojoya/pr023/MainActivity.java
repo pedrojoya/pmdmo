@@ -1,6 +1,8 @@
 package es.iessaladillo.pedrojoya.pr023;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -35,10 +37,12 @@ public class MainActivity extends Activity implements OnDateSetListener,
 	private static final int DLG_ALERTA_SELECCION_SIMPLE = 4;
 	private static final int DLG_ALERTA_SELECCION_MULTIPLE = 5;
 	private static final int DLG_ALERTA_PERSONALIZADA = 6;
+	private static final int DLG_ALERTA_ADAPTADOR = 7;
 
 	// Variables a nivel de clase.
 	private int turnoSeleccionado; // Selección simple.
 	private boolean[] turnosSeleccionados; // Selección múltiple.
+	ArrayList<Album> albumes; // ArrayList de álbumes para adaptador.
 	Dialog dialogo = null;
 
 	@Override
@@ -51,27 +55,30 @@ public class MainActivity extends Activity implements OnDateSetListener,
 	public void btnOnClick(View v) {
 		// Muestro el diálogo correspondiente.
 		switch (v.getId()) {
-		case R.id.btnDatePicker:
-			showDialog(DLG_DATEPICKER);
-			break;
-		case R.id.btnTimePicker:
-			showDialog(DLG_TIMEPICKER);
-			break;
-		case R.id.btnAlertaSiNo:
-			showDialog(DLG_ALERTA_SINO);
-			break;
-		case R.id.btnAlertaSeleccionDirecta:
-			showDialog(DLG_ALERTA_SELECCION_DIRECTA);
-			break;
-		case R.id.btnAlertaSeleccionSimple:
-			showDialog(DLG_ALERTA_SELECCION_SIMPLE);
-			break;
-		case R.id.btnAlertaSeleccionMultiple:
-			showDialog(DLG_ALERTA_SELECCION_MULTIPLE);
-			break;
-		case R.id.btnAlertaPersonalizada:
-			showDialog(DLG_ALERTA_PERSONALIZADA);
-			break;
+			case R.id.btnDatePicker:
+				showDialog(DLG_DATEPICKER);
+				break;
+			case R.id.btnTimePicker:
+				showDialog(DLG_TIMEPICKER);
+				break;
+			case R.id.btnAlertaSiNo:
+				showDialog(DLG_ALERTA_SINO);
+				break;
+			case R.id.btnAlertaSeleccionDirecta:
+				showDialog(DLG_ALERTA_SELECCION_DIRECTA);
+				break;
+			case R.id.btnAlertaSeleccionSimple:
+				showDialog(DLG_ALERTA_SELECCION_SIMPLE);
+				break;
+			case R.id.btnAlertaSeleccionMultiple:
+				showDialog(DLG_ALERTA_SELECCION_MULTIPLE);
+				break;
+			case R.id.btnAlertaPersonalizada:
+				showDialog(DLG_ALERTA_PERSONALIZADA);
+				break;
+			case R.id.btnAlertaAdaptador:
+				showDialog(DLG_ALERTA_ADAPTADOR);
+				break;
 		}
 	}
 
@@ -81,119 +88,156 @@ public class MainActivity extends Activity implements OnDateSetListener,
 		Calendar calendario;
 		AlertDialog.Builder b;
 		switch (idDialogo) {
-		case DLG_DATEPICKER:
-			calendario = Calendar.getInstance();
-			dialogo = new DatePickerDialog(this, this,
-					calendario.get(Calendar.YEAR),
-					calendario.get(Calendar.MONTH),
-					calendario.get(Calendar.DAY_OF_MONTH));
-			break;
-		case DLG_TIMEPICKER:
-			calendario = Calendar.getInstance();
-			dialogo = new TimePickerDialog(this, this,
-					calendario.get(Calendar.HOUR),
-					calendario.get(Calendar.MINUTE), true);
-			break;
-		case DLG_ALERTA_SINO:
-			b = new AlertDialog.Builder(this);
-			b.setTitle(R.string.eliminar_usuario);
-			b.setMessage(R.string.esta_seguro_de_que_quiere_eliminar_el_usuario);
-			b.setIcon(R.drawable.ic_launcher);
-			b.setPositiveButton(R.string.si, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					mostrarTostada(getString(R.string.usuario_borrado),
-							R.drawable.ic_launcher);
-				}
-			});
-			b.setNegativeButton(R.string.no, null);
-			dialogo = b.create();
-			break;
-		case DLG_ALERTA_SELECCION_DIRECTA:
-			b = new AlertDialog.Builder(this);
-			b.setTitle(R.string.turno);
-			b.setItems(R.array.turnos, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					String[] turnos = getResources().getStringArray(
-							R.array.turnos);
-					mostrarTostada(getString(R.string.ha_seleccionado)
-							+ turnos[which], R.drawable.ic_launcher);
-				}
-			});
-			b.setIcon(R.drawable.ic_launcher);
-			dialogo = b.create();
-			break;
-		case DLG_ALERTA_SELECCION_SIMPLE:
-			b = new AlertDialog.Builder(this);
-			b.setTitle(R.string.turno);
-			b.setSingleChoiceItems(R.array.turnos, 0, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					turnoSeleccionado = which;
-				}
-			});
-			b.setIcon(R.drawable.ic_launcher);
-			b.setNeutralButton("Aceptar", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface d, int arg1) {
-					d.dismiss();
-					String[] turnos = getResources().getStringArray(
-							R.array.turnos);
-					mostrarTostada(getString(R.string.ha_seleccionado)
-							+ turnos[turnoSeleccionado], R.drawable.ic_launcher);
-				}
-			});
-			dialogo = b.create();
-			break;
-		case DLG_ALERTA_SELECCION_MULTIPLE:
-			turnosSeleccionados = new boolean[] { true, false, false };
-			b = new AlertDialog.Builder(this);
-			b.setTitle(R.string.turno);
-			b.setMultiChoiceItems(R.array.turnos, turnosSeleccionados,
-					new OnMultiChoiceClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which,
-								boolean isChecked) {
-							turnosSeleccionados[which] = isChecked;
-						}
-					});
-			b.setIcon(R.drawable.ic_launcher);
-			b.setNeutralButton("Aceptar", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface d, int arg1) {
-					d.dismiss();
-					String[] turnos = getResources().getStringArray(
-							R.array.turnos);
-					String mensaje = "";
-					boolean primero = true;
-					for (int i = 0; i < turnosSeleccionados.length; i++) {
-						if (turnosSeleccionados[i]) {
-							if (primero) {
-								mensaje += getString(R.string.ha_seleccionado);
-								primero = false;
-							} else {
-								mensaje += ", ";
+			case DLG_DATEPICKER:
+				calendario = Calendar.getInstance();
+				dialogo = new DatePickerDialog(this, this,
+						calendario.get(Calendar.YEAR),
+						calendario.get(Calendar.MONTH),
+						calendario.get(Calendar.DAY_OF_MONTH));
+				break;
+			case DLG_TIMEPICKER:
+				calendario = Calendar.getInstance();
+				dialogo = new TimePickerDialog(this, this,
+						calendario.get(Calendar.HOUR),
+						calendario.get(Calendar.MINUTE), true);
+				break;
+			case DLG_ALERTA_SINO:
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.eliminar_usuario);
+				b.setMessage(R.string.esta_seguro_de_que_quiere_eliminar_el_usuario);
+				b.setIcon(R.drawable.ic_launcher);
+				b.setPositiveButton(R.string.si, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						mostrarTostada(getString(R.string.usuario_borrado),
+								R.drawable.ic_launcher);
+					}
+				});
+				b.setNegativeButton(R.string.no, null);
+				dialogo = b.create();
+				break;
+			case DLG_ALERTA_SELECCION_DIRECTA:
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.turno);
+				b.setItems(R.array.turnos, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String[] turnos = getResources().getStringArray(
+								R.array.turnos);
+						mostrarTostada(getString(R.string.ha_seleccionado)
+								+ turnos[which], R.drawable.ic_launcher);
+					}
+				});
+				b.setIcon(R.drawable.ic_launcher);
+				dialogo = b.create();
+				break;
+			case DLG_ALERTA_SELECCION_SIMPLE:
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.turno);
+				b.setSingleChoiceItems(R.array.turnos, 0,
+						new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								turnoSeleccionado = which;
 							}
-							mensaje += turnos[i];
+						});
+				b.setIcon(R.drawable.ic_launcher);
+				b.setNeutralButton("Aceptar", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface d, int arg1) {
+						d.dismiss();
+						String[] turnos = getResources().getStringArray(
+								R.array.turnos);
+						mostrarTostada(getString(R.string.ha_seleccionado)
+								+ turnos[turnoSeleccionado],
+								R.drawable.ic_launcher);
+					}
+				});
+				dialogo = b.create();
+				break;
+			case DLG_ALERTA_SELECCION_MULTIPLE:
+				turnosSeleccionados = new boolean[] { true, false, false };
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.turno);
+				b.setMultiChoiceItems(R.array.turnos, turnosSeleccionados,
+						new OnMultiChoiceClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which, boolean isChecked) {
+								turnosSeleccionados[which] = isChecked;
+							}
+						});
+				b.setIcon(R.drawable.ic_launcher);
+				b.setNeutralButton("Aceptar", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface d, int arg1) {
+						d.dismiss();
+						String[] turnos = getResources().getStringArray(
+								R.array.turnos);
+						String mensaje = "";
+						boolean primero = true;
+						for (int i = 0; i < turnosSeleccionados.length; i++) {
+							if (turnosSeleccionados[i]) {
+								if (primero) {
+									mensaje += getString(R.string.ha_seleccionado);
+									primero = false;
+								}
+								else {
+									mensaje += ", ";
+								}
+								mensaje += turnos[i];
+							}
 						}
+						if (mensaje.equals("")) {
+							mensaje = getString(R.string.no_ha_seleccionado_ningun_turno);
+						}
+						mostrarTostada(mensaje, R.drawable.ic_launcher);
 					}
-					if (mensaje.equals("")) {
-						mensaje = getString(R.string.no_ha_seleccionado_ningun_turno);
+				});
+				dialogo = b.create();
+				break;
+			case DLG_ALERTA_PERSONALIZADA:
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.conexion);
+				b.setIcon(R.drawable.ic_launcher);
+				b.setView((LayoutInflater.from(this)).inflate(
+						R.layout.dialog_login, null));
+				dialogo = b.create();
+				break;
+			case DLG_ALERTA_ADAPTADOR:
+				b = new AlertDialog.Builder(this);
+				b.setTitle(R.string.album);
+				b.setIcon(R.drawable.ic_launcher);
+				// Creo el array de datos.
+				albumes = new ArrayList<Album>();
+				albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
+				albumes.add(new Album(R.drawable.mecanico,
+						"Seré mecánico por ti", "1981"));
+				albumes.add(new Album(R.drawable.cantecito,
+						"Échate un cantecito", "1992"));
+				albumes.add(new Album(R.drawable.carinio,
+						"Está muy bien eso del cariño", "1995"));
+				albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
+				albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
+				albumes.add(new Album(R.drawable.pollo, "La familia pollo",
+						"2000"));
+				albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria",
+						"2001"));
+				albumes.add(new Album(R.drawable.hombre, "El hombre invisible",
+						"2005"));
+				// Creo el adaptador.
+				AdaptadorAlbumes adaptador = new AdaptadorAlbumes(this, albumes);
+				b.setAdapter(adaptador, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						mostrarTostada(getString(R.string.ha_seleccionado)
+								+ albumes.get(which).getNombre(),
+								R.drawable.ic_launcher);
 					}
-					mostrarTostada(mensaje, R.drawable.ic_launcher);
-				}
-			});
-			dialogo = b.create();
-			break;
-		case DLG_ALERTA_PERSONALIZADA:
-			b = new AlertDialog.Builder(this);
-			b.setTitle(R.string.conexion);
-			b.setIcon(R.drawable.ic_launcher);
-			b.setView((LayoutInflater.from(this)).inflate(
-					R.layout.dialog_login, null));
-			dialogo = b.create();
-			break;
+				});
+				dialogo = b.create();
+				break;
 		}
 		return dialogo;
 	}
