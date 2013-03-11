@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp" >
+
+    <ImageView
+        android:id="@+id/imgJelly"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/jelly_beans"
+        android:scaleType="centerCrop"
+        android:src="@drawable/jellybean" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/este_textview_est_encima"
+        android:textColor="#000"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/btnAceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/aceptar"
+        android:textSize="30sp" />
+
+</FrameLayout>
