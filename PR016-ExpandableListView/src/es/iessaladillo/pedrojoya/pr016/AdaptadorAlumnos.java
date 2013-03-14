@@ -17,6 +17,7 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 
 	// Variables miembro.
 	private Activity contexto; // Actividad que lo usa.
+	@SuppressWarnings("unused")
 	private ExpandableListView lista; // Lista que usa el adaptador.
 	private ArrayList<String> grupos; // Nombres de los grupos.
 	private ArrayList<ArrayList<Alumno>> alumnos; // Alumnos por grupo.

@@ -235,6 +235,7 @@ public class CarritoActivity extends FragmentActivity implements
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		// Obtengo un array que indica para cada elemento de la lista si está
 		// seleccionado o no.
+		@SuppressWarnings("unused")
 		SparseBooleanArray elementos = lstProductos.getCheckedItemPositions();
 		// Switch on the item’s ID to find the action the user selected
 		switch (item.getItemId()) {

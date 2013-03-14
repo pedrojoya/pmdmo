@@ -38,7 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends FragmentActivity implements 
 		OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener,
 		OnMarkerDragListener, OnInfoWindowClickListener, LocationListener,
 		LocationSource {

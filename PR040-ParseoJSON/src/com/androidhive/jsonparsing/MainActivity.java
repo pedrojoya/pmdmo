@@ -75,6 +75,7 @@ public class MainActivity extends Activity {
 			super.onPreExecute();
 		}
 
+		@SuppressWarnings("unused")
 		@Override
 		protected ArrayList<HashMap<String, String>> doInBackground(
 				String... arg0) {
