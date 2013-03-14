@@ -163,7 +163,7 @@ public class CarritoActivity extends FragmentActivity implements
 	private class ProductosCursorAdapter extends CursorAdapter {
 
 		// Variables miembro.
-		LayoutInflater inflador;
+		LayoutInflater inflador; 
 
 		// Contenedor de vistas de la fila.
 		private class ContenedorVistas {
