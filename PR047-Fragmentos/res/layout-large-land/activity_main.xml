@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+    <fragment
+        android:id="@+id/frgLista"
+        android:name="es.iessaladillo.pedrojoya.pr047.fragmentos.ListaFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        tools:layout="@layout/fragment_lista" />
+    <fragment
+        android:id="@+id/frgDetalle"
+        android:name="es.iessaladillo.pedrojoya.pr047.fragmentos.DetalleFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        tools:layout="@layout/fragment_detalle" />
+</LinearLayout>

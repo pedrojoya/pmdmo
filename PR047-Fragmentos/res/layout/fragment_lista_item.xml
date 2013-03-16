@@ -16,24 +16,11 @@
         android:src="@drawable/cantecito" />
     <TextView
         android:id="@+id/lblNombre"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_above="@+id/lblAnio"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imgFoto"
         android:gravity="center"
         android:text="Échate un cantecito"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    <TextView
-        android:id="@+id/lblAnio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/imgFoto"
-        android:gravity="center"
-        android:padding="3dp"
-        android:text="1992"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>
