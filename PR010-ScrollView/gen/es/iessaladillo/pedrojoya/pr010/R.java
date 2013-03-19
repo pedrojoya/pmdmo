@@ -18,10 +18,10 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
-        public static final int azul=0x7f040003;
-        public static final int blanco=0x7f040005;
-        public static final int gris=0x7f040004;
-        public static final int rojo=0x7f040001;
-        public static final int verde=0x7f040002;
+        public static final int atanasio=0x7f040004;
+        public static final int casimiro=0x7f040005;
+        public static final int fulgencio=0x7f040002;
+        public static final int gervasio=0x7f040001;
+        public static final int godolfredo=0x7f040003;
     }
 }

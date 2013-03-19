@@ -2,50 +2,44 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-	<TableLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:stretchColumns="0" >
-	    <TableRow>
-	        <View 
-	            android:layout_height="200dp" 
-	            android:background="#FF0000"/>
-		    <TextView
-		        android:text="@string/rojo"		        
-		        android:padding="2dp" />
-	    </TableRow>
-	    <TableRow>
-	        <View 
-	            android:layout_height="200dp" 
-	            android:background="#00FF00"/>
-		    <TextView
-		        android:text="@string/verde"
-		        android:padding="2dp" />
-	    </TableRow>
-	    <TableRow>
-	        <View 
-	            android:layout_height="200dp" 
-	            android:background="#0000FF"/>
-		    <TextView
-		        android:text="@string/azul"
-		        android:padding="2dp" />
-	    </TableRow>
-	    <TableRow>
-	        <View 
-	            android:layout_height="200dp" 
-	            android:background="#0F0F0F"/>
-		    <TextView
-		        android:text="@string/gris"
-		        android:padding="2dp" />
-	    </TableRow>   
-	    <TableRow>
-	        <View 
-	            android:layout_height="200dp" 
-	            android:background="#F0F0F0"/>
-		    <TextView
-		        android:text="@string/blanco"
-		        android:padding="2dp" />
-	    </TableRow>   
-	</TableLayout>    
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/gervasio"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/fulgencio"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/godolfredo"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/atanasio"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/casimiro"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
 </ScrollView>
