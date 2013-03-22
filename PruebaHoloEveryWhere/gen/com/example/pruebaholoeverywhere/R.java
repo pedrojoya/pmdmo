@@ -20,6 +20,9 @@ public final class R {
         public static final int shrink_fade_out_center=0x7f040008;
         public static final int shrink_fade_out_from_bottom=0x7f040009;
     }
+    public static final class array {
+        public static final int estado=0x7f0e0000;
+    }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -2161,7 +2164,7 @@ containing a value of this type.
         public static final int time_picker_holo=0x7f03003c;
     }
     public static final class menu {
-        public static final int main=0x7f0e0000;
+        public static final int main=0x7f0f0000;
     }
     public static final class raw {
         public static final int roboto_bold=0x7f060000;
