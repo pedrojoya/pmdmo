@@ -5,4 +5,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="arte_del_album">Arte del álbum</string>
     <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="seleccione_un_album_de_la_lista">Seleccione un álbum de la lista</string>
 </resources>

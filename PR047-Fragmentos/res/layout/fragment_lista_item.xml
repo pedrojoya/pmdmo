@@ -4,23 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:background="#F7F2E0"
-    android:padding="2dp"
-    tools:ignore="HardcodedText" >
+    android:padding="2dp" >
     <ImageView
-        android:id="@+id/imgFoto"
+        android:id="@+id/imgFotoItem"
         android:layout_width="?android:attr/listPreferredItemHeight"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dp"
-        android:contentDescription="Arte del álbum"
-        android:src="@drawable/cantecito" />
+        android:contentDescription="@string/arte_del_album" />
     <TextView
-        android:id="@+id/lblNombre"
+        android:id="@+id/lblNombreItem"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/imgFoto"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/imgFotoItem"
+        android:ellipsize="marquee"
         android:gravity="center"
-        android:text="Échate un cantecito"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textIsSelectable="true" />
 </RelativeLayout>

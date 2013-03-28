@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import es.iessaladillo.pedrojoya.pr047.R;
 import es.iessaladillo.pedrojoya.pr047.fragmentos.DetalleFragment;
-import es.iessaladillo.pedrojoya.pr047.fragmentos.ListaFragment;
 import es.iessaladillo.pedrojoya.pr047.interfaces.OnAlbumSelectedListener;
 import es.iessaladillo.pedrojoya.pr047.modelos.Album;
 
@@ -16,20 +15,15 @@ public class MainActivity extends FragmentActivity implements
     public static final String EXTRA_ALBUM = "es.iessaladillo.pr047.ALBUM";
 
     // Variables miembro.
-    private ListaFragment frgLista;
     private DetalleFragment frgDetalle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Hace que la propia actividad sea el listener al que informará el
-        // fragmento frgLista cuando el usuario seleccione un álbum.
-        frgLista = (ListaFragment) this.getSupportFragmentManager()
-                .findFragmentById(R.id.frgLista);
+        // Obtiene la referencia al fragmento de detalle.
         frgDetalle = (DetalleFragment) this.getSupportFragmentManager()
                 .findFragmentById(R.id.frgDetalle);
-        frgLista.setOnAlbumSelectedListener(this);
     }
 
     // Cuando en el fragmento frgLista se selecciona un álbum.

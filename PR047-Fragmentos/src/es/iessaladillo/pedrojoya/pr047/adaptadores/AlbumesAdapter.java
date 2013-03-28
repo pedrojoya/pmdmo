@@ -49,8 +49,10 @@ public class AlbumesAdapter extends ArrayAdapter<Album> {
             fila = inflador.inflate(R.layout.fragment_lista_item, null);
             // Creo un nuevo contenedor de vistas.
             contenedor = new ContenedorVistas();
-            contenedor.imgFoto = (ImageView) fila.findViewById(R.id.imgFoto);
-            contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
+            contenedor.imgFoto = (ImageView) fila
+                    .findViewById(R.id.imgFotoItem);
+            contenedor.lblNombre = (TextView) fila
+                    .findViewById(R.id.lblNombreItem);
             // Guardo el contenedor en la propiedad Tag de la vista-fila.
             fila.setTag(contenedor);
         }

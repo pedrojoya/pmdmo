@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.pr047.fragmentos;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,12 +22,27 @@ public class ListaFragment extends Fragment {
     private AlbumesAdapter adaptador;
     private OnAlbumSelectedListener listener;
 
-    // Retorna la vista que mostará el fragmento.
+    // Retorna la vista que mostrará el fragmento.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflo el layout del fragmento y retorno la vista correspondiente.
         return inflater.inflate(R.layout.fragment_lista, container, false);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            // Establece que la propia actividad sea el listener al que
+            // informará el
+            // fragmento cuando el usuario seleccione un álbum.
+            listener = (OnAlbumSelectedListener) activity;
+        } catch (ClassCastException e) {
+            // La actividad no implementa la interfaz.
+            throw new ClassCastException(activity.toString()
+                    + " debe implementar OnAlbumSeleccionadoListener");
+        }
     }
 
     // Cuando se ha terminado de crear la actividad completa.
@@ -67,9 +83,10 @@ public class ListaFragment extends Fragment {
         });
     }
 
-    public void setOnAlbumSelectedListener(OnAlbumSelectedListener listener) {
-        // Guardo la copia local del listener que será informado cuando se
-        // seleccione un álbum.
-        this.listener = listener;
-    }
+    // public void setOnAlbumSelectedListener(OnAlbumSelectedListener listener)
+    // {
+    // // Guardo la copia local del listener que será informado cuando se
+    // // seleccione un álbum.
+    // this.listener = listener;
+    // }
 }
