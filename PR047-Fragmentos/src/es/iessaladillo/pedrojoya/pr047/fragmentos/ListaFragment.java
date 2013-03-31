@@ -30,13 +30,13 @@ public class ListaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_lista, container, false);
     }
 
+    // Cuando se vincula el fragmento a la actividad.
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
             // Establece que la propia actividad sea el listener al que
-            // informará el
-            // fragmento cuando el usuario seleccione un álbum.
+            // informará el fragmento cuando el usuario seleccione un álbum.
             listener = (OnAlbumSelectedListener) activity;
         } catch (ClassCastException e) {
             // La actividad no implementa la interfaz.
@@ -52,20 +52,7 @@ public class ListaFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Ya puedo crear el adaptador y asignárselo al ListView.
         lstAlbumes = (ListView) this.getView().findViewById(R.id.lstAlbumes);
-        ArrayList<Album> albumes = new ArrayList<Album>();
-        albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
-        albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
-                "1981"));
-        albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
-                "1992"));
-        albumes.add(new Album(R.drawable.carinio,
-                "Está muy bien eso del cariño", "1995"));
-        albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
-        albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
-        albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
-        albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
-        albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
-        adaptador = new AlbumesAdapter(this.getActivity(), albumes);
+        adaptador = new AlbumesAdapter(this.getActivity(), getDatos());
         lstAlbumes.setAdapter(adaptador);
         // Cuando se haga click sobre un elemento del ListView.
         lstAlbumes.setOnItemClickListener(new OnItemClickListener() {
@@ -83,10 +70,22 @@ public class ListaFragment extends Fragment {
         });
     }
 
-    // public void setOnAlbumSelectedListener(OnAlbumSelectedListener listener)
-    // {
-    // // Guardo la copia local del listener que será informado cuando se
-    // // seleccione un álbum.
-    // this.listener = listener;
-    // }
+    // Creo los datos para la lista.
+    private ArrayList<Album> getDatos() {
+        ArrayList<Album> albumes = new ArrayList<Album>();
+        albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
+        albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
+                "1981"));
+        albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
+                "1992"));
+        albumes.add(new Album(R.drawable.carinio,
+                "Está muy bien eso del cariño", "1995"));
+        albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
+        albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
+        albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
+        albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
+        albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
+        return albumes;
+    }
+
 }

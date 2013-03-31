@@ -11,10 +11,6 @@ import android.widget.TextView;
 import es.iessaladillo.pedrojoya.pr047.R;
 import es.iessaladillo.pedrojoya.pr047.modelos.Album;
 
-/**
- * @author Pedro
- * 
- */
 public class DetalleFragment extends Fragment {
 
     private ImageView imgFoto;
@@ -35,9 +31,9 @@ public class DetalleFragment extends Fragment {
     // Muestra el detalle de un album en las vistas correspondientes.
     // Recibe el álbum.
     public void mostrarDetalle(Album album) {
-        // Guardo la copia local del album.
+        // Se guarda la copia local del album.
         this.album = album;
-        // Escribo los datos en las vistas correspondientes.
+        // Se escriben los datos en las vistas correspondientes.
         getVistas();
         lblMensaje.setVisibility(View.GONE);
         rlDatos.setVisibility(View.VISIBLE);
