@@ -11,29 +11,29 @@ import android.support.v4.app.DialogFragment;
 
 public class TimePickerDialogFragment extends DialogFragment {
 
-	private TimePickerDialog dialogo;
-	private TimePickerDialog.OnTimeSetListener listener;
+    private TimePickerDialog dialogo;
+    private TimePickerDialog.OnTimeSetListener listener;
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Calendar calendario = Calendar.getInstance();
-		dialogo = new TimePickerDialog(this.getActivity(), listener,
-				calendario.get(Calendar.HOUR), calendario.get(Calendar.MINUTE),
-				true);
-		return dialogo;
-	}
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Calendar calendario = Calendar.getInstance();
+        dialogo = new TimePickerDialog(this.getActivity(), listener,
+                calendario.get(Calendar.HOUR), calendario.get(Calendar.MINUTE),
+                true);
+        return dialogo;
+    }
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		// Establece la actividad como listener de los eventos del diálogo.
-		try {
-			listener = (OnTimeSetListener) activity;
-		} catch (ClassCastException e) {
-			// La actividad no implementa la interfaz, se lanza excepción.
-			throw new ClassCastException(activity.toString()
-					+ " debe implementar TimePickerDialog.OnTimeSetListener");
-		}
-	}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Establece la actividad como listener de los eventos del diálogo.
+        try {
+            listener = (OnTimeSetListener) activity;
+        } catch (ClassCastException e) {
+            // La actividad no implementa la interfaz, se lanza excepción.
+            throw new ClassCastException(activity.toString()
+                    + " debe implementar TimePickerDialog.OnTimeSetListener");
+        }
+    }
 
 }
