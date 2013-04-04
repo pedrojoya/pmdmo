@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PR047-Fragmentos</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="arte_del_album">Arte del álbum</string>
+    <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="seleccione_un_album_de_la_lista">Seleccione un álbum de la lista</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+    <fragment
+        android:id="@+id/frgLista"
+        android:name="es.iessaladillo.pedrojoya.pr049.fragmentos.ListaFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        tools:layout="@layout/fragment_lista" />
+    <FrameLayout
+        android:id="@+id/flDetalle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60" >
+        <TextView
+            android:id="@+id/lblMensaje"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/seleccione_un_album_de_la_lista"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </FrameLayout>
+</LinearLayout>
