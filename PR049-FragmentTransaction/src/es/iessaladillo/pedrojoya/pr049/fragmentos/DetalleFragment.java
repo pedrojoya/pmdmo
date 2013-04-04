@@ -52,13 +52,13 @@ public class DetalleFragment extends Fragment {
         lblAnio.setText(album.getAnio());
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Se guarda el album en el Bundle.
-        outState.putParcelable("album", album);
-    }
-
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        // Se guarda el album en el Bundle.
+//        outState.putParcelable("album", album);
+//    }
+//
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // Se recupera el album y se muestra (si lo hay).

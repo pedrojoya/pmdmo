@@ -16,13 +16,5 @@
         android:id="@+id/flDetalle"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="60" >
-        <TextView
-            android:id="@+id/lblMensaje"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/seleccione_un_album_de_la_lista"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </FrameLayout>
+        android:layout_weight="60" />
 </LinearLayout>

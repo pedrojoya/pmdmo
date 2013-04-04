@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Obtiene la referencia al FrameLayout.
+        // Obtengo las referencias a los objetos.
         flDetalle = (FrameLayout) this.findViewById(R.id.flDetalle);
         gestor = getSupportFragmentManager();
     }
@@ -58,7 +58,9 @@ public class MainActivity extends FragmentActivity implements
         argumentos.putParcelable(MainActivity.EXTRA_ALBUM, album);
         frgDetalle.setArguments(argumentos);
         // Añado a la transacción el colocar el fragmento en el FrameLayout.
-        transaccion.add(R.id.flDetalle, frgDetalle);
+        transaccion.replace(R.id.flDetalle, frgDetalle);
+        transaccion.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaccion.addToBackStack("prueba");
         // Finalizo la transacción.
         transaccion.commit();
     }

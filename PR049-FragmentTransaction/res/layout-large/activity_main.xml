@@ -10,23 +10,14 @@
         android:name="es.iessaladillo.pedrojoya.pr049.fragmentos.ListaFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="40"
         tools:layout="@layout/fragment_lista" />
 
     <FrameLayout
         android:id="@+id/flDetalle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="70"
-        android:padding="5dp" >
-
-        <TextView
-            android:id="@+id/lblMensaje"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/seleccione_un_album_de_la_lista"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </FrameLayout>
+        android:layout_weight="60"
+        android:padding="5dp" />
 
 </LinearLayout>

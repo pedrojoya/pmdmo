@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:background="#F7F2E0"
+    android:background="@drawable/fondo"
     android:padding="2dp"
     tools:ignore="SelectableText" >
 
