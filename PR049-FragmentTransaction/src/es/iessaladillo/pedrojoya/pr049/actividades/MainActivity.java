@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import es.iessaladillo.pedrojoya.pr049.R;
 import es.iessaladillo.pedrojoya.pr049.fragmentos.DetalleFragment;
-import es.iessaladillo.pedrojoya.pr049.interfaces.OnAlbumSelectedListener;
+import es.iessaladillo.pedrojoya.pr049.fragmentos.ListaFragment.OnAlbumSelectedListener;
 import es.iessaladillo.pedrojoya.pr049.modelos.Album;
 
 public class MainActivity extends FragmentActivity implements
@@ -39,7 +39,8 @@ public class MainActivity extends FragmentActivity implements
         if (flDetalle != null) {
             // Muestro el detalle del álbum.
             mostrarFragmentoDetalle(album);
-        } else {
+        }
+        else {
             // Hay dos actividades. Llamo a la otra actividad pasándole el álbum
             // que debe mostrar (cuya clase debe implementar Parcelable).
             Intent i = new Intent(this, DetalleActivity.class);

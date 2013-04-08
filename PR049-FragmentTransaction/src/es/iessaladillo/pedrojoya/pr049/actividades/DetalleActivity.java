@@ -24,4 +24,5 @@ public class DetalleActivity extends FragmentActivity {
         transaccion.add(R.id.flContenedorDetalle, frgDetalle);
         transaccion.commit();
     }
+
 }

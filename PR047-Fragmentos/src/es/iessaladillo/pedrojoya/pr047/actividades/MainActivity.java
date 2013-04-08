@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import es.iessaladillo.pedrojoya.pr047.R;
 import es.iessaladillo.pedrojoya.pr047.fragmentos.DetalleFragment;
-import es.iessaladillo.pedrojoya.pr047.interfaces.OnAlbumSelectedListener;
+import es.iessaladillo.pedrojoya.pr047.fragmentos.ListaFragment.OnAlbumSelectedListener;
 import es.iessaladillo.pedrojoya.pr047.modelos.Album;
 
 public class MainActivity extends FragmentActivity implements

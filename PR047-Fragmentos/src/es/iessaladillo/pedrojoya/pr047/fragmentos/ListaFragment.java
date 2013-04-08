@@ -13,10 +13,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import es.iessaladillo.pedrojoya.pr047.R;
 import es.iessaladillo.pedrojoya.pr047.adaptadores.AlbumesAdapter;
-import es.iessaladillo.pedrojoya.pr047.interfaces.OnAlbumSelectedListener;
 import es.iessaladillo.pedrojoya.pr047.modelos.Album;
 
 public class ListaFragment extends Fragment {
+
+    // Interfaz para notificación de eventos desde el fragmento.
+    public interface OnAlbumSelectedListener {
+        // Cuando se selecciona un álbum.
+        public void onAlbumSelected(Album album);
+    }
 
     private ListView lstAlbumes;
     private AlbumesAdapter adaptador;
