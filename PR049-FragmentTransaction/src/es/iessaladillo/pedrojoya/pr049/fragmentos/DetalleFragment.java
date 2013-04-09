@@ -34,10 +34,6 @@ public class DetalleFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         // Se obtiene el álbum desde el bundle de parámetros.
         album = this.getArguments().getParcelable(MainActivity.EXTRA_ALBUM);
-        // Si venimos de estado anterior, se recupera el álbum.
-        if (savedInstanceState != null) {
-            album = savedInstanceState.getParcelable(MainActivity.EXTRA_ALBUM);
-        }
         // Si hay álbum, se muestra.
         if (album != null) {
             mostrarDetalle();

@@ -79,7 +79,7 @@ public class ListaFragment extends Fragment {
             lstAlbumes.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             // Mostramos el detalle del elemento seleccionado, que inicialmente
             // será el primero.
-            mostrarDetalle();
+            notificarSeleccion();
         }
         // Cuando se haga click sobre un elemento del ListView.
         lstAlbumes.setOnItemClickListener(new OnItemClickListener() {
@@ -88,13 +88,14 @@ public class ListaFragment extends Fragment {
                     int position, long id) {
                 // Se actualiza el elemento seleccionado en la lista.
                 elemSeleccionado = position;
-                // Se muestra el detalle correspondiente.
-                mostrarDetalle();
+                // Se notifica al listener el cambio de selección.
+                notificarSeleccion();
             }
         });
     }
 
-    private void mostrarDetalle() {
+    // Notifica al listener que se ha seleccionado un elemento en la lista.
+    private void notificarSeleccion() {
         // Establecemos que dicho elemento de la lista ha sido seleccionado.
         lstAlbumes.setItemChecked(elemSeleccionado, true);
         // Llama al método onAlbumSelected del listener que debe ser
