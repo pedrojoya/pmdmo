@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/mnuAgregar"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/agregar"/>
+    <item
+        android:id="@+id/mnuEditar"
+        android:icon="@drawable/ic_menu_edit"
+        android:showAsAction="ifRoom"
+        android:title="@string/editar"/>
+    <item
+        android:id="@+id/mnuEliminar"
+        android:icon="@drawable/ic_menu_delete"
+        android:showAsAction="ifRoom"
+        android:title="@string/eliminar"/>
+    <item
+        android:id="@+id/mnuRefrescar"
+        android:icon="@drawable/ic_menu_refresh"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/refrescar"/>
+    <item
+        android:id="@+id/mnuCargar"
+        android:icon="@drawable/ic_menu_upload"
+        android:showAsAction="never"
+        android:title="@string/cargar"/>
+    <item
+        android:id="@+id/mnuBuscar"
+        android:icon="@drawable/ic_menu_search"
+        android:showAsAction="never"
+        android:title="@string/buscar"/>
+    <item
+        android:id="@+id/mnuCompartir"
+        android:icon="@drawable/ic_menu_share"
+        android:showAsAction="never"
+        android:title="@string/compartir"/>
+
+</menu>
