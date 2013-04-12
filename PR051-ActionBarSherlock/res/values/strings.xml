@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PR051-ActionBarSherlock</string>
+    <string name="actionbar">ActionBarSherlock</string>
+    <string name="alumno">Alumno</string>
+    <string name="refrescar">Refrescar</string>
+    <string name="agregar">Agregar</string>
+    <string name="cargar">Cargar</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="buscar">Buscar</string>
+    <string name="compartir">Compartir</string>
+    <string name="ir_a_la_actividad_superior">Ir a la actividad superior</string>
+
+</resources>
