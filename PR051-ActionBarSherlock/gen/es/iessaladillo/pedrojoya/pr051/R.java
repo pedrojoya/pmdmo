@@ -2288,6 +2288,9 @@ containing a value of this type.
          */
         public static final int AppBaseTheme=0x7f0d00e3;
         /**  Application theme. 
+ Si sólo queremos ActionBarSherlock pondremos  
+    <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+     
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0d00e4;
