@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PR052-ActionBarTabs</string>
+    <string name="app_name">PR053-ActionBarSherlockTabs</string>
     <string name="alumno">Alumno</string>
     <string name="notas_del_alumno">Notas del alumno</string>
     <string name="refrescar">Refrescar</string>
