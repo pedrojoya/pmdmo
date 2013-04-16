@@ -83,9 +83,12 @@ public final class R {
     
  API 11 theme customizations can go here. 
 
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
+         Base application theme for API 14+. This theme completely replaces 
+		AppBaseTheme from BOTH res/values/styles.xml and res/values-v11/styles.xml 
+		on API 14+ devices.
+
+
+
     
  API 14 theme customizations can go here. 
          */
