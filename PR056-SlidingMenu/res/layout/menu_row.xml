@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<es.iessaladillo.pedrojoya.pr056.utils.LinearLayoutCheckeable xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="#F7F2E0"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:background="@drawable/fondo"
+    android:orientation="horizontal"
     android:padding="2dp"
-    tools:ignore="HardcodedText" >
+    tools:ignore="SelectableText" >
     <ImageView
-        android:id="@+id/imgFoto"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignParentLeft="true"
-        android:contentDescription="@string/arte_del_album"
+        android:id="@+id/imgFotoItem"
+        android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_height="match_parent"
         android:layout_marginRight="5dp"
-        android:src="@drawable/cantecito" />
+        android:contentDescription="@string/arte_del_album" />
     <TextView
-        android:id="@+id/lblNombre"
-        android:layout_width="0dp"
-        android:layout_height="18dp"
-        android:layout_toRightOf="@+id/imgFoto"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="2dp"
+        android:id="@+id/lblNombreItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
         android:gravity="center"
-        android:text="Échate un cantecito"
-        android:textSize="14sp" />
-    <TextView
-        android:id="@+id/lblAnio"
-        android:layout_width="0dp"
-        android:layout_height="18dp"
-        android:layout_below="@id/lblNombre"
-        android:layout_toRightOf="@+id/imgFoto"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="center|top"
-        android:text="1992"
-        android:textSize="12sp" />
-</RelativeLayout>
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+</es.iessaladillo.pedrojoya.pr056.utils.LinearLayoutCheckeable>

@@ -13,14 +13,14 @@ import es.iessaladillo.pedrojoya.pr056.R;
 import es.iessaladillo.pedrojoya.pr056.modelos.Album;
 
 // Clase adaptador del grid.
-public class AdaptadorAlbumes extends BaseAdapter {
+public class AlbumesAdapter extends BaseAdapter {
 
     // Variables miembro.
     private Activity contexto; // Actividad que lo usa.
     private ArrayList<Album> albumes; // Array de datos.
     private LayoutInflater inflador; // Inflador de layouts.
 
-    public AdaptadorAlbumes(Activity contexto, ArrayList<Album> albumes) {
+    public AlbumesAdapter(Activity contexto, ArrayList<Album> albumes) {
         // Hago una copia de los parámetros del constructor.
         this.contexto = contexto;
         this.albumes = albumes;
@@ -30,9 +30,8 @@ public class AdaptadorAlbumes extends BaseAdapter {
 
     // Clase interna para contener las vistas.
     private class ContenedorVistas {
-        ImageView imgFoto;
-        TextView lblNombre;
-        TextView lblAnio;
+        ImageView imgFotoItem;
+        TextView lblNombreItem;
     }
 
     // Retorna cuántos elementos de datos maneja el adaptador.
@@ -69,19 +68,20 @@ public class AdaptadorAlbumes extends BaseAdapter {
             // Creo un objeto contenedor con las referencias a las vistas
             // de la fila y lo almaceno en el Tag de la vista-fila.
             contenedor = new ContenedorVistas();
-            contenedor.imgFoto = (ImageView) fila.findViewById(R.id.imgFoto);
-            contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
-            contenedor.lblAnio = (TextView) fila.findViewById(R.id.lblAnio);
+            contenedor.imgFotoItem = (ImageView) fila
+                    .findViewById(R.id.imgFotoItem);
+            contenedor.lblNombreItem = (TextView) fila
+                    .findViewById(R.id.lblNombreItem);
             fila.setTag(contenedor);
-        } else {
+        }
+        else {
             // Obtengo el contenedor desde la propiedad Tag de la vista-fila.
             contenedor = (ContenedorVistas) fila.getTag();
         }
         // Escribo lo valores correspondientes de las vistas de la fila.
         Album album = albumes.get(position);
-        contenedor.imgFoto.setImageResource(album.getFotoResId());
-        contenedor.lblNombre.setText(album.getNombre());
-        contenedor.lblAnio.setText(album.getAnio());
+        contenedor.imgFotoItem.setImageResource(album.getFotoResId());
+        contenedor.lblNombreItem.setText(album.getNombre());
         // Retorno la vista-fila.
         return fila;
     }

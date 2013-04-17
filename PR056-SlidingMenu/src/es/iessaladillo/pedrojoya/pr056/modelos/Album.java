@@ -1,7 +1,10 @@
 package es.iessaladillo.pedrojoya.pr056.modelos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 // Clase modelo de datos de álbum
-public class Album {
+public class Album implements Parcelable {
 
     // Propiedades.
     int fotoResId;
@@ -16,6 +19,14 @@ public class Album {
     }
 
     public Album() {
+    }
+
+    // Constructor para Parcelable.
+    public Album(Parcel parcel) {
+        // Mismo orden que al escribir el parcel.
+        this.fotoResId = parcel.readInt();
+        this.nombre = parcel.readString();
+        this.anio = parcel.readString();
     }
 
     // Getters y Setters.
@@ -43,4 +54,29 @@ public class Album {
         this.anio = anio;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(fotoResId);
+        dest.writeString(nombre);
+        dest.writeString(anio);
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+
+        @Override
+        public Album createFromParcel(final Parcel in) {
+            // Llamo al constructor del álbum pasándole el parcel.
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(final int size) {
+            return new Album[size];
+        }
+    };
 }
