@@ -1,10 +1,6 @@
-package es.iessaladillo.pedrojoya.pr057;
+package es.iessaladillo.pedrojoya.pr058;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.AbsListView.MultiChoiceModeListener;
@@ -15,11 +11,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.ListView.SherlockListView;
+
+public class MainActivity extends SherlockActivity {
 
     private TextView txtAlumno;
     private ActionMode modoIndividual;
-    private ListView lstAsignaturas;
+    private SherlockListView lstAsignaturas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,6 +171,7 @@ public class MainActivity extends Activity {
                     int position, long id) {
                 // Se selecciona el elemento.
                 lstAsignaturas.setItemChecked(position, true);
+
             }
         });
     }
