@@ -32,12 +32,12 @@
         android:layout_marginBottom="10dp"
         android:text="@string/asignaturas"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    <ListView
+    <com.actionbarsherlock.view.SherlockListView
         android:id="@+id/lstAsignaturas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/lblAsignaturas" >
-    </ListView>
+    </com.actionbarsherlock.view.SherlockListView>
 </RelativeLayout>

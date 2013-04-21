@@ -235,7 +235,8 @@ public class SherlockListView extends ListView {
                 }
                 checkStateChanged = true;
                 return false;
-            } else if (choiceMode == CHOICE_MODE_SINGLE) {
+            }
+            else if (choiceMode == CHOICE_MODE_SINGLE) {
                 boolean newValue = !getCheckedItemPositions().get(position);
                 setItemChecked(position, newValue);
                 checkStateChanged = true;
@@ -269,7 +270,8 @@ public class SherlockListView extends ListView {
             if (child instanceof Checkable) {
                 ((Checkable) child).setChecked(getCheckedItemPositions().get(
                         position));
-            } else if (useActivated) {
+            }
+            else if (useActivated) {
                 child.setActivated(getCheckedItemPositions().get(position));
             }
         }
@@ -283,10 +285,12 @@ public class SherlockListView extends ListView {
         if (context instanceof SherlockActivity) {
             actionMode = ((SherlockActivity) getContext())
                     .startActionMode(callback);
-        } else if (context instanceof SherlockFragmentActivity) {
+        }
+        else if (context instanceof SherlockFragmentActivity) {
             actionMode = ((SherlockFragmentActivity) context)
                     .startActionMode(callback);
-        } else {
+        }
+        else {
             throw new IllegalStateException(
                     "This view must be hosted in a SherlockActivity or SherlockFragmentActivity");
         }
@@ -335,7 +339,8 @@ public class SherlockListView extends ListView {
             checkStates.put(position, value);
             if (value) {
                 checkedItemCount++;
-            } else {
+            }
+            else {
                 checkedItemCount--;
             }
             if (actionMode != null) {
@@ -343,7 +348,8 @@ public class SherlockListView extends ListView {
                 choiceModeListener.onItemCheckedStateChanged(actionMode,
                         position, id, value);
             }
-        } else {
+        }
+        else {
             if (value || isItemChecked(position)) {
                 checkStates.clear();
             }
@@ -357,5 +363,26 @@ public class SherlockListView extends ListView {
         }
         requestLayout();
         invalidate();
+    }
+
+    /**
+     * Returns the number of items currently selected. This will only be valid
+     * if the choice mode is not CHOICE_MODE_NONE (default).
+     * 
+     * @return The number of items currently selected.
+     */
+    @Override
+    public int getCheckedItemCount() {
+
+        int checked = 0;
+
+        for (int i = 0; i < getCheckedItemPositions().size(); i++) {
+            if (getCheckedItemPositions().valueAt(i)) {
+                checked++;
+            }
+        }
+
+        return checked;
+
     }
 }

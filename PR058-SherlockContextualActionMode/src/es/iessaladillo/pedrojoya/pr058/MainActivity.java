@@ -3,7 +3,6 @@ package es.iessaladillo.pedrojoya.pr058;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnLongClickListener;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,8 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.ListView.SherlockListView;
+import com.actionbarsherlock.view.SherlockListView;
+import com.actionbarsherlock.view.SherlockListView.MultiChoiceModeListenerCompat;
 
 public class MainActivity extends SherlockActivity {
 
@@ -99,7 +99,8 @@ public class MainActivity extends SherlockActivity {
 
     private void configLstAsignaturas() {
         // Se establece el modo de selección múltiple modal.
-        lstAsignaturas = (ListView) this.findViewById(R.id.lstAsignaturas);
+        lstAsignaturas = (SherlockListView) this
+                .findViewById(R.id.lstAsignaturas);
         lstAsignaturas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         // Se carga la lista con datos.
         ArrayAdapter<CharSequence> adaptador = ArrayAdapter.createFromResource(
@@ -109,8 +110,8 @@ public class MainActivity extends SherlockActivity {
         // Se establece el listener para los eventos del modo de acción
         // contextual.
         lstAsignaturas
-                .setMultiChoiceModeListener(new MultiChoiceModeListener() {
-                    // Al preparse el modo.
+                .setMultiChoiceModeListener(new MultiChoiceModeListenerCompat() {
+                    // Al prepararse el modo.
                     @Override
                     public boolean onPrepareActionMode(ActionMode mode,
                             Menu menu) {
@@ -161,6 +162,10 @@ public class MainActivity extends SherlockActivity {
                     @Override
                     public void onItemCheckedStateChanged(ActionMode mode,
                             int position, long id, boolean checked) {
+                        // Se actualiza el título de la action bar contextual.
+                        mode.setTitle(lstAsignaturas.getCheckedItemCount()
+                                + getString(R.string.de)
+                                + lstAsignaturas.getCount());
 
                     }
                 });

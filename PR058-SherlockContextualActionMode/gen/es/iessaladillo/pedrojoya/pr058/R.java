@@ -2233,6 +2233,7 @@ containing a value of this type.
         public static final int date_picker_increment_year_button=0x7f0c0018;
         public static final int date_time_done=0x7f0c0019;
         public static final int date_time_set=0x7f0c001a;
+        public static final int de=0x7f0c0032;
         public static final int editar=0x7f0c0030;
         public static final int eliminar=0x7f0c0031;
         public static final int hello_world=0x7f0c002d;

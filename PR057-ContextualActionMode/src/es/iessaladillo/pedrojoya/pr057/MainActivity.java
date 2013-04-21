@@ -159,6 +159,10 @@ public class MainActivity extends Activity {
                     @Override
                     public void onItemCheckedStateChanged(ActionMode mode,
                             int position, long id, boolean checked) {
+                        // Se actualiza el título de la action bar contextual.
+                        mode.setTitle(lstAsignaturas.getCheckedItemCount()
+                                + getString(R.string.de)
+                                + lstAsignaturas.getCount());
 
                     }
                 });

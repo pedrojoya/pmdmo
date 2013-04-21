@@ -12,4 +12,5 @@
         <item>Acceso a datos</item>
         <item>Libre configuración</item>
     </string-array>
+        <string name="de">" de "</string>
 </resources>
