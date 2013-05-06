@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PR063-PreferenceActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="title_activity_preferencias">PreferenciasActivity</string>
+    <string name="sincronizacion">Sincronización</string>
+    <string name="sincronizar">Sincronizar</string>
+    <string name="sincronizar_detalle">Se sincronizará el contenido</string>
+    <string name="tipo_conexion">Tipo de conexión</string>
+    <string-array name="tipo_conexion_entries">
+        <item >Por wifi</item>
+        <item >Tarifa de datos</item>
+    </string-array>
+    <string-array name="tipo_conexion_values">
+        <item >wifi</item>
+        <item >datos</item>
+    </string-array>
+    <string name="tipo_conexion_default">wifi</string>
+    <string name="apariencia">Apariencia</string>
+    <string name="letras_grandes">Letras grandes</string>
+    <string name="letras_grandes_detalle">Tamaño de letra grande</string>
+    <string name="otras">Otras</string>
+    <string name="lema">Lema</string>
+    <string name="lema_detalle">Lema de la organización</string>
+    <string name="tono_notificacion">Tono de notificación</string>
+    
+</resources>
