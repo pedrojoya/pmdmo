@@ -34,6 +34,9 @@
                 android:title="@string/lema"
                 android:summary="@string/lema_detalle"
                 android:dialogTitle="@string/lema" />
+            <es.iessaladillo.pedrojoya.pr063.DatePickerPreference
+                android:key="prefFecha"
+            	android:title="@string/fecha_nacimiento" />
             <RingtonePreference 
                 android:key="prefTonoNotificacion" 
                 android:ringtoneType="notification" 

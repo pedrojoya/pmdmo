@@ -26,5 +26,6 @@
     <string name="lema">Lema</string>
     <string name="lema_detalle">Lema de la organización</string>
     <string name="tono_notificacion">Tono de notificación</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
     
 </resources>

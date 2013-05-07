@@ -38,6 +38,7 @@ public final class R {
         public static final int action_settings=0x7f060001;
         public static final int apariencia=0x7f06000a;
         public static final int app_name=0x7f060000;
+        public static final int fecha_nacimiento=0x7f060011;
         public static final int hello_world=0x7f060002;
         public static final int lema=0x7f06000e;
         public static final int lema_detalle=0x7f06000f;

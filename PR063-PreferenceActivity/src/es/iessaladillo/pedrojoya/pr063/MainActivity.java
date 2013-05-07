@@ -46,6 +46,9 @@ public class MainActivity extends Activity {
             sb.append(getString(R.string.tono_notificacion)).append(": ")
                     .append(preferencias.getString("prefTonoNotificacion", ""))
                     .append("\n");
+            sb.append(getString(R.string.fecha_nacimiento)).append(": ")
+                    .append(preferencias.getString("prefFecha", ""))
+                    .append("\n");
             lblPreferencias.setText(sb.toString());
         }
         super.onResume();
