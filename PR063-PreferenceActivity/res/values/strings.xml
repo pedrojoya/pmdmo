@@ -27,5 +27,16 @@
     <string name="lema_detalle">Lema de la organización</string>
     <string name="tono_notificacion">Tono de notificación</string>
     <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="maximo">Número de elementos</string>
+    <string name="maximo_detalle">Nº máximo de elementos en la lista</string>
+    <string name="velocidad">Velocidad</string>
+    <string name="velocidad_detalle">Velocidad de movimiento de los elementos</string>
+    <string name="red">En red</string>
+    <string name="red_detalle_on">Jugar en red</string>
+    <string name="red_detalle_off">No jugar en red</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="fondo">Fondo</string>
+    <string name="fondo_detalle">Color de fondo de la actividad</string>
     
 </resources>
