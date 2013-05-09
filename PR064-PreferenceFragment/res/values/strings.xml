@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PR064-PreferenceFragment</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="title_activity_preferencias">Preferencias</string>
+    <string name="sincronizacion">Sincronización</string>
+    <string name="sincronizar">Sincronizar</string>
+    <string name="sincronizar_detalle">Se sincronizará el contenido</string>
+    <string name="tipo_conexion">Tipo de conexión</string>
+    <string-array name="tipo_conexion_entries">
+        <item>Por wifi</item>
+        <item>Tarifa de datos</item>
+    </string-array>
+    <string-array name="tipo_conexion_values">
+        <item>wifi</item>
+        <item>datos</item>
+    </string-array>
+    <string name="tipo_conexion_default">wifi</string>
+    <string name="apariencia">Apariencia</string>
+    <string name="letras_grandes">Letras grandes</string>
+    <string name="letras_grandes_detalle">Tamaño de letra grande</string>
+    <string name="otras">Otras</string>
+    <string name="lema">Lema</string>
+    <string name="lema_detalle">Lema de la organización</string>
+    <string name="tono_notificacion">Tono de notificación</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="maximo">Número de elementos</string>
+    <string name="maximo_detalle">Nº máximo de elementos en la lista</string>
+    <string name="velocidad">Velocidad</string>
+    <string name="velocidad_detalle">Velocidad de movimiento de los elementos</string>
+    <string name="red">En red</string>
+    <string name="red_detalle_on">Jugar en red</string>
+    <string name="red_detalle_off">No jugar en red</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="fondo">Fondo</string>
+    <string name="fondo_detalle">Color de fondo de la actividad</string>
+</resources>
