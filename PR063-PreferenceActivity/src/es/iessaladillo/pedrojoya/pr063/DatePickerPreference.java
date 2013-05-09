@@ -5,9 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -35,6 +38,7 @@ public class DatePickerPreference extends DialogPreference implements
         super.onPrepareDialogBuilder(builder);
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected View onCreateDialogView() {
         this.datePicker = new DatePicker(getContext());
@@ -42,6 +46,9 @@ public class DatePickerPreference extends DialogPreference implements
         datePicker.init(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH), this);
+        if (VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+            datePicker.setCalendarViewShown(false);
+        }
         setToday();
         return datePicker;
     }

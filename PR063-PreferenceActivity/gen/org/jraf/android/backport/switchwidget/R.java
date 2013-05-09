@@ -11,17 +11,17 @@ public final class R {
 		public static final int switchWidget = 0x7f0b000a;
 	}
 	public static final class style {
-		public static final int Widget_Holo_CompoundButton_Switch = 0x7f080000;
-		public static final int Widget_Holo_Light_CompoundButton_Switch = 0x7f080001;
-		public static final int Preference_SwitchPreference = 0x7f080002;
+		public static final int Widget_Holo_CompoundButton_Switch = 0x7f070000;
+		public static final int Widget_Holo_Light_CompoundButton_Switch = 0x7f070001;
+		public static final int Preference_SwitchPreference = 0x7f070002;
 	}
 	public static final class string {
-		public static final int switch_on = 0x7f06000d;
-		public static final int switch_off = 0x7f06000e;
+		public static final int switch_off = 0x7f060001;
+		public static final int switch_on = 0x7f060000;
 	}
 	public static final class layout {
-		public static final int preference_widget_switch = 0x7f030006;
 		public static final int preference = 0x7f030005;
+		public static final int preference_widget_switch = 0x7f030006;
 	}
 	public static final class styleable {
 		public static final int Theme_switchStyle = 0;
@@ -76,22 +76,22 @@ public final class R {
 		public static final int switchMinWidth = 0x7f01000b;
 		public static final int track = 0x7f010006;
 		public static final int switchTextAppearance = 0x7f01000a;
-		public static final int summaryOff = 0x7f010001;
 		public static final int switchStyle = 0x7f01000d;
+		public static final int summaryOff = 0x7f010001;
 		public static final int switchPreferenceStyle = 0x7f01000e;
 		public static final int switchPadding = 0x7f01000c;
 		public static final int switchTextOn = 0x7f010002;
 		public static final int switchTextOff = 0x7f010003;
 		public static final int textOff = 0x7f010008;
 		public static final int thumbTextPadding = 0x7f010009;
-		public static final int thumb = 0x7f010005;
 		public static final int disableDependentsState = 0x7f010004;
+		public static final int thumb = 0x7f010005;
 		public static final int summaryOn = 0x7f010000;
 	}
 	public static final class dimen {
-		public static final int preference_icon_minWidth = 0x7f070002;
-		public static final int preference_item_padding_side = 0x7f070000;
-		public static final int preference_widget_width = 0x7f070003;
-		public static final int preference_item_padding_inner = 0x7f070001;
+		public static final int preference_icon_minWidth = 0x7f050002;
+		public static final int preference_item_padding_side = 0x7f050000;
+		public static final int preference_item_padding_inner = 0x7f050001;
+		public static final int preference_widget_width = 0x7f050003;
 	}
 }
