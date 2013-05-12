@@ -25,6 +25,11 @@
             android:key="prefLetrasGrandes"
             android:summary="@string/letras_grandes_detalle"
             android:title="@string/letras_grandes" />
+        <Preference android:title="@string/web_oficial" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.iessaladillo.es" />
+        </Preference>
         <PreferenceScreen
             android:key="prefOtras"
             android:persistent="false"

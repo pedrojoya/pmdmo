@@ -347,6 +347,7 @@ containing a value of this type.
         public static final int tono_notificacion=0x7f060021;
         public static final int velocidad=0x7f060025;
         public static final int velocidad_detalle=0x7f060026;
+        public static final int web_oficial=0x7f06002e;
     }
     public static final class style {
         /** 

@@ -11,16 +11,16 @@ public final class R {
 		public static final int increment = 0x7f0b0006;
 		public static final int num_picker = 0x7f0b0005;
 		public static final int pref_num_picker = 0x7f0b0009;
-		public static final int numpicker_input = 0x7f0b0007;
 		public static final int decrement = 0x7f0b0008;
+		public static final int numpicker_input = 0x7f0b0007;
 	}
 	public static final class style {
 		public static final int NumberPickerInputText = 0x7f070003;
 		public static final int NumberPickerUpButton = 0x7f070004;
 		public static final int NumberPickerDownButton = 0x7f070005;
 		public static final int NumberPickerUpButtonLight = 0x7f070006;
-		public static final int NumberPickerInputTextLight = 0x7f070008;
 		public static final int NumberPickerDownButtonLight = 0x7f070007;
+		public static final int NumberPickerInputTextLight = 0x7f070008;
 	}
 	public static final class string {
 		public static final int dialog_set_number = 0x7f060002;
@@ -29,15 +29,15 @@ public final class R {
 	}
 	public static final class layout {
 		public static final int pref_number_picker = 0x7f030004;
-		public static final int number_picker = 0x7f030003;
 		public static final int dialog_number_picker = 0x7f030002;
+		public static final int number_picker = 0x7f030003;
 	}
 	public static final class styleable {
+		public static final int numberpicker_defaultValue = 2;
 		public static final int numberpicker_startRange = 0;
 		public static final int numberpicker_wrap = 4;
-		public static final int numberpicker_maxValue = 3;
 		public static final int[] numberpicker = { 0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013 };
-		public static final int numberpicker_defaultValue = 2;
+		public static final int numberpicker_maxValue = 3;
 		public static final int numberpicker_endRange = 1;
 	}
 	public static final class drawable {
@@ -68,8 +68,8 @@ public final class R {
 		public static final int numberpicker_input_normal = 0x7f020015;
 		public static final int numberpicker_down_btn = 0x7f020002;
 		public static final int numberpicker_down_focused_holo_light = 0x7f02000c;
-		public static final int numberpicker_up_btn_holo_light = 0x7f02001a;
 		public static final int numberpicker_down_btn_holo_dark = 0x7f020003;
+		public static final int numberpicker_up_btn_holo_light = 0x7f02001a;
 		public static final int numberpicker_down_disabled_focused_holo_light = 0x7f020008;
 		public static final int numberpicker_up_selected = 0x7f020027;
 		public static final int numberpicker_down_disabled_focused = 0x7f020006;
