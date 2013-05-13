@@ -6,7 +6,6 @@ import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,7 +100,8 @@ public class MainActivity extends SherlockActivity {
         // Se establece el modo de selección múltiple modal.
         lstAsignaturas = (SherlockListView) this
                 .findViewById(R.id.lstAsignaturas);
-        lstAsignaturas.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        lstAsignaturas
+                .setChoiceMode(SherlockListView.CHOICE_MODE_MULTIPLE_MODAL);
         // Se carga la lista con datos.
         ArrayAdapter<CharSequence> adaptador = ArrayAdapter.createFromResource(
                 this, R.array.asignaturas,

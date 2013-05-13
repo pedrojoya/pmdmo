@@ -46,22 +46,6 @@ public class MainActivity extends Activity {
             sb.append(getString(R.string.tono_notificacion)).append(": ")
                     .append(preferencias.getString("prefTonoNotificacion", ""))
                     .append("\n");
-            sb.append(getString(R.string.fecha_nacimiento)).append(": ")
-                    .append(preferencias.getString("prefFecha", ""))
-                    .append("\n");
-            sb.append(getString(R.string.maximo)).append(": ")
-                    .append(preferencias.getInt("prefMaximo", 5)).append("\n");
-            sb.append(getString(R.string.velocidad)).append(": ")
-                    .append(preferencias.getInt("prefVelocidad", 3))
-                    .append("\n");
-            sb.append(getString(R.string.red)).append(": ")
-                    .append(preferencias.getBoolean("prefRed", false))
-                    .append("\n");
-            sb.append(getString(R.string.fondo))
-                    .append(": ")
-                    .append(String.format("#%06X",
-                            0xFFFFFF & preferencias.getInt("prefFondo", 255)))
-                    .append("\n");
             lblPreferencias.setText(sb.toString());
         }
         super.onResume();

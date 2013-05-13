@@ -11,8 +11,6 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="switchStyle">@style/Widget.Holo.CompoundButton.Switch</item>
-        <item name="switchPreferenceStyle">@style/Preference.SwitchPreference</item>
     </style>
 
     <!-- Application theme. -->

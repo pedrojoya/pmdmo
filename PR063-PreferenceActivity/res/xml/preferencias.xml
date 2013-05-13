@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory
-        android:key="prefSincronizacion"
         android:title="@string/sincronizacion" >
         <CheckBoxPreference
             android:defaultValue="true"
@@ -18,7 +17,6 @@
             android:title="@string/tipo_conexion" />
     </PreferenceCategory>
     <PreferenceCategory
-        android:key="prefApariencia"
         android:title="@string/apariencia" >
         <CheckBoxPreference
             android:defaultValue="false"
@@ -31,17 +29,12 @@
                 android:data="http://www.iessaladillo.es" />
         </Preference>
         <PreferenceScreen
-            android:key="prefOtras"
-            android:persistent="false"
             android:title="@string/otras" >
             <EditTextPreference
                 android:dialogTitle="@string/lema"
                 android:key="prefLema"
                 android:summary="@string/lema_detalle"
                 android:title="@string/lema" />
-            <es.iessaladillo.pedrojoya.pr063.DatePickerPreference
-                android:key="prefFecha"
-                android:title="@string/fecha_nacimiento" />
             <RingtonePreference
                 android:defaultValue="content://settings/system/notification_sound"
                 android:key="prefTonoNotificacion"
@@ -49,38 +42,6 @@
                 android:showDefault="true"
                 android:showSilent="true"
                 android:title="@string/tono_notificacion" />
-            <com.michaelnovakjr.numberpicker.NumberPickerPreference
-                xmlns:picker="http://schemas.android.com/apk/res/es.iessaladillo.pedrojoya.pr063"
-                android:key="prefMaximo"
-                android:summary="@string/maximo_detalle"
-                android:title="@string/maximo"
-                picker:defaultValue="5"
-                picker:endRange="10"
-                picker:startRange="1" />
-            <es.iessaladillo.pedrojoya.pr063.SeekBarPreference
-                xmlns:robobunny="http://robobunny.com"
-                android:defaultValue="3"
-                android:key="prefVelocidad"
-                android:max="5"
-                android:summary="@string/velocidad_detalle"
-                android:title="@string/velocidad"
-                robobunny:min="1"
-                robobunny:unitsLeft=""
-                robobunny:unitsRight="" />
-            <org.jraf.android.backport.switchwidget.SwitchPreference
-                xmlns:switchpref="http://schemas.android.com/apk/res-auto"
-                android:key="prefRed"
-                android:title="@string/red"
-                switchpref:summaryOff="@string/red_detalle_off"
-                switchpref:summaryOn="@string/red_detalle_on"
-                switchpref:switchTextOff="@string/no"
-                switchpref:switchTextOn="@string/si" />
-            <net.margaritov.preference.colorpicker.ColorPickerPreference
-                alphaSlider="true"
-                android:defaultValue="@color/azul"
-                android:key="prefFondo"
-                android:summary="@string/fondo_detalle"
-                android:title="@string/fondo" />
         </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>

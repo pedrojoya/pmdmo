@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr064.actividades;
 
+import java.util.Set;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,27 +43,24 @@ public class MainActivity extends Activity {
                     .append(": ")
                     .append(preferencias.getBoolean("prefLetrasGrandes", false))
                     .append("\n");
+            sb.append(getString(R.string.turnos)).append(":\n");
+            Set<String> turnosSeleccionados = preferencias.getStringSet(
+                    "prefTurnos", null);
+            if (turnosSeleccionados != null) {
+                String[] turnos = new String[turnosSeleccionados.size()];
+                turnosSeleccionados.toArray(turnos);
+                for (int i = 0; i < turnos.length; i++) {
+                    sb.append(turnos[i]).append("\n");
+                }
+            }
             sb.append(getString(R.string.lema)).append(": ")
                     .append(preferencias.getString("prefLema", ""))
                     .append("\n");
             sb.append(getString(R.string.tono_notificacion)).append(": ")
                     .append(preferencias.getString("prefTonoNotificacion", ""))
                     .append("\n");
-            sb.append(getString(R.string.fecha_nacimiento)).append(": ")
-                    .append(preferencias.getString("prefFecha", ""))
-                    .append("\n");
-            sb.append(getString(R.string.maximo)).append(": ")
-                    .append(preferencias.getInt("prefMaximo", 5)).append("\n");
-            sb.append(getString(R.string.velocidad)).append(": ")
-                    .append(preferencias.getInt("prefVelocidad", 3))
-                    .append("\n");
             sb.append(getString(R.string.red)).append(": ")
                     .append(preferencias.getBoolean("prefRed", false))
-                    .append("\n");
-            sb.append(getString(R.string.fondo))
-                    .append(": ")
-                    .append(String.format("#%06X",
-                            0xFFFFFF & preferencias.getInt("prefFondo", 255)))
                     .append("\n");
             lblPreferencias.setText(sb.toString());
         }

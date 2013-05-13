@@ -9,185 +9,16 @@ package es.iessaladillo.pedrojoya.pr063;
 
 public final class R {
     public static final class array {
-        public static final int tipo_conexion_entries=0x7f0a0000;
-        public static final int tipo_conexion_values=0x7f0a0001;
+        public static final int tipo_conexion_entries=0x7f080000;
+        public static final int tipo_conexion_values=0x7f080001;
+        public static final int turnos_default=0x7f080004;
+        public static final int turnos_entries=0x7f080002;
+        public static final int turnos_values=0x7f080003;
     }
     public static final class attr {
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int defaultValue=0x7f010011;
-        /** 
-             The state (true for on, or false for off) that causes dependents to be disabled. By default,
-             dependents will be disabled when this is unchecked, so the value of this preference is false.
-        
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int disableDependentsState=0x7f010004;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int endRange=0x7f010010;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int maxValue=0x7f010012;
-        /**  NumberPicker down button style. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int numberPickerDownButtonStyle=0x7f010016;
-        /**  NumberPicker input text style. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int numberPickerInputTextStyle=0x7f010017;
-        /**  NumberPicker style. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int numberPickerStyle=0x7f010014;
-        /**  NumberPicker up button style. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int numberPickerUpButtonStyle=0x7f010015;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int startRange=0x7f01000f;
-        /** 
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is unchecked. If separate on/off summaries are not
-             needed, the summary attribute can be used instead.
-        
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int summaryOff=0x7f010001;
-        /** 
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is checked. If separate on/off summaries are not
-             needed, the summary attribute can be used instead.
-        
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int summaryOn=0x7f010000;
-        /**  Minimum width for the switch component 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int switchMinWidth=0x7f01000b;
-        /**  Minimum space between the switch and caption text 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int switchPadding=0x7f01000c;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchPreferenceStyle=0x7f01000e;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchStyle=0x7f01000d;
-        /**  TextAppearance style for text displayed on the switch thumb. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchTextAppearance=0x7f01000a;
-        /** 
-             The text used on the switch itself when in the "off" state.
-             This should be a very SHORT string, as it appears in a small space.
-        
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchTextOff=0x7f010003;
-        /** 
-             The text used on the switch itself when in the "on" state.
-             This should be a very SHORT string, as it appears in a small space.
-        
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int switchTextOn=0x7f010002;
-        /**  Text to use when the switch is in the unchecked/"off" state. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int textOff=0x7f010008;
-        /**  Text to use when the switch is in the checked/"on" state. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int textOn=0x7f010007;
-        /**  Drawable to use as the "thumb" that switches back and forth. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int thumb=0x7f010005;
-        /**  Amount of padding on either side of text within the switch thumb. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int thumbTextPadding=0x7f010009;
-        /**  Drawable to use as the "track" that the switch thumb slides within. 
-         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int track=0x7f010006;
-        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int wrap=0x7f010013;
     }
     public static final class color {
-        public static final int azul=0x7f090000;
+        public static final int azul=0x7f050000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -196,158 +27,52 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050004;
-        public static final int activity_vertical_margin=0x7f050005;
-        public static final int preference_icon_minWidth=0x7f050002;
-        public static final int preference_item_padding_inner=0x7f050001;
-        public static final int preference_item_padding_side=0x7f050000;
-        public static final int preference_widget_width=0x7f050003;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int icon=0x7f020001;
-        public static final int numberpicker_down_btn=0x7f020002;
-        public static final int numberpicker_down_btn_holo_dark=0x7f020003;
-        public static final int numberpicker_down_btn_holo_light=0x7f020004;
-        public static final int numberpicker_down_disabled=0x7f020005;
-        public static final int numberpicker_down_disabled_focused=0x7f020006;
-        public static final int numberpicker_down_disabled_focused_holo_dark=0x7f020007;
-        public static final int numberpicker_down_disabled_focused_holo_light=0x7f020008;
-        public static final int numberpicker_down_disabled_holo_dark=0x7f020009;
-        public static final int numberpicker_down_disabled_holo_light=0x7f02000a;
-        public static final int numberpicker_down_focused_holo_dark=0x7f02000b;
-        public static final int numberpicker_down_focused_holo_light=0x7f02000c;
-        public static final int numberpicker_down_normal=0x7f02000d;
-        public static final int numberpicker_down_normal_holo_dark=0x7f02000e;
-        public static final int numberpicker_down_normal_holo_light=0x7f02000f;
-        public static final int numberpicker_down_pressed=0x7f020010;
-        public static final int numberpicker_down_pressed_holo=0x7f020011;
-        public static final int numberpicker_down_selected=0x7f020012;
-        public static final int numberpicker_input=0x7f020013;
-        public static final int numberpicker_input_disabled=0x7f020014;
-        public static final int numberpicker_input_normal=0x7f020015;
-        public static final int numberpicker_input_pressed=0x7f020016;
-        public static final int numberpicker_input_selected=0x7f020017;
-        public static final int numberpicker_up_btn=0x7f020018;
-        public static final int numberpicker_up_btn_holo_dark=0x7f020019;
-        public static final int numberpicker_up_btn_holo_light=0x7f02001a;
-        public static final int numberpicker_up_disabled=0x7f02001b;
-        public static final int numberpicker_up_disabled_focused=0x7f02001c;
-        public static final int numberpicker_up_disabled_focused_holo_dark=0x7f02001d;
-        public static final int numberpicker_up_disabled_focused_holo_light=0x7f02001e;
-        public static final int numberpicker_up_disabled_holo_dark=0x7f02001f;
-        public static final int numberpicker_up_focused_holo_dark=0x7f020020;
-        public static final int numberpicker_up_focused_holo_light=0x7f020021;
-        public static final int numberpicker_up_normal=0x7f020022;
-        public static final int numberpicker_up_normal_holo_dark=0x7f020023;
-        public static final int numberpicker_up_normal_holo_light=0x7f020024;
-        public static final int numberpicker_up_pressed=0x7f020025;
-        public static final int numberpicker_up_pressed_holo=0x7f020026;
-        public static final int numberpicker_up_selected=0x7f020027;
-        public static final int switch_bg_disabled_holo_dark=0x7f020028;
-        public static final int switch_bg_disabled_holo_light=0x7f020029;
-        public static final int switch_bg_focused_holo_dark=0x7f02002a;
-        public static final int switch_bg_focused_holo_light=0x7f02002b;
-        public static final int switch_bg_holo_dark=0x7f02002c;
-        public static final int switch_bg_holo_light=0x7f02002d;
-        public static final int switch_inner_holo_dark=0x7f02002e;
-        public static final int switch_inner_holo_light=0x7f02002f;
-        public static final int switch_thumb_activated_holo_dark=0x7f020030;
-        public static final int switch_thumb_activated_holo_light=0x7f020031;
-        public static final int switch_thumb_disabled_holo_dark=0x7f020032;
-        public static final int switch_thumb_disabled_holo_light=0x7f020033;
-        public static final int switch_thumb_holo_dark=0x7f020034;
-        public static final int switch_thumb_holo_light=0x7f020035;
-        public static final int switch_thumb_pressed_holo_dark=0x7f020036;
-        public static final int switch_thumb_pressed_holo_light=0x7f020037;
-        public static final int switch_track_holo_dark=0x7f020038;
-        public static final int switch_track_holo_light=0x7f020039;
     }
     public static final class id {
-        public static final int btnPreferencias=0x7f0b0000;
-        public static final int color_picker_view=0x7f0b0002;
-        public static final int decrement=0x7f0b0008;
-        public static final int increment=0x7f0b0006;
-        public static final int lblPreferencias=0x7f0b0001;
-        public static final int new_color_panel=0x7f0b0004;
-        public static final int num_picker=0x7f0b0005;
-        public static final int numpicker_input=0x7f0b0007;
-        public static final int old_color_panel=0x7f0b0003;
-        public static final int pref_num_picker=0x7f0b0009;
-        public static final int seekBarPrefBarContainer=0x7f0b000e;
-        public static final int seekBarPrefUnitsLeft=0x7f0b000d;
-        public static final int seekBarPrefUnitsRight=0x7f0b000b;
-        public static final int seekBarPrefValue=0x7f0b000c;
-        public static final int switchWidget=0x7f0b000a;
-    }
-    public static final class integer {
-        public static final int COLOR_BLACK=0x7f080000;
-        public static final int COLOR_GREEN=0x7f080001;
+        public static final int btnPreferencias=0x7f0a0000;
+        public static final int lblPreferencias=0x7f0a0001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int dialog_color_picker=0x7f030001;
-        public static final int dialog_number_picker=0x7f030002;
-        public static final int number_picker=0x7f030003;
-        public static final int pref_number_picker=0x7f030004;
-        public static final int preference=0x7f030005;
-        public static final int preference_widget_switch=0x7f030006;
-        public static final int seek_bar_preference=0x7f030007;
     }
     public static final class string {
-        public static final int action_settings=0x7f060012;
-        public static final int apariencia=0x7f06001b;
-        public static final int app_name=0x7f060006;
-        public static final int color1_summary=0x7f06000b;
-        public static final int color1_title=0x7f06000a;
-        public static final int color2_summary=0x7f06000d;
-        public static final int color2_title=0x7f06000c;
-        public static final int color3_summary=0x7f06000f;
-        public static final int color3_title=0x7f06000e;
-        public static final int color4_summary=0x7f060011;
-        public static final int color4_title=0x7f060010;
-        public static final int dialog_cancel=0x7f060003;
-        /**  Color Picker 
-         */
-        public static final int dialog_color_picker=0x7f060007;
-        public static final int dialog_picker_title=0x7f060004;
-        public static final int dialog_set_number=0x7f060002;
-        public static final int fecha_nacimiento=0x7f060022;
-        public static final int fondo=0x7f06002c;
-        public static final int fondo_detalle=0x7f06002d;
-        /**  App 
-         */
-        public static final int hello=0x7f060005;
-        public static final int hello_world=0x7f060013;
-        public static final int lema=0x7f06001f;
-        public static final int lema_detalle=0x7f060020;
-        public static final int letras_grandes=0x7f06001c;
-        public static final int letras_grandes_detalle=0x7f06001d;
-        public static final int maximo=0x7f060023;
-        public static final int maximo_detalle=0x7f060024;
-        public static final int no=0x7f06002b;
-        public static final int otras=0x7f06001e;
-        /**  Preferences 
-         */
-        public static final int pref_category=0x7f060009;
-        public static final int preferencias=0x7f060014;
-        public static final int press_color_to_apply=0x7f060008;
-        public static final int red=0x7f060027;
-        public static final int red_detalle_off=0x7f060029;
-        public static final int red_detalle_on=0x7f060028;
-        public static final int si=0x7f06002a;
-        public static final int sincronizacion=0x7f060016;
-        public static final int sincronizar=0x7f060017;
-        public static final int sincronizar_detalle=0x7f060018;
-        public static final int switch_off=0x7f060001;
-        public static final int switch_on=0x7f060000;
-        public static final int tipo_conexion=0x7f060019;
-        public static final int tipo_conexion_default=0x7f06001a;
-        public static final int title_activity_preferencias=0x7f060015;
-        public static final int tono_notificacion=0x7f060021;
-        public static final int velocidad=0x7f060025;
-        public static final int velocidad_detalle=0x7f060026;
-        public static final int web_oficial=0x7f06002e;
+        public static final int action_settings=0x7f070001;
+        public static final int apariencia=0x7f07000a;
+        public static final int app_name=0x7f070000;
+        public static final int fecha_nacimiento=0x7f070011;
+        public static final int fondo=0x7f07001b;
+        public static final int fondo_detalle=0x7f07001c;
+        public static final int hello_world=0x7f070002;
+        public static final int lema=0x7f07000e;
+        public static final int lema_detalle=0x7f07000f;
+        public static final int letras_grandes=0x7f07000b;
+        public static final int letras_grandes_detalle=0x7f07000c;
+        public static final int maximo=0x7f070012;
+        public static final int maximo_detalle=0x7f070013;
+        public static final int no=0x7f07001a;
+        public static final int otras=0x7f07000d;
+        public static final int preferencias=0x7f070003;
+        public static final int red=0x7f070016;
+        public static final int red_detalle_off=0x7f070018;
+        public static final int red_detalle_on=0x7f070017;
+        public static final int si=0x7f070019;
+        public static final int sincronizacion=0x7f070005;
+        public static final int sincronizar=0x7f070006;
+        public static final int sincronizar_detalle=0x7f070007;
+        public static final int tipo_conexion=0x7f070008;
+        public static final int tipo_conexion_default=0x7f070009;
+        public static final int title_activity_preferencias=0x7f070004;
+        public static final int tono_notificacion=0x7f070010;
+        public static final int turnos=0x7f07001e;
+        public static final int turnos_detalle=0x7f07001f;
+        public static final int velocidad=0x7f070014;
+        public static final int velocidad_detalle=0x7f070015;
+        public static final int web_oficial=0x7f07001d;
     }
     public static final class style {
         /** 
@@ -355,6 +80,12 @@ containing a value of this type.
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
     
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        
 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
@@ -367,486 +98,13 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070009;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f07000a;
-        public static final int NumberPickerDownButton=0x7f070005;
-        public static final int NumberPickerDownButtonLight=0x7f070007;
-        public static final int NumberPickerInputText=0x7f070003;
-        public static final int NumberPickerInputTextLight=0x7f070008;
-        public static final int NumberPickerUpButton=0x7f070004;
-        public static final int NumberPickerUpButtonLight=0x7f070006;
-        public static final int Preference_SwitchPreference=0x7f070002;
-        public static final int Widget_Holo_CompoundButton_Switch=0x7f070000;
-        public static final int Widget_Holo_Light_CompoundButton_Switch=0x7f070001;
+        public static final int AppTheme=0x7f090001;
     }
     public static final class xml {
         public static final int preferencias=0x7f040000;
-        public static final int settings=0x7f040001;
     }
-    public static final class styleable {
-        /** Attributes that can be used with a Android.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Android_android_textColor es.iessaladillo.pedrojoya.pr063:android_textColor}</code></td><td> Text color.</td></tr>
-           <tr><td><code>{@link #Android_android_textColorHighlight es.iessaladillo.pedrojoya.pr063:android_textColorHighlight}</code></td><td> Color of the text selection highlight.</td></tr>
-           <tr><td><code>{@link #Android_android_textColorHint es.iessaladillo.pedrojoya.pr063:android_textColorHint}</code></td><td> Color of the hint text.</td></tr>
-           <tr><td><code>{@link #Android_android_textColorLink es.iessaladillo.pedrojoya.pr063:android_textColorLink}</code></td><td> Color of the links.</td></tr>
-           <tr><td><code>{@link #Android_android_textSize es.iessaladillo.pedrojoya.pr063:android_textSize}</code></td><td> Size of the text.</td></tr>
-           <tr><td><code>{@link #Android_android_textStyle es.iessaladillo.pedrojoya.pr063:android_textStyle}</code></td><td> Style (bold, italic, bolditalic) for the text.</td></tr>
-           <tr><td><code>{@link #Android_android_typeface es.iessaladillo.pedrojoya.pr063:android_typeface}</code></td><td> Typeface (normal, sans, serif, monospace) for the text.</td></tr>
-           </table>
-           @see #Android_android_textColor
-           @see #Android_android_textColorHighlight
-           @see #Android_android_textColorHint
-           @see #Android_android_textColorLink
-           @see #Android_android_textSize
-           @see #Android_android_textStyle
-           @see #Android_android_typeface
-         */
-        public static final int[] Android = {
-            0x01010095, 0x01010096, 0x01010097, 0x01010098,
-            0x01010099, 0x0101009a, 0x0101009b
-        };
-        /**
-          <p>
-          @attr description
-           Text color. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textColor}.
-          @attr name android:android_textColor
-        */
-        public static final int Android_android_textColor = 3;
-        /**
-          <p>
-          @attr description
-           Color of the text selection highlight. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textColorHighlight}.
-          @attr name android:android_textColorHighlight
-        */
-        public static final int Android_android_textColorHighlight = 4;
-        /**
-          <p>
-          @attr description
-           Color of the hint text. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textColorHint}.
-          @attr name android:android_textColorHint
-        */
-        public static final int Android_android_textColorHint = 5;
-        /**
-          <p>
-          @attr description
-           Color of the links. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textColorLink}.
-          @attr name android:android_textColorLink
-        */
-        public static final int Android_android_textColorLink = 6;
-        /**
-          <p>
-          @attr description
-           Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textSize}.
-          @attr name android:android_textSize
-        */
-        public static final int Android_android_textSize = 0;
-        /**
-          <p>
-          @attr description
-           Style (bold, italic, bolditalic) for the text. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_textStyle}.
-          @attr name android:android_textStyle
-        */
-        public static final int Android_android_textStyle = 2;
-        /**
-          <p>
-          @attr description
-           Typeface (normal, sans, serif, monospace) for the text. 
-          <p>This corresponds to the global attribute          resource symbol {@link es.iessaladillo.pedrojoya.pr063.R.attr#android_typeface}.
-          @attr name android:android_typeface
-        */
-        public static final int Android_android_typeface = 1;
-        /** Attributes that can be used with a Switch.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Switch_switchMinWidth es.iessaladillo.pedrojoya.pr063:switchMinWidth}</code></td><td> Minimum width for the switch component </td></tr>
-           <tr><td><code>{@link #Switch_switchPadding es.iessaladillo.pedrojoya.pr063:switchPadding}</code></td><td> Minimum space between the switch and caption text </td></tr>
-           <tr><td><code>{@link #Switch_switchTextAppearance es.iessaladillo.pedrojoya.pr063:switchTextAppearance}</code></td><td> TextAppearance style for text displayed on the switch thumb.</td></tr>
-           <tr><td><code>{@link #Switch_textOff es.iessaladillo.pedrojoya.pr063:textOff}</code></td><td> Text to use when the switch is in the unchecked/"off" state.</td></tr>
-           <tr><td><code>{@link #Switch_textOn es.iessaladillo.pedrojoya.pr063:textOn}</code></td><td> Text to use when the switch is in the checked/"on" state.</td></tr>
-           <tr><td><code>{@link #Switch_thumb es.iessaladillo.pedrojoya.pr063:thumb}</code></td><td> Drawable to use as the "thumb" that switches back and forth.</td></tr>
-           <tr><td><code>{@link #Switch_thumbTextPadding es.iessaladillo.pedrojoya.pr063:thumbTextPadding}</code></td><td> Amount of padding on either side of text within the switch thumb.</td></tr>
-           <tr><td><code>{@link #Switch_track es.iessaladillo.pedrojoya.pr063:track}</code></td><td> Drawable to use as the "track" that the switch thumb slides within.</td></tr>
-           </table>
-           @see #Switch_switchMinWidth
-           @see #Switch_switchPadding
-           @see #Switch_switchTextAppearance
-           @see #Switch_textOff
-           @see #Switch_textOn
-           @see #Switch_thumb
-           @see #Switch_thumbTextPadding
-           @see #Switch_track
-         */
-        public static final int[] Switch = {
-            0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008,
-            0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c
-        };
-        /**
-          <p>
-          @attr description
-           Minimum width for the switch component 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:switchMinWidth
-        */
-        public static final int Switch_switchMinWidth = 6;
-        /**
-          <p>
-          @attr description
-           Minimum space between the switch and caption text 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:switchPadding
-        */
-        public static final int Switch_switchPadding = 7;
-        /**
-          <p>
-          @attr description
-           TextAppearance style for text displayed on the switch thumb. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:switchTextAppearance
-        */
-        public static final int Switch_switchTextAppearance = 5;
-        /**
-          <p>
-          @attr description
-           Text to use when the switch is in the unchecked/"off" state. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:textOff
-        */
-        public static final int Switch_textOff = 3;
-        /**
-          <p>
-          @attr description
-           Text to use when the switch is in the checked/"on" state. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:textOn
-        */
-        public static final int Switch_textOn = 2;
-        /**
-          <p>
-          @attr description
-           Drawable to use as the "thumb" that switches back and forth. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:thumb
-        */
-        public static final int Switch_thumb = 0;
-        /**
-          <p>
-          @attr description
-           Amount of padding on either side of text within the switch thumb. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:thumbTextPadding
-        */
-        public static final int Switch_thumbTextPadding = 4;
-        /**
-          <p>
-          @attr description
-           Drawable to use as the "track" that the switch thumb slides within. 
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:track
-        */
-        public static final int Switch_track = 1;
-        /** Attributes that can be used with a SwitchPreference.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SwitchPreference_disableDependentsState es.iessaladillo.pedrojoya.pr063:disableDependentsState}</code></td><td>
-             The state (true for on, or false for off) that causes dependents to be disabled.</td></tr>
-           <tr><td><code>{@link #SwitchPreference_summaryOff es.iessaladillo.pedrojoya.pr063:summaryOff}</code></td><td>
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is unchecked.</td></tr>
-           <tr><td><code>{@link #SwitchPreference_summaryOn es.iessaladillo.pedrojoya.pr063:summaryOn}</code></td><td>
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is checked.</td></tr>
-           <tr><td><code>{@link #SwitchPreference_switchTextOff es.iessaladillo.pedrojoya.pr063:switchTextOff}</code></td><td>
-             The text used on the switch itself when in the "off" state.</td></tr>
-           <tr><td><code>{@link #SwitchPreference_switchTextOn es.iessaladillo.pedrojoya.pr063:switchTextOn}</code></td><td>
-             The text used on the switch itself when in the "on" state.</td></tr>
-           </table>
-           @see #SwitchPreference_disableDependentsState
-           @see #SwitchPreference_summaryOff
-           @see #SwitchPreference_summaryOn
-           @see #SwitchPreference_switchTextOff
-           @see #SwitchPreference_switchTextOn
-         */
-        public static final int[] SwitchPreference = {
-            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
-            0x7f010004
-        };
-        /**
-          <p>
-          @attr description
-          
-             The state (true for on, or false for off) that causes dependents to be disabled. By default,
-             dependents will be disabled when this is unchecked, so the value of this preference is false.
-        
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:disableDependentsState
-        */
-        public static final int SwitchPreference_disableDependentsState = 4;
-        /**
-          <p>
-          @attr description
-          
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is unchecked. If separate on/off summaries are not
-             needed, the summary attribute can be used instead.
-        
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:summaryOff
-        */
-        public static final int SwitchPreference_summaryOff = 1;
-        /**
-          <p>
-          @attr description
-          
-             The summary for the Preference in a PreferenceActivity screen when the
-             SwitchPreference is checked. If separate on/off summaries are not
-             needed, the summary attribute can be used instead.
-        
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:summaryOn
-        */
-        public static final int SwitchPreference_summaryOn = 0;
-        /**
-          <p>
-          @attr description
-          
-             The text used on the switch itself when in the "off" state.
-             This should be a very SHORT string, as it appears in a small space.
-        
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:switchTextOff
-        */
-        public static final int SwitchPreference_switchTextOff = 3;
-        /**
-          <p>
-          @attr description
-          
-             The text used on the switch itself when in the "on" state.
-             This should be a very SHORT string, as it appears in a small space.
-        
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          <p>This is a private symbol.
-          @attr name android:switchTextOn
-        */
-        public static final int SwitchPreference_switchTextOn = 2;
-        /** Attributes that can be used with a Theme.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Theme_switchPreferenceStyle es.iessaladillo.pedrojoya.pr063:switchPreferenceStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_switchStyle es.iessaladillo.pedrojoya.pr063:switchStyle}</code></td><td></td></tr>
-           </table>
-           @see #Theme_switchPreferenceStyle
-           @see #Theme_switchStyle
-         */
-        public static final int[] Theme = {
-            0x7f01000d, 0x7f01000e
-        };
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#switchPreferenceStyle}
-          attribute's value can be found in the {@link #Theme} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:switchPreferenceStyle
-        */
-        public static final int Theme_switchPreferenceStyle = 1;
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#switchStyle}
-          attribute's value can be found in the {@link #Theme} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:switchStyle
-        */
-        public static final int Theme_switchStyle = 0;
-        /** Attributes that can be used with a numberpicker.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #numberpicker_defaultValue es.iessaladillo.pedrojoya.pr063:defaultValue}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_endRange es.iessaladillo.pedrojoya.pr063:endRange}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_maxValue es.iessaladillo.pedrojoya.pr063:maxValue}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_startRange es.iessaladillo.pedrojoya.pr063:startRange}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_wrap es.iessaladillo.pedrojoya.pr063:wrap}</code></td><td></td></tr>
-           </table>
-           @see #numberpicker_defaultValue
-           @see #numberpicker_endRange
-           @see #numberpicker_maxValue
-           @see #numberpicker_startRange
-           @see #numberpicker_wrap
-         */
-        public static final int[] numberpicker = {
-            0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012,
-            0x7f010013
-        };
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#defaultValue}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:defaultValue
-        */
-        public static final int numberpicker_defaultValue = 2;
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#endRange}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:endRange
-        */
-        public static final int numberpicker_endRange = 1;
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#maxValue}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:maxValue
-        */
-        public static final int numberpicker_maxValue = 3;
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#startRange}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:startRange
-        */
-        public static final int numberpicker_startRange = 0;
-        /**
-          <p>This symbol is the offset where the {@link es.iessaladillo.pedrojoya.pr063.R.attr#wrap}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:wrap
-        */
-        public static final int numberpicker_wrap = 4;
-    };
 }
