@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.android.navigationdrawerexample;
+package es.iessaladillo.pedrojoya.pr066;
 
 public final class R {
     public static final class array {
@@ -48,5 +48,6 @@ public final class R {
         public static final int app_not_available=0x7f040004;
         public static final int drawer_close=0x7f040002;
         public static final int drawer_open=0x7f040001;
+        public static final int imagen_del_planeta=0x7f040005;
     }
 }
