@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr066.actividades;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -15,47 +17,43 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import es.iessaladillo.pedrojoya.pr066.R;
+import es.iessaladillo.pedrojoya.pr066.adaptadores.AlbumesAdapter;
 import es.iessaladillo.pedrojoya.pr066.fragmentos.PlanetaFragment;
+import es.iessaladillo.pedrojoya.pr066.modelos.Album;
 
 public class MainActivity extends Activity {
+
+    // Variables miembro.
     private DrawerLayout panelNavegacion;
     private ListView lstPanelNavegacion;
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
-
     private CharSequence tituloPanelNavegacion;
     private CharSequence tituloActividad;
-    private String[] nombresPlanetas;
+    private AlbumesAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Inicialmente el título del panel de navegación coincide con el de la
         // actividad.
         tituloActividad = tituloPanelNavegacion = getTitle();
-        // Se obtiene el array con los nombres de los planetas.
-        nombresPlanetas = getResources().getStringArray(R.array.planets_array);
-
         // Se establecemos el drawable que actúa como sombra del contenido
         // principal cuando se abre el panel de navegación.
         panelNavegacion = (DrawerLayout) findViewById(R.id.drawer_layout);
         panelNavegacion.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
-
         // Se carga la lista del panel de navegación y se indica el objeto
-        // listener que
-        // será notificado cuando se pulse sobre alguno de sus elementos.
+        // listener que será notificado cuando se pulse sobre alguno de sus
+        // elementos.
         lstPanelNavegacion = (ListView) findViewById(R.id.left_drawer);
-        lstPanelNavegacion.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, nombresPlanetas));
+        adaptador = new AlbumesAdapter(this, getDatos());
+        lstPanelNavegacion.setAdapter(adaptador);
         lstPanelNavegacion
-                .setOnItemClickListener(new MenuLateralItemClickListener());
-
+                .setOnItemClickListener(new PanelNavegacionItemClickListener());
         // Se crea el objeto de vínculo entre la ActionBar y el panel de
         // navegación. El constructor recibe la actividad, el panel de
         // navegación, el icono de activación en la ActionBar, el texto de
@@ -64,7 +62,6 @@ public class MainActivity extends Activity {
         conmutadorPanelNavegacion = new ActionBarDrawerToggle(this,
                 panelNavegacion, R.drawable.ic_drawer, R.string.drawer_open,
                 R.string.drawer_close) {
-
             // Al terminar de cerrarse el panel de navegación.
             public void onDrawerClosed(View view) {
                 // Se reestablece el título de la ActionBar al valor que tuviera
@@ -83,17 +80,16 @@ public class MainActivity extends Activity {
                 invalidateOptionsMenu();
             }
         };
-
-        // Se vincula la ActionBar con el panel de navegación.
+        // Se establece que la ActionBar muestre un icono para el conmutador.
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+        // Se vincula el conmutador con el panel de navegación.
         panelNavegacion.setDrawerListener(conmutadorPanelNavegacion);
-
         // Se selecciona el primer elemento de la lista del panel de navegación
         // para que el contenedor de la actividad principal no se muestre vacío
         // inicialmente.
         if (savedInstanceState == null) {
-            seleccionadoElementoMenuLateral(0);
+            panelNavegacionItemSelected(0);
         }
     }
 
@@ -135,8 +131,7 @@ public class MainActivity extends Activity {
                 // catch event that there's no activity to handle intent
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(this, R.string.app_not_available,
                             Toast.LENGTH_LONG).show();
                 }
@@ -148,18 +143,18 @@ public class MainActivity extends Activity {
 
     // Clase Listener para cuando se pulsa sobre un elemento del panel de
     // navegación
-    private class MenuLateralItemClickListener implements
+    private class PanelNavegacionItemClickListener implements
             ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                 long id) {
             // Se selecciona el elemento correspondiente.
-            seleccionadoElementoMenuLateral(position);
+            panelNavegacionItemSelected(position);
         }
     }
 
     // Respuesta a la selección de un elemento en el panel de navegación.
-    private void seleccionadoElementoMenuLateral(int position) {
+    private void panelNavegacionItemSelected(int position) {
         // Se carga en la actividad principal el fragmento correspondiente.
         Fragment fragment = new PlanetaFragment();
         Bundle args = new Bundle();
@@ -179,8 +174,7 @@ public class MainActivity extends Activity {
     }
 
     // Si se usa un objeto activador del panel de navegación, se debe
-    // sincronizar con
-    // la ActionBar una vez creada la actividad.
+    // sincronizar con la ActionBar una vez creada la actividad.
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -194,6 +188,24 @@ public class MainActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         conmutadorPanelNavegacion.onConfigurationChanged(newConfig);
+    }
+
+    // Creo los datos para la lista.
+    private ArrayList<Album> getDatos() {
+        ArrayList<Album> albumes = new ArrayList<Album>();
+        albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
+        albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
+                "1981"));
+        albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
+                "1992"));
+        albumes.add(new Album(R.drawable.carinio,
+                "Está muy bien eso del cariño", "1995"));
+        albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
+        albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
+        albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
+        albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
+        albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
+        return albumes;
     }
 
 }

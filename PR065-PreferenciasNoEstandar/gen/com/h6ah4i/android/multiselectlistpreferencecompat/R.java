@@ -8,8 +8,8 @@ package com.h6ah4i.android.multiselectlistpreferencecompat;
 
 public final class R {
 	public static final class styleable {
-		public static final int MultiSelectListPreferenceCompat_android_entryValues = 1;
 		public static final int[] MultiSelectListPreferenceCompat = { 0x010100b2, 0x010101f8 };
 		public static final int MultiSelectListPreferenceCompat_android_entries = 0;
+		public static final int MultiSelectListPreferenceCompat_android_entryValues = 1;
 	}
 }
