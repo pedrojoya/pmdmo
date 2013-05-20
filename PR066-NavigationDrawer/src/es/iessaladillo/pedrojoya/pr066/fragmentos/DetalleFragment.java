@@ -1,17 +1,18 @@
 package es.iessaladillo.pedrojoya.pr066.fragmentos;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import es.iessaladillo.pedrojoya.pr056.R;
-import es.iessaladillo.pedrojoya.pr056.actividades.MainActivity;
+import es.iessaladillo.pedrojoya.pr066.R;
 import es.iessaladillo.pedrojoya.pr066.modelos.Album;
 
 public class DetalleFragment extends Fragment {
+
+    public static final String ARG_ALBUM = "argAlbum";
 
     private ImageView imgFoto;
     private TextView lblNombre;
@@ -33,7 +34,7 @@ public class DetalleFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // Se obtiene el álbum desde el bundle de parámetros.
-        album = this.getArguments().getParcelable(MainActivity.EXTRA_ALBUM);
+        album = this.getArguments().getParcelable(ARG_ALBUM);
         // Si hay álbum, se muestra.
         if (album != null) {
             mostrarDetalle();

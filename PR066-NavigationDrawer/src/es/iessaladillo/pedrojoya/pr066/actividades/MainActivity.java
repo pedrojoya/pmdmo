@@ -17,43 +17,46 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import es.iessaladillo.pedrojoya.pr066.R;
 import es.iessaladillo.pedrojoya.pr066.adaptadores.AlbumesAdapter;
-import es.iessaladillo.pedrojoya.pr066.fragmentos.PlanetaFragment;
+import es.iessaladillo.pedrojoya.pr066.fragmentos.DetalleFragment;
 import es.iessaladillo.pedrojoya.pr066.modelos.Album;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnItemClickListener {
 
     // Variables miembro.
     private DrawerLayout panelNavegacion;
     private ListView lstPanelNavegacion;
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
     private CharSequence tituloPanelNavegacion;
-    private CharSequence tituloActividad;
+    private CharSequence tituloContenido;
     private AlbumesAdapter adaptador;
+    private FragmentManager gestorFragmentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Inicialmente el título del panel de navegación coincide con el de la
-        // actividad.
-        tituloActividad = tituloPanelNavegacion = getTitle();
+        // Se obtiene el gestor de fragmentos
+        gestorFragmentos = getFragmentManager();
+        // Inicialmente el título del panel de navegación, como el del contenido
+        // principal coincide con el de la actividad.
+        tituloContenido = tituloPanelNavegacion = getTitle();
         // Se establecemos el drawable que actúa como sombra del contenido
         // principal cuando se abre el panel de navegación.
         panelNavegacion = (DrawerLayout) findViewById(R.id.drawer_layout);
         panelNavegacion.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
-        // Se carga la lista del panel de navegación y se indica el objeto
-        // listener que será notificado cuando se pulse sobre alguno de sus
-        // elementos.
+        // Se carga la lista del panel de navegación y se indica que sea la
+        // propia la que responda a la pulsación sobre los elementos de la
+        // lista.
         lstPanelNavegacion = (ListView) findViewById(R.id.left_drawer);
         adaptador = new AlbumesAdapter(this, getDatos());
         lstPanelNavegacion.setAdapter(adaptador);
-        lstPanelNavegacion
-                .setOnItemClickListener(new PanelNavegacionItemClickListener());
+        lstPanelNavegacion.setOnItemClickListener(this);
         // Se crea el objeto de vínculo entre la ActionBar y el panel de
         // navegación. El constructor recibe la actividad, el panel de
         // navegación, el icono de activación en la ActionBar, el texto de
@@ -66,7 +69,7 @@ public class MainActivity extends Activity {
             public void onDrawerClosed(View view) {
                 // Se reestablece el título de la ActionBar al valor que tuviera
                 // antes de abrir el panel de navegación.
-                getActionBar().setTitle(tituloActividad);
+                getActionBar().setTitle(tituloContenido);
                 // Se recarga el menú de la ActionBar.
                 invalidateOptionsMenu();
             }
@@ -108,7 +111,7 @@ public class MainActivity extends Activity {
         // ActionBar relacionados con contenido (ya que éste está oculto tras el
         // panel de navegación).
         boolean abierto = panelNavegacion.isDrawerOpen(lstPanelNavegacion);
-        menu.findItem(R.id.action_websearch).setVisible(!abierto);
+        menu.findItem(R.id.mnuBuscar).setVisible(!abierto);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -124,15 +127,18 @@ public class MainActivity extends Activity {
         }
         // En cualquier otro caso se procesa la selección.
         switch (item.getItemId()) {
-            case R.id.action_websearch:
-                // create intent to perform web search for this planet
+            case R.id.mnuBuscar:
+                // Se crea un intent explícito para buscar en Internet el título
+                // de la ActionBar.
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
                 intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // catch event that there's no activity to handle intent
+                // Se comprueba si hay alguna aplicación que pueda tratar el
+                // intent.
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available,
+                }
+                else {
+                    Toast.makeText(this, R.string.sin_navegador,
                             Toast.LENGTH_LONG).show();
                 }
                 return true;
@@ -141,39 +147,36 @@ public class MainActivity extends Activity {
         }
     }
 
-    // Clase Listener para cuando se pulsa sobre un elemento del panel de
-    // navegación
-    private class PanelNavegacionItemClickListener implements
-            ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
-            // Se selecciona el elemento correspondiente.
-            panelNavegacionItemSelected(position);
-        }
+    // Al hacer click sobre un elemento de la lista del panel de navegación.
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        // Se selecciona el elemento correspondiente.
+        panelNavegacionItemSelected(position);
     }
 
     // Respuesta a la selección de un elemento en el panel de navegación.
     private void panelNavegacionItemSelected(int position) {
+        // Se obtienen los datos del álbum sobre el que se ha pulsado.
+        Album album = (Album) lstPanelNavegacion.getItemAtPosition(position);
         // Se carga en la actividad principal el fragmento correspondiente.
-        Fragment fragment = new PlanetaFragment();
+        Fragment frgDetalle = new DetalleFragment();
         Bundle args = new Bundle();
-        args.putInt(PlanetaFragment.ARG_PLANET_NUMBER, position);
-        fragment.setArguments(args);
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment).commit();
+        args.putParcelable(DetalleFragment.ARG_ALBUM, album);
+        frgDetalle.setArguments(args);
+        gestorFragmentos.beginTransaction()
+                .replace(R.id.content_frame, frgDetalle).commit();
         // Se marca como seleccionado dicho elemento en la lista.
         lstPanelNavegacion.setItemChecked(position, true);
         // Se actualiza el título que debe mostrar la ActionBar, acorde al
         // fragmento que se ha cargado.
-        tituloActividad = nombresPlanetas[position];
-        getActionBar().setTitle(tituloActividad);
+        tituloContenido = album.getNombre();
+        getActionBar().setTitle(tituloContenido);
         // Se cierra el panel de navegación.
         panelNavegacion.closeDrawer(lstPanelNavegacion);
     }
 
-    // Si se usa un objeto activador del panel de navegación, se debe
+    // Si se usa un conmutador del panel de navegación, se debe
     // sincronizar con la ActionBar una vez creada la actividad.
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -181,9 +184,8 @@ public class MainActivity extends Activity {
         conmutadorPanelNavegacion.syncState();
     }
 
-    // Si se usa un objeto activador del panel de navegación, se le debe
-    // informar de la
-    // nueva configuración.
+    // Si se usa un conmutador del panel de navegación, se le debe
+    // informar de la nueva configuración.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
