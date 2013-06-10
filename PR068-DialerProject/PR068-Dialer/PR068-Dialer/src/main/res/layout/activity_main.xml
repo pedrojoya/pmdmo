@@ -1,0 +1,180 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <!-- Fila 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <EditText
+            android:id="@+id/txtNumero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/boton_text_size"
+            android:inputType="number"
+            android:focusable="false"
+            android:layout_weight="7"/>
+
+        <ImageButton
+            android:id="@+id/btnBorrar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_borrar"
+            android:onClick="btnBorrarOnClick"
+            android:layout_weight="3" />
+
+    </LinearLayout>
+
+    <!-- Fila 2 -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <Button
+                android:id="@+id/btnNumero1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="2"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- Fila 3 -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <Button
+                android:id="@+id/btnNumero4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- Fila 4 -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <Button
+                android:id="@+id/btnNumero7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="8"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="9"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- Fila 5 -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageButton
+                android:id="@+id/btnRegistro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:onClick="btnRegistroOnClick"
+                android:src="@drawable/ic_agenda"
+                android:layout_weight="1" />
+
+        <Button
+                android:id="@+id/btnNumero0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:textSize="@dimen/boton_text_size"
+                android:onClick="btnNumeroOnClick"
+                android:layout_weight="1" />
+
+        <ImageButton
+                android:id="@+id/btnLlamar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_phone"
+                android:onClick="btnLlamarOnClick"
+                android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>
