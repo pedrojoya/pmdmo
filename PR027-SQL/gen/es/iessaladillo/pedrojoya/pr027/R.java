@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package es.uma.SQL;
+package es.iessaladillo.pedrojoya.pr027;
 
 public final class R {
     public static final class array {

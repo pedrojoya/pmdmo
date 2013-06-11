@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package es.uma.SQL;
+package es.iessaladillo.pedrojoya.pr027;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

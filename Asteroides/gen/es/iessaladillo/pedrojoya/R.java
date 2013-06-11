@@ -30,25 +30,28 @@ public final class R {
         public static final int asteroide1=0x7f020000;
         public static final int asteroide2=0x7f020001;
         public static final int asteroide3=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
+        public static final int fondo=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
     }
     public static final class id {
         public static final int TextView01=0x7f0a0000;
-        public static final int btnAcercaDe=0x7f0a0006;
-        public static final int btnConfigurar=0x7f0a0005;
-        public static final int btnJugar=0x7f0a0004;
-        public static final int btnPuntuaciones=0x7f0a0007;
+        public static final int btnAcercaDe=0x7f0a0007;
+        public static final int btnConfigurar=0x7f0a0006;
+        public static final int btnJugar=0x7f0a0005;
+        public static final int btnPuntuaciones=0x7f0a0008;
         public static final int icono=0x7f0a0001;
-        public static final int mnuAcercaDe=0x7f0a0009;
-        public static final int mnuConfig=0x7f0a0008;
+        public static final int mnuAcercaDe=0x7f0a000a;
+        public static final int mnuConfig=0x7f0a0009;
         public static final int subtitulo=0x7f0a0003;
+        public static final int textView1=0x7f0a0004;
         public static final int titulo=0x7f0a0002;
     }
     public static final class layout {
         public static final int acerca_de_activity=0x7f030000;
         public static final int elemento_lista_puntuaciones_activity=0x7f030001;
-        public static final int main_activity=0x7f030002;
-        public static final int puntuaciones_activity=0x7f030003;
+        public static final int fondo=0x7f030002;
+        public static final int main_activity=0x7f030003;
+        public static final int puntuaciones_activity=0x7f030004;
     }
     public static final class menu {
         public static final int main_activity=0x7f090000;
