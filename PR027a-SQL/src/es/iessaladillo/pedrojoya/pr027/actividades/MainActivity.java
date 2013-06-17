@@ -3,7 +3,7 @@ package es.iessaladillo.pedrojoya.pr027.actividades;
 import es.iessaladillo.pedrojoya.pr027.R;
 import es.iessaladillo.pedrojoya.pr027.R.layout;
 import es.iessaladillo.pedrojoya.pr027.R.string;
-import es.iessaladillo.pedrojoya.pr027.bd.AdaptadorBD;
+import es.iessaladillo.pedrojoya.pr027.bd.DAO;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				// Borro la BD.
 				ContextWrapper c = new ContextWrapper(contexto);
-				c.deleteDatabase(AdaptadorBD.DATABASE_NAME);
+				c.deleteDatabase(DAO.DATABASE_NAME);
 			}
 		});
 		b.create().show();

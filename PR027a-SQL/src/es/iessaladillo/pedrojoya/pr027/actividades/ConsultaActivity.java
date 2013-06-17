@@ -4,7 +4,7 @@ import es.iessaladillo.pedrojoya.pr027.R;
 import es.iessaladillo.pedrojoya.pr027.R.id;
 import es.iessaladillo.pedrojoya.pr027.R.layout;
 import es.iessaladillo.pedrojoya.pr027.R.string;
-import es.iessaladillo.pedrojoya.pr027.bd.AdaptadorBD;
+import es.iessaladillo.pedrojoya.pr027.bd.DAO;
 import es.iessaladillo.pedrojoya.pr027.modelos.Alumno;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,7 +28,7 @@ public class ConsultaActivity extends Activity {
     Button btnConsultar;
     Button btnLlamar;
     Alumno alumno;	// Alumno con el que trabajará la actividad.
-    AdaptadorBD  bd;
+    DAO  bd;
     
 	public void onCreate(Bundle savedInstanceState) {
 		// Llamo al onCreate del padre.
@@ -74,7 +74,7 @@ public class ConsultaActivity extends Activity {
 	// Carga el spinner de Alumnos con los datos obtenidos de la BD.
 	private void cargarAlumnos() {
 		// Creo un objeto adaptador de la BD.
-        bd = new AdaptadorBD (this);
+        bd = new DAO (this);
         try {
         	// Abro la base de datos.
 			bd.open();
@@ -88,7 +88,7 @@ public class ConsultaActivity extends Activity {
 			SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this,
 					android.R.layout.simple_spinner_item,
 					cursor,
-				    new String[] {AdaptadorBD.FLD_ALU_NOM}, 
+				    new String[] {DAO.FLD_ALU_NOM}, 
 				    new int[] {android.R.id.text1});
 			// Establezco el layout que debe utilizarse cuando se despliegue el spinner (uno estándar).
 			adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

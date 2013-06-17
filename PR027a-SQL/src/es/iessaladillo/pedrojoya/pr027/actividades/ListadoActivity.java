@@ -5,7 +5,7 @@ import es.iessaladillo.pedrojoya.pr027.R.id;
 import es.iessaladillo.pedrojoya.pr027.R.layout;
 import es.iessaladillo.pedrojoya.pr027.R.menu;
 import es.iessaladillo.pedrojoya.pr027.R.string;
-import es.iessaladillo.pedrojoya.pr027.bd.AdaptadorBD;
+import es.iessaladillo.pedrojoya.pr027.bd.DAO;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -25,7 +25,7 @@ import android.widget.Toast;
 public class ListadoActivity extends ListActivity {
 
 	// Variables a nivel de clase.
-	private AdaptadorBD bd;	// Base de datos.
+	private DAO bd;	// Base de datos.
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class ListadoActivity extends ListActivity {
 		// Registro la lista para menú contextual
 		this.registerForContextMenu(this.getListView());
 		// Creo un objeto AdaptadorBD.
-		bd = new AdaptadorBD(this);
+		bd = new DAO(this);
 		bd.open();
 	}
 
@@ -49,7 +49,7 @@ public class ListadoActivity extends ListActivity {
 		// Creo un adaptador para la lista.
 		SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, 
 				android.R.layout.simple_list_item_1, 
-				cursor, new String[] {AdaptadorBD.FLD_ALU_NOM}, new int[] {android.R.id.text1});
+				cursor, new String[] {DAO.FLD_ALU_NOM}, new int[] {android.R.id.text1});
 		// Asigno el adaptador a la ListActivity.
 		this.setListAdapter(adaptador);
 	}
@@ -59,7 +59,7 @@ public class ListadoActivity extends ListActivity {
 		// Obtengo el registro correspondiente al alumno seleccionado en forma de cursor.
 		Cursor cursor = (Cursor) getListView().getItemAtPosition(position);
 		// Obtengo el id del alumno seleccionado.
-		long idAlumno = cursor.getLong(cursor.getColumnIndex(AdaptadorBD.FLD_ALU_ID));
+		long idAlumno = cursor.getLong(cursor.getColumnIndex(DAO.FLD_ALU_ID));
 		// Cierro el cursor.
 		cursor.close();
 		// Envío el intent correspondiente.
@@ -82,9 +82,9 @@ public class ListadoActivity extends ListActivity {
 	    // Obtengo el registro correspondiente al alumno seleccionado en forma de cursor.
 		Cursor cursor = (Cursor) getListView().getItemAtPosition(info.position);
 		// Obtengo el id del alumno seleccionado.
-		long id = cursor.getLong(cursor.getColumnIndex(AdaptadorBD.FLD_ALU_ID));
-		String telefono = cursor.getString(cursor.getColumnIndex(AdaptadorBD.FLD_ALU_TEL));
-		String direccion = cursor.getString(cursor.getColumnIndex(AdaptadorBD.FLD_ALU_DIR));
+		long id = cursor.getLong(cursor.getColumnIndex(DAO.FLD_ALU_ID));
+		String telefono = cursor.getString(cursor.getColumnIndex(DAO.FLD_ALU_TEL));
+		String direccion = cursor.getString(cursor.getColumnIndex(DAO.FLD_ALU_DIR));
 		// Cierro el cursor.
 		cursor.close();
 		// Dependiendo de la opción de menú seleccionada.
@@ -145,7 +145,7 @@ public class ListadoActivity extends ListActivity {
 		b.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {	
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (bd.deleteAlumno(id)) {
+				if (bd.delete(id)) {
 					Toast.makeText(getApplicationContext(), R.string.eliminacion_correcta, Toast.LENGTH_LONG).show();
 				}
 				else {

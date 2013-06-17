@@ -5,7 +5,7 @@ import es.iessaladillo.pedrojoya.pr027.R.array;
 import es.iessaladillo.pedrojoya.pr027.R.id;
 import es.iessaladillo.pedrojoya.pr027.R.layout;
 import es.iessaladillo.pedrojoya.pr027.R.string;
-import es.iessaladillo.pedrojoya.pr027.bd.AdaptadorBD;
+import es.iessaladillo.pedrojoya.pr027.bd.DAO;
 import es.iessaladillo.pedrojoya.pr027.modelos.Alumno;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +26,7 @@ public class AlumnoActivity extends Activity {
 	private enum Modo {AGREGAR, EDITAR, VER};
 	
 	// Variables a nivel de clase.
-	private AdaptadorBD  bd;
+	private DAO  bd;
 	private EditText txtNombre;
 	private EditText txtTelefono;
 	private EditText txtDireccion;
@@ -43,7 +43,7 @@ public class AlumnoActivity extends Activity {
 		// Establezco el layout que mostrará la actividad.
 		setContentView(R.layout.addalumnos);
 		// Obtengo el adaptador de la BD y la abro.
-		bd = new AdaptadorBD (this);
+		bd = new DAO (this);
 		try {
 			bd.open();
 			// Obtengo las referencias a las vistas.
@@ -170,7 +170,7 @@ public class AlumnoActivity extends Activity {
 		// Copio los datos de las vistas en el objeto Alumno.
 		vistasToAlumno();
 		// Realizo el insert.
-		long id = bd.insertAlumno(alumno);
+		long id = bd.insert(alumno);
 		// Si se ha realizado correctamente guardo el id que se le asignado en el objeto Alumno.
 		if (id >= 0) {
 			alumno.setId(id);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ListView
+        android:id="@+id/lstProductos"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rlCatalogoVacio"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/imgLitadoVacio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="No hay alumnado en la base de datos"
+                android:clickable="true"
+                android:onClick="btnListadoVacioOnClick"
+                android:src="@drawable/ic_user_add" />
+
+            <TextView
+                android:id="@+id/lblListadoVacio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgListadoVacio"
+                android:clickable="true"
+                android:onClick="btnListadoVacioOnClick"
+                android:text="No hay alumnado en la base de datos" />
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+</RelativeLayout>
+
+</FrameLayout>
