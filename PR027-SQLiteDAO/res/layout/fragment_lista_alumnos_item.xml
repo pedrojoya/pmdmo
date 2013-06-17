@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/card"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16.0dip"
+        android:paddingRight="16.0dip"
+        android:paddingTop="5.0dip"
+        android:text="Title"
+        android:textSize="18.0sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16.0dip"
+        android:paddingRight="16.0dip"
+        android:text="Subtitle"
+        android:textSize="14.0sp"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16.0dip"
+        android:paddingRight="16.0dip"
+        android:text="Subtitle"
+        android:textSize="14.0sp"
+        android:textStyle="italic" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10.0dip"
+        android:paddingTop="10.0dip" >
+        <ImageView
+            android:id="@+id/Thumb"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.34"
+            android:adjustViewBounds="true"
+            android:maxHeight="300dp"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16.0dp"
+        android:paddingLeft="16.0dip"
+        android:paddingRight="16.0dip"
+        android:text="Subtitle"
+        android:textSize="14.0sp"
+        android:textStyle="italic" />
+</LinearLayout>
