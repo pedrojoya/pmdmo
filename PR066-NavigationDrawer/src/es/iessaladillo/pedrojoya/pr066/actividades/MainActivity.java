@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -27,7 +28,10 @@ import es.iessaladillo.pedrojoya.pr066.modelos.Album;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
-    // Variables miembro.
+	// Constantes.
+    private static final String PANEL_YA_ABIERTO = "prefPanelYaAbierto";
+    
+	// Variables miembro.
     private DrawerLayout panelNavegacion;
     private ListView lstPanelNavegacion;
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
@@ -94,6 +98,17 @@ public class MainActivity extends Activity implements OnItemClickListener {
         if (savedInstanceState == null) {
             panelNavegacionItemSelected(0);
         }
+        // Se obtiene la preferencia PANEL_YA_ABIERTO (false por defecto)
+        SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
+        if(!preferencias.getBoolean(PANEL_YA_ABIERTO, false))
+        {
+            // Se abre el panel de navegación con su lista.
+            panelNavegacion.openDrawer(lstPanelNavegacion);
+            // Se actualiza la preferencia.
+            SharedPreferences.Editor editor = preferencias.edit();
+            editor.putBoolean(PANEL_YA_ABIERTO, true);
+            editor.commit();
+        }  
     }
 
     @Override
