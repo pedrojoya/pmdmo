@@ -17,7 +17,7 @@ public class Helper extends SQLiteOpenHelper {
             + Instituto.Alumno.TABLA;
 
     // Constructor. Recibe el contexto.
-    Helper(Context ctx) {
+    public Helper(Context ctx) {
         // Se llama al constructor del padre, que es quien realmente crea o
         // actualiza la versión de BD si es necesario.
         super(ctx, Instituto.BD_NOMBRE, null, Instituto.BD_VERSION);

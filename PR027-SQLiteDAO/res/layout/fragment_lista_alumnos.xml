@@ -8,13 +8,13 @@
         android:layout_height="fill_parent"
         android:clipToPadding="false"
         android:divider="#00000000"
-        android:dividerHeight="25dip"
-        android:paddingLeft="10.0dip"
-        android:paddingRight="10.0dip" />
+        android:padding="8dp"
+        android:dividerHeight="8dp" />
     <RelativeLayout
         android:id="@+id/rlListaVacia"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:clickable="true"
         android:gravity="center_horizontal|center_vertical" >
         <ImageView
             android:id="@+id/imgNuevoAlumno"
@@ -22,9 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:clickable="true"
             android:contentDescription="@string/sin_alumnado_agregue_un_alumno"
-            android:onClick="btnNuevoAlumnoOnClick"
             android:src="@drawable/ic_user_add" />
         <TextView
             android:id="@+id/lblNuevoAlumno"
@@ -32,8 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgNuevoAlumno"
             android:layout_centerHorizontal="true"
-            android:clickable="true"
-            android:onClick="btnNuevoAlumnoOnClick"
             android:text="@string/sin_alumnado_agregue_un_alumno"
             android:textAlignment="center" />
     </RelativeLayout>

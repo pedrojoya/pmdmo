@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package es.iessaladillo.pedrojoya.pr027;
+package es.iessaladillo.pedrojoya.pr027a;
 
 public final class R {
     public static final class array {
@@ -15,24 +15,29 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int ic_user_add=0x7f020001;
     }
     public static final class id {
         public static final int btnAgregar=0x7f080008;
-        public static final int btnBorrarBD=0x7f08000f;
+        public static final int btnBorrarBD=0x7f080013;
         public static final int btnConsultar=0x7f08000b;
         public static final int btnLlamar=0x7f08000c;
+        public static final int imgListadoVacio=0x7f080011;
+        public static final int imgLitadoVacio=0x7f08000f;
         public static final int lblAlumno=0x7f080009;
-        public static final int lblBienvenida=0x7f08000e;
+        public static final int lblBienvenida=0x7f080012;
         public static final int lblCurso=0x7f080002;
         public static final int lblDireccion=0x7f080006;
-        public static final int lblMensaje=0x7f08000d;
+        public static final int lblListadoVacio=0x7f080010;
         public static final int lblNombre=0x7f080000;
         public static final int lblTelefono=0x7f080004;
-        public static final int mnuEditar=0x7f080011;
-        public static final int mnuEliminar=0x7f080012;
-        public static final int mnuLlamar=0x7f080013;
-        public static final int mnuMapa=0x7f080014;
-        public static final int mnuVer=0x7f080010;
+        public static final int lstProductos=0x7f08000d;
+        public static final int mnuEditar=0x7f080015;
+        public static final int mnuEliminar=0x7f080016;
+        public static final int mnuLlamar=0x7f080017;
+        public static final int mnuMapa=0x7f080018;
+        public static final int mnuVer=0x7f080014;
+        public static final int rlCatalogoVacio=0x7f08000e;
         public static final int spnAlumno=0x7f08000a;
         public static final int spnCurso=0x7f080003;
         public static final int txtDireccion=0x7f080007;

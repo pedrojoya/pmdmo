@@ -43,7 +43,7 @@ public class Alumno {
      * @param curso
      *            Curso del alumno.
      */
-    Alumno(String nombre, String telefono, String curso, String direccion) {
+    public Alumno(String nombre, String telefono, String curso, String direccion) {
         // Establezo los valores iniciales para las propiedades
         this.id = 0;
         this.nombre = nombre;
