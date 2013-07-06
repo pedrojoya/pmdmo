@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="cursos">
-        <item >Primero</item>
-        <item >Segundo</item>
-        <item >Tercero</item>
+        <item >1º CFGM SMR</item>
+        <item >2º CFGM SMR</item>
+        <item >1º CFGS DAM</item>
+        <item >2º CFGS DAM</item>
     </string-array>    
 </resources>

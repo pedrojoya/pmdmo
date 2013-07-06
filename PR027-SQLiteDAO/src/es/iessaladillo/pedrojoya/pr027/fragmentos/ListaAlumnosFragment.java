@@ -139,6 +139,9 @@ public class ListaAlumnosFragment extends Fragment {
 		// Se establece el adaptador para la lista.
 		lstAlumnos.setAdapter(new ListaAlumnosAdapter(this.getActivity(),
 				alumnos));
+		for (int i = 0; i < lstAlumnos.getCount(); i++) {
+			lstAlumnos.setItemChecked(i, false);
+		}
 	}
 
 	// Cuando el fragmento es cargado en la actividad.
@@ -175,7 +178,9 @@ public class ListaAlumnosFragment extends Fragment {
 			}
 		}
 		dao.close();
+		// Se finaliza el modo contextual.
 		modoContextual.finish();
+		// Se infora al adaptador de que ha habido cambios en sus datos.
 		((ListaAlumnosAdapter) lstAlumnos.getAdapter()).notifyDataSetChanged();
 	}
 }
