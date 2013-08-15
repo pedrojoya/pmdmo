@@ -143,7 +143,7 @@ public class DAO {
         alumno.setCurso(cursorAlumno.getString(2));
         alumno.setTelefono(cursorAlumno.getString(3));
         alumno.setDireccion(cursorAlumno.getString(4));
-        // Retorno el objeto Alumno.
+        // Se retorna el objeto Alumno.
         return alumno;
     }
 

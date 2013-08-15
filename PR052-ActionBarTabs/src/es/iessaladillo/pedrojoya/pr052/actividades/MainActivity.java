@@ -46,12 +46,11 @@ public class MainActivity extends Activity {
         }
     }
 
-    // Al crear la primera vez el menú.
+    // Al crear el menú.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Se infla el menú a partir del XML.
         getMenuInflater().inflate(R.menu.activity_main, menu);
-        // Se retorna lo que devuelva la actividad.
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -60,32 +59,13 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Dependiendo del item pulsado se realiza la acción deseada.
         switch (item.getItemId()) {
-            case android.R.id.home:
-                mostrarTostada(getString(R.string.ir_a_la_actividad_superior));
-                break;
-            case R.id.mnuAgregar:
-                mostrarTostada(getString(R.string.agregar));
-                break;
-            case R.id.mnuCargar:
-                mostrarTostada(getString(R.string.cargar));
-                break;
-            case R.id.mnuEditar:
-                mostrarTostada(item.getTitle().toString());
-                break;
-            case R.id.mnuEliminar:
-                mostrarTostada(getString(R.string.eliminar));
-                break;
-            case R.id.mnuBuscar:
-                mostrarTostada(getString(R.string.buscar));
-                break;
-            case R.id.mnuCompartir:
-                mostrarTostada(getString(R.string.compartir));
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        case android.R.id.home:
+            Toast.makeText(getApplicationContext(),
+                    R.string.ir_a_la_actividad_superior, Toast.LENGTH_SHORT)
+                    .show();
+            return true;
         }
-        // Retorna que ya ha sido gestionado.
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -93,12 +73,6 @@ public class MainActivity extends Activity {
         // Almacena qué pestaña tenemos seleccionada.
         outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
         super.onSaveInstanceState(outState);
-    }
-
-    // Muestra una tostada.
-    private void mostrarTostada(String mensaje) {
-        Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT)
-                .show();
     }
 
     // Gestor de pestañas.

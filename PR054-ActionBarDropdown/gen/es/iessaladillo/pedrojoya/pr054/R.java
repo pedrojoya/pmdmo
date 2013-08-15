@@ -26,23 +26,15 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int ic_menu_add=0x7f020001;
-        public static final int ic_menu_delete=0x7f020002;
-        public static final int ic_menu_edit=0x7f020003;
-        public static final int ic_menu_refresh=0x7f020004;
-        public static final int ic_menu_search=0x7f020005;
-        public static final int ic_menu_share=0x7f020006;
-        public static final int ic_menu_upload=0x7f020007;
+        public static final int ic_menu_refresh=0x7f020002;
+        public static final int ic_menu_share=0x7f020003;
     }
     public static final class id {
         public static final int lblAlumno=0x7f090000;
         public static final int lblNotas=0x7f090002;
-        public static final int mnuAgregar=0x7f090003;
-        public static final int mnuBuscar=0x7f090008;
-        public static final int mnuCargar=0x7f090007;
-        public static final int mnuCompartir=0x7f090009;
-        public static final int mnuEditar=0x7f090004;
-        public static final int mnuEliminar=0x7f090005;
-        public static final int mnuRefrescar=0x7f090006;
+        public static final int mnuAgregar=0x7f090004;
+        public static final int mnuCompartir=0x7f090005;
+        public static final int mnuRefrescar=0x7f090003;
         public static final int txtAlumno=0x7f090001;
     }
     public static final class layout {
@@ -52,6 +44,8 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
+        public static final int fragment_alumno=0x7f080001;
+        public static final int fragment_notas=0x7f080002;
     }
     public static final class string {
         public static final int agregar=0x7f050004;

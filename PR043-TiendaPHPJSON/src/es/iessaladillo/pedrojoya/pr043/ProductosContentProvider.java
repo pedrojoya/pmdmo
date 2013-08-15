@@ -40,7 +40,7 @@ public class ProductosContentProvider extends ContentProvider {
 	@Override
 	public boolean onCreate() {
 		// Obtengo la base de datos.
-		GestorBD gestor = new GestorBD(getContext());
+		DAO gestor = new DAO(getContext());
 		bd = gestor.getWritableDatabase();
 		// Retorno si se ha realizado la apertura.
 		return bd != null && bd.isOpen();
@@ -60,14 +60,14 @@ public class ProductosContentProvider extends ContentProvider {
 				break;
 			case TIPO_URI_ID:
 				// Agrego al where la selección de ese alumno.
-				where = GestorBD.FLD_PRO_ID + "=" + uri.getLastPathSegment()
+				where = DAO.FLD_PRO_ID + "=" + uri.getLastPathSegment()
 						+ (TextUtils.isEmpty(selection) ? "" : " AND " + where);
 				break;
 			default:
 				throw new IllegalArgumentException("URI desconoida: " + uri);
 		}
 		// Realizo la consulta.
-		Cursor cursor = bd.query(GestorBD.TBL_PRODUCTOS, projection, where,
+		Cursor cursor = bd.query(DAO.TBL_PRODUCTOS, projection, where,
 				selectionArgs, null, null, sortOrder);
 		// Notifico a los escuchadores del content provider.
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -86,7 +86,7 @@ public class ProductosContentProvider extends ContentProvider {
 				break;
 			case TIPO_URI_ID:
 				// Agrego al where la selección de ese alumno.
-				where = GestorBD.FLD_PRO_ID + "=" + uri.getLastPathSegment()
+				where = DAO.FLD_PRO_ID + "=" + uri.getLastPathSegment()
 						+ (TextUtils.isEmpty(selection) ? "" : " and " + where);
 				break;
 			default:
@@ -95,7 +95,7 @@ public class ProductosContentProvider extends ContentProvider {
 						+ uri);
 		}
 		// Se quieren borrar todos los alumnos.
-		filasBorradas = bd.delete(GestorBD.TBL_PRODUCTOS, where, selectionArgs);
+		filasBorradas = bd.delete(DAO.TBL_PRODUCTOS, where, selectionArgs);
 		getContext().getContentResolver().notifyChange(uri, null);
 		return filasBorradas;
 	}
@@ -123,7 +123,7 @@ public class ProductosContentProvider extends ContentProvider {
 		int tipoURI = validadorURIs.match(uri);
 		switch (tipoURI) {
 			case TIPO_URI_TODOS:
-				id = bd.insert(GestorBD.TBL_PRODUCTOS, null, values);
+				id = bd.insert(DAO.TBL_PRODUCTOS, null, values);
 				break;
 			default:
 				throw new IllegalArgumentException(getContext().getString(
@@ -149,7 +149,7 @@ public class ProductosContentProvider extends ContentProvider {
 				break;
 			case TIPO_URI_ID:
 				// Agrego al where la selección de ese alumno.
-				where = GestorBD.FLD_PRO_ID + "=" + uri.getLastPathSegment()
+				where = DAO.FLD_PRO_ID + "=" + uri.getLastPathSegment()
 						+ (TextUtils.isEmpty(selection) ? "" : " AND " + where);
 				break;
 			default:
@@ -158,16 +158,16 @@ public class ProductosContentProvider extends ContentProvider {
 						+ uri);
 		}
 		// Se quieren borrar todos los alumnos.
-		filasActualizadas = bd.update(GestorBD.TBL_PRODUCTOS, values, where,
+		filasActualizadas = bd.update(DAO.TBL_PRODUCTOS, values, where,
 				selectionArgs);
 		getContext().getContentResolver().notifyChange(uri, null);
 		return filasActualizadas;
 	}
 
 	private void comprobarColumnas(String[] columnas) {
-		String[] disponibles = { GestorBD.FLD_PRO_ID, GestorBD.FLD_PRO_NOM,
-				GestorBD.FLD_PRO_DES, GestorBD.FLD_PRO_IMA,
-				GestorBD.FLD_PRO_VEN };
+		String[] disponibles = { DAO.FLD_PRO_ID, DAO.FLD_PRO_NOM,
+				DAO.FLD_PRO_DES, DAO.FLD_PRO_IMA,
+				DAO.FLD_PRO_VEN };
 		if (columnas != null) {
 			HashSet<String> columnasSolicitadas = new HashSet<String>(
 					Arrays.asList(columnas));

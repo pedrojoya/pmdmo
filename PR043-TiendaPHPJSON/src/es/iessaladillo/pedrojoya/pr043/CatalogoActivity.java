@@ -84,7 +84,7 @@ public class CatalogoActivity extends FragmentActivity implements
 		// de cursor.
 		Cursor cursor = (Cursor) lstProductos.getItemAtPosition(position);
 		// Obtengo el id del producto seleccionado.
-		idProducto = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_PRO_ID));
+		idProducto = cursor.getLong(cursor.getColumnIndex(DAO.FLD_PRO_ID));
 		// Envío el intent correspondiente.
 		mostrarFichaProducto(idProducto);
 	}
@@ -115,7 +115,7 @@ public class CatalogoActivity extends FragmentActivity implements
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		// Consulto todos los alumnos a través del content provider.
 		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos");
-		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.PRO_TODOS,
+		CursorLoader cLoader = new CursorLoader(this, uri, DAO.PRO_TODOS,
 				null, null, null);
 		return cLoader;
 	}
@@ -166,12 +166,12 @@ public class CatalogoActivity extends FragmentActivity implements
 			// Obtengo los datos desde el cursor y los escribo en las vistas
 			// correspondientes.
 			contenedor.lblNombre.setText(c.getString(c
-					.getColumnIndex(GestorBD.FLD_PRO_NOM)));
+					.getColumnIndex(DAO.FLD_PRO_NOM)));
 			contenedor.lblDescripcion.setText(c.getString(c
-					.getColumnIndex(GestorBD.FLD_PRO_DES)));
+					.getColumnIndex(DAO.FLD_PRO_DES)));
 			// Obtengo el nombre del archivo de la foto.
 			String sNombreImagen = c.getString(c
-					.getColumnIndex(GestorBD.FLD_PRO_IMA));
+					.getColumnIndex(DAO.FLD_PRO_IMA));
 			// Si el producto tiene foto la pongo, y si no pongo una por
 			// defecto.
 			if (sNombreImagen != null && !sNombreImagen.equals("")) {

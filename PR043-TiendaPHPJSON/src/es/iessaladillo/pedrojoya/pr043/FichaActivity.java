@@ -85,21 +85,21 @@ public class FichaActivity extends Activity {
 	private void cargarProducto(long id) {
 		// Consulto en el content provider los datos del producto.
 		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos/" + id);
-		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.PRO_TODOS,
+		CursorLoader cLoader = new CursorLoader(this, uri, DAO.PRO_TODOS,
 				null, null, null);
 		Cursor cursor = cLoader.loadInBackground();
 		if (cursor.getCount() == 1) {
 			// Lo muestro en las vistas correspondientes.
 			cursor.moveToFirst();
 			lblNombre.setText(cursor.getString(cursor
-					.getColumnIndex(GestorBD.FLD_PRO_NOM)));
+					.getColumnIndex(DAO.FLD_PRO_NOM)));
 			lblDescripcion.setText(cursor.getString(cursor
-					.getColumnIndex(GestorBD.FLD_PRO_DES)));
+					.getColumnIndex(DAO.FLD_PRO_DES)));
 			unidadesPedidas = cursor.getLong(cursor
-					.getColumnIndex(GestorBD.FLD_PRO_VEN));
+					.getColumnIndex(DAO.FLD_PRO_VEN));
 			// Obtengo el nombre del archivo de la foto.
 			String sNombreImagen = cursor.getString(cursor
-					.getColumnIndex(GestorBD.FLD_PRO_IMA));
+					.getColumnIndex(DAO.FLD_PRO_IMA));
 			// Si el producto tiene foto la pongo, y si no pongo una por
 			// defecto.
 			if (sNombreImagen != null && !sNombreImagen.equals("")) {
@@ -130,7 +130,7 @@ public class FichaActivity extends Activity {
 		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos/"
 				+ idProducto);
 		ContentValues valores = new ContentValues();
-		valores.put(GestorBD.FLD_PRO_VEN, unidadesPedidas + 1);
+		valores.put(DAO.FLD_PRO_VEN, unidadesPedidas + 1);
 		if (getContentResolver().update(uri, valores, null, null) > 0) {
 			// Incremento el número de unidades pedidas del artículo.
 			unidadesPedidas += 1;

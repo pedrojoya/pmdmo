@@ -92,15 +92,15 @@ class ImportarCatalogo extends AsyncTask<Void, String, Integer> {
 			// ContentValues.
 			JSONObject jProducto = jaProductos.getJSONObject(i);
 			ContentValues valores = new ContentValues();
-			valores.put(GestorBD.FLD_PRO_ID,
+			valores.put(DAO.FLD_PRO_ID,
 					jProducto.getString(ConexionServidor.TAG_PRO_ID));
-			valores.put(GestorBD.FLD_PRO_NOM,
+			valores.put(DAO.FLD_PRO_NOM,
 					jProducto.getString(ConexionServidor.TAG_PRO_NOMBRE));
-			valores.put(GestorBD.FLD_PRO_DES,
+			valores.put(DAO.FLD_PRO_DES,
 					jProducto.getString(ConexionServidor.TAG_PRO_DESCRIPCION));
 			String sProImagen = jProducto
 					.getString(ConexionServidor.TAG_PRO_IMAGEN);
-			valores.put(GestorBD.FLD_PRO_IMA, sProImagen);
+			valores.put(DAO.FLD_PRO_IMA, sProImagen);
 			// Inserto el producto en la BD.
 			Uri uriInsercion = Uri
 					.parse("content://es.iessaladillo.tienda/productos");

@@ -111,7 +111,7 @@ public class CarritoActivity extends FragmentActivity implements
 		// de cursor.
 		Cursor cursor = (Cursor) lstProductos.getItemAtPosition(position);
 		// Obtengo el id del producto seleccionado.
-		idProducto = cursor.getLong(cursor.getColumnIndex(GestorBD.FLD_PRO_ID));
+		idProducto = cursor.getLong(cursor.getColumnIndex(DAO.FLD_PRO_ID));
 		// Envío el intent correspondiente.
 		mostrarFichaProducto(idProducto);
 	}
@@ -136,8 +136,8 @@ public class CarritoActivity extends FragmentActivity implements
 		// Consulto a través del content provider los registros con unidades a
 		// pedir.
 		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos");
-		CursorLoader cLoader = new CursorLoader(this, uri, GestorBD.PRO_TODOS,
-				GestorBD.FLD_PRO_VEN + " > 0", null, null);
+		CursorLoader cLoader = new CursorLoader(this, uri, DAO.PRO_TODOS,
+				DAO.FLD_PRO_VEN + " > 0", null, null);
 		return cLoader;
 	}
 
@@ -188,12 +188,12 @@ public class CarritoActivity extends FragmentActivity implements
 			// Obtengo los datos desde el cursor y los escribo en las
 			// vistas correspondientes.
 			contenedor.lblNombre.setText(c.getString(c
-					.getColumnIndex(GestorBD.FLD_PRO_NOM)));
+					.getColumnIndex(DAO.FLD_PRO_NOM)));
 			contenedor.lblUnidades.setText(getResources().getString(
 					R.string.unidades_pedidas)
-					+ c.getString(c.getColumnIndex(GestorBD.FLD_PRO_VEN)));
+					+ c.getString(c.getColumnIndex(DAO.FLD_PRO_VEN)));
 			String sNombreImagen = c.getString(c
-					.getColumnIndex(GestorBD.FLD_PRO_IMA));
+					.getColumnIndex(DAO.FLD_PRO_IMA));
 			// Si el producto tiene foto la pongo, y si no pongo una por
 			// defecto.
 			if (sNombreImagen != null && !sNombreImagen.equals("")) {

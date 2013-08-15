@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PR076-NavigationDrawerCompat</string>
+    <string name="drawer_open">Abrir panel de navegación</string>
+    <string name="drawer_close">Cerrar panel de navegación</string>
+    <string name="buscar">Buscar</string>
+    <string name="sin_navegador">Lo sentimos, navegador no disponible</string>
+    <string name="arte_del_album">Arte del álbum</string>
+</resources>

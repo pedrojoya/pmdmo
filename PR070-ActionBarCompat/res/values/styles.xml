@@ -1,0 +1,8 @@
+<resources>
+	<style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+	    <!-- Settings values in the android namespace affects API v14+ -->
+
+	    <!-- Settings values in the default namespace affects API v7-13 -->
+	    
+	</style>
+</resources>

@@ -84,16 +84,16 @@ public class PedidoActivity extends Activity {
 			// pedir.
 			Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos");
 			CursorLoader cLoader = new CursorLoader(this, uri,
-					GestorBD.PRO_TODOS, GestorBD.FLD_PRO_VEN + " > 0", null,
+					DAO.PRO_TODOS, DAO.FLD_PRO_VEN + " > 0", null,
 					null);
 			Cursor c = cLoader.loadInBackground();
 			if (c != null) {
 				c.moveToFirst();
 				while (!c.isAfterLast()) {
-					b.append(c.getString(c.getColumnIndex(GestorBD.FLD_PRO_NOM))
+					b.append(c.getString(c.getColumnIndex(DAO.FLD_PRO_NOM))
 							+ " - "
 							+ c.getString(c
-									.getColumnIndex(GestorBD.FLD_PRO_VEN))
+									.getColumnIndex(DAO.FLD_PRO_VEN))
 							+ " unidades\n");
 					c.moveToNext();
 				}

@@ -98,9 +98,9 @@ class EnviarPedido extends AsyncTask<String, String, Boolean> {
 		// Realizo el update en la base de datos a través del content provider.
 		Uri uri = Uri.parse("content://es.iessaladillo.tienda/productos/");
 		ContentValues valores = new ContentValues();
-		valores.put(GestorBD.FLD_PRO_VEN, 0);
+		valores.put(DAO.FLD_PRO_VEN, 0);
 		contexto.getContentResolver().update(uri, valores,
-				GestorBD.FLD_PRO_VEN + " > 0", null);
+				DAO.FLD_PRO_VEN + " > 0", null);
 	}
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PR073-ContextualActionModeCompat</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="alumno">Alumno</string>
+    <string name="asignaturas">Asignaturas</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string-array name="asignaturas">
+        <item>Android</item>
+        <item>Acceso a datos</item>
+        <item>Libre configuración</item>
+    </string-array>
+        <string name="de">" de "</string>
+</resources>
