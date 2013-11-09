@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="vistas_margen_vertical">5dp</dimen>
+    <dimen name="titulo_margen_vertical">5dp</dimen>
+    <dimen name="actividad_margen_vertical">5dp</dimen>    
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">C.C. Puerta Europa</string>
+    <string name="action_settings">Configuración</string>
+    <string name="no_hay_ninguna_tienda_en_la_lista">No hay ninguna tienda en la lista</string>
+    <string name="title_activity_detalle_tienda">Datos de la Tienda</string>
+    <string name="title_activity_detalle_foto">Galería de Fotos</string>
+    <string name="llamar">Llamar</string>
+    <string name="foto_del_centro_comercial">Foto del centro comercial</string>
+    <string name="icono_de_comentarios">Icono de comentarios</string>
+    <string name="ejemplo_comentarios"><b>María</b>: Me gusta mucho este centro comercial porque hay muchas tiendas en las que disfrutar comprando todo tipo de productos.\n\n<b>Raúl</b>: Mis hijos disfrutan mucho en la ludoteca.\n\n<b>Gabriel</b>: Algunas veces hay demasiado ruido en el centro comercial, por lo que merece la pena ir a la hora del almuerzo, cuando hay mucha menos gente.\n\n<b>Ana</b>: En verano con tanto calor apetece estar todo el día en el Centro Comercial con su aire acondicionado.</string>
+
+</resources>

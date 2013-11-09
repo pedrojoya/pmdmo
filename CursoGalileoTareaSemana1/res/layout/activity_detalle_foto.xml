@@ -1,0 +1,32 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/actividad_margen_vertical"
+        android:paddingLeft="@dimen/actividad_margen_horizontal"
+        android:paddingRight="@dimen/actividad_margen_horizontal"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".DetalleFotoActivity" >
+
+        <ImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/foto_del_centro_comercial"
+            android:src="@drawable/centro_comercial" />
+
+        <TextView
+            android:id="@+id/lblComentarios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgFoto"
+            android:drawableTop="@drawable/ic_comentarios"
+            android:text="@string/ejemplo_comentarios" />
+    </RelativeLayout>
+
+</ScrollView>
