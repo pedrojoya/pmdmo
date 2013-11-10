@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* rtp_respond_to_push.xml
+* Shown when receiving a push message
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- Userid  -->
+    <TextView
+        android:id="@+id/rtp_welcomeMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Signup is good!" />
+    
+    <Button
+        android:id="@+id/rtp_sendMessageButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendMessage"
+        android:text="Send Message" />
+    <Button
+        android:id="@+id/rtp_sendMessageAsDataButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendMessageAsData"
+        android:text="Send Message as Data" />
+    
+    <Button
+        android:id="@+id/rtp_sendMessageAsIntentButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendMessageAsIntent"
+        android:text="Send Message as Intent" />
+    
+</LinearLayout>

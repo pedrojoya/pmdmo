@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* create_word_meaning.xml
+* prefix: cwm_
+* Create a word meaning
+* Input controls:
+*    word
+*    details: created by, on
+* 	 meaning text area
+*    submit button: createMeaning
+*
+* Activity: CreateAMeaningActivity
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical" >
+
+    <!-- Word  -->
+    <TextView android:id="@+id/cwm_tv_word"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Word Goes here" />
+    
+    <TextView android:id="@+id/cwm_tv_wordDetail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Word Detail Goes here" />
+    
+    <!-- password1  -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Enter Meaning" />
+    
+    <EditText android:id="@+id/cwm_et_meaning"
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:inputType="textMultiLine"
+        android:background="@drawable/box1"
+        android:layout_margin="15dp"
+        />
+    <Button
+        android:id="@+id/cwm_createWordButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createMeaning"
+        android:layout_weight="0"
+        android:text="Create Word  Meaning" />
+</LinearLayout>

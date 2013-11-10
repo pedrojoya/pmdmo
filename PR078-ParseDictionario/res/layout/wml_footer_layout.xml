@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* wml_footer_layout.xml
+* word_meaning_list_layout
+* prefix: wml_
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+	<Button 
+	   android:id="@+id/wml_CreateMeaningButton"
+	   android:text="Create Meaning" 
+	   android:layout_width="match_parent" 
+	   android:layout_height="wrap_content"
+	   />
+</LinearLayout>

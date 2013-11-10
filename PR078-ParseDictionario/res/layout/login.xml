@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* login.xml
+* Shown when the user is redirected to login
+* Input controls:
+*    userid
+*    password
+*    Reset Password
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- Userid  -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Userid" />
+    
+    <EditText android:id="@+id/userid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <!-- password1  -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="password" />
+    
+    <EditText android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        />
+    
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="login"
+        android:text="Login" />
+    
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="resetPassword"
+        android:text="Send a Password Reset" />
+</LinearLayout>

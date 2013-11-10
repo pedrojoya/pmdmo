@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* wml_layout.xml
+* word_meaning_list_layout
+* prefix: wml_
+* WordMeaningsListActivity
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"  android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <ListView android:id="@android:id/list"
+              android:layout_width="match_parent"
+              android:layout_height="0dip"
+              android:layout_weight="1"
+              android:drawSelectorOnTop="false"
+              />
+	<TextView  
+	   android:id="@android:id/empty"
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="Going to Retrieve Word Meanings For:"
+	    />
+   <Button 
+	   android:id="@+id/wml_CreateMeaningButton"
+	   android:text="Create Meaning" 
+	   android:layout_width="match_parent" 
+	   android:layout_height="wrap_content"
+	   android:onClick="createWordMeaning"
+	   />
+</LinearLayout>

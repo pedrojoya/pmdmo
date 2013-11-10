@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+ -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="ContextLine" parent="@android:style/TextAppearance.Small">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">?android:textColorTertiary</item>
+        </style>
+</resources>

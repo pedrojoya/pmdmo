@@ -10,8 +10,10 @@ import android.view.View;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
 public class MainActivity extends Activity {
@@ -22,15 +24,18 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Inicializamos Parse con el código de aplicación y el código de
-        // cliente.
         Parse.initialize(this, "d2PHQCDhqFMHPJEPxaBHCM6VwNJGAOyb4ZA7bvop",
                 "4udokv0y95AcXIP6DlbRhlDkmM7x4cwBNQAtskqM");
+        // Seguimos la estadísticas de la aplicación.
+        ParseAnalytics.trackAppOpened(getIntent());
         // Consultamos el valor del contador.
+        // ParseQuery consulta = new ParseQuery("Main");
         ParseQuery<ParseObject> consulta = ParseQuery.getQuery("Main");
         consulta.whereEqualTo("id", "main");
         consulta.findInBackground(new FindCallback<ParseObject>() {
+            // consulta.findInBackground(new FindCallback() {
 
+            @Override
             public void done(List<ParseObject> lista, ParseException e) {
                 if (e == null) {
                     // Si el objeto ya existe lo obtiene.
@@ -53,8 +58,8 @@ public class MainActivity extends Activity {
                     Log.d("main", "Error: " + e.getMessage());
                 }
             }
-
         });
+
     }
 
     @Override
@@ -67,6 +72,11 @@ public class MainActivity extends Activity {
     public void btnIncrementarOnClick(View v) {
         datosMain.increment("contador");
         datosMain.saveInBackground();
+        // Se envía un push.
+        ParsePush push = new ParsePush();
+        push.setChannel("contador");
+        push.setMessage("Nuevo valor: " + datosMain.getInt("contador"));
+        push.sendInBackground();
     }
 
 }

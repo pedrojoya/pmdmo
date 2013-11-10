@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* welcome.xml
+* Shown when the user is redirected to login
+* Input controls:
+*    userid
+*    password
+*    Reset Password
+* prefix: wlc
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/showUserButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showUsers"
+        android:text="Show Users" />
+    
+    <Button
+        android:id="@+id/createWordButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createWord"
+        android:text="Create a Word" />
+    <Button
+        android:id="@+id/showWordList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showWordListActivity"
+        android:text="Show Word List" />
+    
+    <Button
+        android:id="@+id/wlc_testPushButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="testPush"
+        android:text="Test Push" />
+</LinearLayout>

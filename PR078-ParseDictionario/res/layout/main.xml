@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* main.xml
+* Shows login/logout state buttons
+* Input controls: when not logged in
+*    Signup
+*    Login
+*    Reset Password
+* Input controls: when logged in
+*    Logout
+*    Welcome message
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/SignupButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="signUp"
+        android:text="SignUp" />
+    
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="login"
+        android:text="Login" />
+    
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="logout"
+        android:text="Logout" />
+    
+    <Button 
+        android:id="@+id/welcomeButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="welcome"
+        android:text="Welcome" />
+</LinearLayout>

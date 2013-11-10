@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.androidbook.parse"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="14"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name="com.androidbook.parse.ParseApplication"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@android:style/Theme.Light"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".ParseStarterProjectActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SignupActivity"
+            android:label="Signup"/>
+        <activity android:name=".LoginActivity"
+            android:label="Login"/>
+        <activity android:name=".SignupSuccessActivity"
+            android:label="Login"/>
+        <activity android:name=".PasswordResetActivity"
+            android:label="Reset Password"/>
+        <activity android:name=".PasswordResetSuccessActivity"
+            android:label="Reset Password"/>
+        <activity android:name=".UserListActivity"
+            android:label="List of Users"/>
+        <activity android:name=".WelcomeActivity"
+            android:label="Welcome"/>
+        <activity android:name=".CreateAWordActivity"
+            android:label="Create A Word"/>
+        <activity android:name=".WordListActivity"
+            android:label="List of Words"/>
+        <activity android:name=".WordMeaningsListActivity"
+            android:label="List of Words"/>
+        <activity android:name="com.androidbook.parse.CreateAMeaningActivity"
+            android:label="Provide Meaning"/>
+        <activity android:name="com.androidbook.parse.RespondToPushActivity"
+            android:launchMode="singleTop"
+            android:label="Respond"/>
+        <!--
+        ************************************************************************
+        * Push needs
+        ************************************************************************
+        -->
+		<service android:name="com.parse.PushService" />
+		<receiver android:name="com.parse.ParseBroadcastReceiver">
+		  <intent-filter>
+		    <action android:name="android.intent.action.BOOT_COMPLETED" />
+		    <action android:name="android.intent.action.USER_PRESENT" />
+		  </intent-filter>
+		</receiver>
+		
+		<receiver 
+		    android:name=".TestBroadcastReceiver"
+		    android:exported="false"
+		    >
+			<intent-filter>
+			  <action android:name="com.androidbook.parse.TestPushAction" />
+			</intent-filter>
+		</receiver>		
+        
+        </application>
+</manifest>

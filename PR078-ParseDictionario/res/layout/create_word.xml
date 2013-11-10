@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+*********************************************
+* create_word.xml
+* Create a word
+* Input controls:
+*    word
+*    meaning
+* 	 createWord button
+*********************************************
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- Userid  -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the word" />
+    
+    <EditText android:id="@+id/word"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <!-- password1  -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Meaning" />
+    
+    <EditText android:id="@+id/meaning"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        />
+    
+
+    <Button
+        android:id="@+id/createWordButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createWord"
+        android:text="Create Word" />
+</LinearLayout>

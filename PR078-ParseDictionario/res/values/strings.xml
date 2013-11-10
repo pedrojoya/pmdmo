@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ParseStarterProjectActivity!</string>
+    <string name="app_name">Playing with Parse!</string>
+    <dimen name="forty_pixels">40px</dimen>
+    <dimen name="medium_size">20sp</dimen>
+    <dimen name="medium_minus_size">15sp</dimen>
+</resources>
