@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".DetalleFotoActivity" >
+
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/foto_del_centro_comercial"
+        android:paddingBottom="@dimen/simple"
+        android:paddingLeft="10dp"
+        android:paddingRight="@dimen/simple"
+        android:paddingTop="10dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/centro_comercial" />
+
+    <fragment
+        android:id="@+id/frgComentarios"
+        android:name="es.iessaladillo.pedrojoya.cursogalileotareasemana1.fragmentos.ComentariosTiendaFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_comentarios" />
+
+</LinearLayout>

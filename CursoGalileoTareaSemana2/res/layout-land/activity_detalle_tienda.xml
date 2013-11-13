@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    tools:context=".DetalleTiendaActivity" >
+
+    <fragment
+        android:id="@+id/frgInfoTienda"
+        android:name="es.iessaladillo.pedrojoya.cursogalileotareasemana1.fragmentos.InfoTiendaFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_tienda_info" />
+
+    <fragment
+        android:id="@+id/frgComentariosTienda"
+        android:name="es.iessaladillo.pedrojoya.cursogalileotareasemana1.fragmentos.ComentariosTiendaFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_comentarios" />
+
+</LinearLayout>
