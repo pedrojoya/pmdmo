@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Centro" >
         <activity
-            android:name="es.iessaladillo.pedrojoya.cursogalileotareasemana1.actividades.ListaTiendasActivity"
+            android:name="es.iessaladillo.pedrojoya.cursogalileotareasemana1.actividades.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

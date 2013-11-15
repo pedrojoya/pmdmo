@@ -20,7 +20,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--  TEMA -->
-    <style name="Theme.Centro" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <style name="Theme.Centro" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_centro</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Centro</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Centro</item>

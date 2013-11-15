@@ -17,5 +17,11 @@
     <string name="compartir_recomendacion">Compartir recomendación</string>
     <string name="elija_aplicacion">Elija aplicación</string>
     <string name="enviar_comentario">Enviar comentario</string>
-    
+    <string name="listado">Listado</string>
+    <string name="mapa">Mapa</string>
+    <string name="title_activity_tiendas">Tiendas</string>
+    <string name="foto_de_pagina">Foto de página</string>
+    <string name="cerrar_panel_de_navegacion">Cerrar panel de navegación</string>
+    <string name="abrir_panel_de_navegacion">Abrir panel de navegación</string>
+
 </resources>
