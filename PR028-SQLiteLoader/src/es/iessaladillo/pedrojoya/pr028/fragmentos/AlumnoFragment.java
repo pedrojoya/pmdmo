@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import es.iessaladillo.pedrojoya.pr028.R;
+import es.iessaladillo.pedrojoya.pr028.bd.BD;
 import es.iessaladillo.pedrojoya.pr028.bd.DAO;
-import es.iessaladillo.pedrojoya.pr028.bd.Instituto;
 import es.iessaladillo.pedrojoya.pr028.modelos.Alumno;
 import es.iessaladillo.pedrojoya.pr028.proveedores.AlumnosContentProvider;
 
@@ -27,7 +27,6 @@ public class AlumnoFragment extends Fragment {
     public static final String MODO_EDITAR = "EDITAR";
 
     // Variables a nivel de clase.
-    private DAO dao;
     private EditText txtNombre;
     private EditText txtTelefono;
     private EditText txtDireccion;
@@ -97,7 +96,7 @@ public class AlumnoFragment extends Fragment {
         // provider en un hilo diferente al hilo principal.
         Uri uri = Uri.parse(AlumnosContentProvider.URI_BASE + "/" + id);
         CursorLoader cLoader = new CursorLoader(this.getActivity(), uri,
-                Instituto.Alumno.TODOS, null, null, null);
+                BD.Alumno.TODOS, null, null, null);
         Cursor cursor = cLoader.loadInBackground();
         // Si no se ha encontrado el alumno, se informa y se pasa al modo
         // Agregar.

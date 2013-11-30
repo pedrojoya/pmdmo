@@ -1,0 +1,22 @@
+<!-- Layout con panel de navegación. Debe ser el elemento raíz. -->
+<android.support.v4.widget.DrawerLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drlPanelNavegacion"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <!-- Contenido principal. Debe ser el primer hijo y ocupar todo el padre. -->
+    <FrameLayout
+        android:id="@+id/frmContenido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!-- Contenido del panel de navegación. Su alineación debe ser "start",
+         ocupar todo el alto del padre y tener un ancho fijo < 320dp.
+         Se establece el modo simple de selección para que quede seleccionado. -->
+    <ListView
+        android:id="@+id/lstNavegacion"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/casi_blanco"
+        android:choiceMode="singleChoice" />
+</android.support.v4.widget.DrawerLayout>

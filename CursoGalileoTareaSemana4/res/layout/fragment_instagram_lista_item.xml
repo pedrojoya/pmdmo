@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+     >
+<LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    
+    android:background="@drawable/fondo_foto">
+	<!-- com.android.volley.toolbox.NetworkImageView  -->
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="@dimen/ancho_foto_instagram"
+        android:layout_height="@dimen/alto_foto_instagram"
+        android:background="@drawable/fondo_leyenda_foto"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/foto" />
+
+    <TextView
+        android:id="@+id/lblUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/simple"
+        android:paddingBottom="@dimen/simple"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="@drawable/fondo_leyenda_foto"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+</LinearLayout>
+</RelativeLayout>

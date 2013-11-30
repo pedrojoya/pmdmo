@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="doble">10dp</dimen>
+    <dimen name="simple">5dp</dimen>
+    <dimen name="minimo">2dp</dimen>
+    <dimen name="ancho_foto">280dp</dimen>
+    <dimen name="alto_foto">210dp</dimen>
+    <dimen name="ancho_foto_instagram">280dp</dimen>
+    <dimen name="alto_foto_instagram">280dp</dimen>
+    <dimen name="ancho_logo_tienda">80dp</dimen>
+    <dimen name="alto_logo_tienda">30dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+</resources>

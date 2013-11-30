@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/casi_blanco" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/llBotonera"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/doble" >
+
+        <ListView
+            android:id="@+id/lstFotos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/doble" />
+
+        <RelativeLayout
+            android:id="@+id/rlListaFotosVacia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:visibility="invisible" >
+
+            <ImageView
+                android:id="@+id/imgListaFotosVacia"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/doble"
+                android:clickable="true"
+                android:contentDescription="@string/no_hay_ninguna_foto_en_la_lista"
+                android:src="@drawable/ic_lista_tiendas_vacia" />
+
+            <TextView
+                android:id="@+id/lblListaFotosVacia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgListaFotosVacia"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:text="@string/no_hay_ninguna_foto_en_la_lista"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llBotonera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/simple"
+        android:paddingTop="@dimen/simple"
+        android:background="@color/mas_claro"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/btnHacerFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fondo_boton_camara"
+            android:clickable="true"
+            android:contentDescription="@string/hacer_foto"
+            android:src="@drawable/ic_menu_camera" />
+    </LinearLayout>
+
+</RelativeLayout>

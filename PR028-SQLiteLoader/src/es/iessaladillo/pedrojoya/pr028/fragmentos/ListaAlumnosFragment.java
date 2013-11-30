@@ -25,7 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import es.iessaladillo.pedrojoya.pr028.R;
 import es.iessaladillo.pedrojoya.pr028.bd.DAO;
-import es.iessaladillo.pedrojoya.pr028.bd.Instituto;
+import es.iessaladillo.pedrojoya.pr028.bd.BD;
 import es.iessaladillo.pedrojoya.pr028.modelos.Alumno;
 import es.iessaladillo.pedrojoya.pr028.proveedores.AlumnosContentProvider;
 
@@ -156,8 +156,8 @@ public class ListaAlumnosFragment extends Fragment implements
         gestor.initLoader(0, null, this);
         // Se establece un SimpleCursorAdapter como adaptador para la lista, que
         // inicialmente manejará un cursor nulo.
-        String[] from = { Instituto.Alumno.NOMBRE, Instituto.Alumno.CURSO,
-                Instituto.Alumno.TELEFONO, Instituto.Alumno.DIRECCION };
+        String[] from = { BD.Alumno.NOMBRE, BD.Alumno.CURSO,
+                BD.Alumno.TELEFONO, BD.Alumno.DIRECCION };
         int[] to = { R.id.lblNombre, R.id.lblCurso, R.id.lblTelefono,
                 R.id.lblDireccion };
         adaptador = new SimpleCursorAdapter(this.getActivity(),
@@ -214,7 +214,7 @@ public class ListaAlumnosFragment extends Fragment implements
         // Se retorna el cargador del cursor. Se le pasa el contexto, la uri en
         // la que consultar los datos y las columnas a obtener.
         return new CursorLoader(getActivity(), AlumnosContentProvider.URI_BASE,
-                Instituto.Alumno.TODOS, null, null, null);
+                BD.Alumno.TODOS, null, null, null);
     }
 
     // Cuando terminan de cargarse los datos en el cargador.

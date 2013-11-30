@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
 import es.iessaladillo.pedrojoya.pr028.bd.DAO;
-import es.iessaladillo.pedrojoya.pr028.bd.Instituto;
+import es.iessaladillo.pedrojoya.pr028.bd.BD;
 
 public class AlumnosContentProvider extends ContentProvider {
 
@@ -77,14 +77,14 @@ public class AlumnosContentProvider extends ContentProvider {
             break;
         case TIPO_URI_ID:
             // Se agrega al where la selección de ese alumno.
-            where = Instituto.Alumno._ID + "=" + uri.getLastPathSegment()
+            where = BD.Alumno._ID + "=" + uri.getLastPathSegment()
                     + (TextUtils.isEmpty(selection) ? "" : " and " + where);
             break;
         default:
             throw new IllegalArgumentException("URI desconocida: " + uri);
         }
         // Se realiza la consulta.
-        Cursor cursor = bd.query(Instituto.Alumno.TABLA, projection, where,
+        Cursor cursor = bd.query(BD.Alumno.TABLA, projection, where,
                 selectionArgs, null, null, sortOrder);
         // Se notifica a los escuchadores del content provider.
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -104,14 +104,14 @@ public class AlumnosContentProvider extends ContentProvider {
             break;
         case TIPO_URI_ID:
             // Se agrega al where la selección de ese alumno.
-            where = Instituto.Alumno._ID + "=" + uri.getLastPathSegment()
+            where = BD.Alumno._ID + "=" + uri.getLastPathSegment()
                     + (TextUtils.isEmpty(selection) ? "" : " and " + where);
             break;
         default:
             throw new IllegalArgumentException("URI desconocida: " + uri);
         }
         // Se quieren borrar todos los alumnos.
-        filasBorradas = bd.delete(Instituto.Alumno.TABLA, where, selectionArgs);
+        filasBorradas = bd.delete(BD.Alumno.TABLA, where, selectionArgs);
         getContext().getContentResolver().notifyChange(uri, null);
         return filasBorradas;
     }
@@ -124,7 +124,7 @@ public class AlumnosContentProvider extends ContentProvider {
         int tipoURI = validadorURIs.match(uri);
         switch (tipoURI) {
         case TIPO_URI_TODOS:
-            id = bd.insert(Instituto.Alumno.TABLA, null, values);
+            id = bd.insert(BD.Alumno.TABLA, null, values);
             break;
         default:
             throw new IllegalArgumentException("URI desconocida: " + uri);
@@ -151,21 +151,21 @@ public class AlumnosContentProvider extends ContentProvider {
             break;
         case TIPO_URI_ID:
             // Se agrega al where la selección de ese alumno.
-            where = Instituto.Alumno._ID + "=" + uri.getLastPathSegment()
+            where = BD.Alumno._ID + "=" + uri.getLastPathSegment()
                     + (TextUtils.isEmpty(selection) ? "" : " and " + where);
             break;
         default:
             throw new IllegalArgumentException("URI desconocida: " + uri);
         }
         // Se quieren borrar todos los alumnos.
-        filasActualizadas = bd.update(Instituto.Alumno.TABLA, values, where,
+        filasActualizadas = bd.update(BD.Alumno.TABLA, values, where,
                 selectionArgs);
         getContext().getContentResolver().notifyChange(uri, null);
         return filasActualizadas;
     }
 
     private void comprobarColumnas(String[] columnas) {
-        String[] disponibles = Instituto.Alumno.TODOS;
+        String[] disponibles = BD.Alumno.TODOS;
         if (columnas != null) {
             HashSet<String> columnasSolicitadas = new HashSet<String>(
                     Arrays.asList(columnas));

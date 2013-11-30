@@ -13,6 +13,7 @@ import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
 
 public class ImagenesFragment extends Fragment implements OnPageChangeListener {
 
+    // Vistas.
     private PaginasAdapter adaptador;
     private ViewPager paginador;
     private FragmentManager gestor;
@@ -20,24 +21,26 @@ public class ImagenesFragment extends Fragment implements OnPageChangeListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Se infla el layout.
+        // Se infla el layout correspondiente.
         View v = inflater.inflate(R.layout.fragment_imagenes, container, false);
         paginador = (ViewPager) v.findViewById(R.id.vpPaginador);
-        // Se crea el adaptador que mostrará el fragmento correspondiente y se
-        // le asigna al paginador.
+        // Se retorna la vista que debe mostrar el fragmento.
         return v;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        gestor = getChildFragmentManager(); // MUY IMPORTANTE, SINO SE MUESTRA
-                                            // EN BLANCO LA PRIMERA PÁGINA.
+        // Se obtiene el gestor de fragmentos. Es MUY IMPORTANTE, que se realice
+        // con getChildFragmentManager y no con getFragmentManager, si no
+        // muestra en blanco la primera página del ViewPager.
+        gestor = getChildFragmentManager();
+        // Se crea el adaptador que mostrará el fragmento correspondiente y se
+        // le asigna al paginador.
         adaptador = new PaginasAdapter(gestor);
         paginador.setAdapter(adaptador);
-        // Se establece que la actividad actúa como objeto //listener// cuando
+        // Se establece que la actividad actúe como objeto listener cuando
         // se cambie la página en el paginador.
         paginador.setOnPageChangeListener(this);
-        paginador.setCurrentItem(0);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -54,13 +57,14 @@ public class ImagenesFragment extends Fragment implements OnPageChangeListener {
             super(fm);
         }
 
-        // Retorna el fragmento que debe mostrarse.
+        // Retorna el fragmento que debe mostrarse, dependiendo de la posición
+        // recibida.
         @Override
         public Fragment getItem(int position) {
-            // Se crea el objeto Fragment del fragmento correspondiente,
-            // pasándolo el resId de la foto a mostrar.
+            // Se crea el objeto Fragment correspondiente a la página.
             Fragment frgPagina = new PaginaFragment();
-            // Se le pasa como parámetro el número de página.
+            // Se le pasa como parámetro el número de página a la que
+            // corresponde, para que muestre la foto adecuada.
             Bundle parametros = new Bundle();
             parametros.putInt(PaginaFragment.PAR_RESID_FOTO,
                     resIdFotos[position]);
@@ -90,8 +94,10 @@ public class ImagenesFragment extends Fragment implements OnPageChangeListener {
 
     }
 
+    // Al cambiar la página en el ViewPager. Recibe el índice de la página a la
+    // que se ha pasado.
     @Override
-    public void onPageSelected(int arg0) {
+    public void onPageSelected(int numPagina) {
         // TODO Auto-generated method stub
 
     }

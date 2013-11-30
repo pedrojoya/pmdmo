@@ -10,21 +10,18 @@ import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
 
 public class PaginaFragment extends Fragment {
 
+    // Constantes.
     public static final String PAR_RESID_FOTO = "resIdFoto";
-    private ImageView imgFoto;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onActivityCreated(savedInstanceState);
-    }
+    // Vistas.
+    private ImageView imgFoto;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Se infla el layout.
+        // Se infla el layout correspondiente.
         View v = inflater.inflate(R.layout.fragment_pagina, container, false);
-        // Se obtienen las referencias a las vistas.
+        // Se obtienen e inicializan las referencias a las vistas.
         getVistas(v);
         // Se muestra la foto correspondiente
         mostrarFoto();
@@ -32,13 +29,15 @@ public class PaginaFragment extends Fragment {
         return v;
     }
 
+    // Obtiene e inicializa las vistas.
     private void getVistas(View v) {
         imgFoto = (ImageView) v.findViewById(R.id.imgFoto);
     }
 
+    // Establece como imagen del ImageView la foto correspondiente.
     private void mostrarFoto() {
         // Se obtiene el parámetro que me han pasado con el resId de la foto a
-        // mostrar.
+        // mostrar y se le asigna al ImageView.
         int resIdFoto = getArguments().getInt(PAR_RESID_FOTO,
                 R.drawable.ic_launcher);
         imgFoto.setImageResource(resIdFoto);

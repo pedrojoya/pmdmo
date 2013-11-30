@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+  ptrHeaderStyle above refers to this style which contains all of the
+  DefaultHeaderTransformer customization values. The name and parent
+  can be anything, but only the attributes defined in 
+  library/res/attrs.xml are actually read in. 
+    -->
+    <style name="Widget.Custom.PtrHeader" parent="android:Widget">
+
+        <!-- Color to tint the progress bar -->
+        <item name="ptrProgressBarColor">@color/claro</item>
+    </style>
+
+</resources>

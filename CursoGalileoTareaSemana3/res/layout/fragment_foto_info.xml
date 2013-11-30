@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fondo_foto"
+    android:padding="@dimen/simple" >
+
+    <com.parse.ParseImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llLeyenda"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/simple"
+        android:contentDescription="@string/foto" />
+
+    <LinearLayout
+        android:id="@+id/llLeyenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/fondo_leyenda_foto"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/lblDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/simple"
+            android:text="2013-12-07 14:15:16"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_favoritos"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:text="0 favoritos"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+</RelativeLayout>

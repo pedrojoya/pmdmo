@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="opcionesNavegacion">
+        <item>Imágenes</item>
+        <item>Tiendas</item>
+        <item>Comunidad</item>
+        <item>Instagram</item>
+    </string-array>
+
+</resources>

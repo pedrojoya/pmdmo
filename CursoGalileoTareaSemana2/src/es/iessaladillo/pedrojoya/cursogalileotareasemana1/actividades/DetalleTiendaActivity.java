@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.cursogalileotareasemana1.actividades;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class DetalleTiendaActivity extends Activity {
     private TextView lblTelefono;
     private TextView lblWebsite;
     private TextView lblEmail;
+    private ActionBar barra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,13 @@ public class DetalleTiendaActivity extends Activity {
         setContentView(R.layout.activity_detalle_tienda);
         // Se obtienen e inicializan las vistas.
         getVistas();
+        // Se establece que la ActionBar muestre un icono para el conmutador.
+        barra = getActionBar();
+        barra.setDisplayHomeAsUpEnabled(true);
+        barra.setHomeButtonEnabled(true);
     }
 
+    // Obtiene e inicializa los objetos vista.
     private void getVistas() {
         // Se obtienen las vistas.
         lblNombre = (TextView) findViewById(R.id.lblNombre);
@@ -39,7 +46,7 @@ public class DetalleTiendaActivity extends Activity {
         Linkify.addLinks(lblWebsite, Linkify.WEB_URLS);
         Linkify.addLinks(lblEmail, Linkify.EMAIL_ADDRESSES);
         // Se obtiene el extra del Intent con el que ha sido llamada la
-        // actividad.
+        // actividad y se actualizan las vistas con los datos.
         Intent i = getIntent();
         if (i != null && i.hasExtra(EXTRA_TIENDA)) {
             lblNombre.setText(i.getStringExtra(EXTRA_TIENDA));
@@ -50,6 +57,11 @@ public class DetalleTiendaActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Dependiendo del ítem del menú pulsado.
         switch (item.getItemId()) {
+        case android.R.id.home:
+            // Al pulsar sobre el icono de navegación se vuelve a la actividad
+            // anterior.
+            onBackPressed();
+            break;
         case R.id.mnuFavorito:
             // marcarComoFavorito();
             // Se pone este código SOLO para poder probar la actividad de
@@ -59,6 +71,7 @@ public class DetalleTiendaActivity extends Activity {
             startActivity(intent);
             break;
         case R.id.mnuCompartir:
+            // Se comparten los datos de la tienda.
             compartir();
             break;
         default:
@@ -78,14 +91,16 @@ public class DetalleTiendaActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, recomendacion);
+        // Se envía el intent creando un seleccionador de aplicación.
         startActivity(Intent.createChooser(intent,
                 getString(R.string.compartir_recomendacion)));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Se infla el menú correspondiente.
         getMenuInflater().inflate(R.menu.detalle_tienda, menu);
+        // Se indica que ya se ha procesado el evento.
         return true;
     }
 

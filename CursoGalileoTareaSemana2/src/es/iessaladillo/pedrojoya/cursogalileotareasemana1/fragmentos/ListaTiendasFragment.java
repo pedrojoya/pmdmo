@@ -15,24 +15,21 @@ import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
 import es.iessaladillo.pedrojoya.cursogalileotareasemana1.actividades.DetalleTiendaActivity;
 
 public class ListaTiendasFragment extends Fragment {
+
+    // Vistas.
     private RelativeLayout rlListaTiendasVacia;
     private ListView lstTiendas;
     private ArrayAdapter<String> adaptador;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Se infla el layout.
+        // Se infla el layout correspondiente..
         View v = inflater.inflate(R.layout.fragment_lista_tiendas, container,
-                false); // NOTA: último parámetro debe ser false, si no da
-                        // error.
+                false);
+        // Se obtienen e inicializan las vistas.
         getVistas(v);
+        // Se retorna la vista que debe mostrar el fragmento.
         return v;
     }
 
@@ -62,18 +59,20 @@ public class ListaTiendasFragment extends Fragment {
                 // Se obtiene del adaptador de la lista los datos del elemento
                 // pulsado.
                 String tienda = (String) lstTiendas.getItemAtPosition(position);
+                // Se muestra la actividad de detalle de la tienda.
                 mostrarDetalleTienda(tienda);
             }
 
         });
     }
 
+    // Muestra la actividad de detalle de la tienda.
     private void mostrarDetalleTienda(String tienda) {
         // Se crea el intent para llamar a la actividad de detalle de tienda, y
         // se le pasa la tienda como dato extra.
         Intent i = new Intent(getActivity(), DetalleTiendaActivity.class);
         i.putExtra(DetalleTiendaActivity.EXTRA_TIENDA, tienda);
-        // Se inicia la actividad de detalle de tienda.
+        // Se envía el intent.
         startActivity(i);
     }
 

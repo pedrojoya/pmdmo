@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="tiendas">
+    <item>Mercadona</item>
+    <item>Aromas</item>
+    <item>El Potro</item>
+    <item>El Baúl</item>
+    <item>Décimas</item>
+    <item>Sport Zone</item>
+    <item>Calzedonia</item>
+    <item>Cortefiel</item>
+    <item>Gales Fabiola</item>
+    <item>MaryPaz</item>
+    <item>Mayoral</item>
+    <item>Primark</item>
+    <item>Springfield</item>
+</string-array>    
+</resources>

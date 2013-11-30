@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_foto"
+    android:padding="@dimen/simple"
+    tools:ignore="HardcodedText" >
+
+    <TextView
+        android:id="@+id/lblLeyenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_comentarios"
+        android:gravity="center_vertical"
+        android:text="Comentarios"
+        android:textColor="@color/principal"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lstComentarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llBotonera"
+        android:layout_below="@+id/lblLeyenda"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="2dp"
+        android:paddingLeft="@dimen/simple"
+        android:paddingRight="@dimen/simple"
+        android:paddingBottom="@dimen/simple" />
+
+    <RelativeLayout
+        android:id="@+id/llBotonera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparente"
+        android:paddingBottom="@dimen/simple"
+        android:paddingLeft="@dimen/simple"
+        android:paddingRight="@dimen/simple"
+        android:paddingTop="@dimen/minimo" >
+
+        <EditText
+            android:id="@+id/txtComentario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btnEnviar"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/btnEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txtComentario"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/txtComentario"
+            android:layout_marginLeft="@dimen/minimo"
+            android:clickable="true"
+            android:contentDescription="@string/enviar_comentario"
+            android:paddingBottom="@dimen/simple"
+            android:paddingLeft="@dimen/simple"
+            android:paddingTop="@dimen/simple"
+            android:src="@drawable/ic_action_send_now" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -10,15 +10,9 @@ import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
 public class ComunidadFragment extends Fragment {
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Se infla el layout.
+        // Se infla el layout correspondiente.
         View v = inflater
                 .inflate(R.layout.fragment_comunidad, container, false);
         return v;

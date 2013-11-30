@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="acciones_dialogo_foto">
+        <item>Hacer foto</item>
+        <item>Elegir de la galería</item>
+    </string-array>
+
+</resources>

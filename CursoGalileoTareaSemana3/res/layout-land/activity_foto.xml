@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:padding="@dimen/simple"
+    tools:context=".FotoActivity" >
+
+    <FrameLayout
+        android:id="@+id/frmInfoFoto"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/simple"
+        android:layout_weight="4" />
+
+    <FrameLayout
+        android:id="@+id/frmComentariosFoto"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6" />
+
+</LinearLayout>

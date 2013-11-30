@@ -41,15 +41,15 @@ public class DAO {
         // del registro actual del cursor.
         Alumno alumno = new Alumno();
         alumno.setId(cursorAlumno.getLong(cursorAlumno
-                .getColumnIndex(Instituto.Alumno._ID)));
+                .getColumnIndex(BD.Alumno._ID)));
         alumno.setNombre(cursorAlumno.getString(cursorAlumno
-                .getColumnIndex(Instituto.Alumno.NOMBRE)));
+                .getColumnIndex(BD.Alumno.NOMBRE)));
         alumno.setCurso(cursorAlumno.getString(cursorAlumno
-                .getColumnIndex(Instituto.Alumno.CURSO)));
+                .getColumnIndex(BD.Alumno.CURSO)));
         alumno.setTelefono(cursorAlumno.getString(cursorAlumno
-                .getColumnIndex(Instituto.Alumno.TELEFONO)));
+                .getColumnIndex(BD.Alumno.TELEFONO)));
         alumno.setDireccion(cursorAlumno.getString(cursorAlumno
-                .getColumnIndex(Instituto.Alumno.DIRECCION)));
+                .getColumnIndex(BD.Alumno.DIRECCION)));
         // Retorno el objeto Alumno.
         return alumno;
     }
@@ -58,10 +58,10 @@ public class DAO {
     public static ContentValues alumnoToContentValues(Alumno alumno) {
         // Creamos un la lista de pares clave-valor con cada campo-valor.
         ContentValues valores = new ContentValues();
-        valores.put(Instituto.Alumno.NOMBRE, alumno.getNombre());
-        valores.put(Instituto.Alumno.CURSO, alumno.getCurso());
-        valores.put(Instituto.Alumno.TELEFONO, alumno.getTelefono());
-        valores.put(Instituto.Alumno.DIRECCION, alumno.getDireccion());
+        valores.put(BD.Alumno.NOMBRE, alumno.getNombre());
+        valores.put(BD.Alumno.CURSO, alumno.getCurso());
+        valores.put(BD.Alumno.TELEFONO, alumno.getTelefono());
+        valores.put(BD.Alumno.DIRECCION, alumno.getDireccion());
         return valores;
     }
 

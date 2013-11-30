@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
 
 public class TiendasFragment extends Fragment {
+
+    // Vistas.
     private ActionBar barra;
     private ActionBarActivity actividad;
 
@@ -32,36 +34,39 @@ public class TiendasFragment extends Fragment {
         // Se crea y asocia el listener a cada pestaña.
         tabListado.setTabListener(new GestorTabListener(frgListado));
         tabMapa.setTabListener(new GestorTabListener(frgNotas));
-        // Se añaden las pestañas a la action bar (borrando antes las
-        // existentes)
+        // Se añaden las pestañas a la action bar.
         barra.addTab(tabListado);
         barra.addTab(tabMapa);
         // Si venimos de un estado anterior.
         if (savedInstanceState != null) {
             // Se coloca en la pestaña en la que estaba.
             barra.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+        } else {
+            barra.setSelectedNavigationItem(0);
         }
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        // Se infla el layout.
-        View v = inflater.inflate(R.layout.fragment_tiendas, container, false);
-        return v;
+    public void onDestroyView() {
+        // Se eliminan las tabs (para que no se vean en la actividad cuando en
+        // el navigation drawer se selecciona la opción correpondiente a otro
+        // fragmento) y se establece el modo de navegación normal.
+        barra.removeAllTabs();
+        barra.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        super.onDestroyView();
     }
 
     @Override
-    public void onPause() {
-        // Se eliminan las tabs (para que no se vean en la actividad cuando en
-        // el navigation drawer se selecciona la opción correpondiente a otro
-        // fragmento. Se establece el modo de navegación normal.
-        barra.removeAllTabs();
-        barra.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        super.onPause();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        // Se infla el layout correspondiente.
+        View v = inflater.inflate(R.layout.fragment_tiendas, container, false);
+        // Se retorna la vista que debe mostrar el fragmento.
+        return v;
     }
 
+    // Cuando se va a recrear el fragmento.
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -69,7 +74,7 @@ public class TiendasFragment extends Fragment {
         outState.putInt("tab", barra.getSelectedNavigationIndex());
     }
 
-    // Gestor de pestañas.
+    // Clase Gestor de pestañas.
     public class GestorTabListener implements ActionBar.TabListener {
 
         // Fragmento correspondiente de la pestaña.
@@ -88,8 +93,7 @@ public class TiendasFragment extends Fragment {
         // Al convertir en activa una pestaña.
         public void onTabSelected(Tab tab, FragmentTransaction ft) {
             // Inserto el fragmento correspondiente en el contenedor,
-            // reemplazando el que
-            // tuviera.
+            // reemplazando el que tuviera.
             ft.replace(R.id.frlTiendas, fragment);
         }
 

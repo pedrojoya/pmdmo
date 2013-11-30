@@ -8,19 +8,19 @@ public class Helper extends SQLiteOpenHelper {
 
 	// Constantes de sentencias SQL.
 	private static final String TBL_ALUMNO_CREATE = "create table "
-			+ Instituto.Alumno.TABLA + "(" + Instituto.Alumno._ID
-			+ " integer primary key autoincrement, " + Instituto.Alumno.NOMBRE
-			+ " text not null, " + Instituto.Alumno.CURSO + " text not null, "
-			+ Instituto.Alumno.TELEFONO + " text not null, "
-			+ Instituto.Alumno.DIRECCION + " text);";
+			+ BD.Alumno.TABLA + "(" + BD.Alumno._ID
+			+ " integer primary key autoincrement, " + BD.Alumno.NOMBRE
+			+ " text not null, " + BD.Alumno.CURSO + " text not null, "
+			+ BD.Alumno.TELEFONO + " text not null, "
+			+ BD.Alumno.DIRECCION + " text);";
 	private static final String TBL_ALUMNO_DROP = "drop table if exists "
-			+ Instituto.Alumno.TABLA;
+			+ BD.Alumno.TABLA;
 
 	// Constructor. Recibe el contexto.
 	public Helper(Context ctx) {
 		// Se llama al constructor del padre, que es quien realmente crea o
 		// actualiza la versión de BD si es necesario.
-		super(ctx, Instituto.BD_NOMBRE, null, Instituto.BD_VERSION);
+		super(ctx, BD.BD_NOMBRE, null, BD.BD_VERSION);
 	}
 
 	// Cuando es necesario crear la BD.
