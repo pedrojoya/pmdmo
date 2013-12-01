@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.galileo.datos;
 
+import android.content.ContentValues;
+
 import com.parse.ParseObject;
 
 public class Foto implements Comparable<Foto> {
@@ -65,6 +67,16 @@ public class Foto implements Comparable<Foto> {
     public int compareTo(Foto another) {
         // Las fotos se ordenan descendientemente en función de su descripción.
         return (descripcion.compareTo(another.descripcion) * -1);
+    }
+
+    // Retorna un ContentValues con los datos.
+    public ContentValues toContentValues() {
+        ContentValues objeto = new ContentValues();
+        objeto.put(BD.Foto.OBJECTID, objectId);
+        objeto.put(BD.Foto.URL, url);
+        objeto.put(BD.Foto.DESCRIPCION, descripcion);
+        objeto.put(BD.Foto.FAVORITOS, favoritos);
+        return objeto;
     }
 
 }

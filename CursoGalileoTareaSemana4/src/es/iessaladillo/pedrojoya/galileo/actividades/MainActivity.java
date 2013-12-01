@@ -19,11 +19,11 @@ import android.widget.ListView;
 
 import com.parse.ParseAnalytics;
 
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.dialogos.FotoDialogFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.FotosListaFragment;
-import es.iessaladillo.pedrojoya.galileo.fragmentos.ImagenesFragment;
-import es.iessaladillo.pedrojoya.galileo.fragmentos.InstagramListaFragment;
+import es.iessaladillo.pedrojoya.galileo.fragmentos.PortadaFragment;
+import es.iessaladillo.pedrojoya.galileo.fragmentos.ImagenesListaFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.TiendasFragment;
 import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
@@ -178,7 +178,7 @@ public class MainActivity extends ActionBarActivity implements
         // Dependiendo de la opción seleccionada.
         switch (position) {
         case 0:
-            frg = new ImagenesFragment();
+            frg = new PortadaFragment();
             break;
         case 1:
             frg = new TiendasFragment();
@@ -187,10 +187,10 @@ public class MainActivity extends ActionBarActivity implements
             frg = new FotosListaFragment();
             break;
         case 3:
-            frg = new InstagramListaFragment();
+            frg = new ImagenesListaFragment();
             break;
         default:
-            frg = new ImagenesFragment();
+            frg = new PortadaFragment();
             break;
         }
         // Se carga en la actividad principal el fragmento correspondiente.

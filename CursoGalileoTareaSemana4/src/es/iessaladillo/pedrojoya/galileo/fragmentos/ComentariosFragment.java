@@ -21,7 +21,7 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseQueryAdapter.OnQueryLoadListener;
 import com.parse.SaveCallback;
 
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 

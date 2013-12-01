@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
 
 public class TiendasAdapter extends ArrayAdapter<Tienda> {

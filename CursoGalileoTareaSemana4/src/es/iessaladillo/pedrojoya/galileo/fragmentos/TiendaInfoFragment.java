@@ -23,7 +23,7 @@ import com.parse.ParseQuery;
 import com.parse.RefreshCallback;
 import com.parse.SaveCallback;
 
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.actividades.TiendaActivity;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;

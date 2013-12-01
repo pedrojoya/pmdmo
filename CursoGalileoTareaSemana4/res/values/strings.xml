@@ -3,7 +3,7 @@
 
     <string name="app_name">C.C. Puerta Europa</string>
     <string name="action_settings">Configuración</string>
-    <string name="no_hay_ninguna_tienda_en_la_lista">No hay ninguna tienda en la lista</string>
+    <string name="no_hay_ninguna_tienda_en_la_lista">No hay ninguna tienda en la lista.\nDeslice hacia abajo para actualizar.</string>
     <string name="title_activity_detalle_tienda">Tienda</string>
     <string name="title_activity_detalle_foto">Galería de Fotos</string>
     <string name="llamar">Llamar</string>
@@ -27,7 +27,7 @@
     <string name="refrescar">Refrescar</string>
     <string name="marcada_como_favorita">Favorita</string>
     <string name="veces">veces</string>
-    <string name="no_hay_ninguna_foto_en_la_lista">No hay ninguna foto en la lista</string>
+    <string name="no_hay_ninguna_foto_en_la_lista">No hay ninguna foto en la lista.\nDeslice hacia abajo para actualizar.</string>
     <string name="hacer_foto">Hacer foto</string>
     <string name="foto">Foto</string>
     <string name="seleccionar_accion">Seleccionar acción</string>

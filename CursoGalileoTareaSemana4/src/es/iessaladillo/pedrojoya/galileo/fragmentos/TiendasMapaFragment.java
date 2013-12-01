@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 
 public class TiendasMapaFragment extends Fragment {
 

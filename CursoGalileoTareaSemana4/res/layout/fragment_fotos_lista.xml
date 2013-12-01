@@ -4,12 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/casi_blanco" >
 
-    <FrameLayout
+    <uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@+id/llBotonera"
-        android:layout_alignParentTop="true"
-        android:padding="@dimen/doble" >
+        android:layout_height="match_parent" >
 
         <ListView
             android:id="@+id/lstFotos"
@@ -45,18 +44,18 @@
                 android:text="@string/no_hay_ninguna_foto_en_la_lista"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>
-    </FrameLayout>
+    </uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout>
 
     <LinearLayout
         android:id="@+id/llBotonera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="@dimen/simple"
-        android:paddingTop="@dimen/simple"
         android:background="@color/mas_claro"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/simple"
+        android:paddingTop="@dimen/simple" >
 
         <ImageView
             android:id="@+id/btnHacerFoto"

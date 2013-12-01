@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.galileo.adaptadores;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,12 +13,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import es.iessaladillo.pedrojoya.galileo.R;
-import es.iessaladillo.pedrojoya.galileo.datos.Foto;
+import es.iessaladillo.pedrojoya.galileo.datos.Imagen;
 
-public class FotosAdapter extends ArrayAdapter<Foto> {
+public class ImagenesAdapter extends ArrayAdapter<Imagen> {
 
     private Context contexto;
-    private ArrayList<Foto> datos;
+    private ArrayList<Imagen> datos;
     // private ImageLoader cargadorImagenes;
     private final int anchoFoto;
     private final int altoFoto;
@@ -27,63 +26,57 @@ public class FotosAdapter extends ArrayAdapter<Foto> {
     // Clase contenedora de vistas.
     private class ContenedorVistas {
         public ImageView imgFoto;
-        public TextView lblDescripcion;
+        public TextView lblUsuario;
     }
 
-    public FotosAdapter(Context contexto, ArrayList<Foto> datos) {
+    // Constructor.
+    public ImagenesAdapter(Context contexto,
+            ArrayList<Imagen> datos) {
         super(contexto, R.layout.fragment_imagenes_lista_item, datos);
         this.contexto = contexto;
         this.datos = datos;
         // cargadorImagenes = new ImageLoader(Aplicacion.colaPeticiones,
         // new CacheImagenes());
+        // Se obtiene el ancho y alto con el que deben guardarse la imágenes en
+        // la caché.
         anchoFoto = contexto.getResources().getDimensionPixelSize(
-                R.dimen.ancho_foto);
+                R.dimen.ancho_foto_instagram);
         altoFoto = contexto.getResources().getDimensionPixelSize(
-                R.dimen.alto_foto);
+                R.dimen.alto_foto_instagram);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ContenedorVistas contenedor;
-        View item = convertView;
         // Si no se puede reciclar.
-        if (item == null) {
+        if (convertView == null) {
             // Se infla el layout.
-            item = LayoutInflater.from(contexto).inflate(
-                    R.layout.fragment_fotos_lista_item, parent, false);
-            // Se obtienen las vistas.
+            convertView = LayoutInflater.from(contexto).inflate(
+                    R.layout.fragment_imagenes_lista_item, parent, false);
+            // Se obtienen las vistas de elemento.
             contenedor = new ContenedorVistas();
-            contenedor.imgFoto = (ImageView) item.findViewById(R.id.imgFoto);
-            contenedor.lblDescripcion = (TextView) item
-                    .findViewById(R.id.lblDescripcion);
-            // Se guarda el contenedor en la propiedad tag del item.
-            item.setTag(contenedor);
+            contenedor.imgFoto = (ImageView) convertView
+                    .findViewById(R.id.imgFoto);
+            contenedor.lblUsuario = (TextView) convertView
+                    .findViewById(R.id.lblUsuario);
+            // Se guarda el contenedor en la propiedad tag de la vista del
+            // elemento.
+            convertView.setTag(contenedor);
         } else {
             // Si se puede reciclar, obtengo el contenedor de la vista
-            // reciclada.
-            contenedor = (ContenedorVistas) item.getTag();
+            // reciclada del elemento.
+            contenedor = (ContenedorVistas) convertView.getTag();
         }
         // Se escriben los datos correspondientes en las vistas.
-        Foto imagen = datos.get(position);
+        Imagen imagen = datos.get(position);
         // contenedor.imgFoto.setImageUrl(imagen.getUrl(), cargadorImagenes);
+        // Se muestra la imagen en el imageView con la librería Picasso, que
+        // almacenará la imagen en caché de memoria y de disco con el tamaño
+        // indicado.
         Picasso.with(contexto).load(imagen.getUrl())
                 .resize(anchoFoto, altoFoto).into(contenedor.imgFoto);
-        contenedor.lblDescripcion.setText(imagen.getDescripcion());
-        return item;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        // Se deshabilita temporalmente para que el sort funcione bien.
-        setNotifyOnChange(false);
-        // Se ordena el array de datos del adaptador (descendientemente según su
-        // descripción).
-        sort(new Comparator<Foto>() {
-            @Override
-            public int compare(Foto foto1, Foto foto2) {
-                return foto1.compareTo(foto2);
-            }
-        });
-        super.notifyDataSetChanged();
+        contenedor.lblUsuario.setText(imagen.getUsername());
+        // Se retorna la vista del elemento para que se pinte.
+        return convertView;
     }
 }

@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.galileo.datos;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -20,8 +22,12 @@ public class Tienda implements Parcelable {
     String ubicacion;
 
     // Constructores.
-    public Tienda(ParseObject objeto) {
-        from(objeto);
+    public Tienda(ParseObject parseObject) {
+        from(parseObject);
+    }
+
+    public Tienda(Cursor cursor) {
+        fromCursor(cursor);
     }
 
     public Tienda() {
@@ -104,7 +110,7 @@ public class Tienda implements Parcelable {
         this.urlLogo = urlLogo;
     }
 
-    // Escribe en las propieades los datos de un ParseObject.
+    // Escribe en las propiedades los datos de un ParseObject.
     public void from(ParseObject objeto) {
         objectId = objeto.getObjectId();
         nombre = objeto.getString(BD.Tienda.NOMBRE);
@@ -118,6 +124,22 @@ public class Tienda implements Parcelable {
         urlLogo = objeto.getParseFile(BD.Tienda.ARCHIVO_LOGO).getUrl();
     }
 
+    // Escribe en las propieades los datos de un cursor.
+    public void fromCursor(Cursor cursor) {
+        objectId = cursor.getString(cursor.getColumnIndex(BD.Tienda.OBJECTID));
+        nombre = cursor.getString(cursor.getColumnIndex(BD.Tienda.NOMBRE));
+        direccion = cursor
+                .getString(cursor.getColumnIndex(BD.Tienda.DIRECCION));
+        telefono = cursor.getString(cursor.getColumnIndex(BD.Tienda.TELEFONO));
+        horarios = cursor.getString(cursor.getColumnIndex(BD.Tienda.HORARIOS));
+        website = cursor.getString(cursor.getColumnIndex(BD.Tienda.WEBSITE));
+        email = cursor.getString(cursor.getColumnIndex(BD.Tienda.EMAIL));
+        favoritos = cursor.getLong(cursor.getColumnIndex(BD.Tienda.FAVORITOS));
+        ubicacion = cursor
+                .getString(cursor.getColumnIndex(BD.Tienda.UBICACION));
+        urlLogo = cursor.getString(cursor.getColumnIndex(BD.Tienda.URL_LOGO));
+    }
+
     // Escribe en un ParseObject las propiedades.
     public void to(ParseObject objeto) {
         objeto.put(BD.Tienda.NOMBRE, nombre);
@@ -128,6 +150,22 @@ public class Tienda implements Parcelable {
         objeto.put(BD.Tienda.EMAIL, email);
         objeto.put(BD.Tienda.FAVORITOS, favoritos);
         objeto.put(BD.Tienda.UBICACION, ubicacion);
+    }
+
+    // Retorna un ContentValues con los datos.
+    public ContentValues toContentValues() {
+        ContentValues objeto = new ContentValues();
+        objeto.put(BD.Tienda.OBJECTID, objectId);
+        objeto.put(BD.Tienda.NOMBRE, nombre);
+        objeto.put(BD.Tienda.DIRECCION, direccion);
+        objeto.put(BD.Tienda.TELEFONO, telefono);
+        objeto.put(BD.Tienda.HORARIOS, horarios);
+        objeto.put(BD.Tienda.WEBSITE, website);
+        objeto.put(BD.Tienda.EMAIL, email);
+        objeto.put(BD.Tienda.FAVORITOS, favoritos);
+        objeto.put(BD.Tienda.UBICACION, ubicacion);
+        objeto.put(BD.Tienda.URL_LOGO, urlLogo);
+        return objeto;
     }
 
     // Desde aquí para que sea Parcelable.

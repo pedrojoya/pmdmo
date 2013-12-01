@@ -136,7 +136,7 @@ public class BD {
                 + "/vnd.es.iessaladillo.galileo.imagenes";
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
                 + "/vnd.es.iessaladillo.galileo.imagen";
-        public static final String SORT_ORDER_DEFAULT = _ID + " DESC";
+        public static final String SORT_ORDER_DEFAULT = _ID + " ASC";
     }
 
     // Constructor privado para que NO pueda instanciarse.

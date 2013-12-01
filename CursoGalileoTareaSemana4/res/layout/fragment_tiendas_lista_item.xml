@@ -19,6 +19,7 @@
         android:layout_toRightOf="@+id/imgLogo"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/doble"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

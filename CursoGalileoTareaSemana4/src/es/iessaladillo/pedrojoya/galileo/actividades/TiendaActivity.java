@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
 
-import es.iessaladillo.pedrojoya.cursogalileotareasemana1.R;
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.ComentariosFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.TiendaInfoFragment;
 import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
