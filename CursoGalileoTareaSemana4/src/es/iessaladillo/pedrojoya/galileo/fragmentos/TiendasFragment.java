@@ -32,10 +32,10 @@ public class TiendasFragment extends Fragment {
         tabMapa.setText(R.string.mapa);
         // Se crean los fragmentos de cada pestaña.
         Fragment frgListado = new TiendasListaFragment();
-        Fragment frgNotas = new TiendasMapaFragment();
+        Fragment frgMapa = new TiendasMapaFragment();
         // Se crea y asocia el listener a cada pestaña.
         tabListado.setTabListener(new GestorTabListener(frgListado));
-        tabMapa.setTabListener(new GestorTabListener(frgNotas));
+        tabMapa.setTabListener(new GestorTabListener(frgMapa));
         // Se añaden las pestañas a la action bar.
         barra.addTab(tabListado);
         barra.addTab(tabMapa);

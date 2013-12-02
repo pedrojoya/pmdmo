@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 public class Tienda implements Parcelable {
@@ -18,8 +19,9 @@ public class Tienda implements Parcelable {
     private String website;
     private String email;
     private String urlLogo;
-    long favoritos;
-    String ubicacion;
+    private long favoritos;
+    private Double latitud;
+    private Double longitud;
 
     // Constructores.
     public Tienda(ParseObject parseObject) {
@@ -94,12 +96,20 @@ public class Tienda implements Parcelable {
         this.favoritos = favoritos;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public Double getLatitud() {
+        return latitud;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 
     public String getUrlLogo() {
@@ -120,8 +130,9 @@ public class Tienda implements Parcelable {
         website = objeto.getString(BD.Tienda.WEBSITE);
         email = objeto.getString(BD.Tienda.EMAIL);
         favoritos = objeto.getLong(BD.Tienda.FAVORITOS);
-        ubicacion = objeto.getString(BD.Tienda.UBICACION);
         urlLogo = objeto.getParseFile(BD.Tienda.ARCHIVO_LOGO).getUrl();
+        latitud = objeto.getParseGeoPoint(BD.Tienda.GEO).getLatitude();
+        longitud = objeto.getParseGeoPoint(BD.Tienda.GEO).getLongitude();
     }
 
     // Escribe en las propieades los datos de un cursor.
@@ -135,8 +146,10 @@ public class Tienda implements Parcelable {
         website = cursor.getString(cursor.getColumnIndex(BD.Tienda.WEBSITE));
         email = cursor.getString(cursor.getColumnIndex(BD.Tienda.EMAIL));
         favoritos = cursor.getLong(cursor.getColumnIndex(BD.Tienda.FAVORITOS));
-        ubicacion = cursor
-                .getString(cursor.getColumnIndex(BD.Tienda.UBICACION));
+        latitud = cursor
+                .getDouble(cursor.getColumnIndex(BD.Tienda.GEO_LATITUD));
+        longitud = cursor.getDouble(cursor
+                .getColumnIndex(BD.Tienda.GEO_LONGITUD));
         urlLogo = cursor.getString(cursor.getColumnIndex(BD.Tienda.URL_LOGO));
     }
 
@@ -149,7 +162,7 @@ public class Tienda implements Parcelable {
         objeto.put(BD.Tienda.WEBSITE, website);
         objeto.put(BD.Tienda.EMAIL, email);
         objeto.put(BD.Tienda.FAVORITOS, favoritos);
-        objeto.put(BD.Tienda.UBICACION, ubicacion);
+        objeto.put(BD.Tienda.GEO, new ParseGeoPoint(latitud, longitud));
     }
 
     // Retorna un ContentValues con los datos.
@@ -163,7 +176,8 @@ public class Tienda implements Parcelable {
         objeto.put(BD.Tienda.WEBSITE, website);
         objeto.put(BD.Tienda.EMAIL, email);
         objeto.put(BD.Tienda.FAVORITOS, favoritos);
-        objeto.put(BD.Tienda.UBICACION, ubicacion);
+        objeto.put(BD.Tienda.GEO_LATITUD, latitud);
+        objeto.put(BD.Tienda.GEO_LONGITUD, longitud);
         objeto.put(BD.Tienda.URL_LOGO, urlLogo);
         return objeto;
     }
@@ -190,7 +204,8 @@ public class Tienda implements Parcelable {
         dest.writeString(website);
         dest.writeString(email);
         dest.writeLong(favoritos);
-        dest.writeString(ubicacion);
+        dest.writeDouble(latitud);
+        dest.writeDouble(longitud);
     }
 
     // Leer desde un Parcel las propiedades del objeto.
@@ -203,7 +218,8 @@ public class Tienda implements Parcelable {
         website = in.readString();
         email = in.readString();
         favoritos = in.readLong();
-        ubicacion = in.readString();
+        latitud = in.readDouble();
+        longitud = in.readDouble();
     }
 
     // Creador del objeto Parcelable.

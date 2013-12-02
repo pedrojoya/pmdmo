@@ -27,13 +27,15 @@ public class BD {
         public static final String WEBSITE = "website";
         public static final String EMAIL = "email";
         public static final String FAVORITOS = "favoritos";
-        public static final String UBICACION = "ubicacion";
-        public static final String ARCHIVO_LOGO = "logo"; // Para Parse.
+        public static final String GEO_LATITUD = "latitud";
+        public static final String GEO_LONGITUD = "longitud";
+        public static final String GEO = "ubicacion"; // Para Parse.
         public static final String URL_LOGO = "urlLogo";
+        public static final String ARCHIVO_LOGO = "logo"; // Para Parse.
         // SQL.
         public static final String[] ALL = new String[] { _ID, OBJECTID,
                 NOMBRE, DIRECCION, TELEFONO, HORARIOS, WEBSITE, EMAIL,
-                FAVORITOS, UBICACION, URL_LOGO };
+                FAVORITOS, GEO_LATITUD, GEO_LONGITUD, URL_LOGO };
         public static final String CREATE = "CREATE TABLE "
                 + BD.Tienda.TABLE_NAME + " (" + BD.Tienda._ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + BD.Tienda.OBJECTID
@@ -41,8 +43,9 @@ public class BD {
                 + BD.Tienda.DIRECCION + " TEXT, " + BD.Tienda.TELEFONO
                 + " TEXT, " + BD.Tienda.HORARIOS + " TEXT, "
                 + BD.Tienda.WEBSITE + " TEXT, " + BD.Tienda.EMAIL + " TEXT, "
-                + BD.Tienda.FAVORITOS + " INTEGER, " + BD.Tienda.UBICACION
-                + " TEXT, " + BD.Tienda.URL_LOGO + " TEXT " + " )";
+                + BD.Tienda.FAVORITOS + " INTEGER, " + BD.Tienda.GEO_LATITUD
+                + " REAL, " + BD.Tienda.GEO_LONGITUD + " REAL, "
+                + BD.Tienda.URL_LOGO + " TEXT " + " )";
         public static final String DROP = "DROP TABLE IF EXISTS "
                 + BD.Tienda.TABLE_NAME;
         // Content Provider.
