@@ -12,6 +12,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
@@ -33,7 +36,9 @@ import com.google.android.gms.maps.model.LatLngBounds.Builder;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.actividades.TiendaActivity;
+import es.iessaladillo.pedrojoya.galileo.adaptadores.TiendasMarkersAdapter;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
 import es.iessaladillo.pedrojoya.galileo.dialogos.ErrorDialogFragment;
@@ -46,16 +51,18 @@ public class TiendasMapaFragment extends SupportMapFragment implements
     public static final long INTERVALO_SOLICITUD_POSICION = 5000;
     public static final long INTERVALO_RAPIDO_SOLICITUD_POSICION = 1000;
     public static final LatLng ALGECIRAS = new LatLng(36.1066, -5.44343);
+    private static final int PADDING_MAPA = 100;
 
     private LocationClient clienteLocalizacion;
     private LocationRequest solicitudPosicion;
     private GoogleMap mapa;
     private Builder limitesBuilder;
-    private HashMap<Marker, Tienda> marcadoresTiendas = new HashMap<Marker, Tienda>();
+    private HashMap<Marker, Tienda> marcadoresTiendas;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        // Se indica que el fragmento aportará ítems a la ActionBar.
+        setHasOptionsMenu(true);
         mapa = getMap();
         // Se crea un cliente de localización, siendo el propio fragmento el
         // listener cuando se establezca la conexión o si falla.
@@ -67,6 +74,7 @@ public class TiendasMapaFragment extends SupportMapFragment implements
         solicitudPosicion.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         solicitudPosicion
                 .setFastestInterval(INTERVALO_RAPIDO_SOLICITUD_POSICION);
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -159,7 +167,7 @@ public class TiendasMapaFragment extends SupportMapFragment implements
         // Se establezco el tipo de mapa que se mostrar.
         mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         // Se configura la interfaz del mapa.
-        mapa.getUiSettings().setZoomControlsEnabled(true);
+        mapa.getUiSettings().setZoomControlsEnabled(false);
         mapa.getUiSettings().setCompassEnabled(true);
         mapa.getUiSettings().setMyLocationButtonEnabled(true);
         mapa.getUiSettings().setRotateGesturesEnabled(true);
@@ -169,13 +177,11 @@ public class TiendasMapaFragment extends SupportMapFragment implements
         // El propio fragmento actúa como listener cuando se pulsa en la ventana
         // de información de un marcador.
         mapa.setOnInfoWindowClickListener(this);
-        // El propio fragmento actúa como adaptador para pintar las ventanas de
-        // información de los marcadores.
-        // mapa.setInfoWindowAdapter(this);
         // Se crean los limites en los que debe posicionarse el mapa para que se
         // muestren todas los marcadores.
         limitesBuilder = new LatLngBounds.Builder();
-        marcadoresTiendas.clear();
+        marcadoresTiendas = new HashMap<Marker, Tienda>();
+        mapa.clear();
         CursorLoader cLoader = new CursorLoader(this.getActivity(),
                 BD.Tienda.CONTENT_URI, BD.Tienda.ALL, null, null, null);
         Cursor cursor = cLoader.loadInBackground();
@@ -194,6 +200,10 @@ public class TiendasMapaFragment extends SupportMapFragment implements
                 limitesBuilder.include(posicion);
             } while (cursor.moveToNext());
         }
+        // Especificamos el adaptador para para pintar las ventanas de
+        // información de los marcadores.
+        mapa.setInfoWindowAdapter(new TiendasMarkersAdapter(getActivity(),
+                marcadoresTiendas));
         // Cuando el layout esté disponible se mueve la cámara para que se
         // coloce en una posición que incluya
         // todos los marcadores (dejando un padding de 50px)
@@ -222,7 +232,8 @@ public class TiendasMapaFragment extends SupportMapFragment implements
 
     private void posicionarMapa() {
         LatLngBounds limites = limitesBuilder.build();
-        mapa.moveCamera(CameraUpdateFactory.newLatLngBounds(limites, 50));
+        mapa.moveCamera(CameraUpdateFactory.newLatLngBounds(limites,
+                PADDING_MAPA));
     }
 
     private boolean comprobarGooglePlayServices() {
@@ -247,15 +258,17 @@ public class TiendasMapaFragment extends SupportMapFragment implements
     @Override
     public void onInfoWindowClick(Marker marcador) {
         Tienda tienda = marcadoresTiendas.get(marcador);
-        mostrarDetalleTienda(tienda.getObjectId());
+        if (tienda != null) {
+            mostrarDetalleTienda(tienda);
+        }
     }
 
     // Muestra la actividad de detalle de la tienda.
-    private void mostrarDetalleTienda(String objectIdTienda) {
+    private void mostrarDetalleTienda(Tienda tienda) {
         // Se crea el intent para llamar a la actividad de detalle de tienda, y
         // se le pasa la tienda como dato extra.
         Intent i = new Intent(getActivity(), TiendaActivity.class);
-        i.putExtra(TiendaActivity.EXTRA_TIENDA, objectIdTienda);
+        i.putExtra(TiendaActivity.EXTRA_TIENDA, tienda);
         // Se envía el intent.
         startActivity(i);
     }
@@ -270,6 +283,32 @@ public class TiendasMapaFragment extends SupportMapFragment implements
     public View getInfoWindow(Marker arg0) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_tiendas_mapa, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.mnuNormal:
+            mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        case R.id.mnuSatelite:
+            mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            break;
+        case R.id.mnuHibrido:
+            mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            break;
+        case R.id.mnuTerreno:
+            mapa.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            break;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     // @Override

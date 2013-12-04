@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/simple" >
+
+    <ImageView
+        android:id="@+id/imgInfo"
+        android:layout_width="@dimen/ancho_logo_tienda"
+        android:layout_height="@dimen/alto_logo_tienda"
+        android:layout_marginRight="@dimen/simple"
+        android:contentDescription="@string/logo" />
+
+    <TextView
+        android:id="@+id/lblTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgInfo"
+        android:layout_alignTop="@+id/imgInfo"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lblInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgInfo"
+        android:layout_below="@+id/lblTitulo"
+        android:textSize="12sp" />
+
+</RelativeLayout>

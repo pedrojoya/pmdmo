@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.galileo.fragmentos;
 
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,15 +22,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.RefreshCallback;
 import com.parse.SaveCallback;
 
 import es.iessaladillo.pedrojoya.galileo.R;
-import es.iessaladillo.pedrojoya.galileo.actividades.TiendaActivity;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
 
-public class TiendaInfoFragment extends Fragment {
+public class TiendaInfoFragment extends Fragment implements OnClickListener {
 
     // Constantes.
     public static String EXTRA_TIENDA = "tienda";
@@ -46,8 +46,8 @@ public class TiendaInfoFragment extends Fragment {
     private String objectIdTienda;
     private ParseObject parseTienda;
     private Tienda tienda;
-    private View vRaiz;
 
+    // Retorna la vista que debe mostrar el fragmento.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -60,10 +60,57 @@ public class TiendaInfoFragment extends Fragment {
         return v;
     }
 
+    // Cuando la actividad se ha creado completamente.
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // Se indica que el fragmento aportará ítems a la ActionBar.
+        setHasOptionsMenu(true);
+        // Se obtiene la tienda pasada como argumento.
+        tienda = getArguments().getParcelable(EXTRA_TIENDA);
+        // Se muestran los datos de la tienda en las vistas correspondientes.
+        if (tienda != null) {
+            escribirVistas(tienda);
+        }
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    // Al crearse el menú de opciones.
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Se infla el menú correspondiente.
+        inflater.inflate(R.menu.fragment_tienda_info, menu);
+        // Se indica que ya se ha procesado el evento.
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    // Al seleccionar un ítem de menú.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Dependiendo del ítem del menú pulsado.
+        switch (item.getItemId()) {
+        case R.id.mnuFavorito:
+            // Se incrementa el número de favoritos.
+            marcarComoFavorito();
+            break;
+        case R.id.mnuCompartir:
+            // Se comparten los datos de la tienda.
+            compartir();
+            break;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    // Cuando se pulsa en botón de llamar.
+    @Override
+    public void onClick(View v) {
+        btnLlamarOnClick();
+    }
+
     // Obtiene e inicializa las vistas.
     private void getVistas(View v) {
         // Se obtienen las vistas.
-        vRaiz = v;
         lblNombre = (TextView) v.findViewById(R.id.lblNombre);
         lblDireccion = (TextView) v.findViewById(R.id.lblDireccion);
         lblTelefono = (TextView) v.findViewById(R.id.lblTelefono);
@@ -71,57 +118,9 @@ public class TiendaInfoFragment extends Fragment {
         lblEmail = (TextView) v.findViewById(R.id.lblEmail);
         lblFavoritos = (TextView) v.findViewById(R.id.lblFavoritos);
         btnLlamar = (ImageView) v.findViewById(R.id.btnLlamar);
-        btnLlamar.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                btnLlamarOnClick();
-            }
-        });
-
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        // El fragmento aportará ítems a la ActionBar.
-        setHasOptionsMenu(true);
-        // Se ocultan las vistas hasta que tengamos los datos.
-        if (vRaiz != null) {
-            vRaiz.setVisibility(View.INVISIBLE);
-            if (getActivity() != null) {
-                ((TiendaActivity) getActivity()).mostrarProgreso(true);
-            }
-        }
-        // Se obtienen los argumentos con los que ha sido llamado el fragmento.
-        objectIdTienda = getArguments().getString(EXTRA_TIENDA);
-        // Se obtiene el objecto Parse correspondiente a la tienda.
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                BD.Tienda.TABLE_NAME);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
-        query.whereEqualTo(BD.Tienda.OBJECTID, objectIdTienda);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> lista, ParseException e) {
-                if (e == null) {
-                    // Se guarda el objeto.
-                    parseTienda = lista.get(0);
-                    tienda = new Tienda(parseTienda);
-                    // Se escriben los datos en las vistas.
-                    if (getActivity() != null) {
-                        escribirVistas(tienda);
-                    }
-                    // Se hacen visibles las vistas.
-                    if (vRaiz != null) {
-                        vRaiz.setVisibility(View.VISIBLE);
-                    }
-                    if (getActivity() != null) {
-                        ((TiendaActivity) getActivity()).mostrarProgreso(false);
-                    }
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-        super.onActivityCreated(savedInstanceState);
+        // El propio fragmento actúa de listener cuando se pulse el botón de
+        // llamar.
+        btnLlamar.setOnClickListener(this);
     }
 
     // Al hacer click sobre btnLlamar.
@@ -151,45 +150,34 @@ public class TiendaInfoFragment extends Fragment {
         Linkify.addLinks(lblEmail, Linkify.EMAIL_ADDRESSES);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Se infla el menú correspondiente.
-        inflater.inflate(R.menu.fragment_tienda_info, menu);
-        // Se indica que ya se ha procesado el evento.
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Dependiendo del ítem del menú pulsado.
-        switch (item.getItemId()) {
-        case R.id.mnuFavorito:
-            marcarComoFavorito();
-            break;
-        case R.id.mnuCompartir:
-            // Se comparten los datos de la tienda.
-            compartir();
-            break;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
-
     private void marcarComoFavorito() {
-        // Se trae el objeto actualizado.
-        parseTienda.refreshInBackground(new RefreshCallback() {
-            public void done(ParseObject object, ParseException e) {
+        // Se obtiene el objecto Parse correspondiente a la tienda.
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                BD.Tienda.TABLE_NAME);
+        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.whereEqualTo(BD.Tienda.OBJECTID, objectIdTienda);
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+            @Override
+            public void done(List<ParseObject> lista, ParseException e) {
                 if (e == null) {
                     // Se incrementa el valor de favoritos.
-                    parseTienda = object;
-                    parseTienda.put(BD.Tienda.FAVORITOS,
-                            parseTienda.getLong(BD.Tienda.FAVORITOS) + 1);
+                    parseTienda = lista.get(0);
+                    parseTienda.increment(BD.Tienda.FAVORITOS);
                     parseTienda.saveInBackground(new SaveCallback() {
 
                         @Override
                         public void done(ParseException e) {
-                            // Se actualiza el número de favoritos.
+                            // Se actualiza el número de favoritos en la bd.
+                            Tienda t = new Tienda(parseTienda);
+                            Uri uri = Uri.withAppendedPath(
+                                    BD.Tienda.CONTENT_URI, tienda.getId() + "");
+                            ContentValues valores = t.toContentValues();
+                            String where = BD.Tienda._ID + " = "
+                                    + tienda.getId();
+                            int actualizados = getActivity()
+                                    .getContentResolver().update(uri, valores,
+                                            where, null);
                             if (getActivity() != null) {
                                 tienda.from(parseTienda);
                                 escribirVistas(tienda);

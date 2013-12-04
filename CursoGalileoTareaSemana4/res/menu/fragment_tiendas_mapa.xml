@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mnuModo"
+        android:icon="@drawable/ic_menu_mapmode"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/modo">
+        <menu>
+            <item
+                android:id="@+id/mnuNormal"
+                android:title="@string/normal"/>
+            <item
+                android:id="@+id/mnuSatelite"
+                android:title="@string/satelite"/>
+            <item
+                android:id="@+id/mnuHibrido"
+                android:title="@string/hibrido"/>
+            <item
+                android:id="@+id/mnuTerreno"
+                android:title="@string/terreno"/>
+        </menu>
+    </item>
+
+</menu>

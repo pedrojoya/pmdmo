@@ -66,6 +66,7 @@ public class BD {
         public static final String OBJECTID = "objectId";
         public static final String TEXTO = "texto";
         public static final String PARENT = "parent";
+        public static final String UPDATEDAT = "updatedAt"; // Parse.
         // SQL.
         public static final String[] ALL = new String[] { _ID, OBJECTID, TEXTO,
                 PARENT };
@@ -84,7 +85,7 @@ public class BD {
                 + "/vnd.es.iessaladillo.galileo.comentarios";
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
                 + "/vnd.es.iessaladillo.galileo.comentario";
-        public static final String SORT_ORDER_DEFAULT = OBJECTID + " DESC";
+        public static final String SORT_ORDER_DEFAULT = _ID + " DESC";
     }
 
     // Tabla Foto.

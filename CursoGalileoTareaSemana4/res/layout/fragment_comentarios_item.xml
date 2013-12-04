@@ -4,10 +4,9 @@
     android:layout_height="wrap_content" >
 
     <TextView
-        android:id="@android:id/text1"
+        android:id="@+id/lblTexto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tienda de ejemplo"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

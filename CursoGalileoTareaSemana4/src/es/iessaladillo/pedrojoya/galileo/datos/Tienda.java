@@ -10,7 +10,8 @@ import com.parse.ParseObject;
 
 public class Tienda implements Parcelable {
 
-    // Propieadades.
+    // Propiedades.
+    private long id;
     private String objectId;
     private String nombre;
     private String direccion;
@@ -36,6 +37,14 @@ public class Tienda implements Parcelable {
     }
 
     // Getters and setters.
+    public long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getObjectId() {
         return objectId;
     }
@@ -137,6 +146,7 @@ public class Tienda implements Parcelable {
 
     // Escribe en las propieades los datos de un cursor.
     public void fromCursor(Cursor cursor) {
+        id = cursor.getLong(cursor.getColumnIndex(BD.Tienda._ID));
         objectId = cursor.getString(cursor.getColumnIndex(BD.Tienda.OBJECTID));
         nombre = cursor.getString(cursor.getColumnIndex(BD.Tienda.NOMBRE));
         direccion = cursor
@@ -196,6 +206,7 @@ public class Tienda implements Parcelable {
 
     // Escribir las propiedades del objeto en un Parcel de destino.
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeString(objectId);
         dest.writeString(nombre);
         dest.writeString(direccion);
@@ -210,6 +221,7 @@ public class Tienda implements Parcelable {
 
     // Leer desde un Parcel las propiedades del objeto.
     public void readFromParcel(Parcel in) {
+        id = in.readLong();
         objectId = in.readString();
         nombre = in.readString();
         direccion = in.readString();

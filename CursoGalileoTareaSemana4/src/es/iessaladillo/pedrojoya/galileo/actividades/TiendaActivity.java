@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.parse.ParseAnalytics;
 
 import es.iessaladillo.pedrojoya.galileo.R;
+import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.ComentariosFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.TiendaInfoFragment;
 import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
@@ -23,7 +24,7 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
     private ActionBar barra;
 
     // Propiedades.
-    private String objectIdTienda;
+    private Tienda tienda;
     private FragmentManager gestorFragmentos;
     private MenuItem mnuRefrescar;
 
@@ -41,7 +42,7 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
         barra.setHomeButtonEnabled(true);
         // Se obtiene el extra del Intent con el que ha sido llamada la
         // actividad.
-        objectIdTienda = getIntent().getStringExtra(EXTRA_TIENDA);
+        tienda = getIntent().getParcelableExtra(EXTRA_TIENDA);
         // Se obtiene el gestor de fragmentos.
         gestorFragmentos = getSupportFragmentManager();
         // Se carga el fragmento de InfoTienda.
@@ -56,7 +57,7 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
         TiendaInfoFragment frg = new TiendaInfoFragment();
         // Se le establece como argumento la tienda.
         Bundle argumentos = new Bundle();
-        argumentos.putString(TiendaInfoFragment.EXTRA_TIENDA, objectIdTienda);
+        argumentos.putParcelable(TiendaInfoFragment.EXTRA_TIENDA, tienda);
         frg.setArguments(argumentos);
         // Se carga el fragmento en el contenedor correspodiente.
         gestorFragmentos.beginTransaction().replace(R.id.frmInfoTienda, frg)
@@ -69,7 +70,8 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
         ComentariosFragment frg = new ComentariosFragment();
         // Se le establece como argumento la tienda.
         Bundle argumentos = new Bundle();
-        argumentos.putString(ComentariosFragment.EXTRA_PARENT, objectIdTienda);
+        argumentos.putString(ComentariosFragment.EXTRA_PARENT,
+                tienda.getObjectId());
         frg.setArguments(argumentos);
         // Se carga el fragmento en el contenedor correspodiente.
         gestorFragmentos.beginTransaction()
@@ -97,6 +99,7 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
         getMenuInflater().inflate(R.menu.activitity_tienda, menu);
         mnuRefrescar = menu.findItem(R.id.mnuRefrescar);
         mnuRefrescar.setActionView(R.layout.actionview_progreso);
+        mnuRefrescar.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

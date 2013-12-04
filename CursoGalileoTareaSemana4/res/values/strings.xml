@@ -31,5 +31,10 @@
     <string name="hacer_foto">Hacer foto</string>
     <string name="foto">Foto</string>
     <string name="seleccionar_accion">Seleccionar acción</string>
+    <string name="modo">Modo</string>
+    <string name="normal">Normal</string>
+    <string name="satelite">Satélite</string>
+    <string name="hibrido">Híbrido</string>
+    <string name="terreno">Terreno</string>
     
 </resources>

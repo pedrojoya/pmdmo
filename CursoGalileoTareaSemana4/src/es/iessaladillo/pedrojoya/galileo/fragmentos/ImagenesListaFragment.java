@@ -17,6 +17,9 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -72,6 +75,8 @@ public class ImagenesListaFragment extends Fragment implements
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        // Se indica que el fragmento aportará ítems a la ActionBar.
+        setHasOptionsMenu(true);
         // Se configura el pulltorefresh.
         ActionBarPullToRefresh.from(getActivity()).allChildrenArePullable()
                 .listener(this).setup(ptrLayout);
@@ -79,6 +84,29 @@ public class ImagenesListaFragment extends Fragment implements
         gestor = getActivity().getSupportLoaderManager();
         cargarListaDesdeBD();
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Se infla el menú correspondiente.
+        inflater.inflate(R.menu.fragment_imagenes_lista, menu);
+        // Se indica que ya se ha procesado el evento.
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    // Al seleccionar un ítem de menú.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Dependiendo del ítem del menú pulsado.
+        switch (item.getItemId()) {
+        case R.id.mnuActualizar:
+            // Se cargan los datos desde el backend.
+            obtenerDatos();
+            break;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     private void obtenerDatos() {
