@@ -60,7 +60,8 @@ public class ImagenesCursorAdapter extends SimpleCursorAdapter {
         // Se obtiene el contenedor de la vista reciclada del elemento.
         ContenedorVistas contenedor = (ContenedorVistas) view.getTag();
         Picasso.with(contexto)
-                .load(cursor.getString(cursor.getColumnIndex(BD.Imagen.URL)))
+                .load(cursor.getString(cursor
+                        .getColumnIndex(BD.Imagen.THUMBNAIL)))
                 .resize(anchoFoto, altoFoto).into(contenedor.imgFoto);
         contenedor.lblUsuario.setText(cursor.getString(cursor
                 .getColumnIndex(BD.Imagen.USERNAME)));

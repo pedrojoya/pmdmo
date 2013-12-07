@@ -5,7 +5,7 @@
     android:background="@drawable/fondo_foto"
     android:padding="@dimen/simple" >
 
-    <com.parse.ParseImageView
+    <ImageView
         android:id="@+id/imgFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

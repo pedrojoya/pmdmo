@@ -1,34 +1,31 @@
 package es.iessaladillo.pedrojoya.galileo.actividades;
 
+import java.lang.reflect.Field;
+
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 
 import com.parse.ParseAnalytics;
 
 import es.iessaladillo.pedrojoya.galileo.R;
+import es.iessaladillo.pedrojoya.galileo.datos.Foto;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.ComentariosFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.FotoInfoFragment;
-import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
-public class FotoActivity extends FragmentActivity implements MuestraProgreso {
+public class FotoActivity extends ActionBarActivity {
 
     // Constantes.
     public static final String EXTRA_FOTO = "foto";
 
-    // Vistas.
+    // Propieades.
     private ActionBar barra;
-
     private FragmentManager gestorFragmentos;
-
-    private String objectIdFoto;
-
-    private boolean cargando;
-
-    private MenuItem mnuRefrescar;
+    private Foto foto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +39,16 @@ public class FotoActivity extends FragmentActivity implements MuestraProgreso {
         barra.setHomeButtonEnabled(true);
         // Se obtiene el extra del Intent con el que ha sido llamada la
         // actividad.
-        objectIdFoto = getIntent().getStringExtra(EXTRA_FOTO);
+        foto = getIntent().getParcelableExtra(EXTRA_FOTO);
         // Se obtiene el gestor de fragmentos.
         gestorFragmentos = getSupportFragmentManager();
         // Se carga el fragmento de info de la foto.
         cargarInfoFotoFragment();
         // Se carga el framento de comentarios de la foto.
         cargarComentariosFragment();
+        // Se establece que se muestre el menú de overflow incluso en
+        // dispositivos que tengan tecla física de menú.
+        overflowEnDispositivoConTeclaMenu();
     }
 
     // Carga el fragmento de info de la foto.
@@ -57,7 +57,7 @@ public class FotoActivity extends FragmentActivity implements MuestraProgreso {
         FotoInfoFragment frg = new FotoInfoFragment();
         // Se le establece como argumento la tienda.
         Bundle argumentos = new Bundle();
-        argumentos.putString(FotoInfoFragment.EXTRA_FOTO, objectIdFoto);
+        argumentos.putParcelable(FotoInfoFragment.EXTRA_FOTO, foto);
         frg.setArguments(argumentos);
         // Se carga el fragmento en el contenedor correspodiente.
         gestorFragmentos.beginTransaction().replace(R.id.frmInfoFoto, frg)
@@ -68,8 +68,6 @@ public class FotoActivity extends FragmentActivity implements MuestraProgreso {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Se infla el menú.
         getMenuInflater().inflate(R.menu.activity_foto, menu);
-        mnuRefrescar = menu.findItem(R.id.mnuRefrescar);
-        mnuRefrescar.setActionView(R.layout.actionview_progreso);
         // Se indica que ya se ha tramitado el evento.
         return true;
     }
@@ -89,34 +87,32 @@ public class FotoActivity extends FragmentActivity implements MuestraProgreso {
         return true;
     }
 
-    // Llamado automáticamente tras cada llamada a invalidateOptionsMenu()
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (cargando) {
-            mnuRefrescar.setVisible(true);
-        } else {
-            mnuRefrescar.setVisible(false);
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void mostrarProgreso(boolean valor) {
-        cargando = valor;
-        invalidateOptionsMenu();
-    }
-
     // Carga el fragmento de comentarios sobre la foto.
     private void cargarComentariosFragment() {
         // Se crea el fragmento.
         ComentariosFragment frg = new ComentariosFragment();
         // Se le establece como argumento la tienda.
         Bundle argumentos = new Bundle();
-        argumentos.putString(ComentariosFragment.EXTRA_PARENT, objectIdFoto);
+        argumentos.putString(ComentariosFragment.EXTRA_PARENT,
+                foto.getObjectId());
         frg.setArguments(argumentos);
         // Se carga el fragmento en el contenedor correspodiente.
         gestorFragmentos.beginTransaction()
                 .replace(R.id.frmComentariosFoto, frg).commit();
     }
 
+    // Activa el ítem de overflow en dispositivos con botón físico de menú.
+    private void overflowEnDispositivoConTeclaMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class
+                    .getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignorar
+        }
+    }
 }

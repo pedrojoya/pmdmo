@@ -9,8 +9,12 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -29,7 +33,6 @@ import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.adaptadores.ComentariosCursorAdapter;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Comentario;
-import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
 public class ComentariosFragment extends Fragment implements OnClickListener,
         LoaderCallbacks<Cursor> {
@@ -47,6 +50,8 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
     // Propiedades.
     private String objectIdParent;
     private LoaderManager gestor;
+    private MenuItem mnuActualizar;
+    private boolean cargando;
 
     // Retorna la vista que debe mostrar el fragmento.
     @Override
@@ -73,12 +78,11 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
     // Al terminar de crear la actividad.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Se obtiene el argumento con el objectId del objeto parent.
         objectIdParent = getArguments().getString(EXTRA_PARENT);
         // Se obtiene el gestor de cargadores.
         gestor = getActivity().getSupportLoaderManager();
-        // Se obtienen los datos de Parse.
-        obtenerDatosBackend();
         // Se carga la lista.
         cargarLista();
         super.onActivityCreated(savedInstanceState);
@@ -166,7 +170,7 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
             comentarioParse.put(BD.Comentario.TEXTO, texto);
             comentarioParse.put(BD.Comentario.PARENT, objectIdParent);
             final Comentario comentario = new Comentario(comentarioParse);
-            comentarioParse.saveInBackground(new SaveCallback() {
+            comentarioParse.saveEventually(new SaveCallback() {
 
                 @Override
                 public void done(ParseException e) {
@@ -192,11 +196,9 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
 
     // Obtiene los datos correspondientes del Backend y los almacena en la base
     // de datos.
-    private void obtenerDatosBackend() {
+    private void obtenerDatos() {
         // Muestra el progreso en la ActionBar.
-        if (getActivity() != null) {
-            ((MuestraProgreso) getActivity()).mostrarProgreso(true);
-        }
+        mostrarProgreso(true);
         // Se consultan en Parse todas las tiendas.
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                 BD.Comentario.TABLE_NAME);
@@ -224,10 +226,7 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
                                 comentario.toContentValues());
                     }
                     // Oculta el progreso en la ActionBar.
-                    if (getActivity() != null) {
-                        ((MuestraProgreso) getActivity())
-                                .mostrarProgreso(false);
-                    }
+                    mostrarProgreso(false);
                     // Se reinicia el cargador para que recargue el adaptador.
                     gestor.restartLoader(COMENTARIOS_LOADER, null,
                             ComentariosFragment.this);
@@ -262,5 +261,46 @@ public class ComentariosFragment extends Fragment implements OnClickListener,
         if (adaptador != null) {
             adaptador.changeCursor(null);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Se infla el menú correspondiente.
+        inflater.inflate(R.menu.fragment_comentarios, menu);
+        mnuActualizar = menu.findItem(R.id.mnuActualizar);
+        // Se indica que ya se ha procesado el evento.
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (cargando) {
+            MenuItemCompat.setActionView(mnuActualizar,
+                    R.layout.actionview_progreso);
+        } else {
+            MenuItemCompat.setActionView(mnuActualizar, null);
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    // Al seleccionar un ítem de menú.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Dependiendo del ítem del menú pulsado.
+        switch (item.getItemId()) {
+        case R.id.mnuActualizar:
+            // Se cargan los datos desde el backend.
+            obtenerDatos();
+            break;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    // Muestra el círculo de progreso en la ActionBar.
+    private void mostrarProgreso(boolean mostrar) {
+        cargando = mostrar;
+        getActivity().invalidateOptionsMenu();
     }
 }

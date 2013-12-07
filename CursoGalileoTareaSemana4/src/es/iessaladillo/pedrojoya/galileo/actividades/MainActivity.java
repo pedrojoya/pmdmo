@@ -1,17 +1,19 @@
 package es.iessaladillo.pedrojoya.galileo.actividades;
 
+import java.lang.reflect.Field;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -22,13 +24,12 @@ import com.parse.ParseAnalytics;
 import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.dialogos.FotoDialogFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.FotosListaFragment;
-import es.iessaladillo.pedrojoya.galileo.fragmentos.PortadaFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.ImagenesListaFragment;
+import es.iessaladillo.pedrojoya.galileo.fragmentos.PortadaFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.TiendasFragment;
-import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
 public class MainActivity extends ActionBarActivity implements
-        OnItemClickListener, MuestraProgreso, FotoDialogFragment.Callback {
+        OnItemClickListener, FotoDialogFragment.Callback {
 
     private static final int ACCION_HACER_FOTO = 0;
     private static final int ACCION_DESDE_GALERIA = 1;
@@ -41,8 +42,7 @@ public class MainActivity extends ActionBarActivity implements
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
     private Fragment frg = null;
     private ActionBar barra;
-    private MenuItem mnuRefrescar;
-    private boolean cargando;
+    private Menu mnuActividad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,35 +109,17 @@ public class MainActivity extends ActionBarActivity implements
         if (savedInstanceState == null) {
             panelNavegacionItemSelected(0);
         }
+        // Se establece que se muestre el menú de overflow incluso en
+        // dispositivos que tengan tecla física de menú.
+        overflowEnDispositivoConTeclaMenu();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main, menu);
-        mnuRefrescar = menu.findItem(R.id.mnuRefrescar);
+        mnuActividad = menu;
         return true;
-    }
-
-    // Llamado automáticamente tras cada llamada a invalidateOptionsMenu()
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Si el panel de navegación está abierto, se ocultan los ítems de menú
-        // de la
-        // ActionBar relacionados con contenido (ya que éste está oculto tras el
-        // panel de navegación).
-        // boolean abierto = panelNavegacion.isDrawerOpen(lstPanelNavegacion);
-        // mnuRefrescar.setVisible(!abierto);
-        if (cargando) {
-            MenuItemCompat.setActionView(mnuRefrescar,
-                    R.layout.actionview_progreso);
-            mnuRefrescar.setVisible(true);
-        } else {
-            MenuItemCompat.setActionView(mnuRefrescar, null);
-            mnuRefrescar.setVisible(false);
-        }
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     // Cuando se selecciona un ítem de menú en la ActionBar.
@@ -163,11 +145,6 @@ public class MainActivity extends ActionBarActivity implements
             long id) {
         // Se selecciona el elemento correspondiente.
         panelNavegacionItemSelected(position);
-    }
-
-    public void mostrarProgreso(boolean valor) {
-        cargando = valor;
-        invalidateOptionsMenu();
     }
 
     // Respuesta a la selección de un elemento en el panel de navegación.
@@ -232,4 +209,20 @@ public class MainActivity extends ActionBarActivity implements
             ((FotosListaFragment) frg).desdeGaleria();
         }
     }
+
+    // Activa el ítem de overflow en dispositivos con botón físico de menú.
+    private void overflowEnDispositivoConTeclaMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class
+                    .getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignorar
+        }
+    }
+
 }

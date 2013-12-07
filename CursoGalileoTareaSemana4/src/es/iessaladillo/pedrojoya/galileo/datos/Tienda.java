@@ -144,7 +144,7 @@ public class Tienda implements Parcelable {
         longitud = objeto.getParseGeoPoint(BD.Tienda.GEO).getLongitude();
     }
 
-    // Escribe en las propieades los datos de un cursor.
+    // Escribe en las propiedades los datos de un cursor.
     public void fromCursor(Cursor cursor) {
         id = cursor.getLong(cursor.getColumnIndex(BD.Tienda._ID));
         objectId = cursor.getString(cursor.getColumnIndex(BD.Tienda.OBJECTID));

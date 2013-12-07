@@ -187,7 +187,7 @@ public class TiendasMapaFragment extends SupportMapFragment implements
         Cursor cursor = cLoader.loadInBackground();
         if (cursor != null) {
             cursor.moveToFirst();
-            do {
+            while (!cursor.isAfterLast()) {
                 Tienda tienda = new Tienda(cursor);
                 LatLng posicion = new LatLng(tienda.getLatitud(),
                         tienda.getLongitud());
@@ -198,7 +198,8 @@ public class TiendasMapaFragment extends SupportMapFragment implements
                 marcadoresTiendas.put(marcador, tienda);
                 // Se añade el marcador a los límites del mapa.
                 limitesBuilder.include(posicion);
-            } while (cursor.moveToNext());
+                cursor.moveToNext();
+            }
         }
         // Especificamos el adaptador para para pintar las ventanas de
         // información de los marcadores.
@@ -231,9 +232,13 @@ public class TiendasMapaFragment extends SupportMapFragment implements
     }
 
     private void posicionarMapa() {
-        LatLngBounds limites = limitesBuilder.build();
-        mapa.moveCamera(CameraUpdateFactory.newLatLngBounds(limites,
-                PADDING_MAPA));
+        if (marcadoresTiendas.size() > 0) {
+            LatLngBounds limites = limitesBuilder.build();
+            mapa.moveCamera(CameraUpdateFactory.newLatLngBounds(limites,
+                    PADDING_MAPA));
+        } else {
+            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(ALGECIRAS, 15));
+        }
     }
 
     private boolean comprobarGooglePlayServices() {

@@ -124,12 +124,15 @@ public class BD {
         public static final String TABLE_NAME = "Imagen";
         public static final String URL = "url";
         public static final String USERNAME = "username";
+        public static final String THUMBNAIL = "thumbnail";
         // SQL.
-        public static final String[] ALL = new String[] { _ID, URL, USERNAME };
+        public static final String[] ALL = new String[] { _ID, URL, USERNAME,
+                THUMBNAIL };
         public static final String CREATE = "CREATE TABLE "
                 + BD.Imagen.TABLE_NAME + " (" + BD.Imagen._ID
                 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + BD.Imagen.URL
-                + " TEXT, " + BD.Imagen.USERNAME + " TEXT " + " )";
+                + " TEXT, " + BD.Imagen.USERNAME + " TEXT, "
+                + BD.Imagen.THUMBNAIL + " TEXT " + " )";
         public static final String DROP = "DROP TABLE IF EXISTS "
                 + BD.Imagen.TABLE_NAME;
         // Content Provider.

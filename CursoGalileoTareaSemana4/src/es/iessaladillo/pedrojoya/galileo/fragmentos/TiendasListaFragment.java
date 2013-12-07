@@ -13,7 +13,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +35,6 @@ import es.iessaladillo.pedrojoya.galileo.actividades.TiendaActivity;
 import es.iessaladillo.pedrojoya.galileo.adaptadores.TiendasCursorAdapter;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
-import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
 public class TiendasListaFragment extends Fragment implements
         OnRefreshListener, LoaderCallbacks<Cursor>, OnItemClickListener {
@@ -47,6 +50,12 @@ public class TiendasListaFragment extends Fragment implements
     // Variables a nivel de clase.
     private LoaderManager gestor;
     private TiendasCursorAdapter adaptador;
+
+    private MenuItem mnuActualizar;
+
+    private boolean cargando;
+
+    private Menu menuFrag;
 
     // Retorna la vista que debe mostrar el fragmento.
     @Override
@@ -64,6 +73,8 @@ public class TiendasListaFragment extends Fragment implements
     // Cuando la actividad se ha creado completamente.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        // Se indica que el fragmento aportará ítems a la ActionBar.
+        setHasOptionsMenu(true);
         // Se configura el pulltorefresh.
         ActionBarPullToRefresh.from(getActivity()).allChildrenArePullable()
                 .listener(this).setup(ptrLayout);
@@ -135,7 +146,7 @@ public class TiendasListaFragment extends Fragment implements
     @Override
     public void onRefreshStarted(View view) {
         // Se obtienen los datos desde backend (Parse).
-        obtenerDatosBackend();
+        obtenerDatos();
     }
 
     // Obtiene e inicializa las vistas.
@@ -182,11 +193,9 @@ public class TiendasListaFragment extends Fragment implements
 
     // Obtiene los datos correspondientes del Backend y los almacena en la base
     // de datos.
-    private void obtenerDatosBackend() {
+    private void obtenerDatos() {
         // Muestra el progreso en la ActionBar.
-        if (getActivity() != null) {
-            ((MuestraProgreso) getActivity()).mostrarProgreso(true);
-        }
+        mostrarProgreso(true);
         // Se consultan en Parse todas las tiendas.
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                 BD.Tienda.TABLE_NAME);
@@ -209,18 +218,58 @@ public class TiendasListaFragment extends Fragment implements
                                 .insert(BD.Tienda.CONTENT_URI,
                                         tienda.toContentValues());
                     }
-                    // Oculta el progreso en la ActionBar.
-                    if (getActivity() != null) {
-                        ((MuestraProgreso) getActivity())
-                                .mostrarProgreso(false);
-                    }
                     // Se reinicia el cargador para que recargue el adaptador.
                     gestor.restartLoader(TIENDAS_LOADER, null,
                             TiendasListaFragment.this);
+                    // Oculta el progreso en la ActionBar.
+                    mostrarProgreso(false);
                     // Se indica que el PullToRefresh ha concluido.
                     ptrLayout.setRefreshComplete();
                 }
             }
         });
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Se infla el menú correspondiente.
+        inflater.inflate(R.menu.fragment_tiendas_lista, menu);
+        menuFrag = menu;
+        mnuActualizar = menu.findItem(R.id.mnuActualizar);
+        // Se indica que ya se ha procesado el evento.
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (cargando) {
+            MenuItemCompat.setActionView(mnuActualizar,
+                    R.layout.actionview_progreso);
+        } else {
+            MenuItemCompat.setActionView(mnuActualizar, null);
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    // Al seleccionar un ítem de menú.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Dependiendo del ítem del menú pulsado.
+        switch (item.getItemId()) {
+        case R.id.mnuActualizar:
+            // Se cargan los datos desde el backend.
+            obtenerDatos();
+            break;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    // Muestra el círculo de progreso en la ActionBar.
+    private void mostrarProgreso(boolean mostrar) {
+        cargando = mostrar;
+        getActivity().invalidateOptionsMenu();
+    }
+
 }

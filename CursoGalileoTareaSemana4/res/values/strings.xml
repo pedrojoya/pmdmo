@@ -5,7 +5,7 @@
     <string name="action_settings">Configuración</string>
     <string name="no_hay_ninguna_tienda_en_la_lista">No hay ninguna tienda en la lista.\nDeslice hacia abajo para actualizar.</string>
     <string name="title_activity_detalle_tienda">Tienda</string>
-    <string name="title_activity_detalle_foto">Galería de Fotos</string>
+    <string name="title_activity_detalle_foto">Foto</string>
     <string name="llamar">Llamar</string>
     <string name="foto_del_centro_comercial">Foto del centro comercial</string>
     <string name="icono_de_comentarios">Icono de comentarios</string>
@@ -31,7 +31,7 @@
     <string name="hacer_foto">Hacer foto</string>
     <string name="foto">Foto</string>
     <string name="seleccionar_accion">Seleccionar acción</string>
-    <string name="modo">Modo</string>
+    <string name="modo">Modo Mapa</string>
     <string name="normal">Normal</string>
     <string name="satelite">Satélite</string>
     <string name="hibrido">Híbrido</string>

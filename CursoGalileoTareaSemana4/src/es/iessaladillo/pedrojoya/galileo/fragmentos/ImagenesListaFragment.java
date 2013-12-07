@@ -6,8 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,13 +16,13 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request.Method;
@@ -31,28 +31,29 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import es.iessaladillo.pedrojoya.galileo.Aplicacion;
 import es.iessaladillo.pedrojoya.galileo.R;
-import es.iessaladillo.pedrojoya.galileo.actividades.MainActivity;
 import es.iessaladillo.pedrojoya.galileo.adaptadores.ImagenesCursorAdapter;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Imagen;
 import es.iessaladillo.pedrojoya.galileo.datos.Instagram;
+import es.iessaladillo.pedrojoya.galileo.widgets.EndlessGridView;
 
 public class ImagenesListaFragment extends Fragment implements
-        OnRefreshListener, LoaderCallbacks<Cursor> {
+        OnRefreshListener, LoaderCallbacks<Cursor>, EndlessGridView.LoadAgent {
 
     private static final int IMAGENES_LOADER = 2;
+    private static final String EXTRA_URL = "url";
 
     // Vistas.
-    private ListView lstFotos;
+    private EndlessGridView lstFotos;
+    private PullToRefreshLayout ptrLayout;
+    private RelativeLayout rlListaFotosVacia;
 
     // Propiedades.
     private ImagenesCursorAdapter adaptador;
-
-    private PullToRefreshLayout ptrLayout;
-
-    private RelativeLayout rlListaFotosVacia;
-
     private LoaderManager gestor;
+    private boolean cargando;
+    private MenuItem mnuActualizar;
+    private String siguientePeticionURL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +68,10 @@ public class ImagenesListaFragment extends Fragment implements
 
     private void getVistas(View v) {
         // Se obtienen las vistas.
-        lstFotos = (ListView) v.findViewById(R.id.lstFotos);
+        lstFotos = (EndlessGridView) v.findViewById(R.id.lstFotos);
+        // El propio fragmento hará de listener cuando el grid solicite la carga
+        // de más datos.
+        lstFotos.setLoadAgent(this);
         rlListaFotosVacia = (RelativeLayout) v
                 .findViewById(R.id.rlListaFotosVacia);
         ptrLayout = (PullToRefreshLayout) v.findViewById(R.id.ptr_layout);
@@ -83,15 +87,33 @@ public class ImagenesListaFragment extends Fragment implements
         // Se obtiene el gestor de cargadores.
         gestor = getActivity().getSupportLoaderManager();
         cargarListaDesdeBD();
+        if (savedInstanceState == null) {
+            siguientePeticionURL = Instagram.getRecentMediaURL("algeciras");
+        } else {
+            siguientePeticionURL = savedInstanceState.getString(EXTRA_URL);
+        }
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Se infla el menú correspondiente.
+        menu.clear(); // Para que no repita el menú de Tienda.
         inflater.inflate(R.menu.fragment_imagenes_lista, menu);
+        mnuActualizar = menu.findItem(R.id.mnuActualizar);
         // Se indica que ya se ha procesado el evento.
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (cargando) {
+            MenuItemCompat.setActionView(mnuActualizar,
+                    R.layout.actionview_progreso);
+        } else {
+            MenuItemCompat.setActionView(mnuActualizar, null);
+        }
+        super.onPrepareOptionsMenu(menu);
     }
 
     // Al seleccionar un ítem de menú.
@@ -109,29 +131,36 @@ public class ImagenesListaFragment extends Fragment implements
         return true;
     }
 
+    // Muestra el círculo de progreso en la ActionBar.
+    private void mostrarProgreso(boolean mostrar) {
+        cargando = mostrar;
+        getActivity().invalidateOptionsMenu();
+    }
+
     private void obtenerDatos() {
         // Se muestra el círculo de progreso.
-        if (getActivity() != null) {
-            ((MainActivity) getActivity()).mostrarProgreso(true);
-        }
+        mostrarProgreso(true);
         // Se obtiene la URL de petición a Instagram.
-        String url = Instagram.getRecentMediaURL("algeciras");
+        String url = siguientePeticionURL;
         // Se crea el listener que recibirá la respuesta de la petición.
         Response.Listener<JSONObject> listenerRespuesta = new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject respuesta) {
-                // Se oculta el progreso.
-                if (getActivity() != null) {
-                    ((MainActivity) getActivity()).mostrarProgreso(false);
-                }
                 // Se crea la lista de datos parseando la respuesta.
                 ArrayList<Imagen> lista = new ArrayList<Imagen>();
+                // Se obtiene un indicador de si se trata de la carga inicial.
+                boolean peticionInicial = siguientePeticionURL.equals(Instagram
+                        .getRecentMediaURL("algeciras"));
                 parseRespuesta(respuesta, lista);
                 // Se recorre la lista y se añade cada elemento a la BD.
                 if (lista != null) {
-                    getActivity().getContentResolver().delete(
-                            BD.Imagen.CONTENT_URI, null, null);
+                    // Si es una petición inicial se borran los registros
+                    // existentes.
+                    if (peticionInicial) {
+                        getActivity().getContentResolver().delete(
+                                BD.Imagen.CONTENT_URI, null, null);
+                    }
                     for (Imagen elemento : lista) {
                         getActivity().getContentResolver().insert(
                                 BD.Imagen.CONTENT_URI,
@@ -141,8 +170,11 @@ public class ImagenesListaFragment extends Fragment implements
                     gestor.restartLoader(IMAGENES_LOADER, null,
                             ImagenesListaFragment.this);
                 }
+                // Se oculta el progreso.
+                mostrarProgreso(false);
                 // Se indica que el PullToRefresh ha concluido.
                 ptrLayout.setRefreshComplete();
+                lstFotos.setLoaded();
             }
 
         };
@@ -160,9 +192,13 @@ public class ImagenesListaFragment extends Fragment implements
             ArrayList<Imagen> datosAdaptador) {
         try {
             // Se parsea la respuesta para obtener los datos deseados.
+            // Se obtiene cual debe ser la próxima petición para paginación.
+            JSONObject paginationKeyJSONObject = respuesta
+                    .getJSONObject(Instagram.PAGINACION_KEY);
+            siguientePeticionURL = paginationKeyJSONObject
+                    .getString(Instagram.SIGUIENTE_PETICION_KEY);
             // Se obtiene el valor de la clave "data", que correponde al
             // array de datos.
-
             JSONArray dataKeyJSONArray = respuesta
                     .getJSONArray(Instagram.ARRAY_DATOS_KEY);
             // Por cada uno de los elementos del array de datos.
@@ -189,6 +225,11 @@ public class ImagenesListaFragment extends Fragment implements
                     imagenInstagram.setUrl(imagen.getJSONObject(
                             Instagram.RESOLUCION_ESTANDAR_KEY).getString(
                             Instagram.URL_KEY));
+                    // Se obtiene la url de la miniatura de la imagen y se
+                    // guarda en el objeto modelo.
+                    imagenInstagram.setThumbnail(imagen.getJSONObject(
+                            Instagram.RESOLUCION_MINIATURA_KEY).getString(
+                            Instagram.URL_KEY));
                     // Se añade el objeto modelo a la lista de datos
                     // para el adaptador.
                     datosAdaptador.add(imagenInstagram);
@@ -205,7 +246,7 @@ public class ImagenesListaFragment extends Fragment implements
         // Se inicializa el cargador.
         gestor.initLoader(IMAGENES_LOADER, null, this);
         // Se crea un adaptador inicial con el cursor nulo.
-        String[] from = new String[] { BD.Imagen.USERNAME, BD.Imagen.URL };
+        String[] from = new String[] { BD.Imagen.USERNAME, BD.Imagen.THUMBNAIL };
         int[] to = new int[] { R.id.lblUsuario, R.id.imgFoto };
         adaptador = new ImagenesCursorAdapter(this.getActivity(), null, from,
                 to);
@@ -260,6 +301,28 @@ public class ImagenesListaFragment extends Fragment implements
     @Override
     public void onRefreshStarted(View view) {
         // Se obtienen los datos desde Parse.
+        siguientePeticionURL = Instagram.getRecentMediaURL("algeciras");
         obtenerDatos();
     }
+
+    @Override
+    public void onDestroyView() {
+        // Se "quitan" los menus del fragmento. OJO: si no se
+        // hace se muestran repetidos al cambiar orientación.
+        setHasOptionsMenu(false);
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Se guarda la proxima url a consultar.
+        outState.putString(EXTRA_URL, siguientePeticionURL);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void loadData() {
+        obtenerDatos();
+    }
+
 }

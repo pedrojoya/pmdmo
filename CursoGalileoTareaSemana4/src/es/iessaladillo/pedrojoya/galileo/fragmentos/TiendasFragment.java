@@ -16,12 +16,13 @@ public class TiendasFragment extends Fragment {
     // Vistas.
     private ActionBar barra;
     private ActionBarActivity actividad;
+    private TiendasListaFragment frgListado;
+    private TiendasMapaFragment frgMapa;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // Se establece que el fragmento aportará menús.
-        setHasOptionsMenu(true);
         // Se configura la ActionBar para navegación por pestañas.
+        setHasOptionsMenu(true);
         actividad = (ActionBarActivity) getActivity();
         barra = actividad.getSupportActionBar();
         barra.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -31,8 +32,8 @@ public class TiendasFragment extends Fragment {
         ActionBar.Tab tabMapa = barra.newTab();
         tabMapa.setText(R.string.mapa);
         // Se crean los fragmentos de cada pestaña.
-        Fragment frgListado = new TiendasListaFragment();
-        Fragment frgMapa = new TiendasMapaFragment();
+        frgListado = new TiendasListaFragment();
+        frgMapa = new TiendasMapaFragment();
         // Se crea y asocia el listener a cada pestaña.
         tabListado.setTabListener(new GestorTabListener(frgListado));
         tabMapa.setTabListener(new GestorTabListener(frgMapa));
@@ -51,6 +52,15 @@ public class TiendasFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        // Se "quitan" los menus de los fragmentos de las tabs. OJO: si no se
+        // hace se muestran en otros fragmentos.
+        frgListado.setHasOptionsMenu(false);
+        frgMapa.setHasOptionsMenu(false);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .remove(frgListado).commit();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .remove(frgMapa).commit();
+        getActivity().invalidateOptionsMenu();
         // Se eliminan las tabs (para que no se vean en la actividad cuando en
         // el navigation drawer se selecciona la opción correpondiente a otro
         // fragmento) y se establece el modo de navegación normal.
@@ -105,5 +115,4 @@ public class TiendasFragment extends Fragment {
             ft.remove(fragment);
         }
     }
-
 }

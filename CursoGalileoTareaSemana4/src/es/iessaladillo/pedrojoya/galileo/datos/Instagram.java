@@ -11,8 +11,11 @@ public class Instagram {
     public static final String USUARIO_KEY = "user";
     public static final String NOMBRE_USUARIO_KEY = "username";
     public static final String IMAGEN_KEY = "images";
+    public static final String RESOLUCION_MINIATURA_KEY = "thumbnail";
     public static final String RESOLUCION_ESTANDAR_KEY = "standard_resolution";
     public static final String URL_KEY = "url";
+    public static final String PAGINACION_KEY = "pagination";
+    public static final String SIGUIENTE_PETICION_KEY = "next_url";
 
     public static String getRecentMediaURL(String tag) {
         return BASE_URL + "/tags/" + tag + "/media/recent?client_id="

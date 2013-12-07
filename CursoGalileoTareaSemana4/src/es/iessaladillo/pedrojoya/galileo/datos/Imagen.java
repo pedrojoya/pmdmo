@@ -6,6 +6,7 @@ public class Imagen {
 
     private String url;
     private String username;
+    private String thumbnail;
 
     public String getUrl() {
         return url;
@@ -23,11 +24,20 @@ public class Imagen {
         this.username = username;
     }
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
     // Retorna un ContentValues con los datos.
     public ContentValues toContentValues() {
         ContentValues objeto = new ContentValues();
         objeto.put(BD.Imagen.URL, url);
         objeto.put(BD.Imagen.USERNAME, username);
+        objeto.put(BD.Imagen.THUMBNAIL, thumbnail);
         return objeto;
     }
 

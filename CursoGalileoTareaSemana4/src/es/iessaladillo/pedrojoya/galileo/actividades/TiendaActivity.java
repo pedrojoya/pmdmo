@@ -1,11 +1,14 @@
 package es.iessaladillo.pedrojoya.galileo.actividades;
 
+import java.lang.reflect.Field;
+
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 
 import com.parse.ParseAnalytics;
 
@@ -13,9 +16,8 @@ import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.datos.Tienda;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.ComentariosFragment;
 import es.iessaladillo.pedrojoya.galileo.fragmentos.TiendaInfoFragment;
-import es.iessaladillo.pedrojoya.galileo.interfaces.MuestraProgreso;
 
-public class TiendaActivity extends FragmentActivity implements MuestraProgreso {
+public class TiendaActivity extends ActionBarActivity {
 
     // Constantes públicas estáticas.
     public static String EXTRA_TIENDA = "objectIdTienda";
@@ -26,9 +28,6 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
     // Propiedades.
     private Tienda tienda;
     private FragmentManager gestorFragmentos;
-    private MenuItem mnuRefrescar;
-
-    private boolean cargando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,9 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
         cargarInfoTiendaFragment();
         // Se carga el framento de comentarios de la tienda.
         cargarComentariosFragment();
+        // Se establece que se muestre el menú de overflow incluso en
+        // dispositivos que tengan tecla física de menú.
+        overflowEnDispositivoConTeclaMenu();
     }
 
     // Carga el fragmento de InfoTienda.
@@ -97,26 +99,22 @@ public class TiendaActivity extends FragmentActivity implements MuestraProgreso 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Se infla el menú correspondiente.
         getMenuInflater().inflate(R.menu.activitity_tienda, menu);
-        mnuRefrescar = menu.findItem(R.id.mnuRefrescar);
-        mnuRefrescar.setActionView(R.layout.actionview_progreso);
-        mnuRefrescar.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void mostrarProgreso(boolean valor) {
-        cargando = valor;
-        invalidateOptionsMenu();
-    }
-
-    // Llamado automáticamente tras cada llamada a invalidateOptionsMenu()
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (cargando) {
-            mnuRefrescar.setVisible(true);
-        } else {
-            mnuRefrescar.setVisible(false);
+    // Activa el ítem de overflow en dispositivos con botón físico de menú.
+    private void overflowEnDispositivoConTeclaMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class
+                    .getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignorar
         }
-        return super.onPrepareOptionsMenu(menu);
     }
 
 }

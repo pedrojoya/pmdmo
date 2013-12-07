@@ -8,7 +8,6 @@ import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseInstallation;
-import com.parse.ParseUser;
 import com.parse.PushService;
 
 import es.iessaladillo.pedrojoya.galileo.actividades.MainActivity;
@@ -25,7 +24,7 @@ public class Aplicacion extends Application {
         // cliente.
         Parse.initialize(this, "fB8fwNmsRef34Xg4k6NXxzVx3HPeLAfrkdluKnTi",
                 "TNTaEvszGOoyRx0D1vaFfiM9UCurUm9Q1LcsADZV");
-        ParseUser.enableAutomaticUser();
+        // ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
 
         // If you would like all objects to be private by default, remove this

@@ -43,7 +43,6 @@ public class TiendaInfoFragment extends Fragment implements OnClickListener {
     private TextView lblFavoritos;
 
     // Propiedades.
-    private String objectIdTienda;
     private ParseObject parseTienda;
     private Tienda tienda;
 
@@ -155,7 +154,7 @@ public class TiendaInfoFragment extends Fragment implements OnClickListener {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                 BD.Tienda.TABLE_NAME);
         query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.whereEqualTo(BD.Tienda.OBJECTID, objectIdTienda);
+        query.whereEqualTo(BD.Tienda.OBJECTID, tienda.getObjectId());
         query.findInBackground(new FindCallback<ParseObject>() {
 
             @Override
@@ -164,7 +163,7 @@ public class TiendaInfoFragment extends Fragment implements OnClickListener {
                     // Se incrementa el valor de favoritos.
                     parseTienda = lista.get(0);
                     parseTienda.increment(BD.Tienda.FAVORITOS);
-                    parseTienda.saveInBackground(new SaveCallback() {
+                    parseTienda.saveEventually(new SaveCallback() {
 
                         @Override
                         public void done(ParseException e) {

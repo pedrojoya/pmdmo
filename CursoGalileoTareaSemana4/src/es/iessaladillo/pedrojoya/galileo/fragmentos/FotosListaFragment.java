@@ -26,6 +26,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +49,6 @@ import com.parse.SaveCallback;
 
 import es.iessaladillo.pedrojoya.galileo.R;
 import es.iessaladillo.pedrojoya.galileo.actividades.FotoActivity;
-import es.iessaladillo.pedrojoya.galileo.actividades.MainActivity;
 import es.iessaladillo.pedrojoya.galileo.adaptadores.FotosCursorAdapter;
 import es.iessaladillo.pedrojoya.galileo.datos.BD;
 import es.iessaladillo.pedrojoya.galileo.datos.Foto;
@@ -65,18 +65,18 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
     // Vistas.
     private ImageView btnHacerFoto;
     private ListView lstFotos;
+    private PullToRefreshLayout ptrLayout;
+    private RelativeLayout rlListaFotosVacia;
 
     // Propiedades.
     private String pathFoto;
     private String descripcionFoto;
     private ParseFile parseFileFoto;
     private ParseObject fotoParse;
-    // private ParseQueryAdapter<ParseObject> adaptador;
     private FotosCursorAdapter adaptador;
-    private View vRaiz;
-    private PullToRefreshLayout ptrLayout;
     private LoaderManager gestor;
-    private RelativeLayout rlListaFotosVacia;
+    private MenuItem mnuActualizar;
+    private boolean cargando;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,7 +90,6 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
     }
 
     private void getVistas(View v) {
-        vRaiz = v;
         btnHacerFoto = (ImageView) v.findViewById(R.id.btnHacerFoto);
         lstFotos = (ListView) v.findViewById(R.id.lstFotos);
         rlListaFotosVacia = (RelativeLayout) v
@@ -121,8 +120,20 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Se infla el menú correspondiente.
         inflater.inflate(R.menu.fragment_fotos_lista, menu);
+        mnuActualizar = menu.findItem(R.id.mnuActualizar);
         // Se indica que ya se ha procesado el evento.
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (cargando) {
+            MenuItemCompat.setActionView(mnuActualizar,
+                    R.layout.actionview_progreso);
+        } else {
+            MenuItemCompat.setActionView(mnuActualizar, null);
+        }
+        super.onPrepareOptionsMenu(menu);
     }
 
     // Al seleccionar un ítem de menú.
@@ -138,6 +149,12 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    // Muestra el círculo de progreso en la ActionBar.
+    private void mostrarProgreso(boolean mostrar) {
+        cargando = mostrar;
+        getActivity().invalidateOptionsMenu();
     }
 
     private void cargarListaDesdeBD() {
@@ -298,38 +315,33 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
 
     private void obtenerDatos() {
         // Se muestra el círculo de progreso.
-        if (getActivity() != null) {
-            ((MainActivity) getActivity()).mostrarProgreso(true);
-        }
+        mostrarProgreso(true);
         // Se obtienen las fotos.
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                 BD.Foto.TABLE_NAME);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
         query.orderByDescending(BD.Foto.DESCRIPCION);
         query.findInBackground(new FindCallback<ParseObject>() {
 
             @Override
             public void done(List<ParseObject> lista, ParseException e) {
                 if (lista != null) {
-                    getActivity().getContentResolver().delete(
-                            BD.Foto.CONTENT_URI, null, null);
-                    for (ParseObject elemento : lista) {
-                        Foto foto = new Foto(elemento);
-                        getActivity().getContentResolver().insert(
-                                BD.Foto.CONTENT_URI, foto.toContentValues());
-                    }
-                    // Se hacen visibles las vistas.
-                    if (vRaiz != null) {
-                        vRaiz.setVisibility(View.VISIBLE);
-                    }
                     if (getActivity() != null) {
-                        ((MainActivity) getActivity()).mostrarProgreso(false);
+                        getActivity().getContentResolver().delete(
+                                BD.Foto.CONTENT_URI, null, null);
+                        for (ParseObject elemento : lista) {
+                            Foto foto = new Foto(elemento);
+                            getActivity().getContentResolver()
+                                    .insert(BD.Foto.CONTENT_URI,
+                                            foto.toContentValues());
+                        }
+                        // Se oculta el círculo de progreso.
+                        mostrarProgreso(false);
+                        // Se reinicia el cargador.
+                        gestor.restartLoader(FOTOS_LOADER, null,
+                                FotosListaFragment.this);
+                        // Se indica que el PullToRefresh ha concluido.
+                        ptrLayout.setRefreshComplete();
                     }
-                    // Se reinicia el cargador.
-                    gestor.restartLoader(FOTOS_LOADER, null,
-                            FotosListaFragment.this);
-                    // Se indica que el PullToRefresh ha concluido.
-                    ptrLayout.setRefreshComplete();
                 }
             }
         });
@@ -342,19 +354,18 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
         // Se obtiene del adaptador de la lista los datos del elemento
         // pulsado.
         Cursor cursor = (Cursor) lstFotos.getItemAtPosition(position);
-        String objectIdFoto = cursor.getString(cursor
-                .getColumnIndex(BD.Foto.OBJECTID));
+        Foto foto = new Foto(cursor);
         // Se muestra la actividad de detalle de la foto.
-        mostrarDetalleFoto(objectIdFoto);
+        mostrarDetalleFoto(foto);
 
     }
 
     // Muestra la actividad de detalle de la foto.
-    private void mostrarDetalleFoto(String objectIdFoto) {
+    private void mostrarDetalleFoto(Foto foto) {
         // Se crea el intent para llamar a la actividad de detalle de foto, y
         // se le pasa la foto como dato extra.
         Intent i = new Intent(getActivity(), FotoActivity.class);
-        i.putExtra(FotoActivity.EXTRA_FOTO, objectIdFoto);
+        i.putExtra(FotoActivity.EXTRA_FOTO, foto);
         // Se envía el intent.
         startActivity(i);
     }
@@ -404,6 +415,14 @@ public class FotosListaFragment extends Fragment implements OnClickListener,
     public void onRefreshStarted(View view) {
         // Se obtienen los datos desde Parse.
         obtenerDatos();
+    }
+
+    @Override
+    public void onDestroyView() {
+        // Se "quitan" los menus del fragmento. OJO: si no se
+        // hace se muestran repetidos al cambiar orientación.
+        setHasOptionsMenu(false);
+        super.onDestroyView();
     }
 
 }
