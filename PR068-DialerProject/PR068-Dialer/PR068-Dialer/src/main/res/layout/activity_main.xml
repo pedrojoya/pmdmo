@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_borrar"
             android:onClick="btnBorrarOnClick"
+            android:contentDescription = "@string/borrar"
             android:layout_weight="3" />
 
     </LinearLayout>

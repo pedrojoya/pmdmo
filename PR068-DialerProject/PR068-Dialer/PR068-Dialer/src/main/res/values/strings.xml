@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" >Dial
-    </string>
-    <string name="action_settings" >Settings
-    </string>
-    <string name="hello_world" >Hello world!
-    </string>
+    <string name="app_name">Dial</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_llamada">Llamada</string>
+    <string name="llamando">Llamando...</string>
+    <string name="icono_de_usuario">Icono de usuario</string>
+    <string name="finalizar_llamada">Finalizar llamada</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="tipo_de_llamada">Tipo de llamada</string>
+    <string name="borrar">Borrar</string>
+    <string name="buscar">Buscar</string>
 
 </resources>
