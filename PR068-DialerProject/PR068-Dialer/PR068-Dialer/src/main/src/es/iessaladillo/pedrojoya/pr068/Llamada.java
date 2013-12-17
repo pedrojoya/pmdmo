@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.pr068;
 
 import java.util.Date;
 
+// Modela una llamada telefónica.
 public class Llamada {
 
 	// Constantes.

@@ -8,6 +8,7 @@ public class Registro {
 	// Propiedades.
 	private static ArrayList<Llamada> lista = new ArrayList<Llamada>();
 
+	// Inicialización de la lista.
 	static {
 		lista.add(0, new Llamada("678678678", new Date(),
 				Llamada.LLAMADA_ENTRANTE));
@@ -21,11 +22,12 @@ public class Registro {
 	private Registro() {
 	}
 
-	// Métodos
+	// Añade una nueva llamada a la lista.
 	public static void registrar(Llamada llamada) {
 		lista.add(0, llamada);
 	}
 
+	// Retorna la lista de llamadas.
 	public static ArrayList<Llamada> getLlamadas() {
 		return lista;
 	}

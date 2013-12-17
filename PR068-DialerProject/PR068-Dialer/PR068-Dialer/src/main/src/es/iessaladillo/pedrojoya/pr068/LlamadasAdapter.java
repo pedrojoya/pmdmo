@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+// Adaptador para la lista de llamadas.
 public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 
 	// Variables.
@@ -19,7 +20,7 @@ public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 	private ArrayList<Llamada> datos;
 	private SimpleDateFormat formateador;
 
-	// Clase interna contenedor.
+	// Clase interna contenedor de vistas.
 	class Contenedor {
 		TextView lblFecha;
 		TextView lblNumero;
@@ -32,6 +33,7 @@ public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 	public LlamadasAdapter(Context context, ArrayList<Llamada> datos) {
 		// Se llama al constructor del padre.
 		super(context, R.layout.activity_registro_item, datos);
+		// Se realiza copia local de los datos del constructor.
 		this.datos = datos;
 		// Se obtiene un inflador de layouts.
 		inflador = LayoutInflater.from(context);
@@ -39,6 +41,7 @@ public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 		formateador = new SimpleDateFormat("dd/MM HH:mm");
 	}
 
+	// Cada vez que se debe pintar un ítem de la lista.
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Contenedor contenedor;
@@ -47,8 +50,8 @@ public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 			// Se infla el layout.
 			convertView = inflador.inflate(R.layout.activity_registro_item,
 					parent, false);
-			// Se obtienen las vistas y se guardan en un contenedor que se
-			// almacenar en la propiedad tag del layout.
+			// Se obtienen las vistas y se guardan en un contenedor, que se
+			// almacena en la propiedad tag del layout.
 			contenedor = new Contenedor();
 			contenedor.lblFecha = (TextView) convertView
 					.findViewById(R.id.lblFecha);
@@ -58,10 +61,12 @@ public class LlamadasAdapter extends ArrayAdapter<Llamada> {
 					.findViewById(R.id.imgTipo);
 			convertView.setTag(contenedor);
 		} else {
+			// Se obtiene el contenedor de la prop tag de la vista reciclada.
 			contenedor = (Contenedor) convertView.getTag();
 		}
-		// Se escriben los datos correspondientes en las vistas.
+		// Se obtiene la llamada correspondiente al ítem que va a pintarse.
 		Llamada llamada = datos.get(position);
+		// Se escriben los datos correspondientes en las vistas.
 		contenedor.lblFecha.setText(formateador.format(llamada.getFecha()));
 		contenedor.lblNumero.setText(llamada.getNumero());
 		int resIdTipoLLamada;

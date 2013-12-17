@@ -32,7 +32,6 @@ public final class R {
         public static final int sym_call_outgoing=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
         public static final int btnBorrar=0x7f080005;
         public static final int btnFinalizar=0x7f080003;
         public static final int btnLlamar=0x7f080011;
@@ -64,20 +63,17 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
-        public static final int llamada=0x7f070001;
-        public static final int registro=0x7f070002;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int borrar=0x7f050008;
-        public static final int buscar=0x7f050009;
-        public static final int finalizar_llamada=0x7f050005;
-        public static final int icono_de_usuario=0x7f050004;
-        public static final int llamando=0x7f050003;
-        public static final int tipo_de_llamada=0x7f050007;
-        public static final int title_activity_llamada=0x7f050002;
-        public static final int title_activity_registro=0x7f050006;
+        public static final int borrar=0x7f050007;
+        public static final int buscar=0x7f050008;
+        public static final int finalizar_llamada=0x7f050004;
+        public static final int icono_de_usuario=0x7f050003;
+        public static final int llamando=0x7f050002;
+        public static final int tipo_de_llamada=0x7f050006;
+        public static final int title_activity_llamada=0x7f050001;
+        public static final int title_activity_registro=0x7f050005;
     }
     public static final class style {
         /** 

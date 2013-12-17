@@ -13,21 +13,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+// Actividad principal. Muestra un dial para marcar número de teléfono.
 public class MainActivity extends Activity implements OnLongClickListener {
 
+	// Vistas.
 	private EditText txtNumero;
 	private ImageButton btnBorrar;
 
+	// Al crear la actividad.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// Se obtienen las vistas.
 		getVistas();
 	}
 
+	// Obtiene e inicializa las vistas.
 	private void getVistas() {
 		txtNumero = (EditText) this.findViewById(R.id.txtNumero);
 		btnBorrar = (ImageButton) this.findViewById(R.id.btnBorrar);
+		// La propia actividad actuará como listener cuando se haga click largo
+		// sobre btnBorrar.
 		btnBorrar.setOnLongClickListener(this);
 
 	}
@@ -58,6 +65,7 @@ public class MainActivity extends Activity implements OnLongClickListener {
 
 	// Al pulsar sobre el botón btnLlamar.
 	public void btnLlamarOnClick(View v) {
+		// Si se ha introducido un número.
 		if (!TextUtils.isEmpty(txtNumero.getText().toString())) {
 			// Se muestra la actividad de llamada.
 			Intent intent = new Intent(getApplicationContext(),
@@ -68,6 +76,7 @@ public class MainActivity extends Activity implements OnLongClickListener {
 		}
 	}
 
+	// Al hacer click largo sobre btnBorrar.
 	@Override
 	public boolean onLongClick(View v) {
 		// Dependiendo del botón pulsado.
@@ -81,17 +90,21 @@ public class MainActivity extends Activity implements OnLongClickListener {
 		return true;
 	}
 
+	// Cuando se ha hecho click largo sobre btnBorrar.
 	private void btnBorrarOnLongClick() {
 		// Se borra todo el contenido de texto.
 		txtNumero.setText("");
 	}
 
+	// Al crear el menú de opciones.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		// Se infla el menú correspondiente.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	// Al seleccionar un ítem de menú.
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -104,9 +117,13 @@ public class MainActivity extends Activity implements OnLongClickListener {
 		return super.onOptionsItemSelected(item);
 	}
 
+	// Busca en Internet el número de teléfono introducido.
 	private void buscarNumero() {
+		// Si se ha introducido un número.
 		String numero = txtNumero.getText().toString();
 		if (!TextUtils.isEmpty(numero)) {
+			// Se lanza un intent implícito para que el navegador busque el
+			// número de Internet.
 			Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
 			intent.putExtra(SearchManager.QUERY, numero);
 			startActivity(intent);

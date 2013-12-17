@@ -28,8 +28,8 @@
         </activity>
 
         <provider
-            android:name=".proveedores.AlumnosContentProvider"
-            android:authorities="es.iessaladillo.institutoprovider"
+            android:name=".proveedores.InstitutoContentProvider"
+            android:authorities="es.iessaladillo.instituto.provider"
             android:exported="false" >
         </provider>
     </application>

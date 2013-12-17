@@ -4,10 +4,10 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+// Actividad que simula la realización de una llamada telefónica.
 public class LlamadaActivity extends Activity {
 
 	// Constantes.
@@ -16,13 +16,16 @@ public class LlamadaActivity extends Activity {
 	// Variables.
 	private TextView lblNumero;
 
+	// Al crear la actividad.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_llamada);
+		// Se obtienen las vistas.
 		getVistas();
 	}
 
+	// Obtiene e inicializa las vistas.
 	private void getVistas() {
 		// Se obtienen las vistas.
 		lblNumero = (TextView) findViewById(R.id.lblNumero);
@@ -31,6 +34,7 @@ public class LlamadaActivity extends Activity {
 		lblNumero.setText(getIntent().getStringExtra(EXTRA_NUMERO));
 	}
 
+	// Al hacer click sobre btnFinalizar.
 	public void btnFinalizarOnClick(View v) {
 		// Se añade la llamada al registro.
 		Llamada llamada = new Llamada(lblNumero.getText().toString(),
@@ -38,13 +42,6 @@ public class LlamadaActivity extends Activity {
 		Registro.registrar(llamada);
 		// Se cierra la actividad.
 		finish();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.llamada, menu);
-		return true;
 	}
 
 }
