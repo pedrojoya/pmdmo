@@ -27,7 +27,8 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater;
+        inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main, menu);
         return true;
     }
