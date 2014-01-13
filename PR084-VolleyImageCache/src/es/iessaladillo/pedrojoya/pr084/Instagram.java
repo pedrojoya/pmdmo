@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr084;
 
+// Clase contrato con las claves de Instagram.
 public class Instagram {
 
     // Constantes.
@@ -17,6 +18,7 @@ public class Instagram {
     public static final String PAGINACION_KEY = "pagination";
     public static final String SIGUIENTE_PETICION_KEY = "next_url";
 
+    // Retorna la url de acceso a las imágenes más recientes para un tag.
     public static String getRecentMediaURL(String tag) {
         return BASE_URL + "/tags/" + tag + "/media/recent?client_id="
                 + CLIENT_ID;

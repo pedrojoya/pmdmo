@@ -9,66 +9,62 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+// Adaptador para lista de fotos.
 public class FotosAdapter extends ArrayAdapter<Foto> {
 
+    // Variables.
     private Context contexto;
     private ArrayList<Foto> datos;
     private ImageLoader cargadorImagenes;
-    private final int anchoFoto;
-    private final int altoFoto;
-    private RequestQueue colaPeticiones;
 
-    // Clase contenedora de vistas.
+    // Clase interna contenedora de vistas.
     private class ContenedorVistas {
         public NetworkImageView imgFoto;
         public TextView lblDescripcion;
     }
 
+    // Constructor.
     public FotosAdapter(Context contexto, ArrayList<Foto> datos) {
         super(contexto, R.layout.activity_main_item, datos);
         this.contexto = contexto;
         this.datos = datos;
-        colaPeticiones = App.getRequestQueue();
-        int max_cache_size = 1000000;
-        cargadorImagenes = new ImageLoader(colaPeticiones, new BitmapLruCache(
-                max_cache_size));
-        anchoFoto = contexto.getResources().getDimensionPixelSize(
-                R.dimen.ancho_foto);
-        altoFoto = contexto.getResources().getDimensionPixelSize(
-                R.dimen.alto_foto);
+        // Se obtiene el cargador de imágenes.
+        cargadorImagenes = App.getImageLoader();
     }
 
+    // Cuando debe visualizarse un elemento de la lista. Retorna la vista.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ContenedorVistas contenedor;
-        View item = convertView;
+        ContenedorVistas contenedor = null;
         // Si no se puede reciclar.
-        if (item == null) {
+        if (convertView == null) {
             // Se infla el layout.
-            item = LayoutInflater.from(contexto).inflate(
+            convertView = LayoutInflater.from(contexto).inflate(
                     R.layout.activity_main_item, parent, false);
             // Se obtienen las vistas.
             contenedor = new ContenedorVistas();
-            contenedor.imgFoto = (NetworkImageView) item
+            contenedor.imgFoto = (NetworkImageView) convertView
                     .findViewById(R.id.imgFoto);
-            contenedor.lblDescripcion = (TextView) item
+            contenedor.lblDescripcion = (TextView) convertView
                     .findViewById(R.id.lblDescripcion);
             // Se guarda el contenedor en la propiedad tag del item.
-            item.setTag(contenedor);
+            convertView.setTag(contenedor);
         } else {
             // Si se puede reciclar, obtengo el contenedor de la vista
             // reciclada.
-            contenedor = (ContenedorVistas) item.getTag();
+            contenedor = (ContenedorVistas) convertView.getTag();
         }
         // Se escriben los datos correspondientes en las vistas.
         Foto foto = datos.get(position);
+        // Se le indica al NetworkImageView la URL de la foto que debe mostrar y
+        // el cargador de imágenes que debe usarse para obtenerla.
         contenedor.imgFoto.setImageUrl(foto.getUrl(), cargadorImagenes);
         contenedor.lblDescripcion.setText(foto.getDescripcion());
-        return item;
+        // Se retorna la vista que debe mostrarse para el elemento de la lista.
+        return convertView;
     }
 
 }

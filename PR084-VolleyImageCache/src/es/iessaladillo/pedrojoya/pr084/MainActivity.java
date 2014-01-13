@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
         lstFotos.setAdapter(adaptador);
         // Se establece la url inicial.
         sUrlSiguiente = Instagram.getRecentMediaURL("algeciras");
-        // Si hay conexión a Internet.
+        // Si hay conexión a Internet se obtienen los datos.
         if (isConnectionAvailable()) {
             obtenerDatos();
         } else {
@@ -55,6 +55,7 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
         }
     }
 
+    // Obtiene los datos JSON de la lista de fotos de Instagram.
     private void obtenerDatos() {
         // Se muestra el círculo de progreso.
         if (mnuActualizar != null) {
@@ -66,16 +67,18 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
             @Override
             public void onResponse(JSONObject respuesta) {
                 // Se crea la lista de datos parseando la respuesta.
-                ArrayList<Foto> lista = parseRespuesta(respuesta);
+                ArrayList<Foto> lista = procesarRespuesta(respuesta);
                 // Se añaden las fotos de la lista al adaptador.
                 agregarAlAdaptador(lista);
                 // Se oculta el progreso.
                 if (mnuActualizar != null) {
                     mnuActualizar.setVisible(false);
                 }
+                // Se indica al gridview que ya ha finalizado la carga.
                 lstFotos.setLoaded();
             }
 
+            // Agraga al adaptador la lista de fotos obtenidas.
             private void agregarAlAdaptador(ArrayList<Foto> lista) {
                 // Se añade cada foto al adaotador.
                 for (Foto foto : lista) {
@@ -83,7 +86,6 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
                 }
                 // Se notifican los cambios en los datos.
                 adaptador.notifyDataSetChanged();
-
             }
 
         };
@@ -94,10 +96,11 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
         colaPeticiones.add(peticion);
     }
 
-    private ArrayList<Foto> parseRespuesta(JSONObject respuesta) {
+    // Procesa el objeto JSON de respuesta, retornando la lista de fotos.
+    private ArrayList<Foto> procesarRespuesta(JSONObject respuesta) {
         ArrayList<Foto> lista = new ArrayList<Foto>();
         try {
-            // Se parsea la respuesta para obtener los datos deseados.
+            // Se procesa la respuesta para obtener los datos deseados.
             // Se obtiene cual debe ser la próxima petición para paginación.
             JSONObject paginationKeyJSONObject = respuesta
                     .getJSONObject(Instagram.PAGINACION_KEY);
@@ -141,6 +144,7 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        // Se retorna la lista de fotos.
         return lista;
     }
 
@@ -169,6 +173,7 @@ public class MainActivity extends Activity implements EndlessGridView.LoadAgent 
                 .show();
     }
 
+    // Cuando el gridview solicta más datos.
     @Override
     public void loadData() {
         // Se obtienen más fotos.

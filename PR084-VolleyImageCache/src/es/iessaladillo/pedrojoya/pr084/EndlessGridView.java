@@ -6,15 +6,19 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.GridView;
 
+// GridView que solicita más datos al hacer scroll hasta el final.
 public class EndlessGridView extends GridView implements OnScrollListener {
 
     private LoadAgent listener;
     private boolean isLoading;
 
+    // Interfaz que debe implementar el objeto que cargará los datos.
     public interface LoadAgent {
+        // Método que será llamado para cargar más datos.
         public void loadData();
     }
 
+    // Constructores.
     public EndlessGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.setOnScrollListener(this);
@@ -30,6 +34,7 @@ public class EndlessGridView extends GridView implements OnScrollListener {
         this.setOnScrollListener(this);
     }
 
+    // Cuando se hace scroll.
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
@@ -39,9 +44,10 @@ public class EndlessGridView extends GridView implements OnScrollListener {
         if (getAdapter().getCount() == 0)
             return;
 
+        // Si se ha llegado al final del scroll y no se está cargando ya.
         int l = visibleItemCount + firstVisibleItem;
         if (l >= totalItemCount && !isLoading) {
-            // It is time to add new data. We call the listener
+            // Se cargan más datos.
             isLoading = true;
             listener.loadData();
         }
@@ -49,15 +55,16 @@ public class EndlessGridView extends GridView implements OnScrollListener {
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        // TODO Auto-generated method stub
-
     }
 
+    // Establece el objeto que cargará los datos.
     public void setLoadAgent(LoadAgent listener) {
         this.listener = listener;
     }
 
+    // Establece el fin de la carga de datos.
     public void setLoaded() {
         isLoading = false;
     }
+
 }
