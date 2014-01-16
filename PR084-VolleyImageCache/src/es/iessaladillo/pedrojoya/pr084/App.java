@@ -17,8 +17,8 @@ import com.android.volley.toolbox.ImageLoader;
 public class App extends Application {
 
     // Constantes.
-    private static final int MAX_MEMORY_CACHE_SIZE = 1000000;
-    private static final int MAX_DISK_CACHE_SIZE = 25 * 1024 * 1024;
+    private static final int MAX_MEMORY_CACHE_SIZE_KB = 25 * 1024;
+    private static final int MAX_DISK_CACHE_SIZE_B = 25 * 1024 * 1024;
     private static final String DEFAULT_DISK_CACHE_DIR = "fotos";
 
     // Variables.
@@ -29,14 +29,13 @@ public class App extends Application {
     @Override
     public void onCreate() {
         // Se crea la cola de peticiones de Volley.
-        // Con caché en memoria.
+        // Con caché en disco L2 en directorio por defecto.
         // colaPeticiones = Volley.newRequestQueue(this);
-        // Con caché en disco.
+        // Con caché en disco L2 en directorio de soporte externo.
         colaPeticiones = newRequestQueue(this);
-        // Se crea el cargador de imágenes.
-        cargadorImagenes = new ImageLoader(colaPeticiones, new BitmapLruCache(
-                MAX_MEMORY_CACHE_SIZE));
-
+        // Se crea el cargador de imágenes indicándole la caché en memoria L1.
+        cargadorImagenes = new ImageLoader(colaPeticiones, new BitmapMemCache(
+                MAX_MEMORY_CACHE_SIZE_KB));
     }
 
     // Retorna la cola de peticiones de Volley.
@@ -53,7 +52,8 @@ public class App extends Application {
         return cargadorImagenes;
     }
 
-    // Crea la cola de peticiones utilizando si es posible caché en disco.
+    // Crea la cola de peticiones utilizando, si es posible, la caché de disco
+    // en soporte externo.
     private static RequestQueue newRequestQueue(Context context) {
         // Se intenta obtener el directorio raíz de cache en soporte externo, y
         // si no es posible, se utiliza el interno.
@@ -64,14 +64,14 @@ public class App extends Application {
             raizCache = context.getCacheDir();
         }
         // Se crea el subdirectorio para las fotos.
-        File fotosCache = new File(raizCache, DEFAULT_DISK_CACHE_DIR);
-        fotosCache.mkdirs();
+        File dirCache = new File(raizCache, DEFAULT_DISK_CACHE_DIR);
+        dirCache.mkdirs();
         // Se crea la caché en dicho subdirectorio con el tamaño máximo
         // indicado.
         HttpStack pila = new HurlStack();
         Network red = new BasicNetwork(pila);
-        DiskBasedCache diskBasedCache = new DiskBasedCache(fotosCache,
-                MAX_DISK_CACHE_SIZE);
+        DiskBasedCache diskBasedCache = new DiskBasedCache(dirCache,
+                MAX_DISK_CACHE_SIZE_B);
         // Se crea la cola de peticiones, se inicia y se retorna.
         RequestQueue cola = new RequestQueue(diskBasedCache, red);
         cola.start();

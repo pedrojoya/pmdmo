@@ -8,9 +8,6 @@
 package es.iessaladillo.pedrojoya.pr057;
 
 public final class R {
-    public static final class array {
-        public static final int asignaturas=0x7f060000;
-    }
     public static final class attr {
     }
     public static final class dimen {
@@ -24,30 +21,39 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int fondo=0x7f020000;
+        public static final int fondo_seleccionado=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int lblAlumno=0x7f090000;
-        public static final int lblAsignaturas=0x7f090002;
-        public static final int lstAsignaturas=0x7f090003;
-        public static final int mnuEditar=0x7f090004;
-        public static final int mnuEliminar=0x7f090005;
-        public static final int txtAlumno=0x7f090001;
+        public static final int lblAlumno=0x7f080000;
+        public static final int lblAsignatura=0x7f080004;
+        public static final int lblAsignaturas=0x7f080002;
+        public static final int lstAsignaturas=0x7f080003;
+        public static final int mnuAprobar=0x7f080005;
+        public static final int mnuEliminar=0x7f080006;
+        public static final int txtAlumno=0x7f080001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int activity_main_item=0x7f030001;
     }
     public static final class menu {
-        public static final int txtalumnos_menu=0x7f080000;
+        public static final int txtalumnos_menu=0x7f070000;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int alumno=0x7f050003;
         public static final int app_name=0x7f050000;
+        public static final int aprobar=0x7f050008;
         public static final int asignaturas=0x7f050004;
+        public static final int asignaturas_eliminadas=0x7f05000c;
         public static final int de=0x7f050007;
         public static final int editar=0x7f050005;
         public static final int eliminar=0x7f050006;
+        public static final int estas_aprobado=0x7f050009;
+        public static final int felicidades=0x7f05000a;
+        public static final int has_aprobado=0x7f05000b;
         public static final int hello_world=0x7f050002;
     }
     public static final class style {
@@ -72,10 +78,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f060001;
     }
 }

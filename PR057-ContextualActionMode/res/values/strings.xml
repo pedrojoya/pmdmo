@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">ContextualActionMode</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -7,10 +8,11 @@
     <string name="asignaturas">Asignaturas</string>
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
-    <string-array name="asignaturas">
-        <item>Android</item>
-        <item>Acceso a datos</item>
-        <item>Libre configuración</item>
-    </string-array>
-        <string name="de">" de "</string>
+    <string name="de">" de "</string>
+    <string name="aprobar">Aprobar</string>
+    <string name="estas_aprobado">Estás aprobado</string>
+    <string name="felicidades">Felicidades</string>
+    <string name="has_aprobado">"Has aprobado: "</string>
+    <string name="asignaturas_eliminadas">" asignaturas eliminadas"</string>
+
 </resources>
