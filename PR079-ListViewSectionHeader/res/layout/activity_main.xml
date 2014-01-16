@@ -1,18 +1,12 @@
-<Linearlayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Textview
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Hola" >
-
-        <Listview
+        <ListView
             android:id="@+id/listView_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </Listview>
-    </Textview>
-
-</Linearlayout>
+            android:layout_height="wrap_content"
+            android:dividerHeight="0dp"
+             />
+</LinearLayout>
