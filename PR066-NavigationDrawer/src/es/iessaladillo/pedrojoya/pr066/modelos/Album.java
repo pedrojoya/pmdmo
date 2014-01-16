@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 // Clase modelo de datos de álbum
-public class Album implements Parcelable {
+public class Album implements NavigationDrawerItem, Parcelable {
 
     // Propiedades.
     int fotoResId;
@@ -27,6 +27,11 @@ public class Album implements Parcelable {
         this.fotoResId = parcel.readInt();
         this.nombre = parcel.readString();
         this.anio = parcel.readString();
+    }
+
+    // Retorna si es ítem de cabecera de sección.
+    public boolean isHeader() {
+        return false;
     }
 
     // Getters y Setters.
@@ -79,4 +84,5 @@ public class Album implements Parcelable {
             return new Album[size];
         }
     };
+
 }

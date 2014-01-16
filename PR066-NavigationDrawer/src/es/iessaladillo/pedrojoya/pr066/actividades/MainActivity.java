@@ -25,13 +25,15 @@ import es.iessaladillo.pedrojoya.pr066.R;
 import es.iessaladillo.pedrojoya.pr066.adaptadores.AlbumesAdapter;
 import es.iessaladillo.pedrojoya.pr066.fragmentos.DetalleFragment;
 import es.iessaladillo.pedrojoya.pr066.modelos.Album;
+import es.iessaladillo.pedrojoya.pr066.modelos.NavigationDrawerHeader;
+import es.iessaladillo.pedrojoya.pr066.modelos.NavigationDrawerItem;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
-	// Constantes.
+    // Constantes.
     private static final String PANEL_YA_ABIERTO = "prefPanelYaAbierto";
-    
-	// Variables miembro.
+
+    // Variables miembro.
     private DrawerLayout panelNavegacion;
     private ListView lstPanelNavegacion;
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
@@ -96,19 +98,18 @@ public class MainActivity extends Activity implements OnItemClickListener {
         // para que el contenedor de la actividad principal no se muestre vacío
         // inicialmente.
         if (savedInstanceState == null) {
-            panelNavegacionItemSelected(0);
+            panelNavegacionItemSelected(1);
         }
         // Se obtiene la preferencia PANEL_YA_ABIERTO (false por defecto)
         SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
-        if(!preferencias.getBoolean(PANEL_YA_ABIERTO, false))
-        {
+        if (!preferencias.getBoolean(PANEL_YA_ABIERTO, false)) {
             // Se abre el panel de navegación con su lista.
             panelNavegacion.openDrawer(lstPanelNavegacion);
             // Se actualiza la preferencia.
             SharedPreferences.Editor editor = preferencias.edit();
             editor.putBoolean(PANEL_YA_ABIERTO, true);
             editor.commit();
-        }  
+        }
     }
 
     @Override
@@ -142,23 +143,22 @@ public class MainActivity extends Activity implements OnItemClickListener {
         }
         // En cualquier otro caso se procesa la selección.
         switch (item.getItemId()) {
-            case R.id.mnuBuscar:
-                // Se crea un intent explícito para buscar en Internet el título
-                // de la ActionBar.
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // Se comprueba si hay alguna aplicación que pueda tratar el
-                // intent.
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-                else {
-                    Toast.makeText(this, R.string.sin_navegador,
-                            Toast.LENGTH_LONG).show();
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.mnuBuscar:
+            // Se crea un intent explícito para buscar en Internet el título
+            // de la ActionBar.
+            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+            intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
+            // Se comprueba si hay alguna aplicación que pueda tratar el
+            // intent.
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, R.string.sin_navegador, Toast.LENGTH_LONG)
+                        .show();
+            }
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -208,11 +208,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
     }
 
     // Creo los datos para la lista.
-    private ArrayList<Album> getDatos() {
-        ArrayList<Album> albumes = new ArrayList<Album>();
+    private ArrayList<NavigationDrawerItem> getDatos() {
+        ArrayList<NavigationDrawerItem> albumes = new ArrayList<NavigationDrawerItem>();
+        albumes.add(new NavigationDrawerHeader("Los inicios"));
         albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
         albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
                 "1981"));
+        albumes.add(new NavigationDrawerHeader("Llega la fama"));
         albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
                 "1992"));
         albumes.add(new Album(R.drawable.carinio,
@@ -220,6 +222,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
         albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
         albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
+        albumes.add(new NavigationDrawerHeader("Sin discográfica"));
         albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
         albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
         return albumes;

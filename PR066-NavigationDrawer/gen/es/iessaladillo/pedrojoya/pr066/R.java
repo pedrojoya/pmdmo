@@ -29,18 +29,20 @@ public final class R {
         public static final int content_frame=0x7f060001;
         public static final int drawer_layout=0x7f060000;
         public static final int imgFoto=0x7f060004;
-        public static final int imgFotoItem=0x7f060007;
+        public static final int imgFotoItem=0x7f060008;
         public static final int lblAnio=0x7f060006;
         public static final int lblNombre=0x7f060005;
-        public static final int lblNombreItem=0x7f060008;
+        public static final int lblNombreItem=0x7f060009;
+        public static final int lblText=0x7f060007;
         public static final int left_drawer=0x7f060002;
-        public static final int mnuBuscar=0x7f060009;
+        public static final int mnuBuscar=0x7f06000a;
         public static final int rlDatos=0x7f060003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int fragment_detalle=0x7f030001;
-        public static final int panel_navegacion_list_item=0x7f030002;
+        public static final int panel_navegacion_list_header=0x7f030002;
+        public static final int panel_navegacion_list_item=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f050000;
