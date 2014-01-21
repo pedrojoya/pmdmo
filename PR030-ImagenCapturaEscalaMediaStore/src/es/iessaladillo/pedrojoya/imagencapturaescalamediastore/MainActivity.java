@@ -1,141 +1,223 @@
 package es.iessaladillo.pedrojoya.imagencapturaescalamediastore;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
-import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore.Images.Media;
-import android.view.View;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
-	// Constantes.
-	final static int RC_CAPTURA_FOTO = 0;
+    // Constantes.
+    private final static int RC_CAPTURAR_FOTO = 0;
+    private final static String KEY_PATH = "pathFoto";
 
-	// Variables a nivel de clase.
-	Uri uriFoto;
-	ImageView imgFoto;
+    // Variables a nivel de clase.
+    private String pathFoto;
+    private ImageView imgFoto;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		imgFoto = (ImageView) findViewById(R.id.imgFoto);
-		// Si ya tengo una foto capturada.
-		if (savedInstanceState != null) {
-			// Obtengo del bundle la uri de la foto desde el Bundle.
-			uriFoto = Uri.parse(savedInstanceState.getString("uri"));
-		}
-	}
+    // Al crear la actividad.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        imgFoto = (ImageView) findViewById(R.id.imgFoto);
+        // Si existe estado previo, se inicializa el path de la foto
+        // y se muestra la foto escalada.
+        if (savedInstanceState != null) {
+            pathFoto = savedInstanceState.getString(KEY_PATH);
+            if (!TextUtils.isEmpty(pathFoto)) {
+                cargarImagenEscalada(pathFoto);
+            }
+        }
+    }
 
-	// Al hacer click sobre btnCapturar.
-	public void btnCapturarOnClick(View v) {
-		// Creo un registro en el content provider de la MediaStore para la
-		// foto, indicando que se debe almacenar en almacenamiento externo y
-		// pasándole un objeto para almacenar los metadatos. Obtengo la uri en
-		// la que se almacenará el archivo.
-		uriFoto = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI,
-				new ContentValues());
-		// Creo el intent para capturar una foto y le paso como dato extra la
-		// uri
-		// donde se debe almacenar la foto como archivo.
-		Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-		i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uriFoto);
-		// Envío el intent esperando respuesta.
-		startActivityForResult(i, RC_CAPTURA_FOTO);
-	}
+    // Al salvar el estado.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Se almacena el path de la foto.
+        if (!TextUtils.isEmpty(pathFoto)) {
+            outState.putString(KEY_PATH, pathFoto.toString());
+        }
+        super.onSaveInstanceState(outState);
+    }
 
-	// Cuando se recibe la foto capturada.
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		if (resultCode == RESULT_OK) {
-			switch (requestCode) {
-			case RC_CAPTURA_FOTO:
-				// Cargo la imagen.
-				cargarImagenEscalada();
-				break;
-			}
-		}
-	}
+    // Al crear el menú de opciones.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Se infla la especificación de menú correspondiente.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	// Escala y muestra la imagen en el visor.
-	private void cargarImagenEscalada() {
-		// Utilizo una tarea asíncrona para cargar la foto. La ejecuto pasándole
-		// la uri donde se ha almacenado la foto.
-		CargaFoto carga = new CargaFoto();
-		carga.execute(uriFoto.toString());
-		// Una vez realizada la tarea, elimino el objeto.
-		carga = null;
-	}
+    // Cuando se pulsa sobre un ítem del menú de opciones.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Dependiendo del ítem pulsado.
+        switch (item.getItemId()) {
+        case R.id.mnuCapturarFoto:
+            solicitarCapturaFoto();
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-	// Tarea asíncrona que obtiene una foto a partir de una uri y la muestra en
-	// un visor.
-	private class CargaFoto extends AsyncTask<String, Void, Bitmap> {
+    // Envía un intent implícito para la captura de una foto.
+    private void solicitarCapturaFoto() {
+        // Se crea el intent implícito para realizar la acción.
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Si hay alguna actividad que sepa realizar la acción.
+        if (i.resolveActivity(getPackageManager()) != null) {
+            // Se crea el archivo para la foto.
+            File foto = null;
+            try {
+                foto = crearArchivoFoto();
+            } catch (IOException ex) {
+                // Se ha producido un error el crear el archivo.
+            }
+            // Si todo ha ido bien.
+            if (foto != null) {
+                // Se añade como extra del intent la uri donde debe guardarse.
+                i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
+                // Se envía el intent esperando respuesta.
+                startActivityForResult(i, RC_CAPTURAR_FOTO);
+            }
+        }
+    }
 
-		// Se ejecuta en un hilo trabajador.
-		@Override
-		protected Bitmap doInBackground(String... params) {
-			// Obtengo la uri.
-			Uri uriFoto = Uri.parse(params[0]);
-			// Escalo la imagen a 1/4 de su tamaño.
-			BitmapFactory.Options opcionesImagen = new BitmapFactory.Options();
-			Bitmap imagen;
-			try {
-				opcionesImagen.inJustDecodeBounds = false;
-				opcionesImagen.inSampleSize = 4;
-				InputStream datos = getContentResolver().openInputStream(
-						uriFoto);
-				imagen = BitmapFactory
-						.decodeStream(datos, null, opcionesImagen);
-				datos.close();
-				// Retorno la imagen.
-				return imagen;
-			} catch (Exception e) {
-				return null;
-			}
-		}
+    // Crea un archivo para una foto y lo retorna.
+    private File crearArchivoFoto() throws IOException {
+        // Se obtiene la fecha y hora actual.
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        // Se establece el nombre del archivo.
+        String nombre = "JPEG_" + timestamp + "_";
+        // Se obtiene el directorio en el que almacenarlo.
+        File directorio = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        // Se crea un archivo con ese nombre y la extensión jpg en ese
+        // directorio.
+        File archivo = File.createTempFile(nombre, ".jpg", directorio);
+        // Se almacena el path de la foto para su posterior uso.
+        pathFoto = archivo.getAbsolutePath();
+        // Se retorna el archivo creado.
+        return archivo;
+    }
 
-		// Una vez finalizado el hilo de trabajo. Se ejecuta en el hilo
-		// principal.
-		@Override
-		protected void onPostExecute(Bitmap result) {
-			// Muestro la foto en el visor.
-			if (result != null) {
-				imgFoto.setImageBitmap(result);
-			}
-		}
+    // Cuando se recibe la foto capturada.
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+            case RC_CAPTURAR_FOTO:
+                // Se agrega la foto a la Galería
+                agregarFotoAGaleria(pathFoto);
+                // Se escala la foto y se muestra en el ImageView.
+                cargarImagenEscalada(pathFoto);
+                break;
+            }
+        }
+    }
 
-	}
+    // Agrega a la Galería la foto indicada.
+    private void agregarFotoAGaleria(String pathFoto) {
+        // Se un intent implícito con la acción de
+        // escaneo de un fichero multimedia.
+        Intent i = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        // Se obtiene la uri del archivo a partir de su path.
+        File archivo = new File(pathFoto);
+        Uri uri = Uri.fromFile(archivo);
+        // Se establece la uri con datos del intent.
+        i.setData(uri);
+        // Se envía un broadcast con el intent.
+        this.sendBroadcast(i);
+    }
 
-	// Al cambiar la orientación.
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		// Almaceno la uri de la foto en el bundle.
-		outState.putString("uri", uriFoto.toString());
-		super.onSaveInstanceState(outState);
-	}
+    // Escala y muestra la imagen en el visor.
+    private void cargarImagenEscalada(String pathFoto) {
+        // Se utiliza una tarea asíncrona, para escalar y mostrar la foto en el
+        // ImageView, que recibe el path de la foto.
+        MostrarFotoAsyncTask tarea = new MostrarFotoAsyncTask(this);
+        tarea.execute(pathFoto);
+        // Una vez realizada la tarea, se elimina el objeto.
+        tarea = null;
+    }
 
-	public void btnMetadatosOnClick(View v) {
-		// Creo el intent para mostrar la actividad MetadatosActivity.
-		Intent i = new Intent(this, MetadatosActivity.class);
-		i.setData(uriFoto);
-		this.startActivity(i);
-	}
+    // Tarea asíncrona que obtiene una foto a partir de su path y la muestra en
+    // un visor.
+    private class MostrarFotoAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
-	@Override
-	protected void onResume() {
-		if (uriFoto != null) {
-			cargarImagenEscalada();
-		}
-		super.onResume();
-	}
+        // Variables.
+        private Context contexto;
+
+        // Constructor.
+        public MostrarFotoAsyncTask(Context contexto) {
+            this.contexto = contexto;
+        }
+
+        // Se ejecuta en un hilo trabajador.
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            // Se escala la foto, cuyo path corresponde al primer parámetro,
+            // retornado el Bitmap correspondiente.
+            return escalarFoto(
+                    params[0],
+                    getResources().getDimensionPixelSize(R.dimen.ancho_visor),
+                    contexto.getResources().getDimensionPixelSize(
+                            R.dimen.alto_visor));
+        }
+
+        // Escala la foto indicada, para ser mostarda en un visor determinado.
+        // Retorna el bitmap correspondiente a la imagen escalada o null si
+        // se ha producido un error.
+        private Bitmap escalarFoto(String pathFoto, int anchoVisor,
+                int altoVisor) {
+            try {
+                // Se obtiene el tamaño de la imagen.
+                BitmapFactory.Options opciones = new BitmapFactory.Options();
+                opciones.inJustDecodeBounds = true; // Solo para cálculo.
+                BitmapFactory.decodeFile(pathFoto, opciones);
+                int anchoFoto = opciones.outWidth;
+                int altoFoto = opciones.outHeight;
+                // Se obtiene el factor de escalado para la imagen.
+                int factorEscalado = Math.min(anchoFoto / anchoVisor, altoFoto
+                        / altoVisor);
+                // Se escala la imagen con dicho factor de escalado.
+                opciones.inJustDecodeBounds = false; // Se escalará.
+                opciones.inSampleSize = factorEscalado;
+                opciones.inPurgeable = true; // Eliminable con poca memoria.
+                return BitmapFactory.decodeFile(pathFoto, opciones);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        // Una vez finalizado el hilo de trabajo. Se ejecuta en el hilo
+        // principal. Recibe el Bitmap de la foto escalada (o null si error).
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // Muestro la foto en el ImageView.
+            if (result != null) {
+                imgFoto.setImageBitmap(result);
+            }
+        }
+
+    }
 
 }

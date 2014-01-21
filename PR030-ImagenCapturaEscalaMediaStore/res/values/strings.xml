@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hacer foto y almacenarla en la MediaStore</string>
+    <string name="app_name">Captura de foto</string>
     <string name="metadatos">Metadatos</string>
     <string name="capturar">Hacer foto</string>
     <string name="foto">Foto realizada por el usuario</string>
@@ -8,4 +8,5 @@
     <string name="descripcion">Descripción</string>
     <string name="guardar">Guardar</string>
     <string name="metadatos_guardados">Metadatos guardados</string>
+    <string name="capturar_foto">Capturar foto</string>
 </resources>
