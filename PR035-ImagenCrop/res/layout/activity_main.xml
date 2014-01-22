@@ -1,29 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/lblTitulo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/intro"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnCapturar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btnCapturarOnClick"
-        android:text="@string/capturar" />
-
+    android:layout_height="fill_parent" >
     <ImageView
-        android:id="@+id/imgImagen"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/pic_border"
-        android:contentDescription="@string/imagen" />
+        android:id="@+id/imgFoto"
+        android:layout_width="@dimen/ancho_visor"
+        android:layout_height="@dimen/alto_visor"
+        android:contentDescription="@string/imagen" 
+        android:layout_centerInParent="true" />
 
-</LinearLayout>
+</RelativeLayout>
