@@ -1,6 +1,7 @@
 package es.iessaladillo.pedrojoya.pr035;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -25,15 +25,15 @@ import android.widget.ImageView;
 // Captura una foto y la recorta.
 public class MainActivity extends Activity {
 
+    // Constantes.
     private final static int RC_CAPTURAR_FOTO = 0;
     private final static int RC_RECORTAR_FOTO = 1;
     private final static String KEY_PATH = "pathFoto";
-    private final static String KEY_FOTO = "bitmapFoto";
+    private static final String NOMBRE_FOTO = "lafoto";
 
     // Variables a nivel de clase.
-    private String pathFoto;
+    private String pathFotoSinRecortar;
     private ImageView imgFoto;
-    private Bitmap foto;
 
     // Al crear la actividad.
     @Override
@@ -41,15 +41,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
-        // Si existe estado previo, se inicializa el path de la foto
-        // y se muestra la foto escalada.
+        // Si existe estado previo se reinicializa la variable.
         if (savedInstanceState != null) {
-            pathFoto = savedInstanceState.getString(KEY_PATH);
-            foto = savedInstanceState.getParcelable(KEY_FOTO);
-            if (foto != null) {
-                // Muestro la imagen recortada en el visor.
-                imgFoto.setImageBitmap(foto);
-            }
+            pathFotoSinRecortar = savedInstanceState.getString(KEY_PATH);
+        }
+        // Si ya existe el archivo con la foto recortada, se muestra.
+        File archivoFotoRecortada = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                NOMBRE_FOTO + ".jpg");
+        if (archivoFotoRecortada.exists()) {
+            imgFoto.setImageURI(Uri.fromFile(archivoFotoRecortada));
         }
     }
 
@@ -57,10 +59,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // Se almacena el path de la foto.
-        if (!TextUtils.isEmpty(pathFoto)) {
-            outState.putString(KEY_PATH, pathFoto.toString());
-        }
-        outState.putParcelable(KEY_FOTO, foto);
+        outState.putString(KEY_PATH, pathFotoSinRecortar);
         super.onSaveInstanceState(outState);
     }
 
@@ -78,6 +77,7 @@ public class MainActivity extends Activity {
         // Dependiendo del ítem pulsado.
         switch (item.getItemId()) {
         case R.id.mnuCapturarFoto:
+            // Se solicita la captura de una foto.
             solicitarCapturaFoto();
             break;
         }
@@ -91,16 +91,19 @@ public class MainActivity extends Activity {
         // Si hay alguna actividad que sepa realizar la acción.
         if (i.resolveActivity(getPackageManager()) != null) {
             // Se crea el archivo para la foto.
-            File foto = null;
+            File archivoFotoSinRecortar = null;
             try {
-                foto = crearArchivoFoto();
+                archivoFotoSinRecortar = crearArchivoFoto();
             } catch (IOException ex) {
                 // Se ha producido un error el crear el archivo.
             }
             // Si todo ha ido bien.
-            if (foto != null) {
+            if (archivoFotoSinRecortar != null) {
+                // Se almacena el path de la foto para su posterior uso.
+                pathFotoSinRecortar = archivoFotoSinRecortar.getAbsolutePath();
                 // Se añade como extra del intent la uri donde debe guardarse.
-                i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
+                i.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(archivoFotoSinRecortar));
                 // Se envía el intent esperando respuesta.
                 startActivityForResult(i, RC_CAPTURAR_FOTO);
             }
@@ -114,19 +117,23 @@ public class MainActivity extends Activity {
                 Locale.getDefault()).format(new Date());
         // Se establece el nombre del archivo.
         String nombre = "JPEG_" + timestamp + "_";
+        // Se crea el archivo y se retorna.
+        return crearArchivoFoto(nombre);
+    }
+
+    // Crea un archivo para una foto y lo retorna.Recibe el nombre de la foto.
+    private File crearArchivoFoto(String nombre) throws IOException {
         // Se obtiene el directorio en el que almacenarlo.
         File directorio = Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         // Se crea un archivo con ese nombre y la extensión jpg en ese
         // directorio.
-        File archivo = File.createTempFile(nombre, ".jpg", directorio);
-        // Se almacena el path de la foto para su posterior uso.
-        pathFoto = archivo.getAbsolutePath();
+        File archivo = new File(directorio, nombre + ".jpg");
         // Se retorna el archivo creado.
         return archivo;
     }
 
-    // Cuando se recibe la foto capturada.
+    // Cuando se recibe la respuesta de una actividad llamada.
     protected void onActivityResult(int requestCode, int resultCode,
             Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -134,15 +141,43 @@ public class MainActivity extends Activity {
             switch (requestCode) {
             case RC_CAPTURAR_FOTO:
                 // Se agrega la foto a la Galería
-                agregarFotoAGaleria(pathFoto);
+                agregarFotoAGaleria(pathFotoSinRecortar);
                 // Se recorta la foto.
-                recortarImagen(pathFoto);
+                recortarImagen(pathFotoSinRecortar);
                 break;
             case RC_RECORTAR_FOTO:
                 // Obtengo el bitmap resultante.
-                foto = intent.getExtras().getParcelable("data");
+                Bitmap bitmapFotoRecortada = intent.getExtras().getParcelable(
+                        "data");
+                // Se almacena la foto en un fichero.
+                guardarBitmapEnArchivo(bitmapFotoRecortada);
                 // Muestro la imagen recortada en el visor.
-                imgFoto.setImageBitmap(foto);
+                imgFoto.setImageBitmap(bitmapFotoRecortada);
+            }
+        }
+    }
+
+    // Guarda el bitamp de la foto en un archivo.
+    private void guardarBitmapEnArchivo(Bitmap foto) {
+        // Se crea el archivo con el nombre indicado por la constante.
+        File archivoFotoRecortada = null;
+        try {
+            archivoFotoRecortada = crearArchivoFoto(NOMBRE_FOTO);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (archivoFotoRecortada != null) {
+            // Se guarda el bitmap en el archivo.
+            try {
+                FileOutputStream flujoSalida = new FileOutputStream(
+                        archivoFotoRecortada);
+                foto.compress(Bitmap.CompressFormat.JPEG, 100, flujoSalida);
+                flujoSalida.flush();
+                flujoSalida.close();
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
     }
@@ -153,35 +188,32 @@ public class MainActivity extends Activity {
         // escaneo de un fichero multimedia.
         Intent i = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         // Se obtiene la uri del archivo a partir de su path.
-        File archivo = new File(pathFoto);
-        Uri uri = Uri.fromFile(archivo);
+        File archivoFotoSinRecortar = new File(pathFoto);
+        Uri uri = Uri.fromFile(archivoFotoSinRecortar);
         // Se establece la uri con datos del intent.
         i.setData(uri);
         // Se envía un broadcast con el intent.
         this.sendBroadcast(i);
     }
 
-    // Llama a un intent para recortar la imagen
+    // Llama a un intent para recortar la imagen. Recibe el path de la foto.
     private void recortarImagen(String pathFoto) {
         // Se intenta recortar y si no se puede se muestra la imagen escalada.
         try {
-            // Creo un intent estándar para el recortado de imágenes.
+            // Se crea un intent estándar para el recortado de imágenes.
             Intent i = new Intent("com.android.camera.action.CROP");
-            // Indico la uri de la imagen y el tipo.
             i.setDataAndType(Uri.fromFile(new File(pathFoto)), "image/*");
-            // Indico que se debe recortar.
             i.putExtra("crop", "true");
-            // Indico el ratio ancho/alto del recuadro de recorte.
+            // Ratio.
             i.putExtra("aspectX",
                     getResources().getDimensionPixelSize(R.dimen.ancho_visor));
             i.putExtra("aspectY",
                     getResources().getDimensionPixelSize(R.dimen.alto_visor));
-            // Indico los píxeles de salida de la imagen recortada.
+            // Tamaño de salida.
             i.putExtra("outputX",
                     getResources().getDimensionPixelSize(R.dimen.ancho_visor));
             i.putExtra("outputY",
                     getResources().getDimensionPixelSize(R.dimen.alto_visor));
-            // Indico que se devuelva la imagen recortada.
             i.putExtra("return-data", true);
             // Inicio la actividad esperando el resultado.
             startActivityForResult(i, RC_RECORTAR_FOTO);
@@ -254,8 +286,10 @@ public class MainActivity extends Activity {
         // principal. Recibe el Bitmap de la foto escalada (o null si error).
         @Override
         protected void onPostExecute(Bitmap result) {
-            // Muestro la foto en el ImageView.
             if (result != null) {
+                // Se crea el archivo con la imagen recortada.
+                guardarBitmapEnArchivo(result);
+                // Se muestra la foto en el ImageView.
                 imgFoto.setImageBitmap(result);
             }
         }
