@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
                         "data");
                 // Se almacena la foto en un fichero.
                 guardarBitmapEnArchivo(bitmapFotoRecortada);
-                // Muestro la imagen recortada en el visor.
+                // Muestro la imagen escalada en el visor.
                 imgFoto.setImageBitmap(bitmapFotoRecortada);
             }
         }

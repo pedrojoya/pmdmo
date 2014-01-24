@@ -6,6 +6,8 @@
         android:layout_width="@dimen/ancho_visor"
         android:layout_height="@dimen/alto_visor"
         android:contentDescription="@string/imagen" 
+        android:background="@drawable/fondo_foto"
+        android:src="@drawable/placeholder"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>
