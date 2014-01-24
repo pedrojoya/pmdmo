@@ -2,24 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     tools:context=".MainActivity" >
 
-    <Button
+    <ImageView
         android:id="@+id/btnDisparar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/disparar"
-        android:layout_margin="30dp"
+        android:src="@drawable/ic_arma"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:contentDescription="@string/disparar"
         android:onClick="btnDispararOnClick" />
 
-    <Button
+    <ImageView
         android:id="@+id/btnExplosion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnDisparar"
         android:layout_centerHorizontal="true"
-        android:text="@string/explosion" 
+        android:src="@drawable/ic_explosion"
+        android:clickable="true" 
+        android:contentDescription="@string/explosion"
         android:onClick="btnExplosionOnClick" />
 
 </RelativeLayout>
