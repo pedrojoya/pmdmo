@@ -1,298 +1,184 @@
 package es.iessaladillo.pedrojoya.pr037;
 
 import java.io.IOException;
+
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaRecorder;
+import android.media.MediaRecorder.OnInfoListener;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
 
-public class MainActivity extends Activity implements OnPreparedListener,
-		OnCompletionListener {
+public class MainActivity extends Activity implements OnTouchListener,
+        OnPreparedListener, OnCompletionListener, OnInfoListener {
 
-	// Variables a nivel de clase.
-	private SeekBar skbBarra;
-	private MediaPlayer reproductor;
-	private boolean enPausa = false;
-	private Handler manejador = new Handler();
-	private Runnable notificacion;
-	private MediaRecorder grabadora;
-	private ImageButton btnRec;
-	private boolean grabando = false;
-	private String pathGrabacion = "";
-	private ImageButton btnPlay;
-	private ImageButton btnPause;
-	private ImageButton btnStop;
+    // Constantes.
+    private static final int MAX_DURACION_MS = 3000;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// Llamo al onCreate del padre.
-		super.onCreate(savedInstanceState);
-		// Establezco el layout de la actividad.
-		setContentView(R.layout.activity_main);
-		// Obtengo la referencia a las vistas.
-		getVistas();
-		// Deshabilito el Stop y Pause.
-		btnStop.setEnabled(false);
-		btnPause.setEnabled(false);
-		// Habilito o deshabilito el Play.
-		if (savedInstanceState != null) {
-			btnPlay.setEnabled(savedInstanceState.getBoolean("btnPlayEnabled"));
-		} else {
-			btnPlay.setEnabled(false);
-		}		
-		// Cuando se desplaza la seekbar.
-		skbBarra.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+    // Vistas.
+    private ImageView btnRec;
 
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// Si ha sido el usuario el que ha cambiado la barra.
-				if (fromUser && reproductor.isPlaying()) {
-					// Coloco el reproductor en esa posición.
-					reproductor.seekTo(seekBar.getProgress());
-				}
-			}
+    // Variables.
+    private MediaPlayer reproductor;
+    private MediaRecorder grabadora;
+    private boolean grabando = false;
 
-			@Override
-			public void onStartTrackingTouch(SeekBar arg0) {
-			}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btnRec = (ImageView) this.findViewById(R.id.btnRec);
+        // La propia actividad actuará de listener cuando se pulse el botón.
+        btnRec.setOnTouchListener(this);
+    }
 
-			@Override
-			public void onStopTrackingTouch(SeekBar arg0) {
-			}
+    // Al pulsar el botón.
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        // Si no se estaba grabando, se inicia la grabación.
+        if (!grabando) {
+            grabar();
+        }
+        // Si se suelta el botón, se finaliza la grabación.
+        if ((event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+            pararGrabacion();
+        }
+        return false;
+    }
 
-		});
-	}
+    // Inicia la grabación.
+    private void grabar() {
+        // Se prepara la grabación.
+        prepararGrabacion();
+        // Se inicia la grabación.
+        grabadora.start();
+        // Se cambia estado de grabación.
+        cambiarEstadoGrabacion(true);
+    }
 
-	// Obtiene las referencias a las vistas del layout.
-	private void getVistas() {
-		skbBarra = (SeekBar) this.findViewById(R.id.skbBarra);
-		btnRec = (ImageButton) this.findViewById(R.id.btnRec);
-		btnPlay = (ImageButton) this.findViewById(R.id.btnPlay);
-		btnPause = (ImageButton) this.findViewById(R.id.btnPause);
-		btnStop = (ImageButton) this.findViewById(R.id.btnStop);
-	}
+    // Prepara la grabación.
+    private void prepararGrabacion() {
+        // Se crea el objeto grabadora.
+        grabadora = new MediaRecorder();
+        // Se configura la grabación con fichero de salida, origen, formato,
+        // tipo de codificación y duración máxima.
+        String pathGrabacion = Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + "/audio.3gp";
+        grabadora.setOutputFile(pathGrabacion);
+        grabadora.setAudioSource(MediaRecorder.AudioSource.MIC);
+        grabadora.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        grabadora.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        grabadora.setMaxDuration(MAX_DURACION_MS);
+        grabadora.setOnInfoListener(this);
+        // Se prepara la grabadora (de forma síncrona).
+        try {
+            grabadora.prepare();
+        } catch (IOException e) {
+            Log.e(getString(R.string.app_name), "Fallo en grabación");
+        }
+    }
 
-	// Al hacer click en btnRec.
-	public void btnRecOnClick(View v) {
-		// Si no estoy grabando empiezo y si no termino.
-		if (!grabando) {
-			grabar();
-		} else {
-			pararGrabacion();
-		}
-	}
+    @Override
+    public void onInfo(MediaRecorder mr, int what, int extra) {
+        // Si se ya llegado al tiempo máximo.
+        if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED
+                || what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_FILESIZE_REACHED) {
+            // Se cambia el icono del botón para que el usuario se de cuenta de
+            // que ya no está grabando.
+            btnRec.setImageResource(R.drawable.ic_micro);
+        }
+    }
 
-	// Inicia la grabación.
-	private void grabar() {
-		// Creo el objeto grabadora.
-		grabadora = new MediaRecorder();
-		// Configuro la grabación con fichero de salida, origen, formato y
-		// tipo de codificación.
-		pathGrabacion = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/audio.3gp";
-		grabadora.setOutputFile(pathGrabacion);
-		grabadora.setAudioSource(MediaRecorder.AudioSource.MIC);
-		grabadora.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		grabadora.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		// Preparo la grabadora (síncrona).
-		try {
-			grabadora.prepare();
-		} catch (IOException e) {
-			Log.e(getString(R.string.app_name), "Fallo en grabación");
-		}
-		// Inicio la grabación.
-		grabadora.start();
-		// Cambio el icono del botón y el estado de grabación.
-		btnRec.setImageResource(R.drawable.stoprec);
-		grabando = true;
-		// Deshabilito los botones de reproducción.
-		btnPlay.setEnabled(false);
-		btnStop.setEnabled(false);
-		btnPause.setEnabled(false);
-	}
+    // Detiene la grabación en curso.
+    private void pararGrabacion() {
+        // Se detiene la grabación y se liberan los recursos de la grabadora.
+        if (grabadora != null) {
+            grabadora.stop();
+            grabadora.release();
+            grabadora = null;
+        }
+        // Se cambia el estado de grabación y el icono del botón.
+        cambiarEstadoGrabacion(false);
+        // Se prepara la reproducción.
+        prepararReproductor();
+    }
 
-	// Para la grabación en curso.
-	private void pararGrabacion() {
-		// Paro la grabación y libero el objeto grabadora.
-		grabadora.stop();
-		grabadora.release();
-		grabadora = null;
-		// Cambio el estado de grabación y el icono del botón.
-		grabando = false;
-		btnRec.setImageResource(R.drawable.rec);
-		// Habilito el botón de play.
-		btnPlay.setEnabled(true);
-	}
+    // Cambia el estado de grabación.
+    private void cambiarEstadoGrabacion(boolean estaGrabando) {
+        grabando = estaGrabando;
+        btnRec.setImageResource(estaGrabando ? R.drawable.ic_micro_recording
+                : R.drawable.ic_micro);
+    }
 
-	// Al hacer click en el botón btnPlay.
-	public void btnPlayOnClick(View v) {
-		// Si es una nueva reproducción, la inicio.
-		prepararReproductor();
-	}
+    // Prepara al reproductor para poder reproducir.
+    private void prepararReproductor() {
+        // Si ya existía reproductor, se elimina.
+        if (reproductor != null) {
+            reproductor.reset();
+            reproductor.release();
+            reproductor = null;
+        }
+        // Se crea el objeto reproductor.
+        reproductor = new MediaPlayer();
+        try {
+            // Path de la grabación.
+            reproductor.setDataSource(Environment.getExternalStorageDirectory()
+                    .getAbsolutePath() + "/audio.3gp");
+            // Stream de audio que utilizará el reproductor.
+            reproductor.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            // Volumen
+            reproductor.setVolume(1.0f, 1.0f);
+            // La actividad actuará como listener cuando el reproductor ya esté
+            // preparado para reproducir y cuando se haya finalizado la
+            // reproducción.
+            reproductor.setOnPreparedListener(this);
+            reproductor.setOnCompletionListener(this);
+            // Se prepara el reproductor.
+            // reproductor.prepare(); // síncrona.
+            reproductor.prepareAsync(); // asíncrona.
+        } catch (Exception e) {
+            Log.d("Reproductor", "ERROR: " + e.getMessage());
+        }
+    }
 
-	// Al hacer click en el botón btnPause.
-	public void btnPauseOnClick(View v) {
-		if (reproductor != null) {
-			if (!enPausa) {
-				// Si no estaba en modo pausa, pauso el reproductor.
-				reproductor.pause();
-				enPausa = true;
-			} else {
-				// Si ya estaba en modo pausa continuo la reproducción.
-				reproductor.start();
-				actualizarProgreso();
-				// Dejo de estar en modo pausa.
-				enPausa = false;
-			}
-		}
+    // Cuando el reproductor ya está preparado para reproducir.
+    @Override
+    public void onPrepared(MediaPlayer repr) {
+        // Se inicia la reproducción.
+        repr.start();
+        // Se desactiva el botón de grabación.
+        btnRec.setEnabled(false);
+    }
 
-	}
+    // Cuando ha finalizado la reproducción.
+    @Override
+    public void onCompletion(MediaPlayer arg0) {
+        // Se desactiva el botón de grabación.
+        btnRec.setEnabled(true);
+    }
 
-	// Al hacer click en el botón btnStop.
-	public void btnStopOnClick(View v) {
-		if (reproductor != null) {
-			// Paro la reproducción.
-			reproductor.stop();
-			// Dejo de estar en modo pausa.
-			enPausa = false;
-			// Coloco la barra al principio y elimino los callbacks.
-			skbBarra.setProgress(0);
-			manejador.removeCallbacks(notificacion);
-			// Deshabilito los botones de Pause y de Parar.
-			btnPause.setEnabled(false);
-			btnStop.setEnabled(false);
-			// Habilito el botón de grabar.
-			btnRec.setEnabled(true);
-		}
-	}
-
-	// Prepara al reproductor para poder reproducir.
-	private void prepararReproductor() {
-		// Si ya tenía reproductor, lo elimino.
-		if (reproductor != null) {
-			reproductor.reset();
-			reproductor.release();
-			reproductor = null;
-		}
-		// Creo el objeto MediaPlayer.
-		reproductor = new MediaPlayer();
-		try {
-			// Indico al reproductor el path de la grabación.
-			reproductor.setDataSource(Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + "/audio.3gp");
-			// Establezco el stream de audio que utilizará el reproductor.
-			reproductor.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			// Cuando ya esté preparado el reproductor se generará un evento
-			// OnPrepared que deberá ser gestionado por un Listener. Indico
-			// que será la propia actividad quien implementará la interfaz
-			// del Listener y gestionará el evento.
-			reproductor.setOnPreparedListener(this);
-			reproductor.setOnCompletionListener(this);
-			// Realizo la inicialización (preparación) del reproductor.
-			// reproductor.prepare(); // síncrona.
-			reproductor.prepareAsync(); // asíncrona.
-		} catch (Exception e) {
-			Log.d("Reproductor", "ERROR: " + e.getMessage());
-		}
-	}
-
-	// Cuando el reproductor ya está preparado para reproducir.
-	@Override
-	public void onPrepared(MediaPlayer repr) {
-		// Establezco el máximo de la seekbar.
-		skbBarra.setMax(reproductor.getDuration());
-		skbBarra.setProgress(0);
-		// No estoy en modo pausa.
-		enPausa = false;
-		// Comienzo la reproducción.
-		repr.start();
-		// Inicio el hilo de notificación para actualizar la barra.
-		actualizarProgreso();
-		// Activo el botón de Pause y de Stop.
-		btnPause.setEnabled(true);
-		btnStop.setEnabled(true);
-		// Desactivo el botón de grabación.
-		btnRec.setEnabled(false);
-	}
-
-	// Actualiza la barra en base al progreso del contenido del mediaplayer.
-	private void actualizarProgreso() {
-		// Actualizo la posición en la barra.
-		skbBarra.setProgress(reproductor.getCurrentPosition());
-		// Si está reproduciéndose.
-		if (reproductor.isPlaying()) {
-			// Creo un hilo de notificación para que se ejecute de nuevo.
-			notificacion = new Runnable() {
-				public void run() {
-					actualizarProgreso();
-				}
-			};
-			// Hago que el manejador ejecute el hilo de notificación dentro
-			// de 500ms.
-			manejador.postDelayed(notificacion, 500);
-		}
-		// Si ya se ha terminado de reproducir.
-		else {
-			// Si no estoy en pausa pongo la barra al principio.
-			if (!enPausa) {
-				skbBarra.setProgress(0);
-			}
-		}
-	}
-
-	// Cuando ha terminado de reproducirse la canción.
-	@Override
-	public void onCompletion(MediaPlayer arg0) {
-		// Reinicio la barra.
-		skbBarra.setProgress(0);
-		// Cancelo los mensajes al hilo de notificación.
-		manejador.removeCallbacks(notificacion);
-		// Deshabilito los botones de Pause y de Parar.
-		btnPause.setEnabled(false);
-		btnStop.setEnabled(false);
-		// Habilito el botón de grabar.
-		btnRec.setEnabled(true);
-	}
-
-	// Cuando se salva el estado en recreación.
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		// Guardo el estado de enabled del Play.
-		outState.putBoolean("btnPlayEnabled", btnPlay.isEnabled());
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// Libero los recursos del reproductor y el propio objeto.
-		if (reproductor != null) {
-			reproductor.release();
-			reproductor = null;
-		}
-		// Dejo de enviar mensajes al hilo de notificación.
-		manejador.removeCallbacks(notificacion);
-		// Libero los recursos de la grabadora.
-		if (grabadora != null) {
-			grabadora.release();
-			grabadora = null;
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		skbBarra.setProgress(0);
-	}
+    // Cuando se pausa la actividad.
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Se liberan los recursos del reproductor.
+        if (reproductor != null) {
+            reproductor.release();
+            reproductor = null;
+        }
+        // Se liberan los recursos de la grabadora.
+        if (grabadora != null) {
+            grabadora.release();
+            grabadora = null;
+        }
+    }
 
 }

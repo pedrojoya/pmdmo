@@ -1,56 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llRaiz"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:id="@+id/llBotonera"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <ImageView
+        android:id="@+id/btnRec"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:contentDescription="@string/grabar"
+        android:src="@drawable/ic_micro" />
 
-        <ImageButton
-            android:id="@+id/btnRec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/grabar"
-            android:onClick="btnRecOnClick"
-            android:src="@drawable/rec" />
-
-        <ImageButton
-            android:id="@+id/btnPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/reproducir"
-            android:onClick="btnPlayOnClick"
-            android:saveEnabled="true"
-            android:src="@drawable/play" />
-
-        <ImageButton
-            android:id="@+id/btnPause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/pausar"
-            android:onClick="btnPauseOnClick"
-            android:saveEnabled="true"
-            android:src="@drawable/pause" />
-
-        <ImageButton
-            android:id="@+id/btnStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/parar"
-            android:onClick="btnStopOnClick"
-            android:saveEnabled="true"
-            android:src="@drawable/stop" />
-    </LinearLayout>
-
-    <SeekBar
-        android:id="@+id/skbBarra"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
-
-</LinearLayout>
+</RelativeLayout>
