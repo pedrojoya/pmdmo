@@ -21,7 +21,7 @@ public class MainActivity extends Activity implements OnTouchListener,
         OnPreparedListener, OnCompletionListener, OnInfoListener {
 
     // Constantes.
-    private static final int MAX_DURACION_MS = 3000;
+    private static final int MAX_DURACION_MS = 10000;
 
     // Vistas.
     private ImageView btnRec;
