@@ -5,6 +5,9 @@ import java.util.Set;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -56,9 +59,13 @@ public class MainActivity extends Activity {
             sb.append(getString(R.string.lema)).append(": ")
                     .append(preferencias.getString("prefLema", ""))
                     .append("\n");
-            sb.append(getString(R.string.tono_notificacion)).append(": ")
-                    .append(preferencias.getString("prefTonoNotificacion", ""))
-                    .append("\n");
+            sb.append(getString(R.string.tono_notificacion)).append(": ");
+            String pathTono = preferencias
+                    .getString("prefTonoNotificacion", "");
+            Uri uriTono = Uri.parse(pathTono);
+            Ringtone tono = RingtoneManager.getRingtone(this, uriTono);
+            String nombreTono = tono.getTitle(this);
+            sb.append(nombreTono).append("\n");
             sb.append(getString(R.string.red)).append(": ")
                     .append(preferencias.getBoolean("prefRed", false))
                     .append("\n");

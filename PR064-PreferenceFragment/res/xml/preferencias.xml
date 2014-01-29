@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory
-        android:title="@string/sincronizacion" >
+
+    <PreferenceCategory android:title="@string/sincronizacion" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="prefSincronizar"
-            android:summary="@string/sincronizar_detalle"
+            android:summaryOff="@string/no"
+            android:summaryOn="@string/si"
             android:title="@string/sincronizar" />
+
         <ListPreference
             android:defaultValue="@string/tipo_conexion_default"
             android:dependency="prefSincronizar"
@@ -16,33 +18,36 @@
             android:key="prefTipoConexion"
             android:title="@string/tipo_conexion" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/apariencia" >
+    <PreferenceCategory android:title="@string/apariencia" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="prefLetrasGrandes"
-            android:summary="@string/letras_grandes_detalle"
+            android:summaryOff="@string/no"
+            android:summaryOn="@string/si"
             android:title="@string/letras_grandes" />
-        <MultiSelectListPreference 
-            android:key="prefTurnos"
-            android:title="@string/turnos"         
-            android:dialogTitle="@string/turnos"   
-            android:summary="@string/turnos_detalle"  
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/turnos_default"
+            android:dialogTitle="@string/turnos"
             android:entries="@array/turnos_entries"
             android:entryValues="@array/turnos_values"
-            android:defaultValue="@array/turnos_default" />    
+            android:key="prefTurnos"
+            android:summary="@string/turnos_detalle"
+            android:title="@string/turnos" />
+
         <Preference android:title="@string/web_oficial" >
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="http://www.iessaladillo.es" />
         </Preference>
-        <PreferenceScreen
-            android:title="@string/otras" >
+
+        <PreferenceScreen android:title="@string/otras" >
             <EditTextPreference
                 android:dialogTitle="@string/lema"
                 android:key="prefLema"
                 android:summary="@string/lema_detalle"
                 android:title="@string/lema" />
+
             <RingtonePreference
                 android:defaultValue="content://settings/system/notification_sound"
                 android:key="prefTonoNotificacion"
@@ -50,6 +55,7 @@
                 android:showDefault="true"
                 android:showSilent="true"
                 android:title="@string/tono_notificacion" />
+
             <SwitchPreference
                 android:key="prefRed"
                 android:summaryOff="@string/red_detalle_off"
@@ -59,4 +65,5 @@
                 android:title="@string/red" />
         </PreferenceScreen>
     </PreferenceCategory>
+
 </PreferenceScreen>
