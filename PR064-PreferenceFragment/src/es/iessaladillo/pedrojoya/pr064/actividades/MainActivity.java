@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr064.actividades;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import android.app.Activity;
@@ -10,7 +11,9 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.widget.TextView;
 import es.iessaladillo.pedrojoya.pr064.R;
 
@@ -23,6 +26,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        overflowEnDispositivoConTeclaMenu();
         // Obtengo las preferencias.
         preferencias = PreferenceManager.getDefaultSharedPreferences(this);
         // Obtengo las vistas.
@@ -74,11 +78,36 @@ public class MainActivity extends Activity {
         super.onResume();
     }
 
-    // Al hacer click en btnPrefrencias.
-    public void btnPreferenciasOnClick(View v) {
-        // Lanzamos la actividad de preferencias.
-        Intent i = new Intent(this, PreferenciasActivity.class);
-        this.startActivity(i);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.mnuPreferencias:
+            // Lanzamos la actividad de preferencias.
+            Intent i = new Intent(this, PreferenciasActivity.class);
+            this.startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Activa el ítem de overflow en dispositivos con botón físico de menú.
+    private void overflowEnDispositivoConTeclaMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class
+                    .getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignorar
+        }
+    }
 }

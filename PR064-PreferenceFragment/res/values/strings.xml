@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PR064-PreferenceFragment</string>
+    <string name="app_name">PreferenceFragment</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="preferencias">Preferencias</string>
@@ -21,7 +21,7 @@
     <string name="apariencia">Apariencia</string>
     <string name="letras_grandes">Letras grandes</string>
     <string name="letras_grandes_detalle">Tamaño de letra grande</string>
-    <string name="otras">Otras</string>
+    <string name="otras">Otras preferencias</string>
     <string name="lema">Lema</string>
     <string name="lema_detalle">Lema de la organización</string>
     <string name="tono_notificacion">Tono de notificación</string>

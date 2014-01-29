@@ -22,8 +22,6 @@ import es.iessaladillo.pedrojoya.pr064.R;
 public class PreferenciasFragment extends PreferenceFragment implements
         OnSharedPreferenceChangeListener {
 
-    private static final String KEY_PREF_LEMA = "prefLema";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,17 +30,19 @@ public class PreferenciasFragment extends PreferenceFragment implements
         this.addPreferencesFromResource(R.xml.preferencias);
         // Se inicializan los summary con el valor de la preferencia.
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
-            mostrarSummary(getPreferenceScreen().getPreference(i));
+            inicializarSummary(getPreferenceScreen().getPreference(i));
         }
     }
 
-    private void mostrarSummary(Preference preferencia) {
+    // Inicializa el summary de una preferencia. Llama recursivamente si se
+    // trata de una pantalla de preferencias o una categoría de preferencias.
+    private void inicializarSummary(Preference preferencia) {
         // Si la preferencia corresponde a otra pantalla de preferencias, se
         // llama recursivamente.
         if (preferencia instanceof PreferenceScreen) {
             PreferenceScreen pantalla = (PreferenceScreen) preferencia;
             for (int i = 0; i < pantalla.getPreferenceCount(); i++) {
-                mostrarSummary(pantalla.getPreference(i));
+                inicializarSummary(pantalla.getPreference(i));
             }
         }
         // Si la preferencia corresponde a una categoría de preferencias, se
@@ -50,7 +50,7 @@ public class PreferenciasFragment extends PreferenceFragment implements
         else if (preferencia instanceof PreferenceCategory) {
             PreferenceCategory categoria = (PreferenceCategory) preferencia;
             for (int i = 0; i < categoria.getPreferenceCount(); i++) {
-                mostrarSummary(categoria.getPreference(i));
+                inicializarSummary(categoria.getPreference(i));
             }
         } else {
             // Se actualiza el valor del summary a partir del valor de la
@@ -64,8 +64,8 @@ public class PreferenciasFragment extends PreferenceFragment implements
     public void onPause() {
         // Se elimina la actividad como listener de los cambios en las
         // preferencias.
-        // getPreferenceScreen().getSharedPreferences()
-        // .unregisterOnSharedPreferenceChangeListener(this);
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
 
@@ -87,6 +87,7 @@ public class PreferenciasFragment extends PreferenceFragment implements
         actualizarSummary(findPreference(key));
     }
 
+    // Actuliza el summary de una preferencia dependiendo del tipo que sea.
     private void actualizarSummary(Preference preferencia) {
         // Si es un EditTextPreference.
         if (preferencia instanceof EditTextPreference) {
