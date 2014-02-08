@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements OnTouchListener,
     public boolean onTouch(View v, MotionEvent event) {
         // Si no se estaba grabando, se inicia la grabación.
         if (!grabando) {
-            grabar();
+            iniciarGrabacion();
         }
         // Si se suelta el botón, se finaliza la grabación.
         if ((event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
@@ -55,7 +55,7 @@ public class MainActivity extends Activity implements OnTouchListener,
     }
 
     // Inicia la grabación.
-    private void grabar() {
+    private void iniciarGrabacion() {
         // Se prepara la grabación.
         prepararGrabacion();
         // Se inicia la grabación.
@@ -86,6 +86,7 @@ public class MainActivity extends Activity implements OnTouchListener,
         }
     }
 
+    // Cuando se ha producido un evento de información en la grabador.
     @Override
     public void onInfo(MediaRecorder mr, int what, int extra) {
         // Si se ya llegado al tiempo máximo.

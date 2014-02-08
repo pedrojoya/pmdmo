@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Sockettest!</string>
+    <string name="app_name">Prueba de Sockets</string>
+    <string name="socket_cliente">Socket Cliente</string>
+    <string name="ip">IP Servidor</string>
+    <string name="barrera">Barrera</string>
+    <string name="puerto">Puerto</string>
+    <string name="conectar">Conectar</string>
+    <string name="en_espera">En espera</string>
+    <string name="led_conexion">Led de conexión</string>
+    <string name="enviar_texto">Mensaje</string>
+    <string name="enviar">Enviar</string>
+    <string name="hola">Hola</string>
+    <string name="conexion_establecida">Conexión establecida</string>
+    <string name="no_se_ha_podido_conectar">No se ha podido conectar</string>
+    <string name="conexion_terminada">Conexión terminada</string>
+    <string name="error_al_cerrar_la_conexion">Error al cerrar la conexión</string>
+    <string name="desconectar">Desconectar</string>
+    <string name="mensaje_enviado">Mensaje enviado</string>
+    <string name="error_al_enviar_el_mensaje">Error al enviar el mensaje</string>
+    <string name="socket">Socket</string>
+</resources>

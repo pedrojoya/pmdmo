@@ -30,13 +30,11 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
-        public static final int grabar_sonido=0x7f040007;
-        public static final int hello_world=0x7f040001;
-        public static final int menu_settings=0x7f040002;
-        public static final int parar=0x7f040005;
-        public static final int pausar=0x7f040004;
-        public static final int reproducir=0x7f040003;
-        public static final int seleccionar_cancion=0x7f040006;
+        public static final int grabar_sonido=0x7f040005;
+        public static final int parar=0x7f040003;
+        public static final int pausar=0x7f040002;
+        public static final int reproducir=0x7f040001;
+        public static final int seleccionar_cancion=0x7f040004;
     }
     public static final class style {
         /** 
