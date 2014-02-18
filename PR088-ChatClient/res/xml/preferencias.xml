@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:key="prefAutor"
+        android:title="@string/nombre_del_usuario" />
+    <EditTextPreference
+        android:key="prefIP"
+        android:title="@string/ip_del_servidor" />
+    <EditTextPreference
+        android:key="prefPuerto"
+        android:title="@string/puerto_de_conexion" />
+    
+</PreferenceScreen>

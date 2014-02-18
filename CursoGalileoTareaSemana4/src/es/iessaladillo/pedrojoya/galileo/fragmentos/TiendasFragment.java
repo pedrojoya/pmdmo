@@ -18,6 +18,7 @@ public class TiendasFragment extends Fragment {
     private ActionBarActivity actividad;
     private TiendasListaFragment frgListado;
     private TiendasMapaFragment frgMapa;
+    private int tabInicial;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -25,7 +26,6 @@ public class TiendasFragment extends Fragment {
         setHasOptionsMenu(true);
         actividad = (ActionBarActivity) getActivity();
         barra = actividad.getSupportActionBar();
-        barra.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         // Se crean las pestañas.
         ActionBar.Tab tabListado = barra.newTab();
         tabListado.setText(R.string.listado);
@@ -42,10 +42,9 @@ public class TiendasFragment extends Fragment {
         barra.addTab(tabMapa);
         // Si venimos de un estado anterior.
         if (savedInstanceState != null) {
-            // Se coloca en la pestaña en la que estaba.
-            barra.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+            tabInicial = savedInstanceState.getInt("tab");
         } else {
-            barra.setSelectedNavigationItem(0);
+            tabInicial = 0;
         }
         super.onActivityCreated(savedInstanceState);
     }
@@ -76,6 +75,14 @@ public class TiendasFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tiendas, container, false);
         // Se retorna la vista que debe mostrar el fragmento.
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        barra.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        // Se coloca en la pestaña en la que estaba.
+        barra.setSelectedNavigationItem(tabInicial);
+        super.onResume();
     }
 
     // Cuando se va a recrear el fragmento.

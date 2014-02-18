@@ -17,7 +17,9 @@ public class Servidor {
 
     // Constructor.
     public Servidor() {
+        // Se crea el ejecutor para los hilos.
         ejecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        // Se crea el chat que gestionará los mensajes.
         chat = new Chat();
         try {
             // Se crea el socket servidor.
@@ -39,6 +41,7 @@ public class Servidor {
 
     // Método main.
     public static void main(String[] args) {
+        // Se crea el servidor.
         new Servidor();
     }
 

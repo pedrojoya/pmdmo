@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/simple" >
+
+    <RelativeLayout
+        android:id="@+id/rlElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mensaje_propio"
+        android:gravity="right"
+        android:padding="@dimen/simple" >
+
+        <TextView
+            android:id="@+id/lblFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/simple"
+            android:layout_marginRight="@dimen/simple"
+            android:text="18:36" />
+
+        <TextView
+            android:id="@+id/lblAutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/simple"
+            android:layout_toRightOf="@+id/lblFecha"
+            android:text="Baldomero"
+            android:textStyle="bold"
+            android:textColor="#351424" />
+
+        <TextView
+            android:id="@+id/lblTexto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblAutor"
+            android:text="No te digo trigo"
+            android:maxWidth="200dp" />
+    </RelativeLayout>
+
+</LinearLayout>

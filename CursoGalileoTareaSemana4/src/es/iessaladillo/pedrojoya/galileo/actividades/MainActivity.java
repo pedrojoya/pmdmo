@@ -71,6 +71,7 @@ public class MainActivity extends ActionBarActivity implements
                         android.R.layout.simple_list_item_1);
         lstPanelNavegacion.setAdapter(adaptador);
         lstPanelNavegacion.setOnItemClickListener(this);
+        lstPanelNavegacion.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Se crea el objeto de vínculo entre la ActionBar y el panel de
         // navegación. El constructor recibe la actividad, el panel de
         // navegación, el icono de activación en la ActionBar, el texto de
@@ -80,8 +81,19 @@ public class MainActivity extends ActionBarActivity implements
                 panelNavegacion, R.drawable.ic_navigation_drawer,
                 R.string.abrir_panel_de_navegacion,
                 R.string.cerrar_panel_de_navegacion) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (barra.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS)
+                    barra.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                super.onDrawerSlide(drawerView, slideOffset);
+            }
+
             // Al terminar de cerrarse el panel de navegación.
             public void onDrawerClosed(View view) {
+                int seleccionado = lstPanelNavegacion.getCheckedItemPosition();
+                if (seleccionado == 1)
+                    barra.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
                 // Se reestablece el título de la ActionBar al valor que tuviera
                 // antes de abrir el panel de navegación.
                 getSupportActionBar().setTitle(tituloContenido);
@@ -130,6 +142,7 @@ public class MainActivity extends ActionBarActivity implements
         // nosotros de
         // abrir o cerrar el panel de navegación.
         if (conmutadorPanelNavegacion.onOptionsItemSelected(item)) {
+            // barra.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             return true;
         }
         // En cualquier otro caso se procesa la selección.

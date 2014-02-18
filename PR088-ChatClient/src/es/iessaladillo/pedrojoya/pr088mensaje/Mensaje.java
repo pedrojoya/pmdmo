@@ -1,23 +1,27 @@
 package es.iessaladillo.pedrojoya.pr088mensaje;
 
 import java.io.Serializable;
+import java.util.Date;
 
 // MUY IMPORTANTE: LA CLASE MENSAJE TIENE QUE ESTAR EN EL MISMO PAQUETE EN 
 // AMBOS PROYECTOS PARA QUE LA SERIALIZACIÓN FUNCIONE CORRECTAMENTE.
 
-// Clase modelo de datos del mensaje que se enviará a través del socket.
-// Debe implementar la interfaz Serializable.
+// Mensaje del chat. Debe implementar la interfaz Serializable.
 @SuppressWarnings("serial")
 public class Mensaje implements Serializable {
 
     // Propiedades.
-    private String texto; // Texto enviado.
-    private boolean finalConexion = false; // Indicador de final de la conexión.
+    private String texto;
+    private String autor;
+    private Date fecha;
+    private boolean fin = false;
 
     // Constructor.
-    public Mensaje(String texto, boolean finalConexion) {
+    public Mensaje(String texto, String autor, Date fecha, boolean fin) {
         this.texto = texto;
-        this.finalConexion = finalConexion;
+        this.autor = autor;
+        this.fecha = fecha;
+        this.fin = fin;
     }
 
     // Getters and setters.
@@ -29,12 +33,28 @@ public class Mensaje implements Serializable {
         this.texto = texto;
     }
 
-    public boolean isFinalConexion() {
-        return finalConexion;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setFinalConexion(boolean finalConexion) {
-        this.finalConexion = finalConexion;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
     }
 
 }

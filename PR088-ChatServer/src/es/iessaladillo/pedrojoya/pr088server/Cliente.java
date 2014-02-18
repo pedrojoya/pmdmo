@@ -42,6 +42,7 @@ public class Cliente implements Runnable {
         }
     }
 
+    // Getters.
     public Socket getSocket() {
         return socket;
     }
@@ -60,35 +61,24 @@ public class Cliente implements Runnable {
 
     @Override
     public void run() {
-        // Una vez conectados, se muestra información sobre el cliente.
         System.out.println("[" + formateador.format(new Date())
                 + "] Conectado al cliente " + "IP:" + ipCliente);
         // Se agrega el cliente al chat.
         chat.agregarCliente(this);
         // Bucle de recepción de mensajes del cliente.
         while (true) {
-            // Se lee un objeto.
-            Object datos;
             try {
-                datos = lector.readObject();
-                if (datos instanceof Mensaje) {
-                    // Se convierte a mensaje.
-                    Mensaje mensaje = (Mensaje) datos;
-                    // Se agrega el mensaje al chat.
-                    chat.agregarMensaje(this, mensaje);
-                    // Se muestra el mensaje.
-                    if (!mensaje.isFinalConexion()) {
-                        System.out.println("[" + formateador.format(new Date())
-                                + "] " + ipCliente + " --> "
+                // Se lee un mensaje.
+                Mensaje mensaje = (Mensaje) lector.readObject();
+                // Se agrega el mensaje al chat.
+                chat.agregarMensaje(this, mensaje);
+                System.out
+                        .println("[" + formateador.format(mensaje.getFecha())
+                                + "] " + mensaje.getAutor() + ": "
                                 + mensaje.getTexto());
-                    } else {
-                        // Se sale del bucle de recepción de mensajes.
-                        break;
-                    }
-                } else {
-                    // El mensaje no es válido.
-                    System.err
-                            .println("Los datos recibidos no son de la clase Mensaje.");
+                // Si es un mensaje de fin de conexión se sale del bucle.
+                if (mensaje.isFin()) {
+                    break;
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="hello">Hello World, Sockettest!</string>
     <string name="app_name">Prueba de Sockets</string>
     <string name="socket_cliente">Socket Cliente</string>
@@ -20,4 +21,13 @@
     <string name="mensaje_enviado">Mensaje enviado</string>
     <string name="error_al_enviar_el_mensaje">Error al enviar el mensaje</string>
     <string name="socket">Socket</string>
+    <string name="se_ha_desconectado">Se ha desconectado</string>
+    <string name="nombre_del_usuario">Nombre del usuario</string>
+    <string name="ip_del_servidor">IP del Servidor</string>
+    <string name="title_activity_preferencias">Preferencias</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="puerto_de_conexion">Puerto de conexión</string>
+
 </resources>
