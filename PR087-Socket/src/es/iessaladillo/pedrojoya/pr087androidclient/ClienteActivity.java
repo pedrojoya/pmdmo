@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr087;
+package es.iessaladillo.pedrojoya.pr087androidclient;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import es.iessaladillo.pedrojoya.mensaje.Mensaje;
+import es.iessaladillo.pedrojoya.pr087.R;
 
 // Cliente de Sockets
 public class ClienteActivity extends Activity implements OnClickListener {

@@ -2,11 +2,9 @@ package es.iessaladillo.pedrojoya.mensaje;
 
 import java.io.Serializable;
 
-// MUY IMPORTANTE: LA CLASE MENSAJE TIENE QUE ESTAR EN EL MISMO PAQUETE EN 
-// AMBOS PROYECTOS PARA QUE LA SERIALIZACIÓN FUNCIONE CORRECTAMENTE.
+// Importante: Esta clase debe estar en el mismo nombre de paquete tanto 
+// en el cliente como en el servidor para lectura/escritura correcta.
 
-// Clase modelo de datos del mensaje que se enviará a través del socket.
-// Debe implementar la interfaz Serializable.
 @SuppressWarnings("serial")
 public class Mensaje implements Serializable {
 

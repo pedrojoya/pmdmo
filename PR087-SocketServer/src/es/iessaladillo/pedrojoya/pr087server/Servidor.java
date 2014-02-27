@@ -17,10 +17,7 @@ public class Servidor {
     // Variables a nivel de clase.
     private ServerSocket skServidor;
     private Socket skConexion;
-
-    Mensaje mensaje = null; // Mensaje recibido.
-    String timeStamp; // Código de tiempo actual.
-
+    private Mensaje mensaje = null; // Mensaje recibido.
     private SimpleDateFormat formateador;
 
     // Constructor.
@@ -55,11 +52,6 @@ public class Servidor {
                                 + "] " + ipCliente + " --> "
                                 + mensaje.getTexto());
                     } else {
-                        // Se cierra el lector y la conexión con el cliente.
-                        lector.close();
-                        skConexion.close();
-                        System.out.println("[" + formateador.format(new Date())
-                                + "] Conexion cerrada con " + ipCliente);
                         // Se sale del bucle de recepción de mensajes.
                         break;
                     }
@@ -69,6 +61,11 @@ public class Servidor {
                             .println("Los datos recibidos no son de la clase Mensaje.");
                 }
             }
+            // Se cierra el lector y la conexión con el cliente.
+            lector.close();
+            skConexion.close();
+            System.out.println("[" + formateador.format(new Date())
+                    + "] Conexion cerrada con " + ipCliente);
         } catch (Exception e) {
             e.printStackTrace();
         }
