@@ -15,11 +15,10 @@ public class MainActivity extends FragmentActivity implements
         OnAlbumSelectedListener {
 
     // Constantes.
-    public static final String EXTRA_ALBUM = "es.iessaladillo.pr047.ALBUM";
+    public static final String EXTRA_ALBUM = "es.iessaladillo.pr049.ALBUM";
 
     // Variables miembro.
     private FragmentManager gestor;
-    private DetalleFragment frgDetalle;
     private FrameLayout flDetalle;
 
     @Override
@@ -39,8 +38,7 @@ public class MainActivity extends FragmentActivity implements
         if (flDetalle != null) {
             // Muestro el detalle del álbum.
             mostrarFragmentoDetalle(album);
-        }
-        else {
+        } else {
             // Hay dos actividades. Llamo a la otra actividad pasándole el álbum
             // que debe mostrar (cuya clase debe implementar Parcelable).
             Intent i = new Intent(this, DetalleActivity.class);
@@ -52,12 +50,9 @@ public class MainActivity extends FragmentActivity implements
     public void mostrarFragmentoDetalle(Album album) {
         // Inicio la transacción.
         FragmentTransaction transaccion = gestor.beginTransaction();
-        // Creo una nueva instancia del fragmento de detalle.
-        frgDetalle = new DetalleFragment();
-        // Le paso el album como argumento al fragmento.
-        Bundle argumentos = new Bundle();
-        argumentos.putParcelable(MainActivity.EXTRA_ALBUM, album);
-        frgDetalle.setArguments(argumentos);
+        // Creo una nueva instancia del fragmento de detalle pasándole el álbum
+        // como parámetro.
+        DetalleFragment frgDetalle = DetalleFragment.newInstance(album);
         // Añado a la transacción el colocar el fragmento en el FrameLayout.
         transaccion.replace(R.id.flDetalle, frgDetalle);
         transaccion.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

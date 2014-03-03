@@ -18,6 +18,15 @@ public class DetalleFragment extends Fragment {
     private TextView lblAnio;
     private Album album;
 
+    // Retorna una nueva instancia del fragmento configurado.
+    public static DetalleFragment newInstance(Album album) {
+        DetalleFragment frgDetalle = new DetalleFragment();
+        Bundle argumentos = new Bundle();
+        argumentos.putParcelable(MainActivity.EXTRA_ALBUM, album);
+        frgDetalle.setArguments(argumentos);
+        return frgDetalle;
+    }
+
     // Retorna la vista que debe mostrar el fragmento.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

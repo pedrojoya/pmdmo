@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import es.iessaladillo.pedrojoya.pr049.R;
 import es.iessaladillo.pedrojoya.pr049.fragmentos.DetalleFragment;
+import es.iessaladillo.pedrojoya.pr049.modelos.Album;
 
 public class DetalleActivity extends FragmentActivity {
 
@@ -16,11 +17,9 @@ public class DetalleActivity extends FragmentActivity {
         // Cargo el fragmento de detalle en el FrameLayout.
         FragmentManager gestorFragmentos = this.getSupportFragmentManager();
         FragmentTransaction transaccion = gestorFragmentos.beginTransaction();
-        DetalleFragment frgDetalle = new DetalleFragment();
-        Bundle argumentos = new Bundle();
-        argumentos.putParcelable(MainActivity.EXTRA_ALBUM, getIntent()
-                .getExtras().getParcelable(MainActivity.EXTRA_ALBUM));
-        frgDetalle.setArguments(argumentos);
+        DetalleFragment frgDetalle = DetalleFragment
+                .newInstance((Album) getIntent().getExtras().getParcelable(
+                        MainActivity.EXTRA_ALBUM));
         transaccion.add(R.id.flContenedorDetalle, frgDetalle);
         transaccion.commit();
     }
