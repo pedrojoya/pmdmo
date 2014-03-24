@@ -12,7 +12,12 @@ public class MusicaOnlineService extends Service implements
         OnCompletionListener, OnPreparedListener {
 
     public static final String EXTRA_URL_CANCION = "url";
+    public static final String ACTION_COMPLETADA = "es.iessaladillo.pedrojoya.pr089.action_completada";
+    public static final String EXTRA_PACKAGE_NAME = "package_name";
+    public static final String EXTRA_RESPUESTA = "respuesta";
+
     private MediaPlayer reproductor;
+    private String packageName;
 
     @Override
     public void onCreate() {
@@ -33,6 +38,8 @@ public class MusicaOnlineService extends Service implements
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // Se obtiene el nombre del paquete.
+        packageName = intent.getStringExtra(EXTRA_PACKAGE_NAME);
         // Se prepara la reproducción de la canción.
         if (reproductor != null) {
             reproductor.reset();
@@ -67,8 +74,13 @@ public class MusicaOnlineService extends Service implements
 
     @Override
     public void onCompletion(MediaPlayer arg0) {
+        // Se envía un intent de respuesta al receptor, indicando el paquete
+        // para que no lo puedan recibir componentes de otras aplicaciones.
+        Intent intentRespuesta = new Intent(ACTION_COMPLETADA);
+        intentRespuesta.putExtra(EXTRA_RESPUESTA, "Canción finalizada");
+        intentRespuesta.setPackage(packageName);
+        sendBroadcast(intentRespuesta);
         // Se finaliza el servicio.
         stopSelf();
     }
-
 }
