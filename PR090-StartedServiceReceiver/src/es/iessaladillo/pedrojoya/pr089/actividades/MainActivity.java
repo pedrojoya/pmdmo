@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,12 +26,16 @@ public class MainActivity extends Activity implements OnItemClickListener {
     private ListView lstCanciones;
     private BroadcastReceiver receptor;
     private IntentFilter filtro;
+    private LocalBroadcastManager gestor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getVistas();
+        // Se obtiene el gestor de receptores locales.
+        gestor = LocalBroadcastManager.getInstance(this);
+        // Se crea el intent de inicio del servicio.
         intentServicio = new Intent(getApplicationContext(),
                 MusicaOnlineService.class);
         // Se crea el receptor de mensajes desde el servicio.
@@ -61,14 +66,16 @@ public class MainActivity extends Activity implements OnItemClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        // Se registra el receptor.
-        registerReceiver(receptor, filtro);
+        // Se registra el receptor en el gestor de receptores locales para dicha
+        // acción.
+        gestor.registerReceiver(receptor, filtro);
     }
 
     @Override
     protected void onPause() {
-        // Se desregistra el receptor.
-        unregisterReceiver(receptor);
+        // Se desregistra el receptor del gestor de receptores locales para
+        // dicha acción.
+        gestor.unregisterReceiver(receptor);
         super.onPause();
     }
 
@@ -82,24 +89,25 @@ public class MainActivity extends Activity implements OnItemClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.mnuParar:
+            // Se para el servicio.
             stopService(intentServicio);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    // Cuando se pulsa en una canción de la lista.
     @Override
     public void onItemClick(AdapterView<?> lst, View v, int position, long id) {
         // Se inicia el servicio para que reproduzca la canción.
         reproducirCancion(position);
     }
 
+    // Inicia el servicio de reproducción de la canción.
     private void reproducirCancion(int position) {
         Cancion cancion = (Cancion) lstCanciones.getItemAtPosition(position);
         intentServicio.putExtra(MusicaOnlineService.EXTRA_URL_CANCION,
                 cancion.getUrl());
-        intentServicio.putExtra(MusicaOnlineService.EXTRA_PACKAGE_NAME,
-                getPackageName());
         startService(intentServicio);
     }
 
