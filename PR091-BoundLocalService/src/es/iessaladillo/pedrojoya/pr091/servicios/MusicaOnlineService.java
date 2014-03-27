@@ -17,14 +17,13 @@ public class MusicaOnlineService extends Service implements
         OnCompletionListener, OnPreparedListener {
 
     // Constantes.
-    public static String EXTRA_POS_ACTUAL = "posActual";
-    public static String ACTION_REPRODUCIENDO = "es.iessaladillo.pedrojoya.pr089.action_reproduciendo";
+    public static String ACTION_PLAYING = "es.iessaladillo.pedrojoya.pr089.action_playing";
 
     // Variables.
-    private MediaPlayer reproductor;
-    private LocalBinder binder;
-    private ArrayList<Cancion> canciones;
-    private int posActual;
+    private MediaPlayer mReproductor;
+    private LocalBinder mBinder;
+    private ArrayList<Cancion> mCanciones;
+    private int mPosCancionActual = -1;
 
     // Clase que actúa como Binder con el servicio.
     public class LocalBinder extends Binder {
@@ -35,72 +34,81 @@ public class MusicaOnlineService extends Service implements
         }
     }
 
+    // Al crear el servicio.
     @Override
     public void onCreate() {
         super.onCreate();
         // Se crea el binder con el que se vinculará la actividad.
-        binder = new LocalBinder();
+        mBinder = new LocalBinder();
         // Se crea y configura el reproductor.
-        reproductor = new MediaPlayer();
+        mReproductor = new MediaPlayer();
     }
 
+    // Al destruir el servicio.
     @Override
     public void onDestroy() {
         // Se para la reproducción y se liberan los recursos.
-        if (reproductor != null) {
-            reproductor.stop();
-            reproductor.release();
+        if (mReproductor != null) {
+            mReproductor.stop();
+            mReproductor.release();
         }
         super.onDestroy();
     }
 
+    // Reproduce la canción con dicha posición en la lista.
     public void reproducirCancion(int position) {
-        if (canciones != null) {
-            posActual = position;
-            reproducirCancion(canciones.get(position).getUrl());
+        if (mCanciones != null) {
+            // Se actualiza cuál es la canción actual.
+            mPosCancionActual = position;
+            // Se reproduce la url correspondiente a la canción.
+            reproducirCancion(mCanciones.get(position).getUrl());
+            // Se envía un broadcast informativo.
             enviarBroadcast();
         }
     }
 
+    // Envía un broadcast informativo de que se está reproduciendo una canción.
     private void enviarBroadcast() {
-        // Se envía un intent de respuesta al receptor
-        Intent intentRespuesta = new Intent(ACTION_REPRODUCIENDO);
-        intentRespuesta.putExtra(EXTRA_POS_ACTUAL, posActual);
-        // El intent será recibido por un Receiver local registrado en el gestor
-        // para dicha acción.
+        // Se envía un intent informativo a los receptores locales registrados
+        // para la acción.
+        Intent intentRespuesta = new Intent(ACTION_PLAYING);
         LocalBroadcastManager gestor = LocalBroadcastManager.getInstance(this);
         gestor.sendBroadcast(intentRespuesta);
     }
 
+    // Reproduce la url correspondiente a una canción.
     public void reproducirCancion(String url) {
         // Se prepara la reproducción de la canción.
-        if (reproductor != null) {
-            reproductor.reset();
-            reproductor.setLooping(false);
-            reproductor.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            reproductor.setOnPreparedListener(this);
-            reproductor.setOnCompletionListener(this);
+        if (mReproductor != null) {
+            mReproductor.reset();
+            mReproductor.setLooping(false);
+            mReproductor.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mReproductor.setOnPreparedListener(this);
+            mReproductor.setOnCompletionListener(this);
             try {
-                reproductor.setDataSource(url);
-                reproductor.prepareAsync();
+                mReproductor.setDataSource(url);
+                mReproductor.prepareAsync();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    // Cuando se establece el vínculo.
     @Override
     public IBinder onBind(Intent intent) {
         // Se retorna el binder con el servicio.
-        return binder;
+        return mBinder;
     }
 
+    // Cuando ya está preparada la reproducción de la canción.
     @Override
     public void onPrepared(MediaPlayer arg0) {
         // Se inicia la reproducción.
-        reproductor.start();
+        mReproductor.start();
     }
 
+    // Cuando ha finalizado la reproducción de la canción.
     @Override
     public void onCompletion(MediaPlayer arg0) {
         siguienteCancion();
@@ -108,17 +116,22 @@ public class MusicaOnlineService extends Service implements
 
     // Reproduce la siguiente canción a la actual.
     public void siguienteCancion() {
-        if (canciones != null) {
-            reproducirCancion((posActual + 1) % canciones.size());
+        if (mCanciones != null) {
+            reproducirCancion((mPosCancionActual + 1) % mCanciones.size());
         }
     }
 
     // Reproduce la anterior canción a la actual.
     public void anteriorCancion() {
-        if (canciones != null) {
-            int anterior = posActual - 1;
-            if (anterior < 0) {
-                anterior = canciones.size() - 1;
+        if (mCanciones != null) {
+            int anterior;
+            if (mPosCancionActual >= 0) {
+                anterior = mPosCancionActual - 1;
+                if (anterior < 0) {
+                    anterior = mCanciones.size() - 1;
+                }
+            } else {
+                anterior = 0;
             }
             reproducirCancion(anterior);
         }
@@ -126,34 +139,45 @@ public class MusicaOnlineService extends Service implements
 
     // Pausa la reproducción.
     public void pausarReproduccion() {
-        reproductor.pause();
+        mReproductor.pause();
+    }
+
+    // Retorna si está reproduciendo una canción.
+    public boolean reproduciendo() {
+        return mReproductor.isPlaying();
+    }
+
+    // Continua la reproducción después de una pausa.
+    public void continuarReproduccion() {
+        mReproductor.start();
     }
 
     // Para la reproducción.
     public void pararReproduccion() {
-        reproductor.stop();
+        mReproductor.stop();
     }
 
     // Establece la lista de canciones.
     public void setLista(ArrayList<Cancion> list) {
-        canciones = list;
+        mCanciones = list;
     }
 
     // Limpia la lista de canciones.
     public void limpiarLista() {
-        canciones = null;
+        mCanciones = null;
     }
 
     // Agrega una canción a la lista de canciones.
     public void agregarCancion(Cancion cancion) {
-        if (canciones == null) {
-            canciones = new ArrayList<Cancion>();
+        if (mCanciones == null) {
+            mCanciones = new ArrayList<Cancion>();
         }
-        canciones.add(cancion);
+        mCanciones.add(cancion);
     }
 
+    // Retorna el índice de la canción actual.
     public int getPosCancionActual() {
-        return posActual;
+        return mPosCancionActual;
     }
 
 }
