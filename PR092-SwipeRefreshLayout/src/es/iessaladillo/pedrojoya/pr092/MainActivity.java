@@ -99,8 +99,9 @@ public class MainActivity extends Activity {
         }
 
         private void refrescar() {
-            // Se activa el círculo de progreso.
+            // Se activa el círculo de progreso y la animación.
             mnuActualizar.setActionView(R.layout.actionview_progreso);
+            swlPanel.setRefreshing(true);
             // Se simula que la tarea de carga tarda 2 segundos.
             new Handler().postDelayed(new Runnable() {
                 @Override

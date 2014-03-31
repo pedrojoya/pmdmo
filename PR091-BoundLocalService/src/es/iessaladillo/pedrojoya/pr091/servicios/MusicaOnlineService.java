@@ -17,7 +17,7 @@ public class MusicaOnlineService extends Service implements
         OnCompletionListener, OnPreparedListener {
 
     // Constantes.
-    public static String ACTION_PLAYING = "es.iessaladillo.pedrojoya.pr089.action_playing";
+    public static String ACTION_PLAYING = "es.iessaladillo.pedrojoya.pr091.action.playing";
 
     // Variables.
     private MediaPlayer mReproductor;
@@ -62,8 +62,6 @@ public class MusicaOnlineService extends Service implements
             mPosCancionActual = position;
             // Se reproduce la url correspondiente a la canción.
             reproducirCancion(mCanciones.get(position).getUrl());
-            // Se envía un broadcast informativo.
-            enviarBroadcast();
         }
     }
 
@@ -106,6 +104,8 @@ public class MusicaOnlineService extends Service implements
     public void onPrepared(MediaPlayer arg0) {
         // Se inicia la reproducción.
         mReproductor.start();
+        // Se envía un broadcast informativo.
+        enviarBroadcast();
     }
 
     // Cuando ha finalizado la reproducción de la canción.
