@@ -82,6 +82,8 @@ public class MainActivity extends Activity implements OnItemClickListener,
                 actualizarIU();
             }
         };
+        // Se vincula el servicio.
+        vincularServicio();
     }
 
     private void getVistas() {
@@ -103,8 +105,7 @@ public class MainActivity extends Activity implements OnItemClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        // Se vincula el servicio.
-        vincularServicio();
+        // Se actualiza la IU.
         actualizarIU();
         // Se registra el receptor en el gestor de receptores locales para dicha
         // acción.
@@ -115,11 +116,12 @@ public class MainActivity extends Activity implements OnItemClickListener,
         // Se crea el intent de vinculación con el servicio.
         Intent intentServicio = new Intent(getApplicationContext(),
                 MusicaOnlineService.class);
-        // Se vincula el servicio.
-        bindService(intentServicio, mConexion, Context.BIND_AUTO_CREATE);
+        // Se vincula el servicio (IMPORTANTE: con el contexto de la
+        // aplicación).
+        getApplicationContext().bindService(intentServicio, mConexion,
+                Context.BIND_AUTO_CREATE);
     }
 
-    // Caundo se pausa la actividad.
     @Override
     protected void onPause() {
         // Se desregistra el receptor del gestor de receptores locales para
@@ -130,6 +132,7 @@ public class MainActivity extends Activity implements OnItemClickListener,
 
     @Override
     protected void onDestroy() {
+        // Se desvicula el servicio.
         if (!isChangingConfigurations()) {
             desvincularServicio();
         }
@@ -137,9 +140,11 @@ public class MainActivity extends Activity implements OnItemClickListener,
     }
 
     private void desvincularServicio() {
-        // Se desvincula del servicio.
+        // Se desvincula del servicio (IMPORTANTE: desde el contexto de la
+        // aplicación).
         if (mVinculado) {
-            unbindService(mConexion);
+            getApplicationContext().unbindService(mConexion);
+            mServicio = null;
             mVinculado = false;
         }
     }
