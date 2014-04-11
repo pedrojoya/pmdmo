@@ -152,27 +152,9 @@ public class MusicaOnlineService extends Service implements
         mReproductor.start();
     }
 
-    // Para la reproducción.
-    public void pararReproduccion() {
-        mReproductor.stop();
-    }
-
     // Establece la lista de canciones.
     public void setLista(ArrayList<Cancion> list) {
         mCanciones = list;
-    }
-
-    // Limpia la lista de canciones.
-    public void limpiarLista() {
-        mCanciones = null;
-    }
-
-    // Agrega una canción a la lista de canciones.
-    public void agregarCancion(Cancion cancion) {
-        if (mCanciones == null) {
-            mCanciones = new ArrayList<Cancion>();
-        }
-        mCanciones.add(cancion);
     }
 
     // Retorna el índice de la canción actual.

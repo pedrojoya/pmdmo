@@ -45,6 +45,7 @@ public final class R {
         public static final int parar=0x7f050006;
         public static final int parar_servicio=0x7f050003;
         public static final int reproducir_pausar=0x7f050005;
+        public static final int servicio_musical_detenido=0x7f050008;
         public static final int siguiente=0x7f050007;
     }
     public static final class style {
