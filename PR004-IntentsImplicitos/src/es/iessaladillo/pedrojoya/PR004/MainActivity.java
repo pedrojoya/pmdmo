@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements OnClickListener {
         case R.id.btnNavegar:
             // Acción--> VER. Uri--> URL.
             intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.iessaladillo.es"));
+                    Uri.parse("http://www.genbeta.com"));
             if (estaDisponible(this, intent)) {
                 startActivity(intent);
             } else {
@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
         case R.id.btnMostrarMapa:
             // Acción--> VER. Uri--> geo:latitud,longitud?z=zoom.
             intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("geo:50.123,7.1434?z=19"));
+                    Uri.parse("geo:36.1121,-5.44347?z=19"));
             if (estaDisponible(this, intent)) {
                 startActivity(intent);
             } else {
