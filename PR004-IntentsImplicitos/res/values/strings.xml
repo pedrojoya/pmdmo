@@ -11,5 +11,11 @@
 	<string name="hacer_foto">Hacer una foto</string>
 	<string name="mostrar_contactos">Mostrar lista de contactos</string>
 	<string name="uri_foto">URI de la foto</string>
+	<string name="no_hay_navegador">No hay navegador</string>
+	<string name="no_hay_buscador">No hay buscador</string>
+	<string name="no_se_puede_llamar">No se puede llamar</string>
+	<string name="no_hay_dial">No hay dial</string>
+	<string name="no_hay_aplicaci_n_de_mapas">No hay aplicación de mapas</string>
+	<string name="no_hay_gestor_de_contactos">No hay gestor de contactos</string>
 	
 </resources>

@@ -4,63 +4,75 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class AlumnoActivity extends Activity {
 
-	// Widgets.
-	Button btnAceptar;
-	EditText txtNombre;
-	EditText txtEdad;
+    // Constantes.
+    public static final String EXTRA_NOMBRE = "nombre";
+    public static final String EXTRA_EDAD = "edad";
+    public static final int DEFAULT_EDAD = 18;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// Llamo al onCreate del padre.
-		super.onCreate(savedInstanceState);
-		// Establezco el layout de la actividad.
-		this.setContentView(R.layout.alumno);
-		// Obtengo la referencia a los widgets.
-		btnAceptar = (Button) this.findViewById(R.id.btnAceptar);
-		txtNombre = (EditText) this.findViewById(R.id.txtNombre);
-		txtEdad = (EditText) this.findViewById(R.id.txtEdad);
-		// Obtengo los datos del intent con el que me han llamado y los escribo
-		// en los EditText.
-		Bundle datos = this.getIntent().getExtras();
-		if (datos != null) {
-			String nombre = datos.getString("nombre");
-			if (nombre != null) {
-				txtNombre.setText(nombre);
-			}
-			int edad = datos.getInt("edad", 0);
-			if (edad != 0) {
-				txtEdad.setText(Integer.toString(edad));
-			}
-		}
-		// Establezco el listener del click del botón.
-		btnAceptar.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				retornar();
-			}
-		});
-	}
+    // Vistas.
+    EditText txtNombre;
+    EditText txtEdad;
 
-	// Empaqueta los datos de retorno y finaliza la actividad.
-	private void retornar() {
-		// Creo un nuevo intent sin acción ni destinatario y le agrego los
-		// datos.
-		Intent datos = new Intent();
-		datos.putExtra("nombre", txtNombre.getText().toString());
-		try {
-			datos.putExtra("edad",
-					Integer.parseInt(txtEdad.getText().toString()));
-		} catch (NumberFormatException e) {
-			datos.putExtra("edad", 0);
-		}
-		// Establezco que todo ha ido bien.
-		this.setResult(RESULT_OK, datos);
-		// Finalizo la actividad.
-		this.finish();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.activity_alumno);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
+        // Se obtienen y escriben los datos iniciales.
+        getDatosIniciales();
+    }
+
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        ((Button) this.findViewById(R.id.btnAceptar))
+                .setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // Se retorna la respuesta al componente llamador.
+                        retornarRespuesta();
+                    }
+                });
+        txtNombre = (EditText) this.findViewById(R.id.txtNombre);
+        txtEdad = (EditText) this.findViewById(R.id.txtEdad);
+    }
+
+    // Obtiene los datos iniciales desde el intent con el que ha sido llamada
+    // la actividad.
+    private void getDatosIniciales() {
+        Intent intent = this.getIntent();
+        if (intent != null) {
+            if (intent.hasExtra(EXTRA_NOMBRE)) {
+                txtNombre.setText(intent.getStringExtra(EXTRA_NOMBRE));
+            }
+            txtEdad.setText(intent.getIntExtra(EXTRA_EDAD, DEFAULT_EDAD) + "");
+        }
+    }
+
+    // Empaqueta los datos de retorno y finaliza la actividad.
+    private void retornarRespuesta() {
+        // Se crea un nuevo intent sin acción ni destinatario y se le agregan
+        // los extras con los datos introducidos.
+        Intent intentRetorno = new Intent();
+        intentRetorno.putExtra(EXTRA_NOMBRE, txtNombre.getText().toString());
+        int edad;
+        try {
+            edad = Integer.parseInt(txtEdad.getText().toString());
+        } catch (NumberFormatException e) {
+            edad = DEFAULT_EDAD;
+        }
+        intentRetorno.putExtra(EXTRA_EDAD, edad);
+        // Se indica que el resultado es satisfactorio.
+        this.setResult(RESULT_OK, intentRetorno);
+        // Se finaliza la actividad.
+        this.finish();
+    }
 
 }
