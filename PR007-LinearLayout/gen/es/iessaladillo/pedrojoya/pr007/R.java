@@ -11,7 +11,8 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int titulo=0x7f040000;
+        public static final int editext_focused=0x7f040000;
+        public static final int editext_notfocused=0x7f040001;
     }
     public static final class dimen {
         /** 
@@ -22,16 +23,18 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
-        public static final int titulo_textsize=0x7f050002;
+        public static final int edittext_padding=0x7f050002;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnAceptar=0x7f080003;
-        public static final int btnCancelar=0x7f080002;
-        public static final int txtClave=0x7f080001;
-        public static final int txtUsuario=0x7f080000;
+        public static final int btnAceptar=0x7f080005;
+        public static final int btnCancelar=0x7f080004;
+        public static final int lblClave=0x7f080002;
+        public static final int lblUsuario=0x7f080000;
+        public static final int txtClave=0x7f080003;
+        public static final int txtUsuario=0x7f080001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -41,6 +44,7 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int cancelar=0x7f060005;
         public static final int clave=0x7f060003;
+        public static final int conectando_con_el_usuario=0x7f060008;
         public static final int conexion=0x7f060001;
         public static final int has_pulsado_aceptar=0x7f060006;
         public static final int has_pulsado_cancelar=0x7f060007;

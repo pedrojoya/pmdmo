@@ -8,63 +8,55 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:gravity="center"
-        android:text="@string/conexion"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/titulo"
-        android:textStyle="bold" />
+        android:text="@string/conexion" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/lblUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal" >
+        android:paddingLeft="@dimen/edittext_padding"
+        android:paddingRight="@dimen/edittext_padding"
+        android:text="@string/nombre_usuario"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/nombre_usuario"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/txtUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/nombre_usuario"
-            android:inputType="text" >
-
-            <requestFocus />
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/txtUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:orientation="horizontal" >
+        android:hint="@string/nombre_usuario"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLength="12"
+        android:paddingTop="0dp"
+        android:singleLine="true" >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/clave"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <requestFocus />
+    </EditText>
 
-        <EditText
-            android:id="@+id/txtClave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/clave"
-            android:inputType="textPassword" >
-        </EditText>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/lblClave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:paddingRight="@dimen/edittext_padding"
+        android:text="@string/clave"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/txtClave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clave"
+        android:imeOptions="actionDone"
+        android:paddingTop="0dp"
+        android:maxLength="12"
+        android:inputType="textPassword"
+        android:singleLine="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,15 +73,14 @@
         <LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|center" >
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/btnCancelar"
                 style="?android:buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:text="@string/cancelar" />
 
             <Button
@@ -97,7 +88,7 @@
                 style="?android:buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:text="@string/aceptar" />
         </LinearLayout>
     </LinearLayout>
