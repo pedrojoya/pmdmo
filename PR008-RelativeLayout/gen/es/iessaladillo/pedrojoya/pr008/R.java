@@ -5,14 +5,14 @@
  * should not be modified by hand.
  */
 
-package es.iessaladillo.pedrojoya.pr010;
+package es.iessaladillo.pedrojoya.pr008;
 
 public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int panel_background=0x7f040000;
-        public static final int texto_background=0x7f040001;
+        public static final int editext_focused=0x7f040000;
+        public static final int editext_notfocused=0x7f040001;
     }
     public static final class dimen {
         /** 
@@ -23,29 +23,34 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
-        public static final int button_padding=0x7f050004;
-        public static final int panel_padding=0x7f050003;
-        public static final int text_size=0x7f050002;
+        public static final int edittext_padding=0x7f050002;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnEnviar=0x7f080005;
-        public static final int lblCabecera=0x7f080000;
-        public static final int lblTexto=0x7f080003;
-        public static final int llPanel=0x7f080002;
-        public static final int scvTexto=0x7f080001;
-        public static final int txtMensaje=0x7f080004;
+        public static final int btnAceptar=0x7f080007;
+        public static final int btnCancelar=0x7f080006;
+        public static final int lblClave=0x7f080003;
+        public static final int lblTitulo=0x7f080000;
+        public static final int lblUsuario=0x7f080001;
+        public static final int llBarraBotones=0x7f080005;
+        public static final int txtClave=0x7f080004;
+        public static final int txtUsuario=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
     }
     public static final class string {
+        public static final int aceptar=0x7f060004;
         public static final int app_name=0x7f060000;
-        public static final int enviar=0x7f060001;
-        public static final int mensaje=0x7f060002;
-        public static final int panel_de_mensajes=0x7f060003;
+        public static final int cancelar=0x7f060005;
+        public static final int clave=0x7f060003;
+        public static final int conectando_con_el_usuario=0x7f060008;
+        public static final int conexion=0x7f060001;
+        public static final int has_pulsado_aceptar=0x7f060006;
+        public static final int has_pulsado_cancelar=0x7f060007;
+        public static final int nombre_usuario=0x7f060002;
     }
     public static final class style {
         /** 
