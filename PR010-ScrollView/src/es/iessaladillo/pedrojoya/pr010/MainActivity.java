@@ -93,14 +93,16 @@ public class MainActivity extends Activity {
 
     // Agrega un mensaje al texto.
     private void enviarMensaje(String mensaje) {
-        // Se obtiene la hora actual.
-        String hora = formateadorFechas.format(new Date());
-        // Se agrega el mensaje.
-        lblTexto.append("[" + hora + "] " + mensaje + "\n\n");
-        // Se limpia el cuadro de texto.
-        txtMensaje.setText("");
-        // Se mueve el scroll al final para ver el último mensaje.
-        hacerScroll(scvTexto, View.FOCUS_DOWN);
+        if (!TextUtils.isEmpty(mensaje)) {
+            // Se obtiene la hora actual.
+            String hora = formateadorFechas.format(new Date());
+            // Se agrega el mensaje.
+            lblTexto.append("[" + hora + "] " + mensaje + "\n\n");
+            // Se limpia el cuadro de texto.
+            txtMensaje.setText("");
+            // Se mueve el scroll al final para ver el último mensaje.
+            hacerScroll(scvTexto, View.FOCUS_DOWN);
+        }
     }
 
     // Hace scroll en el ScrollView en la dirección indicada.

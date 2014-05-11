@@ -1,32 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dp" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true" >
 
     <ImageView
-        android:id="@+id/imgJelly"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/jelly_beans"
+        android:id="@+id/imgFoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/foto_del_dia"
         android:scaleType="centerCrop"
-        android:src="@drawable/jellybean" />
+        android:src="@drawable/foto" />
 
-    <TextView
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:id="@+id/rlPanel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/este_textview_est_encima"
-        android:textColor="#000"
-        android:textSize="40sp" />
+        android:layout_gravity="bottom"
+        android:animateLayoutChanges="true"
+        android:background="@color/fondo_semitransparente"
+        android:padding="@dimen/panel_padding" >
 
-    <Button
-        android:id="@+id/btnAceptar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/aceptar"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/lblTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/foto_del_dia"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/titulo_textcolor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblSubtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblTitulo"
+            android:text="@string/londres"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/titulo_textcolor" />
+
+        <ImageView
+            android:id="@+id/imgDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:contentDescription="@string/abrir_detalle"
+            android:src="@drawable/ic_action_navigation_collapse" />
+
+        <TextView
+            android:id="@+id/lblDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblSubtitulo"
+            android:paddingLeft="@dimen/panel_padding"
+            android:paddingTop="@dimen/panel_padding"
+            android:text="@string/detalle"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/titulo_textcolor" />
+    </RelativeLayout>
 
 </FrameLayout>
