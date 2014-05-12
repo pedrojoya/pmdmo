@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/button_padding"
         android:contentDescription="@string/opcion"
-        android:src="@drawable/manzana" />
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/lblOpcion"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imgOpcion"
-        android:text="Strawberry"
+        android:clickable="false"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <RadioButton
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lblOpcion"
         android:layout_alignRight="@+id/imgOpcion"
+        android:clickable="false"
         android:layout_below="@+id/imgOpcion"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

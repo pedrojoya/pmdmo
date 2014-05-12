@@ -1,29 +1,41 @@
 package es.iessaladillo.pedrojoya.pr022;
 
+import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnInitListener {
 
     // Constantes.
-    private static final int NUM_TARJETAS = 4;
+    private static final int SIN_SELECCION = -1;
 
     // Variables a nivel de clase.
-    Ejercicio ejercicio;
+    private Ejercicio ejercicio;
+    private int mRespuestaSeleccionada = SIN_SELECCION;
+    private TextToSpeech tts;
+    private boolean mTTSPreparado = false;
 
     // Vistas.
     private RelativeLayout[] tarjetas;
+    private Button btnCalificar;
 
     // Al crear la actividad.
     @Override
@@ -36,6 +48,19 @@ public class MainActivity extends Activity {
         ejercicio = getEjercicio();
         // Se muestran los datos del ejercicio.
         showEjercicio();
+        // La actividad actuará como listener cuando el sintetizador
+        // de voz esté preparado.
+        tts = new TextToSpeech(this, this);
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 
     // Obtiene e inicializa las vistas.
@@ -45,15 +70,27 @@ public class MainActivity extends Activity {
         tarjetas[1] = (RelativeLayout) findViewById(R.id.rlOpcion2);
         tarjetas[2] = (RelativeLayout) findViewById(R.id.rlOpcion3);
         tarjetas[3] = (RelativeLayout) findViewById(R.id.rlOpcion4);
+        for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
+            tarjetas[i].setOnClickListener(new TarjetaOnClickListener(i));
+        }
+        btnCalificar = (Button) findViewById(R.id.btnCalificar);
+        btnCalificar.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Se comprueba si es la respuesta correcta.
+                checkRespuestaCorrecta();
+            }
+        });
     }
 
     // Obtiene los datos del ejercicio.
     private Ejercicio getEjercicio() {
         Respuesta[] respuestas = new Respuesta[] {
                 new Respuesta("apple", R.drawable.manzana),
-                new Respuesta("stawberry", R.drawable.manzana),
-                new Respuesta("banana", R.drawable.manzana),
-                new Respuesta("pear", R.drawable.manzana) };
+                new Respuesta("strawberry", R.drawable.fresa),
+                new Respuesta("banana", R.drawable.banana),
+                new Respuesta("pear", R.drawable.pear) };
         return new Ejercicio("manzana", respuestas, 0);
     }
 
@@ -68,6 +105,15 @@ public class MainActivity extends Activity {
                     .setText(respuesta.getTexto());
             ((ImageView) tarjetas[i].findViewById(R.id.imgOpcion))
                     .setImageResource(respuesta.getResIdImagen());
+        }
+    }
+
+    private void checkRespuestaCorrecta() {
+        if (mRespuestaSeleccionada == ejercicio.getCorrecta()) {
+            mostrarTostadaLayout(R.string.toast_con_layout_propio,
+                    R.layout.toast, R.id.lblMensaje);
+        } else {
+            Toast.makeText(this, "mal", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -144,6 +190,56 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             // Si hay problema muestro un Toast estándar.
             Toast.makeText(contexto, stringResId, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // Al iniciarse el sintetizador de voz.
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                mTTSPreparado = true;
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+    // Usa el sintetizador para leer en voz alta el texto recibid.
+    private void leer(String texto) {
+        if (mTTSPreparado) {
+            tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
+    private class TarjetaOnClickListener implements View.OnClickListener {
+
+        // Propiedades.
+        private int numTarjeta;
+
+        // Constructor.
+        public TarjetaOnClickListener(int numTarjeta) {
+            this.numTarjeta = numTarjeta;
+        }
+
+        // Al hacer click.
+        @Override
+        public void onClick(View v) {
+            for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
+                boolean valor = (i == numTarjeta);
+                ((RadioButton) tarjetas[i].findViewById(R.id.rbOpcion))
+                        .setChecked(valor);
+            }
+            mRespuestaSeleccionada = numTarjeta;
+            btnCalificar.setEnabled(true);
+            leer(ejercicio.getRespuesta(numTarjeta).getTexto());
         }
     }
 

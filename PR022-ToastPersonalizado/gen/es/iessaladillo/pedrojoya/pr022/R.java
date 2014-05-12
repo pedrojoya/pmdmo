@@ -33,11 +33,14 @@ public final class R {
         public static final int panel_size=0x7f050002;
     }
     public static final class drawable {
-        public static final int card=0x7f020000;
-        public static final int fondo=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int manzana=0x7f020003;
-        public static final int toast_frame=0x7f020004;
+        public static final int banana=0x7f020000;
+        public static final int card=0x7f020001;
+        public static final int fondo=0x7f020002;
+        public static final int fresa=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int manzana=0x7f020005;
+        public static final int pear=0x7f020006;
+        public static final int toast_frame=0x7f020007;
     }
     public static final class id {
         public static final int btnCalificar=0x7f080005;
