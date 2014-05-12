@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">PR022-ToastPersonalizado</string>
+    <string name="app_name">Toast personalizado</string>
     <string name="title_activity_main">Toast Personalizado</string>
     <string name="toast_creado_dinamicamente">Toast creado dinámicamente</string>
     <string name="toast_con_layout_propio">Toast con layout propio</string>
+    <string name="calificar">Calificar</string>
+    <string name="opcion">Opción</string>
+    <string name="escoge_manzana">Escoge "manzana"</string>
 </resources>

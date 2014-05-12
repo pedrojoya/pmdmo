@@ -7,17 +7,68 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    // Constantes.
+    private static final int NUM_TARJETAS = 4;
+
+    // Variables a nivel de clase.
+    Ejercicio ejercicio;
+
+    // Vistas.
+    private RelativeLayout[] tarjetas;
+
+    // Al crear la actividad.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
+        // Se obtienen los datos del ejercicio.
+        ejercicio = getEjercicio();
+        // Se muestran los datos del ejercicio.
+        showEjercicio();
+    }
+
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        tarjetas = new RelativeLayout[Ejercicio.NUM_RESPUESTAS];
+        tarjetas[0] = (RelativeLayout) findViewById(R.id.rlOpcion1);
+        tarjetas[1] = (RelativeLayout) findViewById(R.id.rlOpcion2);
+        tarjetas[2] = (RelativeLayout) findViewById(R.id.rlOpcion3);
+        tarjetas[3] = (RelativeLayout) findViewById(R.id.rlOpcion4);
+    }
+
+    // Obtiene los datos del ejercicio.
+    private Ejercicio getEjercicio() {
+        Respuesta[] respuestas = new Respuesta[] {
+                new Respuesta("apple", R.drawable.manzana),
+                new Respuesta("stawberry", R.drawable.manzana),
+                new Respuesta("banana", R.drawable.manzana),
+                new Respuesta("pear", R.drawable.manzana) };
+        return new Ejercicio("manzana", respuestas, 0);
+    }
+
+    // Muestra los datos del ejercicio en las correspondientes vistas.
+    private void showEjercicio() {
+        ((TextView) findViewById(R.id.lblConcepto)).setText(ejercicio
+                .getPregunta());
+        Respuesta respuesta;
+        for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
+            respuesta = ejercicio.getRespuesta(i);
+            ((TextView) tarjetas[i].findViewById(R.id.lblOpcion))
+                    .setText(respuesta.getTexto());
+            ((ImageView) tarjetas[i].findViewById(R.id.imgOpcion))
+                    .setImageResource(respuesta.getResIdImagen());
+        }
     }
 
     // Al hacer click sobre btnToastDinamico.
