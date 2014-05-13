@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_horizontal_margin">9dp</dimen>
-    <dimen name="activity_vertical_margin">18dp</dimen>
-    <dimen name="panel_size">123dp</dimen>
-    <dimen name="panel_padding">22dp</dimen>
-    <dimen name="button_padding">9dp</dimen>
+
+    <!-- Dimensiones de la actividad -->
+    <dimen name="actividad_padding">9dp</dimen>
+    <dimen name="actividad_margen_vertical">9dp</dimen>
+    <dimen name="actividad_tarjetas_margen">9dp</dimen>
+    <dimen name="actividad_boton_padding">9dp</dimen>
+    
+    <!-- Dimensiones de la tarjeta -->
+    <dimen name="tarjeta_padding">23dp</dimen>
+    <dimen name="tarjeta_foto_anchura">126dp</dimen>
+    <dimen name="tarjeta_margen_vertical">9dp</dimen>
+    
+    <!-- Dimensiones del toast -->
+    <dimen name="toast_padding">11dp</dimen>    
+    <dimen name="toast_drawablepadding">9dp</dimen>
+    <dimen name="toast_borde_anchura">2dp</dimen>
+    <dimen name="toast_esquinas_radio">11dp</dimen>
+
+    <!-- Dimensiones del botón -->
+    <dimen name="boton_esquinas_radio">6dp</dimen>
+    
 </resources>

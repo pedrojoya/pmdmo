@@ -4,16 +4,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/card"
-    android:paddingLeft="@dimen/panel_padding"
-    android:paddingRight="@dimen/panel_padding"
-    android:paddingTop="@dimen/panel_padding" >
+    android:paddingLeft="@dimen/tarjeta_padding"
+    android:paddingRight="@dimen/tarjeta_padding"
+    android:paddingTop="@dimen/tarjeta_padding" >
 
     <ImageView
         android:id="@+id/imgOpcion"
-        android:layout_width="@dimen/panel_size"
-        android:layout_height="@dimen/panel_size"
+        android:layout_width="@dimen/tarjeta_foto_anchura"
+        android:layout_height="@dimen/tarjeta_foto_anchura"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/button_padding"
+        android:layout_marginBottom="@dimen/tarjeta_margen_vertical"
         android:contentDescription="@string/opcion"
         android:clickable="false" />
 

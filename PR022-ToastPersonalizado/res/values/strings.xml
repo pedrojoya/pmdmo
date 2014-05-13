@@ -6,4 +6,6 @@
     <string name="calificar">Calificar</string>
     <string name="opcion">Opción</string>
     <string name="escoge_manzana">Escoge "manzana"</string>
+    <string name="tu_respuesta_es_correcta">Felicidades, tu respuesta es correcta</string>
+    <string name="lo_sentimos_la_respuesta_es_incorrecta">Lo sentimos, la respuesta es incorrecta</string>
 </resources>

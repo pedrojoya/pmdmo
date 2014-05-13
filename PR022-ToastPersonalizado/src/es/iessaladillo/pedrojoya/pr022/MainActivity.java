@@ -110,10 +110,15 @@ public class MainActivity extends Activity implements OnInitListener {
 
     private void checkRespuestaCorrecta() {
         if (mRespuestaSeleccionada == ejercicio.getCorrecta()) {
-            mostrarTostadaLayout(R.string.toast_con_layout_propio,
-                    R.layout.toast, R.id.lblMensaje);
+            mostrarTostadaLayout(this,
+                    getString(R.string.tu_respuesta_es_correcta),
+                    R.drawable.ic_ok, R.layout.toast_correcto,
+                    Toast.LENGTH_SHORT);
         } else {
-            Toast.makeText(this, "mal", Toast.LENGTH_SHORT).show();
+            mostrarTostadaLayout(this,
+                    getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
+                    R.drawable.ic_incorrect, R.layout.toast_incorrecto,
+                    Toast.LENGTH_SHORT);
         }
     }
 
@@ -122,13 +127,6 @@ public class MainActivity extends Activity implements OnInitListener {
         // Muestro un toast creado dinámicamente.
         mostrarTostada(R.string.toast_creado_dinamicamente,
                 R.drawable.ic_launcher);
-    }
-
-    // Al hacer click sobre btnToastDinamico.
-    public void btnToastLayoutOnClick(View v) {
-        // Muestro un toast con layout personalizado.
-        mostrarTostadaLayout(R.string.toast_con_layout_propio, R.layout.toast,
-                R.id.lblMensaje);
     }
 
     // Recrea el layout res/layout/transient_notification.xml de la
@@ -163,41 +161,26 @@ public class MainActivity extends Activity implements OnInitListener {
         tostada.show();
     }
 
-    private void mostrarTostadaLayout(int stringResId, int layoutId,
-            int textViewId) {
-        // Obtengo el contexto.
-        Context contexto = getApplicationContext();
-        try {
-            // Inflo el layout.
-            View padre = LayoutInflater.from(contexto).inflate(layoutId, null);
-            // Escribo el mensaje en el TextView.
-            TextView lblMensaje = (TextView) padre.findViewById(textViewId);
-            if (lblMensaje != null) {
-                lblMensaje.setText(stringResId);
-                // Creo un objeto tostada.
-                Toast tostada = new Toast(contexto);
-                // Establezco el LinarLayout como la vista
-                // que debe mostrar la tostada.
-                tostada.setView(padre);
-                // Establezco la duración de la tostada.
-                tostada.setDuration(Toast.LENGTH_SHORT);
-                // Muestro la tostada.
-                tostada.show();
-            } else {
-                // Si hay problema muestro un Toast estándar
-                Toast.makeText(contexto, stringResId, Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            // Si hay problema muestro un Toast estándar.
-            Toast.makeText(contexto, stringResId, Toast.LENGTH_LONG).show();
-        }
+    private void mostrarTostadaLayout(Context contexto, String mensaje,
+            int resIdIcono, int resIdLayout, int duration) {
+        // Se infla el layout para el toast.
+        View v = LayoutInflater.from(contexto).inflate(resIdLayout, null);
+        // Se obtienen las vistas y se establecen sus datos.
+        TextView lblMensaje = (TextView) v.findViewById(R.id.lblMensaje);
+        lblMensaje.setText(mensaje);
+        lblMensaje.setCompoundDrawablesWithIntrinsicBounds(contexto
+                .getResources().getDrawable(resIdIcono), null, null, null);
+        // Se crea y se muestra el toast, estableciendo su vista.
+        Toast toast = new Toast(contexto);
+        toast.setView(v);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     // Al iniciarse el sintetizador de voz.
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-
             int result = tts.setLanguage(Locale.US);
 
             if (result == TextToSpeech.LANG_MISSING_DATA

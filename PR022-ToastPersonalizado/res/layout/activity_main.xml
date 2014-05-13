@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin" >
+    android:padding="@dimen/actividad_padding" >
 
     <TextView
         android:id="@+id/lblConcepto"
@@ -10,47 +10,64 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/actividad_margen_vertical"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <include
-        android:id="@+id/rlOpcion1"
+    <RelativeLayout
+        android:id="@+id/rlPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/lblConcepto"
-        layout="@layout/tarjeta" />
+        android:gravity="center_horizontal" >
 
-    <include
-        android:id="@+id/rlOpcion2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/lblConcepto"
-        layout="@layout/tarjeta" />
+        <include
+            android:id="@+id/rlOpcion1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
+            layout="@layout/tarjeta" />
 
-    <include
-        android:id="@+id/rlOpcion3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/rlOpcion1"
-        layout="@layout/tarjeta" />
+        <include
+            android:id="@+id/rlOpcion2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
+            android:layout_toRightOf="@+id/rlOpcion1"
+            layout="@layout/tarjeta" />
 
-    <include
-        android:id="@+id/rlOpcion4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/rlOpcion2"
-        layout="@layout/tarjeta" />
+        <include
+            android:id="@+id/rlOpcion3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/rlOpcion1"
+            android:layout_below="@+id/rlOpcion1"
+            layout="@layout/tarjeta" />
+
+        <include
+            android:id="@+id/rlOpcion4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/rlOpcion2"
+            layout="@layout/tarjeta" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnCalificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/rlPanel"
+        android:layout_marginTop="@dimen/actividad_margen_vertical"
+        android:background="@drawable/boton_fondo"
         android:enabled="false"
-        android:text="@string/calificar" />
+        android:padding="@dimen/actividad_boton_padding"
+        android:text="@string/calificar"
+        android:textColor="@color/boton_textcolor"
+        android:textStyle="bold" />
 
 </RelativeLayout>

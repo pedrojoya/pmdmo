@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/toast_incorrecto_fondo"
+    android:orientation="horizontal"
+    android:padding="@dimen/toast_padding" >
+
+    <TextView
+        android:id="@+id/lblMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="@dimen/toast_drawablepadding"
+        android:gravity="center"
+        android:shadowColor="@color/toast_shadowcolor"
+        android:shadowRadius="2.75"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/toast_incorrecto_textcolor"
+        android:textStyle="bold" />
+
+</LinearLayout>
