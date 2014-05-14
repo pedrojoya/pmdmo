@@ -36,16 +36,22 @@ public class MainActivity extends Activity implements OnInitListener {
     // Vistas.
     private RelativeLayout[] tarjetas;
     private Button btnCalificar;
+    private TextView lblConcepto;
+    private ImageView[] imgOpcion;
+    private TextView[] lblOpcion;
+    private RadioButton[] rbOpcion;
 
     // Al crear la actividad.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Se oculta la action bar.
+        getActionBar().hide();
         setContentView(R.layout.activity_main);
         // Se obtienen e inicializan las vistas.
         getVistas();
         // Se obtienen los datos del ejercicio.
-        ejercicio = getEjercicio();
+        ejercicio = BD.getRandomEjercicio();
         // Se muestran los datos del ejercicio.
         showEjercicio();
         // La actividad actuará como listener cuando el sintetizador
@@ -53,9 +59,10 @@ public class MainActivity extends Activity implements OnInitListener {
         tts = new TextToSpeech(this, this);
     }
 
+    // Al destruir la actividad.
     @Override
     public void onDestroy() {
-        // Don't forget to shutdown tts!
+        // Se para y apaga el sintetizador de voz.
         if (tts != null) {
             tts.stop();
             tts.shutdown();
@@ -65,15 +72,30 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Obtiene e inicializa las vistas.
     private void getVistas() {
+        lblConcepto = (TextView) findViewById(R.id.lblConcepto);
+        lblConcepto.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Se lee el concepto en inglés.
+                leer(lblConcepto.getText().toString(), Locale.ENGLISH);
+            }
+        });
         tarjetas = new RelativeLayout[Ejercicio.NUM_RESPUESTAS];
+        imgOpcion = new ImageView[Ejercicio.NUM_RESPUESTAS];
+        lblOpcion = new TextView[Ejercicio.NUM_RESPUESTAS];
+        rbOpcion = new RadioButton[Ejercicio.NUM_RESPUESTAS];
         tarjetas[0] = (RelativeLayout) findViewById(R.id.rlOpcion1);
         tarjetas[1] = (RelativeLayout) findViewById(R.id.rlOpcion2);
         tarjetas[2] = (RelativeLayout) findViewById(R.id.rlOpcion3);
         tarjetas[3] = (RelativeLayout) findViewById(R.id.rlOpcion4);
         for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
             tarjetas[i].setOnClickListener(new TarjetaOnClickListener(i));
+            imgOpcion[i] = (ImageView) tarjetas[i].findViewById(R.id.imgOpcion);
+            lblOpcion[i] = (TextView) tarjetas[i].findViewById(R.id.lblOpcion);
+            rbOpcion[i] = (RadioButton) tarjetas[i].findViewById(R.id.rbOpcion);
         }
-        btnCalificar = (Button) findViewById(R.id.btnCalificar);
+        btnCalificar = (Button) findViewById(R.id.btnComprobar);
         btnCalificar.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -84,28 +106,17 @@ public class MainActivity extends Activity implements OnInitListener {
         });
     }
 
-    // Obtiene los datos del ejercicio.
-    private Ejercicio getEjercicio() {
-        Respuesta[] respuestas = new Respuesta[] {
-                new Respuesta("apple", R.drawable.manzana),
-                new Respuesta("strawberry", R.drawable.fresa),
-                new Respuesta("banana", R.drawable.banana),
-                new Respuesta("pear", R.drawable.pear) };
-        return new Ejercicio("manzana", respuestas, 0);
-    }
-
     // Muestra los datos del ejercicio en las correspondientes vistas.
     private void showEjercicio() {
-        ((TextView) findViewById(R.id.lblConcepto)).setText(ejercicio
-                .getPregunta());
+        lblConcepto.setText(ejercicio.getPregunta());
         Respuesta respuesta;
         for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
             respuesta = ejercicio.getRespuesta(i);
-            ((TextView) tarjetas[i].findViewById(R.id.lblOpcion))
-                    .setText(respuesta.getTexto());
-            ((ImageView) tarjetas[i].findViewById(R.id.imgOpcion))
-                    .setImageResource(respuesta.getResIdImagen());
+            lblOpcion[i].setText(respuesta.getTexto());
+            imgOpcion[i].setImageResource(respuesta.getResIdImagen());
+            rbOpcion[i].setChecked(false);
         }
+        btnCalificar.setEnabled(false);
     }
 
     private void checkRespuestaCorrecta() {
@@ -114,11 +125,18 @@ public class MainActivity extends Activity implements OnInitListener {
                     getString(R.string.tu_respuesta_es_correcta),
                     R.drawable.ic_ok, R.layout.toast_correcto,
                     Toast.LENGTH_SHORT);
+            // leer(getString(R.string.tu_respuesta_es_correcta), new
+            // Locale("es",
+            // "ES"));
+            ejercicio = BD.getRandomEjercicio();
+            showEjercicio();
         } else {
             mostrarTostadaLayout(this,
                     getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
                     R.drawable.ic_incorrect, R.layout.toast_incorrecto,
                     Toast.LENGTH_SHORT);
+            // leer(getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
+            // new Locale("es", "ES"));
         }
     }
 
@@ -181,24 +199,22 @@ public class MainActivity extends Activity implements OnInitListener {
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            int result = tts.setLanguage(Locale.US);
-
-            if (result == TextToSpeech.LANG_MISSING_DATA
-                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "This Language is not supported");
-            } else {
-                mTTSPreparado = true;
-            }
-
+            mTTSPreparado = true;
         } else {
             Log.e("TTS", "Initilization Failed!");
         }
     }
 
     // Usa el sintetizador para leer en voz alta el texto recibid.
-    private void leer(String texto) {
+    private void leer(String texto, Locale loc) {
         if (mTTSPreparado) {
-            tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
+            int result = tts.setLanguage(loc);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
+            }
         }
     }
 
@@ -216,13 +232,12 @@ public class MainActivity extends Activity implements OnInitListener {
         @Override
         public void onClick(View v) {
             for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
-                boolean valor = (i == numTarjeta);
-                ((RadioButton) tarjetas[i].findViewById(R.id.rbOpcion))
-                        .setChecked(valor);
+                rbOpcion[i].setChecked(i == numTarjeta);
             }
             mRespuestaSeleccionada = numTarjeta;
             btnCalificar.setEnabled(true);
-            leer(ejercicio.getRespuesta(numTarjeta).getTexto());
+            leer(ejercicio.getRespuesta(numTarjeta).getTexto(), new Locale(
+                    "es", "ES"));
         }
     }
 

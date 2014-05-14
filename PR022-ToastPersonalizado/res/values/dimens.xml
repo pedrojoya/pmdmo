@@ -4,7 +4,6 @@
     <dimen name="actividad_padding">8dp</dimen>
     <dimen name="actividad_margen_vertical">8dp</dimen>
     <dimen name="actividad_tarjetas_margen">8dp</dimen>
-    <dimen name="actividad_boton_padding">8dp</dimen>
 
     <!-- Dimensiones de la tarjeta -->
     <dimen name="tarjeta_padding">20dp</dimen>
@@ -19,5 +18,10 @@
 
     <!-- Dimensiones del botón -->
     <dimen name="boton_esquinas_radio">5dp</dimen>
-
+    <dimen name="boton_padding">12dp</dimen>
+    
+    <!-- Dimensiones del concepto -->
+    <dimen name="concepto_textsize">30sp</dimen>
+    <dimen name="concepto_padding">8dp</dimen>
+    
 </resources>

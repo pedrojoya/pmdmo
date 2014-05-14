@@ -1,16 +1,20 @@
 package es.iessaladillo.pedrojoya.pr022;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Ejercicio {
 
     public static final int NUM_RESPUESTAS = 4;
 
     // Propiedades.
     private String pregunta;
-    private Respuesta[] respuestas;
+    private ArrayList<Respuesta> respuestas;
     private int correcta;
 
     // Constructor.
-    public Ejercicio(String pregunta, Respuesta[] respuestas, int correcta) {
+    public Ejercicio(String pregunta, ArrayList<Respuesta> respuestas,
+            int correcta) {
         this.pregunta = pregunta;
         this.respuestas = respuestas;
         this.correcta = correcta;
@@ -26,19 +30,16 @@ public class Ejercicio {
     }
 
     public Respuesta getRespuesta(int i) {
-        return respuestas[i];
-    }
-
-    public void setRespuesta(Respuesta respuesta, int i) {
-        this.respuestas[i] = respuesta;
+        return respuestas.get(i);
     }
 
     public int getCorrecta() {
         return correcta;
     }
 
-    public void setCorrecta(int correcta) {
-        this.correcta = correcta;
+    public void shuffleRespuestas() {
+        Respuesta respuestaCorrecta = respuestas.get(correcta);
+        Collections.shuffle(respuestas);
+        correcta = respuestas.indexOf(respuestaCorrecta);
     }
-
 }
