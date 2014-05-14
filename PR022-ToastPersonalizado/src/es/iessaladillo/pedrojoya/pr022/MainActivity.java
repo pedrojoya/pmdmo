@@ -78,7 +78,8 @@ public class MainActivity extends Activity implements OnInitListener {
             @Override
             public void onClick(View v) {
                 // Se lee el concepto en inglés.
-                leer(lblConcepto.getText().toString(), Locale.ENGLISH);
+                Log.d("quillo", "que");
+                leer(lblConcepto.getText().toString(), new Locale("en", "GB"));
             }
         });
         tarjetas = new RelativeLayout[Ejercicio.NUM_RESPUESTAS];
@@ -117,6 +118,13 @@ public class MainActivity extends Activity implements OnInitListener {
             rbOpcion[i].setChecked(false);
         }
         btnCalificar.setEnabled(false);
+        lblConcepto.post(new Runnable() {
+
+            @Override
+            public void run() {
+                leer(lblConcepto.getText().toString(), new Locale("en", "GB"));
+            }
+        });
     }
 
     private void checkRespuestaCorrecta() {
@@ -236,8 +244,8 @@ public class MainActivity extends Activity implements OnInitListener {
             }
             mRespuestaSeleccionada = numTarjeta;
             btnCalificar.setEnabled(true);
-            leer(ejercicio.getRespuesta(numTarjeta).getTexto(), new Locale(
-                    "es", "ES"));
+            // leer(ejercicio.getRespuesta(numTarjeta).getTexto(), new Locale(
+            // "es", "ES"));
         }
     }
 

@@ -6,7 +6,7 @@ import java.util.Random;
 public class BD {
 
     // Propiedades.
-    private static ArrayList<Ejercicio> ejercicios;
+    private static ArrayList<Termino> terminos;
     private static ArrayList<Respuesta> respuestas;
     private static Random aleatorioEjercicios;
     private static Random aleatorioRespuestas;
@@ -23,46 +23,51 @@ public class BD {
         respuestas.add(new Respuesta("pera", R.drawable.pear));
         respuestas.add(new Respuesta("aguacate", R.drawable.aguacate));
         respuestas.add(new Respuesta("mora", R.drawable.mora));
-        // Se crean los ejecicios.
-        ejercicios = new ArrayList<Ejercicio>();
-        ejercicios.add(new Ejercicio("apple", getRandomRespuestas(0), 0));
-        ejercicios.add(new Ejercicio("strawberry", getRandomRespuestas(1), 0));
-        ejercicios.add(new Ejercicio("banana", getRandomRespuestas(2), 0));
-        ejercicios.add(new Ejercicio("pear", getRandomRespuestas(3), 0));
-        ejercicios.add(new Ejercicio("avocado", getRandomRespuestas(4), 0));
-        ejercicios.add(new Ejercicio("blackberry", getRandomRespuestas(5), 0));
+        respuestas.add(new Respuesta("limón", R.drawable.lemon));
+        respuestas.add(new Respuesta("cereza", R.drawable.cereza));
+        respuestas.add(new Respuesta("uva", R.drawable.uva));
+        respuestas.add(new Respuesta("naranja", R.drawable.orange));
+        respuestas.add(new Respuesta("melón", R.drawable.melon));
+        // Se crean los terminos.
+        terminos = new ArrayList<Termino>();
+        terminos.add(new Termino("apple", respuestas.get(0)));
+        terminos.add(new Termino("strawberry", respuestas.get(1)));
+        terminos.add(new Termino("banana", respuestas.get(2)));
+        terminos.add(new Termino("pear", respuestas.get(3)));
+        terminos.add(new Termino("avocado", respuestas.get(4)));
+        terminos.add(new Termino("blackberry", respuestas.get(5)));
+        terminos.add(new Termino("lemon", respuestas.get(6)));
+        terminos.add(new Termino("cherry", respuestas.get(7)));
+        terminos.add(new Termino("grape", respuestas.get(8)));
+        terminos.add(new Termino("orange", respuestas.get(9)));
+        terminos.add(new Termino("melon", respuestas.get(10)));
     }
 
     public static Ejercicio getRandomEjercicio() {
-        int numEjercicio = aleatorioEjercicios.nextInt(ejercicios.size());
-        Ejercicio ejercicio = ejercicios.get(numEjercicio);
+        int numTermino = aleatorioEjercicios.nextInt(terminos.size());
+        Termino termino = terminos.get(numTermino);
+        return createEjercicio(termino);
+    }
+
+    private static Ejercicio createEjercicio(Termino termino) {
+        ArrayList<Respuesta> respEjercicio = new ArrayList<Respuesta>();
+        // Se introduce la respuesta correcta.
+        respEjercicio.add(termino.getRespuesta());
+        Respuesta respuesta;
+        while (respEjercicio.size() < Ejercicio.NUM_RESPUESTAS) {
+            respuesta = respuestas.get(aleatorioRespuestas.nextInt(respuestas
+                    .size()));
+            int pos = respEjercicio.indexOf(respuesta);
+            if (pos < 0) {
+                respEjercicio.add(respuesta);
+            }
+        }
+        // Se crea el ejercicio.
+        Ejercicio ejercicio = new Ejercicio(termino.getPregunta(),
+                respEjercicio, 0);
+        // Se barajan las respuestas.
         ejercicio.shuffleRespuestas();
         return ejercicio;
     }
 
-    private static ArrayList<Respuesta> getRandomRespuestas(int correcta) {
-        ArrayList<Respuesta> respEjercicio = new ArrayList<Respuesta>();
-        int numIncluidas = 0;
-        int[] incluidas = new int[Ejercicio.NUM_RESPUESTAS];
-        // Se introduce la correcta.
-        respEjercicio.add(respuestas.get(correcta));
-        incluidas[numIncluidas++] = correcta;
-        while (numIncluidas < Ejercicio.NUM_RESPUESTAS) {
-            int numRespuesta = aleatorioRespuestas.nextInt(respuestas.size());
-            if (!yaIncluida(incluidas, numRespuesta)) {
-                respEjercicio.add(respuestas.get(numRespuesta));
-                incluidas[numIncluidas++] = numRespuesta;
-            }
-        }
-        return respEjercicio;
-    }
-
-    private static boolean yaIncluida(int[] array, int valor) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == valor) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
