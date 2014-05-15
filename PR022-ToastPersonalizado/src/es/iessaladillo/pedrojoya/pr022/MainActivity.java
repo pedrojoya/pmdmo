@@ -4,19 +4,15 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,7 +24,7 @@ public class MainActivity extends Activity implements OnInitListener {
     private static final int SIN_SELECCION = -1;
 
     // Variables a nivel de clase.
-    private Ejercicio ejercicio;
+    private Ejercicio mEjercicio;
     private int mRespuestaSeleccionada = SIN_SELECCION;
     private TextToSpeech tts;
     private boolean mTTSPreparado = false;
@@ -51,7 +47,7 @@ public class MainActivity extends Activity implements OnInitListener {
         // Se obtienen e inicializan las vistas.
         getVistas();
         // Se obtienen los datos del ejercicio.
-        ejercicio = BD.getRandomEjercicio();
+        mEjercicio = BD.getRandomEjercicio();
         // Se muestran los datos del ejercicio.
         showEjercicio();
         // La actividad actuará como listener cuando el sintetizador
@@ -109,17 +105,21 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Muestra los datos del ejercicio en las correspondientes vistas.
     private void showEjercicio() {
-        lblConcepto.setText(ejercicio.getPregunta());
+        // Se escriben los datos en las vistas.
+        lblConcepto.setText(mEjercicio.getPregunta());
         Respuesta respuesta;
         for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
-            respuesta = ejercicio.getRespuesta(i);
+            respuesta = mEjercicio.getRespuesta(i);
             lblOpcion[i].setText(respuesta.getTexto());
             imgOpcion[i].setImageResource(respuesta.getResIdImagen());
             rbOpcion[i].setChecked(false);
         }
+        // Hasta que no se haya seleccionado alguna repuesta no se puede
+        // comprobar.
         btnCalificar.setEnabled(false);
+        // Se lee el término (se hace con post para que se ejecute una vez
+        // finalizada la ejecución del método onCreate().
         lblConcepto.post(new Runnable() {
-
             @Override
             public void run() {
                 leer(lblConcepto.getText().toString(), new Locale("en", "GB"));
@@ -127,68 +127,28 @@ public class MainActivity extends Activity implements OnInitListener {
         });
     }
 
+    // Comprueba si la respuesta seleccionada es correcta o no.
     private void checkRespuestaCorrecta() {
-        if (mRespuestaSeleccionada == ejercicio.getCorrecta()) {
-            mostrarTostadaLayout(this,
-                    getString(R.string.tu_respuesta_es_correcta),
+        // Si la respuesta es correcta.
+        if (mRespuestaSeleccionada == mEjercicio.getCorrecta()) {
+            // Se informa al usuario.
+            showToast(this, getString(R.string.tu_respuesta_es_correcta),
                     R.drawable.ic_ok, R.layout.toast_correcto,
                     Toast.LENGTH_SHORT);
-            // leer(getString(R.string.tu_respuesta_es_correcta), new
-            // Locale("es",
-            // "ES"));
-            ejercicio = BD.getRandomEjercicio();
+            // Se obtiene y muestra un nuevo ejercicio.
+            mEjercicio = BD.getRandomEjercicio();
             showEjercicio();
         } else {
-            mostrarTostadaLayout(this,
+            showToast(this,
                     getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
                     R.drawable.ic_incorrect, R.layout.toast_incorrecto,
                     Toast.LENGTH_SHORT);
-            // leer(getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
-            // new Locale("es", "ES"));
         }
     }
 
-    // Al hacer click sobre btnToastDinamico.
-    public void btnToastDinamicoOnClick(View v) {
-        // Muestro un toast creado dinámicamente.
-        mostrarTostada(R.string.toast_creado_dinamicamente,
-                R.drawable.ic_launcher);
-    }
-
-    // Recrea el layout res/layout/transient_notification.xml de la
-    // plataforma.
-    private void mostrarTostada(int stringResId, int drawableResId) {
-        // Obtengo el contexto.
-        Context contexto = getApplicationContext();
-        // Creo un objeto tostada.
-        Toast tostada = new Toast(contexto);
-        // Creo un LinearLayout como padre del layout para la tostada.
-        LinearLayout padre = new LinearLayout(contexto);
-        padre.setBackgroundResource(R.drawable.toast_frame);
-        // Creo un TextView, le asigno el texto del mensaje y
-        // el icono y se lo añado al LinearLayout.
-        TextView texto = new TextView(contexto);
-        texto.setText(stringResId);
-        texto.setTextAppearance(contexto, android.R.style.TextAppearance_Small);
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT, 0);
-        texto.setLayoutParams(params);
-        texto.setGravity(Gravity.CENTER);
-        texto.setShadowLayer(2.75f, 0, 0, Color.parseColor("#BB000000"));
-        texto.setCompoundDrawablesWithIntrinsicBounds(drawableResId, 0, 0, 0);
-        texto.setCompoundDrawablePadding(10);
-        padre.addView(texto);
-        // Establezco el LinarLayout como la vista
-        // que debe mostrar la tostada.
-        tostada.setView(padre);
-        // Establezco la duración de la tostada.
-        tostada.setDuration(Toast.LENGTH_SHORT);
-        // Muestro la tostada.
-        tostada.show();
-    }
-
-    private void mostrarTostadaLayout(Context contexto, String mensaje,
-            int resIdIcono, int resIdLayout, int duration) {
+    // Muestra un toast personalizado.
+    private void showToast(Context contexto, String mensaje, int resIdIcono,
+            int resIdLayout, int duration) {
         // Se infla el layout para el toast.
         View v = LayoutInflater.from(contexto).inflate(resIdLayout, null);
         // Se obtienen las vistas y se establecen sus datos.
@@ -203,29 +163,34 @@ public class MainActivity extends Activity implements OnInitListener {
         toast.show();
     }
 
-    // Al iniciarse el sintetizador de voz.
+    // Cuando ya está inicializado el sintetizador de voz.
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
+            // Se actualiza el indicador de que el sintetizador de voz.
             mTTSPreparado = true;
         } else {
             Log.e("TTS", "Initilization Failed!");
         }
     }
 
-    // Usa el sintetizador para leer en voz alta el texto recibid.
+    // Usa el sintetizador para leer en voz alta el texto recibido.
     private void leer(String texto, Locale loc) {
+        // Si está preparado el sintetizador.
         if (mTTSPreparado) {
+            // Se establece el idioma y si hay algún problema se indica.
             int result = tts.setLanguage(loc);
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "This Language is not supported");
+                Log.e("TTS", "El idioma indicado no está disponible");
             } else {
+                // Si todo ha ido bien, se realiza la lectura.
                 tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
             }
         }
     }
 
+    // Clase Listener para las tarjetas.
     private class TarjetaOnClickListener implements View.OnClickListener {
 
         // Propiedades.
@@ -236,17 +201,20 @@ public class MainActivity extends Activity implements OnInitListener {
             this.numTarjeta = numTarjeta;
         }
 
-        // Al hacer click.
+        // Al hacer click sobre la tarjeta.
         @Override
         public void onClick(View v) {
+            // Se selecciona la tarjeta sobre la que se ha pulsado y se quita la
+            // selección del resto.
             for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
                 rbOpcion[i].setChecked(i == numTarjeta);
             }
             mRespuestaSeleccionada = numTarjeta;
+            // Se activa el botón de comprobación (ahora que se ha seleccionado
+            // alguna tarjeta).
             btnCalificar.setEnabled(true);
-            // leer(ejercicio.getRespuesta(numTarjeta).getTexto(), new Locale(
-            // "es", "ES"));
         }
+
     }
 
 }

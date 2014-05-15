@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr022;
 
+// Clase que modela una respuesta.
 public class Respuesta {
 
     // Propiedades.

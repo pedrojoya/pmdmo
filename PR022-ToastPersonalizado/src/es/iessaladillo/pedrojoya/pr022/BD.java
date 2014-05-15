@@ -3,70 +3,94 @@ package es.iessaladillo.pedrojoya.pr022;
 import java.util.ArrayList;
 import java.util.Random;
 
+// Clase que simula la base de datos.
 public class BD {
 
-    // Propiedades.
-    private static ArrayList<Termino> terminos;
-    private static ArrayList<Respuesta> respuestas;
-    private static Random aleatorioEjercicios;
+    // Colecciones (simula las tablas).
+    private static ArrayList<Termino> mTerminos;
+    private static ArrayList<Respuesta> mRespuestas;
+
+    // Auxiliares.
+    private static Random aleatorioTerminos;
     private static Random aleatorioRespuestas;
 
+    // Código estático que se genera la primera vez que se usa la clase.
     static {
-        // Se crea el generador de números aleatorios.
-        aleatorioEjercicios = new Random(System.nanoTime());
+        // Se obtienen los generadores de números aleatorios.
+        aleatorioTerminos = new Random(System.nanoTime());
         aleatorioRespuestas = new Random(System.nanoTime());
-        // Se crean las respuestas.
-        respuestas = new ArrayList<Respuesta>();
-        respuestas.add(new Respuesta("manzana", R.drawable.manzana));
-        respuestas.add(new Respuesta("fresa", R.drawable.fresa));
-        respuestas.add(new Respuesta("plátano", R.drawable.banana));
-        respuestas.add(new Respuesta("pera", R.drawable.pear));
-        respuestas.add(new Respuesta("aguacate", R.drawable.aguacate));
-        respuestas.add(new Respuesta("mora", R.drawable.mora));
-        respuestas.add(new Respuesta("limón", R.drawable.lemon));
-        respuestas.add(new Respuesta("cereza", R.drawable.cereza));
-        respuestas.add(new Respuesta("uva", R.drawable.uva));
-        respuestas.add(new Respuesta("naranja", R.drawable.orange));
-        respuestas.add(new Respuesta("melón", R.drawable.melon));
-        // Se crean los terminos.
-        terminos = new ArrayList<Termino>();
-        terminos.add(new Termino("apple", respuestas.get(0)));
-        terminos.add(new Termino("strawberry", respuestas.get(1)));
-        terminos.add(new Termino("banana", respuestas.get(2)));
-        terminos.add(new Termino("pear", respuestas.get(3)));
-        terminos.add(new Termino("avocado", respuestas.get(4)));
-        terminos.add(new Termino("blackberry", respuestas.get(5)));
-        terminos.add(new Termino("lemon", respuestas.get(6)));
-        terminos.add(new Termino("cherry", respuestas.get(7)));
-        terminos.add(new Termino("grape", respuestas.get(8)));
-        terminos.add(new Termino("orange", respuestas.get(9)));
-        terminos.add(new Termino("melon", respuestas.get(10)));
+        // Se crean las "tablas".
+        mRespuestas = new ArrayList<Respuesta>();
+        mTerminos = new ArrayList<Termino>();
+        // Se insertan los datos iniciales en las tablas.
+        insertarDatosIniciales();
     }
 
+    // Inserta los "registros" en las "tablas" correspondientes.
+    private static void insertarDatosIniciales() {
+        insertarTerminoConRespuestaCorrecta("apple", "manzana",
+                R.drawable.manzana);
+        insertarTerminoConRespuestaCorrecta("strawberry", "fresa",
+                R.drawable.fresa);
+        insertarTerminoConRespuestaCorrecta("banana", "plátano",
+                R.drawable.banana);
+        insertarTerminoConRespuestaCorrecta("pear", "pera", R.drawable.pear);
+        insertarTerminoConRespuestaCorrecta("avocado", "aguacate",
+                R.drawable.aguacate);
+        insertarTerminoConRespuestaCorrecta("blackberry", "mora",
+                R.drawable.mora);
+        insertarTerminoConRespuestaCorrecta("lemon", "limón", R.drawable.lemon);
+        insertarTerminoConRespuestaCorrecta("cherry", "cereza",
+                R.drawable.cereza);
+        insertarTerminoConRespuestaCorrecta("grape", "uva", R.drawable.uva);
+        insertarTerminoConRespuestaCorrecta("orange", "naranja",
+                R.drawable.orange);
+        insertarTerminoConRespuestaCorrecta("melon", "melón", R.drawable.melon);
+    }
+
+    // Inserta un término y su respuesta correcta.
+    private static void insertarTerminoConRespuestaCorrecta(String pregunta,
+            String textoRespuesta, int resIdImagenRespuesta) {
+        // Se crea la respuesta y se "inserta en la tabla" correspondiente.
+        Respuesta respuesta = new Respuesta(textoRespuesta,
+                resIdImagenRespuesta);
+        mRespuestas.add(respuesta);
+        // Se crea el término y se "inserta en la tabla" correspondiente.
+        mTerminos.add(new Termino(pregunta, respuesta));
+    }
+
+    // Retorna un ejercicio creado con un término aleatorio y con respuestas
+    // aleatorias (que incluyen obviamente la correcta).
     public static Ejercicio getRandomEjercicio() {
-        int numTermino = aleatorioEjercicios.nextInt(terminos.size());
-        Termino termino = terminos.get(numTermino);
-        return createEjercicio(termino);
+        return createEjercicio(mTerminos.get(aleatorioTerminos
+                .nextInt(mTerminos.size())));
     }
 
+    // Crea un ejercicio a partir de un término, obteniendo respuesta
+    // aleatorias, incluyendo obviamente la correcta.
     private static Ejercicio createEjercicio(Termino termino) {
+        // Se crea un array para las respuestas del ejercicio al que se le añade
+        // inicialmente la respuesta correcta.
         ArrayList<Respuesta> respEjercicio = new ArrayList<Respuesta>();
-        // Se introduce la respuesta correcta.
         respEjercicio.add(termino.getRespuesta());
+        // Se añaden otras respuestas aleatoriamente hasta llegar al número de
+        // respuestas por ejercicio.
         Respuesta respuesta;
         while (respEjercicio.size() < Ejercicio.NUM_RESPUESTAS) {
-            respuesta = respuestas.get(aleatorioRespuestas.nextInt(respuestas
+            respuesta = mRespuestas.get(aleatorioRespuestas.nextInt(mRespuestas
                     .size()));
-            int pos = respEjercicio.indexOf(respuesta);
-            if (pos < 0) {
+            // Si no se ha añadido previamente se añade.
+            if (respEjercicio.indexOf(respuesta) < 0) {
                 respEjercicio.add(respuesta);
             }
         }
-        // Se crea el ejercicio.
+        // Se crea el ejercicio (la respuesta correcta siempre tiene el índice 0
+        // porque la hemos añadido la primera).
         Ejercicio ejercicio = new Ejercicio(termino.getPregunta(),
                 respEjercicio, 0);
-        // Se barajan las respuestas.
+        // Se barajan las respuestas para que la correcta no sea siempre la 0.
         ejercicio.shuffleRespuestas();
+        // Se retorna el ejercicio creado.
         return ejercicio;
     }
 
