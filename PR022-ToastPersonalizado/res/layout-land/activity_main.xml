@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,17 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
             layout="@layout/tarjeta" />
 
         <include
             android:id="@+id/rlOpcion2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
             android:layout_toRightOf="@+id/rlOpcion1"
             layout="@layout/tarjeta" />
 
@@ -45,37 +41,37 @@
             android:id="@+id/rlOpcion3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/rlOpcion1"
-            android:layout_below="@+id/rlOpcion1"
+            android:layout_toRightOf="@+id/rlOpcion2"
             layout="@layout/tarjeta" />
 
         <include
             android:id="@+id/rlOpcion4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/rlOpcion2"
+            android:layout_toRightOf="@+id/rlOpcion3"
             layout="@layout/tarjeta" />
-        <View 
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" 
-            android:layout_below="@+id/rlOpcion3"           
-            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/rlOpcion1" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/rlPanel" >
+        android:layout_below="@+id/rlPanel"
+        android:gravity="center_horizontal" >
 
         <Button
             android:id="@+id/btnComprobar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:background="@drawable/boton_fondo"
             android:enabled="false"
+            android:paddingLeft="@dimen/boton_padding"
+            android:paddingRight="@dimen/boton_padding"
             android:text="@string/comprobar"
             android:textColor="@color/boton_textcolor"
             android:textStyle="bold" />

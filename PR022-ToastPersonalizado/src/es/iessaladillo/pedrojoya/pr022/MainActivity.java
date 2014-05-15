@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -105,6 +108,9 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Muestra los datos del ejercicio en las correspondientes vistas.
     private void showEjercicio() {
+        // Se desmarca la tarjeta seleccionada del ejercicio anterior.
+        desmarcarTarjeta(mRespuestaSeleccionada);
+        mRespuestaSeleccionada = SIN_SELECCION;
         // Se escriben los datos en las vistas.
         lblConcepto.setText(mEjercicio.getPregunta());
         Respuesta respuesta;
@@ -204,12 +210,10 @@ public class MainActivity extends Activity implements OnInitListener {
         // Al hacer click sobre la tarjeta.
         @Override
         public void onClick(View v) {
-            // Se selecciona la tarjeta sobre la que se ha pulsado y se quita la
-            // selección del resto.
-            for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
-                rbOpcion[i].setChecked(i == numTarjeta);
-            }
-            mRespuestaSeleccionada = numTarjeta;
+            // Se le quita la selección a la tarjeta que estuviera seleccionada.
+            desmarcarTarjeta(mRespuestaSeleccionada);
+            // Se selecciona la tarjeta sobre la que se ha pulsado.
+            marcarTarjeta(numTarjeta);
             // Se activa el botón de comprobación (ahora que se ha seleccionado
             // alguna tarjeta).
             btnCalificar.setEnabled(true);
@@ -217,4 +221,31 @@ public class MainActivity extends Activity implements OnInitListener {
 
     }
 
+    // Desmarca una tarjeta que estaba seleccionada.
+    private void desmarcarTarjeta(int numTarjeta) {
+        if (numTarjeta >= 0) {
+            // Se quita el negrita del texto.
+            lblOpcion[numTarjeta].setTypeface(null, Typeface.NORMAL);
+            // Se desmarca el RadioButton.
+            rbOpcion[numTarjeta].setChecked(false);
+            // Se realiza la animación de la tarjeta.
+            Animation disminuir = AnimationUtils.loadAnimation(
+                    MainActivity.this, R.anim.tarjeta_disminuir);
+            tarjetas[numTarjeta].startAnimation(disminuir);
+        }
+    }
+
+    // Marca una tarjeta como seleccionada.
+    private void marcarTarjeta(int numTarjeta) {
+        // Se actualiza la respuesta seleccionada.
+        mRespuestaSeleccionada = numTarjeta;
+        // Se pone en negrita el texto.
+        lblOpcion[numTarjeta].setTypeface(null, Typeface.BOLD);
+        // Se selecciona el RadioButton.
+        rbOpcion[numTarjeta].setChecked(true);
+        // Se realiza la animación de la tarjeta.
+        Animation agrandar = AnimationUtils.loadAnimation(MainActivity.this,
+                R.anim.tarjeta_agrandar);
+        tarjetas[numTarjeta].startAnimation(agrandar);
+    }
 }

@@ -8,71 +8,76 @@
 package es.iessaladillo.pedrojoya.pr022;
 
 public final class R {
+    public static final class anim {
+        public static final int tarjeta_agrandar=0x7f040000;
+        public static final int tarjeta_disminuir=0x7f040001;
+    }
     public static final class attr {
     }
     public static final class color {
-        public static final int boton_disabled=0x7f040011;
-        public static final int boton_normal_endcolor=0x7f04000e;
-        public static final int boton_normal_startcolor=0x7f04000d;
-        public static final int boton_pressed_endcolor=0x7f040010;
-        public static final int boton_pressed_startcolor=0x7f04000f;
+        public static final int boton_disabled=0x7f050011;
+        public static final int boton_normal_endcolor=0x7f05000e;
+        public static final int boton_normal_startcolor=0x7f05000d;
+        public static final int boton_pressed_endcolor=0x7f050010;
+        public static final int boton_pressed_startcolor=0x7f05000f;
         /**  botón 
          */
-        public static final int boton_textcolor=0x7f04000c;
+        public static final int boton_textcolor=0x7f05000c;
         /**  card colors 
          */
-        public static final int card_background=0x7f040000;
-        public static final int card_detailing=0x7f040003;
-        public static final int card_shadow_1=0x7f040001;
-        public static final int card_shadow_2=0x7f040002;
-        public static final int toast_correcto_borde=0x7f040008;
-        public static final int toast_correcto_fondo=0x7f040007;
+        public static final int card_background=0x7f050000;
+        public static final int card_detailing=0x7f050003;
+        public static final int card_shadow_1=0x7f050001;
+        public static final int card_shadow_2=0x7f050002;
+        public static final int toast_correcto_borde=0x7f050008;
+        public static final int toast_correcto_fondo=0x7f050007;
         /**  toast correcto 
          */
-        public static final int toast_correcto_textcolor=0x7f040005;
-        public static final int toast_incorrecto_borde=0x7f04000b;
-        public static final int toast_incorrecto_fondo=0x7f04000a;
+        public static final int toast_correcto_textcolor=0x7f050005;
+        public static final int toast_incorrecto_borde=0x7f05000b;
+        public static final int toast_incorrecto_fondo=0x7f05000a;
         /**  toast incorrecto 
          */
-        public static final int toast_incorrecto_textcolor=0x7f040009;
-        public static final int toast_shadowcolor=0x7f040006;
-        public static final int transparent=0x7f040004;
+        public static final int toast_incorrecto_textcolor=0x7f050009;
+        public static final int toast_shadowcolor=0x7f050006;
+        public static final int transparent=0x7f050004;
     }
     public static final class dimen {
-        public static final int actividad_margen_vertical=0x7f050001;
+        public static final int actividad_margen_vertical=0x7f060001;
         /**  Dimensiones de la actividad 
-
+ Dimensiones de la actividad 
+         */
+        public static final int actividad_padding=0x7f060000;
+        public static final int actividad_tarjetas_margen=0x7f060002;
+        /**  Dimensiones del botón 
+ Dimensiones del botón 
+         */
+        public static final int boton_esquinas_radio=0x7f06000a;
+        public static final int boton_padding=0x7f06000b;
+        public static final int concepto_padding=0x7f06000d;
+        /**  Dimensiones del concepto 
+ Dimensiones del concepto 
+         */
+        public static final int concepto_textsize=0x7f06000c;
+        /** 
          Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
- Dimensiones de la actividad 
          */
-        public static final int actividad_padding=0x7f050000;
-        public static final int actividad_tarjetas_margen=0x7f050002;
-        /**  Dimensiones del botón 
- Dimensiones del botón 
-         */
-        public static final int boton_esquinas_radio=0x7f05000a;
-        public static final int boton_padding=0x7f05000b;
-        public static final int concepto_padding=0x7f05000d;
-        /**  Dimensiones del concepto 
- Dimensiones del concepto 
-         */
-        public static final int concepto_textsize=0x7f05000c;
-        public static final int tarjeta_foto_anchura=0x7f050004;
-        public static final int tarjeta_margen_vertical=0x7f050005;
+        public static final int tarjeta_foto_anchura=0x7f060004;
+        public static final int tarjeta_margen_vertical=0x7f060005;
         /**  Dimensiones de la tarjeta 
  Dimensiones de la tarjeta 
          */
-        public static final int tarjeta_padding=0x7f050003;
-        public static final int toast_borde_anchura=0x7f050008;
-        public static final int toast_drawablepadding=0x7f050007;
-        public static final int toast_esquinas_radio=0x7f050009;
+        public static final int tarjeta_padding=0x7f060003;
+        public static final int toast_borde_anchura=0x7f060008;
+        public static final int toast_drawablepadding=0x7f060007;
+        public static final int toast_esquinas_radio=0x7f060009;
         /**  Dimensiones del toast 
  Dimensiones del toast 
          */
-        public static final int toast_padding=0x7f050006;
+        public static final int toast_padding=0x7f060006;
     }
     public static final class drawable {
         public static final int aguacate=0x7f020000;
@@ -99,17 +104,17 @@ public final class R {
         public static final int uva=0x7f020015;
     }
     public static final class id {
-        public static final int btnComprobar=0x7f080006;
-        public static final int imgOpcion=0x7f080007;
-        public static final int lblConcepto=0x7f080000;
-        public static final int lblMensaje=0x7f08000a;
-        public static final int lblOpcion=0x7f080008;
-        public static final int rbOpcion=0x7f080009;
-        public static final int rlOpcion1=0x7f080002;
-        public static final int rlOpcion2=0x7f080003;
-        public static final int rlOpcion3=0x7f080004;
-        public static final int rlOpcion4=0x7f080005;
-        public static final int rlPanel=0x7f080001;
+        public static final int btnComprobar=0x7f090006;
+        public static final int imgOpcion=0x7f090007;
+        public static final int lblConcepto=0x7f090000;
+        public static final int lblMensaje=0x7f09000a;
+        public static final int lblOpcion=0x7f090008;
+        public static final int rbOpcion=0x7f090009;
+        public static final int rlOpcion1=0x7f090002;
+        public static final int rlOpcion2=0x7f090003;
+        public static final int rlOpcion3=0x7f090004;
+        public static final int rlOpcion4=0x7f090005;
+        public static final int rlPanel=0x7f090001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -118,16 +123,16 @@ public final class R {
         public static final int toast_incorrecto=0x7f030003;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int calificar=0x7f060004;
-        public static final int comprobar=0x7f060009;
-        public static final int escoge_manzana=0x7f060006;
-        public static final int lo_sentimos_la_respuesta_es_incorrecta=0x7f060008;
-        public static final int opcion=0x7f060005;
-        public static final int title_activity_main=0x7f060001;
-        public static final int toast_con_layout_propio=0x7f060003;
-        public static final int toast_creado_dinamicamente=0x7f060002;
-        public static final int tu_respuesta_es_correcta=0x7f060007;
+        public static final int app_name=0x7f070000;
+        public static final int calificar=0x7f070004;
+        public static final int comprobar=0x7f070009;
+        public static final int escoge_manzana=0x7f070006;
+        public static final int lo_sentimos_la_respuesta_es_incorrecta=0x7f070008;
+        public static final int opcion=0x7f070005;
+        public static final int title_activity_main=0x7f070001;
+        public static final int toast_con_layout_propio=0x7f070003;
+        public static final int toast_creado_dinamicamente=0x7f070002;
+        public static final int tu_respuesta_es_correcta=0x7f070007;
     }
     public static final class style {
         /** 
@@ -151,10 +156,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }

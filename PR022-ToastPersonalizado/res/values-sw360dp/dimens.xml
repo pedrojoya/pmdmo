@@ -22,7 +22,7 @@
     <dimen name="boton_padding">14dp</dimen>
     
     <!-- Dimensiones del concepto -->
-    <dimen name="concepto_textsize">34sp</dimen>
-    <dimen name="concepto_padding">9dp</dimen>
+    <dimen name="concepto_textsize">27sp</dimen>
+    <dimen name="concepto_padding">5dp</dimen>
     
 </resources>
