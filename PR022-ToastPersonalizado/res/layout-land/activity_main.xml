@@ -66,12 +66,10 @@
 
         <Button
             android:id="@+id/btnComprobar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/boton_fondo"
             android:enabled="false"
-            android:paddingLeft="@dimen/boton_padding"
-            android:paddingRight="@dimen/boton_padding"
             android:text="@string/comprobar"
             android:textColor="@color/boton_textcolor"
             android:textStyle="bold" />

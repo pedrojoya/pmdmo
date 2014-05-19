@@ -46,6 +46,31 @@ public class BD {
         insertarTerminoConRespuestaCorrecta("orange", "naranja",
                 R.drawable.orange);
         insertarTerminoConRespuestaCorrecta("melon", "melón", R.drawable.melon);
+        insertarTerminoConRespuestaCorrecta("blueberry", "arándano",
+                R.drawable.arandano);
+        insertarTerminoConRespuestaCorrecta("peach", "melocotón",
+                R.drawable.melocoton);
+        insertarTerminoConRespuestaCorrecta("water melon", "sandía",
+                R.drawable.sandia);
+        insertarTerminoConRespuestaCorrecta("onion", "cebolla",
+                R.drawable.cebolla);
+        insertarTerminoConRespuestaCorrecta("potato", "patata",
+                R.drawable.patata);
+        insertarTerminoConRespuestaCorrecta("tomato", "tomate",
+                R.drawable.tomate);
+        insertarTerminoConRespuestaCorrecta("garlic", "ajo", R.drawable.ajo);
+        insertarTerminoConRespuestaCorrecta("pumpkin", "calabaza",
+                R.drawable.calabaza);
+        insertarTerminoConRespuestaCorrecta("pepper", "pimiento",
+                R.drawable.pimiento);
+        insertarTerminoConRespuestaCorrecta("aubergine / eggplant",
+                "berenjena", R.drawable.berenjena);
+        insertarTerminoConRespuestaCorrecta("broccoli", "brécol",
+                R.drawable.brocoli);
+        insertarTerminoConRespuestaCorrecta("beer", "cerveza",
+                R.drawable.cerveza);
+        insertarTerminoConRespuestaCorrecta("cheese", "queso", R.drawable.queso);
+        insertarTerminoConRespuestaCorrecta("bread", "pan", R.drawable.pan);
     }
 
     // Inserta un término y su respuesta correcta.

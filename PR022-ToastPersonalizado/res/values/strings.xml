@@ -9,4 +9,6 @@
     <string name="tu_respuesta_es_correcta">Correcto</string>
     <string name="lo_sentimos_la_respuesta_es_incorrecta">Incorrecto</string>
     <string name="comprobar">Comprobar</string>
+    <string name="correcto">Correcto</string>
+    <string name="incorrecto">Incorrecto</string>
 </resources>

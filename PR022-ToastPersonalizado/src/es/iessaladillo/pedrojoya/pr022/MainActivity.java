@@ -3,38 +3,47 @@ package es.iessaladillo.pedrojoya.pr022;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnInitListener {
+public class MainActivity extends Activity implements OnInitListener,
+        AnimationListener {
+
+    // Clase interna para almacenar el estado de la actividad.
+    private class Estado {
+        public Ejercicio ejercicio;
+        public int numRespuestaSeleccionada = SIN_SELECCION;
+        public boolean[] comprobadas = { false, false, false, false };
+    }
 
     // Constantes.
     private static final int SIN_SELECCION = -1;
+    private static final long INTERVALO_ENTRE_EJERCICIOS_MS = 1000;
 
     // Variables a nivel de clase.
-    private Ejercicio mEjercicio;
-    private int mRespuestaSeleccionada = SIN_SELECCION;
-    private TextToSpeech tts;
+    private Estado mEstado;
+    private TextToSpeech mTTS;
     private boolean mTTSPreparado = false;
+    private Animation flipToMiddle;
+    private Animation flipFromMiddle;
 
     // Vistas.
     private RelativeLayout[] tarjetas;
-    private Button btnCalificar;
+    private Button btnComprobar;
     private TextView lblConcepto;
     private ImageView[] imgOpcion;
     private TextView[] lblOpcion;
@@ -44,27 +53,45 @@ public class MainActivity extends Activity implements OnInitListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Se oculta la action bar.
-        getActionBar().hide();
         setContentView(R.layout.activity_main);
         // Se obtienen e inicializan las vistas.
         getVistas();
-        // Se obtienen los datos del ejercicio.
-        mEjercicio = BD.getRandomEjercicio();
-        // Se muestran los datos del ejercicio.
-        showEjercicio();
+        // Se recupera el estado anterior.
+        mEstado = (Estado) getLastNonConfigurationInstance();
+        if (mEstado == null) {
+            // Se crea el objeto de estado.
+            mEstado = new Estado();
+            // Se obtienen los datos del ejercicio.
+            mEstado.ejercicio = BD.getRandomEjercicio();
+        }
         // La actividad actuará como listener cuando el sintetizador
         // de voz esté preparado.
-        tts = new TextToSpeech(this, this);
+        mTTS = new TextToSpeech(this, this);
+        // Se cargan las animaciones de comprobación.
+        flipToMiddle = AnimationUtils.loadAnimation(this,
+                R.anim.tarjeta_flip_to_middle);
+        flipToMiddle.setAnimationListener(this);
+        flipFromMiddle = AnimationUtils.loadAnimation(this,
+                R.anim.tarjeta_flip_from_middle);
+        flipFromMiddle.setAnimationListener(this);
+    }
+
+    // Cuando la actividad pasa a primer plano.
+    @Override
+    protected void onResume() {
+        logScreenSizeDPI();
+        // Se muestran los datos del ejercicio.
+        showEjercicio();
+        super.onResume();
     }
 
     // Al destruir la actividad.
     @Override
     public void onDestroy() {
         // Se para y apaga el sintetizador de voz.
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
+        if (mTTS != null) {
+            mTTS.stop();
+            mTTS.shutdown();
         }
         super.onDestroy();
     }
@@ -95,8 +122,8 @@ public class MainActivity extends Activity implements OnInitListener {
             lblOpcion[i] = (TextView) tarjetas[i].findViewById(R.id.lblOpcion);
             rbOpcion[i] = (RadioButton) tarjetas[i].findViewById(R.id.rbOpcion);
         }
-        btnCalificar = (Button) findViewById(R.id.btnComprobar);
-        btnCalificar.setOnClickListener(new OnClickListener() {
+        btnComprobar = (Button) findViewById(R.id.btnComprobar);
+        btnComprobar.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -108,21 +135,19 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Muestra los datos del ejercicio en las correspondientes vistas.
     private void showEjercicio() {
-        // Se desmarca la tarjeta seleccionada del ejercicio anterior.
-        desmarcarTarjeta(mRespuestaSeleccionada);
-        mRespuestaSeleccionada = SIN_SELECCION;
         // Se escriben los datos en las vistas.
-        lblConcepto.setText(mEjercicio.getPregunta());
+        lblConcepto.setText(mEstado.ejercicio.getPregunta());
         Respuesta respuesta;
         for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
-            respuesta = mEjercicio.getRespuesta(i);
+            respuesta = mEstado.ejercicio.getRespuesta(i);
             lblOpcion[i].setText(respuesta.getTexto());
             imgOpcion[i].setImageResource(respuesta.getResIdImagen());
             rbOpcion[i].setChecked(false);
         }
-        // Hasta que no se haya seleccionado alguna repuesta no se puede
-        // comprobar.
-        btnCalificar.setEnabled(false);
+        // Se marca la opción seleccionada (por si venimos de estado anterior).
+        if (mEstado.numRespuestaSeleccionada >= 0) {
+            marcarTarjeta(mEstado.numRespuestaSeleccionada);
+        }
         // Se lee el término (se hace con post para que se ejecute una vez
         // finalizada la ejecución del método onCreate().
         lblConcepto.post(new Runnable() {
@@ -135,38 +160,12 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Comprueba si la respuesta seleccionada es correcta o no.
     private void checkRespuestaCorrecta() {
-        // Si la respuesta es correcta.
-        if (mRespuestaSeleccionada == mEjercicio.getCorrecta()) {
-            // Se informa al usuario.
-            showToast(this, getString(R.string.tu_respuesta_es_correcta),
-                    R.drawable.ic_ok, R.layout.toast_correcto,
-                    Toast.LENGTH_SHORT);
-            // Se obtiene y muestra un nuevo ejercicio.
-            mEjercicio = BD.getRandomEjercicio();
-            showEjercicio();
-        } else {
-            showToast(this,
-                    getString(R.string.lo_sentimos_la_respuesta_es_incorrecta),
-                    R.drawable.ic_incorrect, R.layout.toast_incorrecto,
-                    Toast.LENGTH_SHORT);
-        }
-    }
-
-    // Muestra un toast personalizado.
-    private void showToast(Context contexto, String mensaje, int resIdIcono,
-            int resIdLayout, int duration) {
-        // Se infla el layout para el toast.
-        View v = LayoutInflater.from(contexto).inflate(resIdLayout, null);
-        // Se obtienen las vistas y se establecen sus datos.
-        TextView lblMensaje = (TextView) v.findViewById(R.id.lblMensaje);
-        lblMensaje.setText(mensaje);
-        lblMensaje.setCompoundDrawablesWithIntrinsicBounds(contexto
-                .getResources().getDrawable(resIdIcono), null, null, null);
-        // Se crea y se muestra el toast, estableciendo su vista.
-        Toast toast = new Toast(contexto);
-        toast.setView(v);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.show();
+        // Se guarda que se ha comprobado la opción.
+        mEstado.comprobadas[mEstado.numRespuestaSeleccionada] = true;
+        // Se desactiva el botón de comprobación.
+        btnComprobar.setEnabled(false);
+        // Se realiza la animación inicial.
+        tarjetas[mEstado.numRespuestaSeleccionada].startAnimation(flipToMiddle);
     }
 
     // Cuando ya está inicializado el sintetizador de voz.
@@ -185,40 +184,23 @@ public class MainActivity extends Activity implements OnInitListener {
         // Si está preparado el sintetizador.
         if (mTTSPreparado) {
             // Se establece el idioma y si hay algún problema se indica.
-            int result = tts.setLanguage(loc);
+            int result = mTTS.setLanguage(loc);
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "El idioma indicado no está disponible");
             } else {
                 // Si todo ha ido bien, se realiza la lectura.
-                tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
+                mTTS.speak(texto, TextToSpeech.QUEUE_FLUSH, null);
             }
         }
     }
 
-    // Clase Listener para las tarjetas.
-    private class TarjetaOnClickListener implements View.OnClickListener {
-
-        // Propiedades.
-        private int numTarjeta;
-
-        // Constructor.
-        public TarjetaOnClickListener(int numTarjeta) {
-            this.numTarjeta = numTarjeta;
-        }
-
-        // Al hacer click sobre la tarjeta.
-        @Override
-        public void onClick(View v) {
-            // Se le quita la selección a la tarjeta que estuviera seleccionada.
-            desmarcarTarjeta(mRespuestaSeleccionada);
-            // Se selecciona la tarjeta sobre la que se ha pulsado.
-            marcarTarjeta(numTarjeta);
-            // Se activa el botón de comprobación (ahora que se ha seleccionado
-            // alguna tarjeta).
-            btnCalificar.setEnabled(true);
-        }
-
+    // Al cambiar la configuración.
+    @Override
+    @Deprecated
+    public Object onRetainNonConfigurationInstance() {
+        // Se preserva el objeto de estado.
+        return mEstado;
     }
 
     // Desmarca una tarjeta que estaba seleccionada.
@@ -237,8 +219,10 @@ public class MainActivity extends Activity implements OnInitListener {
 
     // Marca una tarjeta como seleccionada.
     private void marcarTarjeta(int numTarjeta) {
+        // Se le quita la selección a la tarjeta que estuviera seleccionada.
+        desmarcarTarjeta(mEstado.numRespuestaSeleccionada);
         // Se actualiza la respuesta seleccionada.
-        mRespuestaSeleccionada = numTarjeta;
+        mEstado.numRespuestaSeleccionada = numTarjeta;
         // Se pone en negrita el texto.
         lblOpcion[numTarjeta].setTypeface(null, Typeface.BOLD);
         // Se selecciona el RadioButton.
@@ -247,5 +231,125 @@ public class MainActivity extends Activity implements OnInitListener {
         Animation agrandar = AnimationUtils.loadAnimation(MainActivity.this,
                 R.anim.tarjeta_agrandar);
         tarjetas[numTarjeta].startAnimation(agrandar);
+        // Se activa el botón de comprobación (ahora que se ha seleccionado
+        // alguna tarjeta).
+        btnComprobar.setEnabled(true);
+
+    }
+
+    // Resetea el estado y la IU para poder mostrar un nuevo ejercicio.
+    private void resetEjercicio() {
+        // Se desmarca la tarjeta seleccionada del ejercicio anterior.
+        desmarcarTarjeta(mEstado.numRespuestaSeleccionada);
+        // Se establece que no hay ninguna seleccionada.
+        mEstado.numRespuestaSeleccionada = SIN_SELECCION;
+        // Se establece que no se ha comprobado ninguna opción.
+        for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
+            mEstado.comprobadas[i] = false;
+        }
+        // Hasta que no se haya seleccionado alguna repuesta no se puede
+        // comprobar.
+        btnComprobar.setEnabled(false);
+    }
+
+    // Escribe un log con la densidad, la anchura y la altura disponible en dpi.
+    private void logScreenSizeDPI() {
+        final int BASE_DPI = 160;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float densidadDPI = metrics.density * BASE_DPI;
+        float anchuraDPI = metrics.widthPixels / metrics.density;
+        float alturaDPI = metrics.heightPixels / metrics.density;
+        Log.d("metrics", "Densidad: " + densidadDPI + "dpi\nAnchura: "
+                + anchuraDPI + "dpi\nAltura: " + alturaDPI);
+    }
+
+    // Cuando termina de ejecutarse una animación.
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        // Si ha finalizado la primera animación del flip.
+        if (animation == flipToMiddle) {
+            // Se cambia la imagen y el texto de la tarjeta dependiendo de si ha
+            // acertado o no.
+            if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
+                    .getCorrecta()) {
+                imgOpcion[mEstado.numRespuestaSeleccionada]
+                        .setImageResource(R.drawable.correcto);
+            } else {
+                imgOpcion[mEstado.numRespuestaSeleccionada]
+                        .setImageResource(R.drawable.incorrecto);
+            }
+            // Se realiza la segunda animación.
+            tarjetas[mEstado.numRespuestaSeleccionada].clearAnimation();
+            tarjetas[mEstado.numRespuestaSeleccionada]
+                    .startAnimation(flipFromMiddle);
+        }
+        // Si ha finalizado la segunda animación del flip.
+        else if (animation == flipFromMiddle) {
+            // Si ha acertado.
+            if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
+                    .getCorrecta()) {
+                // Se espera un segundo y se muestra otro ejercicio.
+                btnComprobar.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Se resetea el ejercicio.
+                        resetEjercicio();
+                        // Se obtiene y muestra un nuevo ejercicio.
+                        mEstado.ejercicio = BD.getRandomEjercicio();
+                        showEjercicio();
+                    }
+                }, INTERVALO_ENTRE_EJERCICIOS_MS);
+            }
+            // Si no ha acertado.
+            else {
+                // Si sólo queda la tarjeta correcta comprobar, se marca y se
+                // comprueba automáticamente.
+                if (soloQuedaCorrecta()) {
+                    marcarTarjeta(mEstado.ejercicio.getCorrecta());
+                    checkRespuestaCorrecta();
+                } else {
+                    // Se habilita el botón de comprobación.
+                    btnComprobar.setEnabled(true);
+                }
+            }
+        }
+    }
+
+    // Retorna si solo queda por marcar la tarjeta correcta.
+    private boolean soloQuedaCorrecta() {
+        for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
+            if (i != mEstado.ejercicio.getCorrecta() && !mEstado.comprobadas[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation arg0) {
+    }
+
+    @Override
+    public void onAnimationStart(Animation arg0) {
+    }
+
+    // Clase Listener para las tarjetas.
+    private class TarjetaOnClickListener implements View.OnClickListener {
+
+        // Propiedades.
+        private int numTarjeta;
+
+        // Constructor.
+        public TarjetaOnClickListener(int numTarjeta) {
+            this.numTarjeta = numTarjeta;
+        }
+
+        // Al hacer click sobre la tarjeta.
+        @Override
+        public void onClick(View v) {
+            // Se selecciona la tarjeta sobre la que se ha pulsado.
+            marcarTarjeta(numTarjeta);
+        }
+
     }
 }

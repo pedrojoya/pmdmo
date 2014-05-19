@@ -11,6 +11,8 @@ public final class R {
     public static final class anim {
         public static final int tarjeta_agrandar=0x7f040000;
         public static final int tarjeta_disminuir=0x7f040001;
+        public static final int tarjeta_flip_from_middle=0x7f040002;
+        public static final int tarjeta_flip_to_middle=0x7f040003;
     }
     public static final class attr {
     }
@@ -23,7 +25,7 @@ public final class R {
         /**  botón 
          */
         public static final int boton_textcolor=0x7f05000c;
-        /**  card colors 
+        /**  Tarjeta 
          */
         public static final int card_background=0x7f050000;
         public static final int card_detailing=0x7f050003;
@@ -43,65 +45,93 @@ public final class R {
         public static final int transparent=0x7f050004;
     }
     public static final class dimen {
-        public static final int actividad_margen_vertical=0x7f060001;
+        public static final int actividad_margen_vertical=0x7f060005;
         /**  Dimensiones de la actividad 
  Dimensiones de la actividad 
+ Dimensiones de la actividad 
          */
-        public static final int actividad_padding=0x7f060000;
-        public static final int actividad_tarjetas_margen=0x7f060002;
+        public static final int actividad_padding=0x7f060004;
+        public static final int actividad_tarjetas_margen=0x7f060006;
         /**  Dimensiones del botón 
  Dimensiones del botón 
+ Dimensiones del botón 
          */
-        public static final int boton_esquinas_radio=0x7f06000a;
-        public static final int boton_padding=0x7f06000b;
-        public static final int concepto_padding=0x7f06000d;
+        public static final int boton_esquinas_radio=0x7f06000f;
+        public static final int boton_padding=0x7f060010;
+        /**  Dimensiones del fondo de la tarjeta 
+         */
+        public static final int card_padding=0x7f060000;
+        public static final int card_padding_bottom=0x7f060001;
+        public static final int card_radius=0x7f060003;
+        public static final int card_shadow_padding_bottom=0x7f060002;
+        public static final int concepto_padding=0x7f060012;
         /**  Dimensiones del concepto 
  Dimensiones del concepto 
+ Dimensiones del concepto 
          */
-        public static final int concepto_textsize=0x7f06000c;
+        public static final int concepto_textsize=0x7f060011;
         /** 
          Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int tarjeta_foto_anchura=0x7f060004;
-        public static final int tarjeta_margen_vertical=0x7f060005;
+        public static final int tarjeta_foto_anchura=0x7f060008;
+        public static final int tarjeta_margen_vertical=0x7f060009;
         /**  Dimensiones de la tarjeta 
  Dimensiones de la tarjeta 
+ Dimensiones de la tarjeta 
          */
-        public static final int tarjeta_padding=0x7f060003;
-        public static final int toast_borde_anchura=0x7f060008;
-        public static final int toast_drawablepadding=0x7f060007;
-        public static final int toast_esquinas_radio=0x7f060009;
+        public static final int tarjeta_padding=0x7f060007;
+        public static final int tarjeta_textsize=0x7f06000a;
+        public static final int toast_borde_anchura=0x7f06000d;
+        public static final int toast_drawablepadding=0x7f06000c;
+        public static final int toast_esquinas_radio=0x7f06000e;
         /**  Dimensiones del toast 
  Dimensiones del toast 
+ Dimensiones del toast 
          */
-        public static final int toast_padding=0x7f060006;
+        public static final int toast_padding=0x7f06000b;
     }
     public static final class drawable {
         public static final int aguacate=0x7f020000;
-        public static final int banana=0x7f020001;
-        public static final int boton_fondo=0x7f020002;
-        public static final int boton_fondo_disabled=0x7f020003;
-        public static final int boton_fondo_normal=0x7f020004;
-        public static final int boton_fondo_pressed=0x7f020005;
-        public static final int card=0x7f020006;
-        public static final int cereza=0x7f020007;
-        public static final int fresa=0x7f020008;
-        public static final int ic_incorrect=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int ic_ok=0x7f02000b;
-        public static final int lemon=0x7f02000c;
-        public static final int manzana=0x7f02000d;
-        public static final int melon=0x7f02000e;
-        public static final int mora=0x7f02000f;
-        public static final int orange=0x7f020010;
-        public static final int pear=0x7f020011;
-        public static final int toast_correcto_fondo=0x7f020012;
-        public static final int toast_frame=0x7f020013;
-        public static final int toast_incorrecto_fondo=0x7f020014;
-        public static final int uva=0x7f020015;
+        public static final int ajo=0x7f020001;
+        public static final int arandano=0x7f020002;
+        public static final int banana=0x7f020003;
+        public static final int berenjena=0x7f020004;
+        public static final int boton_fondo=0x7f020005;
+        public static final int boton_fondo_disabled=0x7f020006;
+        public static final int boton_fondo_normal=0x7f020007;
+        public static final int boton_fondo_pressed=0x7f020008;
+        public static final int brocoli=0x7f020009;
+        public static final int calabaza=0x7f02000a;
+        public static final int card=0x7f02000b;
+        public static final int cebolla=0x7f02000c;
+        public static final int cereza=0x7f02000d;
+        public static final int cerveza=0x7f02000e;
+        public static final int correcto=0x7f02000f;
+        public static final int fresa=0x7f020010;
+        public static final int ic_incorrect=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int ic_ok=0x7f020013;
+        public static final int incorrecto=0x7f020014;
+        public static final int lemon=0x7f020015;
+        public static final int manzana=0x7f020016;
+        public static final int melocoton=0x7f020017;
+        public static final int melon=0x7f020018;
+        public static final int mora=0x7f020019;
+        public static final int orange=0x7f02001a;
+        public static final int pan=0x7f02001b;
+        public static final int patata=0x7f02001c;
+        public static final int pear=0x7f02001d;
+        public static final int pimiento=0x7f02001e;
+        public static final int queso=0x7f02001f;
+        public static final int sandia=0x7f020020;
+        public static final int toast_correcto_fondo=0x7f020021;
+        public static final int toast_frame=0x7f020022;
+        public static final int toast_incorrecto_fondo=0x7f020023;
+        public static final int tomate=0x7f020024;
+        public static final int uva=0x7f020025;
     }
     public static final class id {
         public static final int btnComprobar=0x7f090006;
@@ -126,7 +156,9 @@ public final class R {
         public static final int app_name=0x7f070000;
         public static final int calificar=0x7f070004;
         public static final int comprobar=0x7f070009;
+        public static final int correcto=0x7f07000a;
         public static final int escoge_manzana=0x7f070006;
+        public static final int incorrecto=0x7f07000b;
         public static final int lo_sentimos_la_respuesta_es_incorrecta=0x7f070008;
         public static final int opcion=0x7f070005;
         public static final int title_activity_main=0x7f070001;

@@ -13,30 +13,28 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:textSize="@dimen/concepto_textsize"
+        android:text="Concepto"
         android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/rlPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_horizontal" >
+        android:layout_centerInParent="true" >
 
         <include
             android:id="@+id/rlOpcion1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
+            android:layout_marginRight="@dimen/actividad_tarjetas_margen"
             layout="@layout/tarjeta" />
 
         <include
             android:id="@+id/rlOpcion2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/actividad_tarjetas_margen"
             android:layout_toRightOf="@+id/rlOpcion1"
             layout="@layout/tarjeta" />
@@ -45,7 +43,7 @@
             android:id="@+id/rlOpcion3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/rlOpcion1"
+            android:layout_alignParentLeft="true"
             android:layout_below="@+id/rlOpcion1"
             layout="@layout/tarjeta" />
 
@@ -53,20 +51,24 @@
             android:id="@+id/rlOpcion4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignLeft="@+id/rlOpcion2"
             android:layout_below="@+id/rlOpcion2"
             layout="@layout/tarjeta" />
-        <View 
+
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="20dp" 
-            android:layout_below="@+id/rlOpcion3"           
-            />
+            android:layout_height="20dp"
+            android:layout_alignLeft="@+id/rlOpcion3"
+            android:layout_alignRight="@+id/rlOpcion4"
+            android:layout_below="@+id/rlOpcion3" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/rlPanel"
+        android:layout_alignRight="@+id/rlPanel"
         android:layout_below="@+id/rlPanel" >
 
         <Button
@@ -77,6 +79,7 @@
             android:background="@drawable/boton_fondo"
             android:enabled="false"
             android:text="@string/comprobar"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/boton_textcolor"
             android:textStyle="bold" />
     </RelativeLayout>
