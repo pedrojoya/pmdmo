@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr094;
+package es.iessaladillo.pedrojoya.pr098;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +30,10 @@ public class MainFragment extends Fragment {
         // Se configura el SlidingTabLayout.
         stTabs = (SlidingTabLayout) rootView.findViewById(R.id.stTabs);
         stTabs.setCustomTabView(R.layout.tab_header, R.id.lblTab);
+        /* NUEVO */
+        stTabs.setTabIcons(R.drawable.ic_launcher, R.drawable.ic_action_pen,
+                R.drawable.ic_launcher, R.drawable.ic_action_pen);
+        /* FIN NUEVO */
         stTabs.setViewPager(vpPaginador);
         stTabs.setSelectedIndicatorColors(
                 getResources().getColor(R.color.color1), getResources()

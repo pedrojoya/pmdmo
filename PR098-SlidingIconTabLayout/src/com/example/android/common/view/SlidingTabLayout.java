@@ -21,6 +21,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -79,11 +80,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
-    private int mTabViewImageViewId;
 
     private ViewPager mViewPager;
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
-    private int[] iconResId;
+
+    /* NUEVO */
+    private int[] mTabIcons;
+    /* FIN NUEVO */
 
     private final SlidingTabStrip mTabStrip;
 
@@ -164,10 +167,14 @@ public class SlidingTabLayout extends HorizontalScrollView {
         mTabViewTextViewId = textViewId;
     }
 
-    // Establece los iconos para las páginas.
-    public void setIconsResIds(int[] iconResId) {
+    /* NUEVO */
 
+    // Establece los iconos para las tabs.
+    public void setTabIcons(int... resIds) {
+        mTabIcons = resIds;
     }
+
+    /* FIN NUEVO */
 
     /**
      * Sets the associated view pager. Note that the assumption here is that the
@@ -244,8 +251,22 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (tabTitleView == null && TextView.class.isInstance(tabView)) {
                 tabTitleView = (TextView) tabView;
             }
-
-            tabTitleView.setText(adapter.getPageTitle(i));
+            /* NUEVO */
+            CharSequence titulo = adapter.getPageTitle(i);
+            tabTitleView.setText(titulo);
+            if (mTabIcons != null) {
+                try {
+                    tabTitleView.setCompoundDrawablesWithIntrinsicBounds(
+                            mTabIcons[i], 0, 0, 0);
+                    if (!TextUtils.isEmpty(titulo)) {
+                        tabTitleView.setCompoundDrawablePadding(10);
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            /* FIN NUEVO */
             tabView.setOnClickListener(tabClickListener);
 
             mTabStrip.addView(tabView);

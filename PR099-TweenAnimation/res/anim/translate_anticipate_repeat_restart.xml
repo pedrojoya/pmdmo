@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Se traslada la vista desde su posición actual (fromDelta) hacia la
+     derecha tanto como la anchura de la vista (toDelta) en 300ms (duration)
+     usando interpolación con impulso previo (interpolator).
+     Se toma como punto de referencia para el escalado (pivot) el punto
+     central de la vista.
+     Al finalizar la animación, la vista quedará en dicha posición final 
+     (fillAfter)
+-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:fillAfter="true"
+    android:fromXDelta="0"
+    android:fromYDelta="0"
+    android:repeatMode="restart"
+    android:repeatCount="3"
+    android:interpolator="@android:anim/anticipate_interpolator"
+    android:toXDelta="100%"
+    android:toYDelta="0" />

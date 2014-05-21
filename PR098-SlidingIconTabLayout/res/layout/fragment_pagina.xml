@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="es.iessaladillo.pedrojoya.pr094.MainActivity$PaginaFragment">
+    tools:context="es.iessaladillo.pedrojoya.pr098.MainActivity$PaginaFragment">
 
     <TextView
         android:id="@+id/lblPagina"

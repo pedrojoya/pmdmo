@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr094;
+package es.iessaladillo.pedrojoya.pr098;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -26,8 +26,8 @@ public class PaginasAdapter extends FragmentPagerAdapter {
                 context.getResources().getColor(R.color.color5) };
     }
 
-    // Retorna el fragmento correspondiente a una p√°gina. Recibe el n√∫mero
-    // de p√°gina.
+    // Retorna el fragmento correspondiente a una p√°gina. Recibe el n˙mero
+    // de p·gina.
     @Override
     public Fragment getItem(int position) {
         // Se crea el fragmento y se le pasa como argumento el n˙mero de
@@ -37,13 +37,13 @@ public class PaginasAdapter extends FragmentPagerAdapter {
         return frgPagina;
     }
 
-    // Retorna el n√∫mero de p√°ginas.
+    // Retorna el n˙mero de p·ginas.
     @Override
     public int getCount() {
         return NUM_PAGINAS;
     }
 
-    // Retorna el t√≠tulo de una p√°gina. Recibe el n√∫mero de p√°gina.
+    // Retorna el tÌtulo de una p·gina. Recibe el n˙mero de p·gina.
     @Override
     public CharSequence getPageTitle(int position) {
         return context.getResources().getString(R.string.tab) + " "

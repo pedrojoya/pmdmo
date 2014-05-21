@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Se rota desde 0 grados (fromDegrees) hasta 270 grados (toDegrees)
+     en 600ms (duration), usando interpolación por aceleración y 
+     desaceleración (interpolator), tomando como punto de referencia para 
+     la rotación el el punto central de la vista (pivot).
+     Al finalizar la animación, la vista quedará con el tamaño final 
+     (fillAfter)
+-->
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="600"
+    android:fillAfter="true"
+    android:fromDegrees="0"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="270" />

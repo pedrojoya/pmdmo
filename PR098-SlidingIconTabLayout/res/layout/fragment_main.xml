@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="es.iessaladillo.pedrojoya.pr094.MainActivity$PlaceholderFragment">
+    tools:context="es.iessaladillo.pedrojoya.pr098.MainActivity$PlaceholderFragment">
 
     <com.example.android.common.view.SlidingTabLayout
         android:id="@+id/stTabs"
