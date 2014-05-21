@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.pr099;
 
 import java.util.ArrayList;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private TextView lblMensaje;
     private ArrayList<Animation> animaciones = new ArrayList<Animation>();
     private int numAnim = 0;
+    private ObjectAnimator anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +54,56 @@ public class MainActivity extends Activity implements OnClickListener {
         // R.anim.translate_bounce));
         // animaciones.add(AnimationUtils.loadAnimation(this,
         // R.anim.translate_anticipate_repeat_restart));
+        // animaciones.add(AnimationUtils.loadAnimation(this,
+        // R.anim.translate_linear_repeat_reverse));
         animaciones.add(AnimationUtils.loadAnimation(this,
-                R.anim.translate_anticipate_repeat_reverse));
+                R.anim.scale_fillbefore));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.btnAnimar:
-            imgIcono.startAnimation(animaciones.get(numAnim++
-                    % animaciones.size()));
+            // imgIcono.startAnimation(animaciones.get(numAnim++
+            // % animaciones.size()));
+            // Animator anim = AnimatorInflater.loadAnimator(this,
+            // R.animator.rotate_3d);
+            // anim.setTarget(imgIcono);
+            // anim.start();
+            // Animator anim = ObjectAnimator.ofFloat(imgIcono,
+            // View.TRANSLATION_X, 30.0f);
+            // anim.setDuration(1000);
+            // anim.start();
+            // Animator anim1 = ObjectAnimator.ofFloat(lblMensaje,
+            // View.TRANSLATION_Y, 20);
+            // anim1.setDuration(1000);
+            // Animator anim2 = ObjectAnimator.ofFloat(imgIcono,
+            // View.ROTATION_X,
+            // 360);
+            // anim2.setDuration(1000);
+            // AnimatorSet set = new AnimatorSet();
+            // set.playTogether(anim1, anim2);
+            // set.setDuration(1000);
+            // set.start();
+            // Animator anim1 = ObjectAnimator.ofFloat(lblMensaje,
+            // View.TRANSLATION_Y, 20);
+            // anim1.setDuration(1000);
+            // Animator anim2 = ObjectAnimator.ofFloat(imgIcono,
+            // View.ROTATION_X,
+            // 360);
+            // anim2.setDuration(1000);
+            // AnimatorSet set = new AnimatorSet();
+            // set.playSequentially(anim1, anim2);
+            // set.start();
+            if (anim == null) {
+                anim = ObjectAnimator.ofFloat(imgIcono, View.ROTATION_X, 360);
+                anim.setDuration(1000);
+                anim.setRepeatMode(ObjectAnimator.RESTART);
+                anim.setRepeatCount(ObjectAnimator.INFINITE);
+                anim.start();
+            } else if (anim.isRunning()) {
+                anim.cancel();
+            }
             break;
 
         default:

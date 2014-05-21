@@ -12,20 +12,25 @@ public final class R {
         public static final int alpha=0x7f040000;
         public static final int rotate=0x7f040001;
         public static final int scale=0x7f040002;
-        public static final int secuencia=0x7f040003;
-        public static final int set=0x7f040004;
-        public static final int translate=0x7f040005;
-        public static final int translate_anticipate=0x7f040006;
-        public static final int translate_anticipate_repeat_restart=0x7f040007;
-        public static final int translate_anticipate_repeat_reverse=0x7f040008;
+        public static final int scale_fillbefore=0x7f040003;
+        public static final int secuencia=0x7f040004;
+        public static final int set=0x7f040005;
+        public static final int translate=0x7f040006;
+        public static final int translate_anticipate=0x7f040007;
+        public static final int translate_anticipate_repeat_restart=0x7f040008;
         public static final int translate_bounce=0x7f040009;
         public static final int translate_cycle=0x7f04000a;
-        public static final int translate_overshoot=0x7f04000b;
+        public static final int translate_linear_fillbefore=0x7f04000b;
+        public static final int translate_linear_repeat_reverse=0x7f04000c;
+        public static final int translate_overshoot=0x7f04000d;
+    }
+    public static final class animator {
+        public static final int rotate_3d=0x7f050000;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int fondo=0x7f050000;
+        public static final int fondo=0x7f060000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -35,30 +40,30 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0003;
-        public static final int btnAnimar=0x7f0a0001;
-        public static final int imgIcono=0x7f0a0002;
-        public static final int lblAnimacion=0x7f0a0000;
+        public static final int action_settings=0x7f0b0003;
+        public static final int btnAnimar=0x7f0b0001;
+        public static final int imgIcono=0x7f0b0002;
+        public static final int lblAnimacion=0x7f0b0000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int main=0x7f0a0000;
     }
     public static final class string {
-        public static final int action_settings=0x7f070002;
-        public static final int animar=0x7f070003;
-        public static final int app_name=0x7f070000;
-        public static final int hello_world=0x7f070001;
-        public static final int icono=0x7f070004;
+        public static final int action_settings=0x7f080002;
+        public static final int animar=0x7f080003;
+        public static final int app_name=0x7f080000;
+        public static final int hello_world=0x7f080001;
+        public static final int icono=0x7f080004;
     }
     public static final class style {
         /** 
@@ -82,10 +87,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
     }
 }

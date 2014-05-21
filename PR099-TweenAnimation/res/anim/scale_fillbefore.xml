@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Se pasa de su tamaño (fromScale) al doble (toScale) en 300ms (duration) 
+	usando interpolación por aceleración y desaceleración (interpolator). Se 
+	toma como punto de referencia para el escalado (pivot) el punto central de 
+	la vista. Al finalizar la animación, la vista quedará con el tamaño final 
+	(fillAfter) -->
+	<scale xmlns:android="http://schemas.android.com/apk/res/android" android:duration="1000" android:fromXScale="5.0"
+		android:fillAfter="false" android:fillBefore="true" android:fromYScale="5.0"
+		android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+		android:pivotX="50%" android:pivotY="50%" android:toXScale="3.0"
+		android:toYScale="3.0" />

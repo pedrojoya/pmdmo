@@ -15,6 +15,6 @@
     android:fromYDelta="0"
     android:repeatMode="reverse"
     android:repeatCount="3"
-    android:interpolator="@android:anim/anticipate_interpolator"
+    android:interpolator="@android:anim/linear_interpolator"
     android:toXDelta="100%"
     android:toYDelta="0" />
