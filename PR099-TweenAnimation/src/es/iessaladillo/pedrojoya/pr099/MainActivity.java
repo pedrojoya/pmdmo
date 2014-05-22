@@ -2,8 +2,10 @@ package es.iessaladillo.pedrojoya.pr099;
 
 import java.util.ArrayList;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +22,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private ArrayList<Animation> animaciones = new ArrayList<Animation>();
     private int numAnim = 0;
     private ObjectAnimator anim;
+    private AnimatorSet set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,15 +98,27 @@ public class MainActivity extends Activity implements OnClickListener {
             // AnimatorSet set = new AnimatorSet();
             // set.playSequentially(anim1, anim2);
             // set.start();
-            if (anim == null) {
-                anim = ObjectAnimator.ofFloat(imgIcono, View.ROTATION_X, 360);
-                anim.setDuration(1000);
-                anim.setRepeatMode(ObjectAnimator.RESTART);
-                anim.setRepeatCount(ObjectAnimator.INFINITE);
-                anim.start();
-            } else if (anim.isRunning()) {
-                anim.cancel();
-            }
+            // if (set == null) {
+            // ObjectAnimator anim1 = ObjectAnimator.ofFloat(imgIcono,
+            // View.ROTATION_X, 360);
+            // anim1.setRepeatMode(ObjectAnimator.RESTART);
+            // anim1.setRepeatCount(ObjectAnimator.INFINITE);
+            // ObjectAnimator anim2 = ObjectAnimator.ofFloat(imgIcono,
+            // View.ROTATION_Y, 360);
+            // anim2.setRepeatMode(ObjectAnimator.RESTART);
+            // anim2.setRepeatCount(ObjectAnimator.INFINITE);
+            // set = new AnimatorSet();
+            // set.playTogether(anim1, anim2);
+            // set.start();
+            // } else if (set.isPaused()) {
+            // set.resume();
+            // } else {
+            // set.pause();
+            // }
+            imgIcono.setImageResource(R.drawable.moon);
+            AnimationDrawable frameAnimation = (AnimationDrawable) imgIcono
+                    .getDrawable();
+            frameAnimation.start();
             break;
 
         default:
