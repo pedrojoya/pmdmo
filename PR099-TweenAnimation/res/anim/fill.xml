@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Con fillBefore a false en el set el estado final de la primera
+transformación no se toma como punto de partida de la segunda
+transformación, pero sólo si para la primera transformación se ha
+indicado que se tenga en cuenta lo establecido en el set,
+indicando fillEnabled a true.
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="true" >
+
+    <translate
+        android:duration="1000"
+        android:fromXDelta="-100"
+        android:fromYDelta="0"
+        android:toXDelta="100"
+        android:toYDelta="0" />
+
+    <scale
+        android:duration="1000"
+        android:fromXScale="2.0"
+        android:fromYScale="2.0"
+        android:startOffset="1000"
+        android:toXScale="3.0"
+        android:toYScale="3.0" />
+
+</set>

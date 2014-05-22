@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,23 +58,22 @@ public class MainActivity extends Activity implements OnClickListener {
         // R.anim.translate_anticipate_repeat_restart));
         // animaciones.add(AnimationUtils.loadAnimation(this,
         // R.anim.translate_linear_repeat_reverse));
-        animaciones.add(AnimationUtils.loadAnimation(this,
-                R.anim.scale_fillbefore));
+        animaciones.add(AnimationUtils.loadAnimation(this, R.anim.fill));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.btnAnimar:
-            // imgIcono.startAnimation(animaciones.get(numAnim++
-            // % animaciones.size()));
+            imgIcono.startAnimation(animaciones.get(numAnim++
+                    % animaciones.size()));
             // Animator anim = AnimatorInflater.loadAnimator(this,
             // R.animator.rotate_3d);
             // anim.setTarget(imgIcono);
             // anim.start();
             // Animator anim = ObjectAnimator.ofFloat(imgIcono,
-            // View.TRANSLATION_X, 30.0f);
-            // anim.setDuration(1000);
+            // View.TRANSLATION_X, imgIcono.getTranslationX() + 50.0f);
+            // anim.setDuration(500);
             // anim.start();
             // Animator anim1 = ObjectAnimator.ofFloat(lblMensaje,
             // View.TRANSLATION_Y, 20);
@@ -115,10 +113,11 @@ public class MainActivity extends Activity implements OnClickListener {
             // } else {
             // set.pause();
             // }
-            imgIcono.setImageResource(R.drawable.moon);
-            AnimationDrawable frameAnimation = (AnimationDrawable) imgIcono
-                    .getDrawable();
-            frameAnimation.start();
+            // imgIcono.setImageResource(R.drawable.moon);
+            // AnimationDrawable frameAnimation = (AnimationDrawable) imgIcono
+            // .getDrawable();
+            // frameAnimation.start();
+
             break;
 
         default:

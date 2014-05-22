@@ -10,19 +10,20 @@ package es.iessaladillo.pedrojoya.pr099;
 public final class R {
     public static final class anim {
         public static final int alpha=0x7f040000;
-        public static final int rotate=0x7f040001;
-        public static final int scale=0x7f040002;
-        public static final int scale_fillbefore=0x7f040003;
-        public static final int secuencia=0x7f040004;
-        public static final int set=0x7f040005;
-        public static final int translate=0x7f040006;
-        public static final int translate_anticipate=0x7f040007;
-        public static final int translate_anticipate_repeat_restart=0x7f040008;
-        public static final int translate_bounce=0x7f040009;
-        public static final int translate_cycle=0x7f04000a;
-        public static final int translate_linear_fillbefore=0x7f04000b;
-        public static final int translate_linear_repeat_reverse=0x7f04000c;
-        public static final int translate_overshoot=0x7f04000d;
+        public static final int fill=0x7f040001;
+        public static final int rotate=0x7f040002;
+        public static final int scale=0x7f040003;
+        public static final int scale_fillbefore=0x7f040004;
+        public static final int secuencia=0x7f040005;
+        public static final int set=0x7f040006;
+        public static final int translate=0x7f040007;
+        public static final int translate_anticipate=0x7f040008;
+        public static final int translate_anticipate_repeat_restart=0x7f040009;
+        public static final int translate_bounce=0x7f04000a;
+        public static final int translate_cycle=0x7f04000b;
+        public static final int translate_linear_fillbefore=0x7f04000c;
+        public static final int translate_linear_repeat_reverse=0x7f04000d;
+        public static final int translate_overshoot=0x7f04000e;
     }
     public static final class animator {
         public static final int rotate_3d=0x7f050000;
