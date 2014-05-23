@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+	Se anima la propiedad rotationX de tipo float pasando de valer 0 a 360 
+	en 2000 ms usando un interpolador por acelaración
+-->
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="2000"
+    android:interpolator="@android:anim/accelerate_interpolator"
     android:propertyName="rotationX"
     android:valueFrom="0"
-    android:valueTo="-360"
-    android:interpolator="@android:anim/accelerate_interpolator"
+    android:valueTo="360"
     android:valueType="floatType" />
