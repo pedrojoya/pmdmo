@@ -14,19 +14,25 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
+        /** 
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
+    
+         */
+        public static final int activity_horizontal_margin=0x7f040001;
         public static final int padding_medium=0x7f040000;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f090000;
-        public static final int lblListado=0x7f090001;
-        public static final int lstAlumnos=0x7f090002;
-        public static final int menu_settings=0x7f090003;
+        public static final int lblListado=0x7f090000;
+        public static final int lstAlumnos=0x7f090001;
+        public static final int menu_settings=0x7f090002;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int activity_main=0x7f030000;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -39,6 +45,31 @@ public final class R {
         public static final int title_activity_main=0x7f050002;
     }
     public static final class style {
-        public static final int AppTheme=0x7f070000;
+        /** 
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
+         */
+        public static final int AppBaseTheme=0x7f070000;
+        /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+         */
+        public static final int AppTheme=0x7f070001;
     }
 }

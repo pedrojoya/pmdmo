@@ -1,8 +1,7 @@
 package es.iessaladillo.pedrojoya.pr011;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,45 +11,40 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	// Variables a nivel de clase.
-	private ListView lstAlumnos;
+    // Vistas.
+    private ListView lstAlumnos;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// Llamo al onCreate del padre.
-		super.onCreate(savedInstanceState);
-		// Establezco el layout que mostrará la actividad.
-		setContentView(R.layout.main);
-		// Obtengo e inicializo las vistas.
-		getVistas();
-	}
+    // Al crear la actividad.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	private void getVistas() {
-		lstAlumnos = (ListView) findViewById(R.id.lstAlumnos);
-		// Obtengo los datos para el adaptador de la lista.
-		String[] alumnos = getResources().getStringArray(R.array.alumnos);
-		// Creo el adaptador que usará dichos datos y un layout estándar.
-		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, alumnos);
-		lstAlumnos.setAdapter(adaptador);
-		// Creo el listener para cuando se hace click en un item de la lista.
-		lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> lst, View vistafila,
-					int posicion, long id) {
-				// Informo al usuario sobre que alumno ha pulsado.
-				Toast.makeText(
-						lst.getContext(),
-						getResources().getString(R.string.ha_pulsado_sobre)
-								+ lst.getItemAtPosition(posicion),
-						Toast.LENGTH_LONG).show();
-			}
-		});
-	}
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        lstAlumnos = (ListView) findViewById(R.id.lstAlumnos);
+        // Se obtienen los datos para el adaptador de la lista.
+        String[] alumnos = getResources().getStringArray(R.array.alumnos);
+        // Se crea el adaptador ArrayAdapter con layout estándar.
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, alumnos);
+        lstAlumnos.setAdapter(adaptador);
+        // Se establece el listener para cuando se hace click en un item de la
+        // lista.
+        lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> lst, View v, int position,
+                    long id) {
+                // Se informa al usuario sobre qué alumno ha pulsado.
+                Toast.makeText(
+                        getApplicationContext(),
+                        getResources().getString(R.string.ha_pulsado_sobre)
+                                + lst.getItemAtPosition(position),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
