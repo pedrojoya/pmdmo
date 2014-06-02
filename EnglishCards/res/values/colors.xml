@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tarjeta -->
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow_1">#d4d4d4</color>
+    <color name="card_shadow_2">#dddddd</color>
+    <color name="card_detailing">#eee</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- toast correcto -->
+    <color name="toast_correcto_textcolor">#5e1f7e</color>
+    <color name="toast_shadowcolor">#BBFFFFFF</color>
+    <color name="toast_correcto_fondo">#e4e8f0</color>
+    <color name="toast_correcto_borde">#556699</color>
+
+    <!-- toast incorrecto -->
+    <color name="toast_incorrecto_textcolor">#bf1616</color>
+    <color name="toast_incorrecto_fondo">#f2dfdf</color>
+    <color name="toast_incorrecto_borde">#da2929</color>
+
+    <!-- botón -->
+    <color name="boton_textcolor">#fff</color>
+    <color name="boton_normal_startcolor">#556699</color>
+    <color name="boton_normal_endcolor">#09c</color>
+    <color name="boton_pressed_startcolor">#690</color>
+    <color name="boton_pressed_endcolor">#9c0</color>
+    <color name="boton_disabled">#b6b6b6</color>
+    
+</resources>

@@ -1,14 +1,12 @@
 <resources>
-    <string name="app_name">Toast personalizado</string>
+
+    <string name="app_name">Toast Personalizado</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Toast Personalizado</string>
+    <string name="esta_tostada_esta_personalizada">Esta tostada está personalizada</string>
+    <string name="icono">Icono</string>
     <string name="toast_creado_dinamicamente">Toast creado dinámicamente</string>
     <string name="toast_con_layout_propio">Toast con layout propio</string>
-    <string name="calificar">Calificar</string>
-    <string name="opcion">Opción</string>
-    <string name="escoge_manzana">Escoge "manzana"</string>
-    <string name="tu_respuesta_es_correcta">Correcto</string>
-    <string name="lo_sentimos_la_respuesta_es_incorrecta">Incorrecto</string>
-    <string name="comprobar">Comprobar</string>
-    <string name="correcto">Correcto</string>
-    <string name="incorrecto">Incorrecto</string>
+
 </resources>

@@ -2,6 +2,8 @@ package es.iessaladillo.pedrojoya.pr022;
 
 import java.util.Locale;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,17 +13,13 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements OnInitListener,
-        AnimationListener {
+public class MainActivity extends Activity implements OnInitListener {
 
     // Clase interna para almacenar el estado de la actividad.
     private class Estado {
@@ -38,8 +36,6 @@ public class MainActivity extends Activity implements OnInitListener,
     private Estado mEstado;
     private TextToSpeech mTTS;
     private boolean mTTSPreparado = false;
-    private Animation flipToMiddle;
-    private Animation flipFromMiddle;
 
     // Vistas.
     private RelativeLayout[] tarjetas;
@@ -67,13 +63,6 @@ public class MainActivity extends Activity implements OnInitListener,
         // La actividad actuará como listener cuando el sintetizador
         // de voz esté preparado.
         mTTS = new TextToSpeech(this, this);
-        // Se cargan las animaciones de comprobación.
-        flipToMiddle = AnimationUtils.loadAnimation(this,
-                R.anim.tarjeta_flip_to_middle);
-        flipToMiddle.setAnimationListener(this);
-        flipFromMiddle = AnimationUtils.loadAnimation(this,
-                R.anim.tarjeta_flip_from_middle);
-        flipFromMiddle.setAnimationListener(this);
     }
 
     // Cuando la actividad pasa a primer plano.
@@ -165,7 +154,7 @@ public class MainActivity extends Activity implements OnInitListener,
         // Se desactiva el botón de comprobación.
         btnComprobar.setEnabled(false);
         // Se realiza la animación inicial.
-        tarjetas[mEstado.numRespuestaSeleccionada].startAnimation(flipToMiddle);
+        animarGiroInicial(tarjetas[mEstado.numRespuestaSeleccionada]);
     }
 
     // Cuando ya está inicializado el sintetizador de voz.
@@ -211,9 +200,7 @@ public class MainActivity extends Activity implements OnInitListener,
             // Se desmarca el RadioButton.
             rbOpcion[numTarjeta].setChecked(false);
             // Se realiza la animación de la tarjeta.
-            Animation disminuir = AnimationUtils.loadAnimation(
-                    MainActivity.this, R.anim.tarjeta_disminuir);
-            tarjetas[numTarjeta].startAnimation(disminuir);
+            animarDisminuir(tarjetas[numTarjeta]);
         }
     }
 
@@ -228,9 +215,7 @@ public class MainActivity extends Activity implements OnInitListener,
         // Se selecciona el RadioButton.
         rbOpcion[numTarjeta].setChecked(true);
         // Se realiza la animación de la tarjeta.
-        Animation agrandar = AnimationUtils.loadAnimation(MainActivity.this,
-                R.anim.tarjeta_agrandar);
-        tarjetas[numTarjeta].startAnimation(agrandar);
+        animarAgrandar(tarjetas[numTarjeta]);
         // Se activa el botón de comprobación (ahora que se ha seleccionado
         // alguna tarjeta).
         btnComprobar.setEnabled(true);
@@ -263,58 +248,6 @@ public class MainActivity extends Activity implements OnInitListener,
                 + anchuraDPI + "dpi\nAltura: " + alturaDPI);
     }
 
-    // Cuando termina de ejecutarse una animación.
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        // Si ha finalizado la primera animación del flip.
-        if (animation == flipToMiddle) {
-            // Se cambia la imagen y el texto de la tarjeta dependiendo de si ha
-            // acertado o no.
-            if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
-                    .getCorrecta()) {
-                imgOpcion[mEstado.numRespuestaSeleccionada]
-                        .setImageResource(R.drawable.correcto);
-            } else {
-                imgOpcion[mEstado.numRespuestaSeleccionada]
-                        .setImageResource(R.drawable.incorrecto);
-            }
-            // Se realiza la segunda animación.
-            tarjetas[mEstado.numRespuestaSeleccionada].clearAnimation();
-            tarjetas[mEstado.numRespuestaSeleccionada]
-                    .startAnimation(flipFromMiddle);
-        }
-        // Si ha finalizado la segunda animación del flip.
-        else if (animation == flipFromMiddle) {
-            // Si ha acertado.
-            if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
-                    .getCorrecta()) {
-                // Se espera un segundo y se muestra otro ejercicio.
-                btnComprobar.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Se resetea el ejercicio.
-                        resetEjercicio();
-                        // Se obtiene y muestra un nuevo ejercicio.
-                        mEstado.ejercicio = BD.getRandomEjercicio();
-                        showEjercicio();
-                    }
-                }, INTERVALO_ENTRE_EJERCICIOS_MS);
-            }
-            // Si no ha acertado.
-            else {
-                // Si sólo queda la tarjeta correcta comprobar, se marca y se
-                // comprueba automáticamente.
-                if (soloQuedaCorrecta()) {
-                    marcarTarjeta(mEstado.ejercicio.getCorrecta());
-                    checkRespuestaCorrecta();
-                } else {
-                    // Se habilita el botón de comprobación.
-                    btnComprobar.setEnabled(true);
-                }
-            }
-        }
-    }
-
     // Retorna si solo queda por marcar la tarjeta correcta.
     private boolean soloQuedaCorrecta() {
         for (int i = 0; i < Ejercicio.NUM_RESPUESTAS; i++) {
@@ -323,14 +256,6 @@ public class MainActivity extends Activity implements OnInitListener,
             }
         }
         return true;
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation arg0) {
-    }
-
-    @Override
-    public void onAnimationStart(Animation arg0) {
     }
 
     // Clase Listener para las tarjetas.
@@ -352,4 +277,143 @@ public class MainActivity extends Activity implements OnInitListener,
         }
 
     }
+
+    // Realiza el giro inicial de la animación flip.
+    private void animarGiroInicial(final View v) {
+        // Se gira la vista 90 grados.
+        v.animate().scaleX(0.0f).setDuration(500)
+                .setListener(new AnimatorListener() {
+
+                    @Override
+                    public void onAnimationStart(Animator arg0) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator arg0) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator arg0) {
+                        // Se cambia la imagen y el texto de la tarjeta
+                        // dependiendo de si ha
+                        // acertado o no.
+                        if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
+                                .getCorrecta()) {
+                            imgOpcion[mEstado.numRespuestaSeleccionada]
+                                    .setImageResource(R.drawable.correcto);
+                        } else {
+                            imgOpcion[mEstado.numRespuestaSeleccionada]
+                                    .setImageResource(R.drawable.incorrecto);
+                        }
+                        // Se realiza la segunda animación.
+                        v.clearAnimation();
+                        animarGiroFinal(v);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator arg0) {
+                    }
+                });
+    }
+
+    // Realiza el giro final de la animación flip.
+    private void animarGiroFinal(final View v) {
+        v.animate().scaleX(1.0f).setDuration(500)
+                .setListener(new AnimatorListener() {
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        // Si ha acertado.
+                        if (mEstado.numRespuestaSeleccionada == mEstado.ejercicio
+                                .getCorrecta()) {
+                            // Se espera un segundo y se muestra otro ejercicio.
+                            btnComprobar.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Se resetea el ejercicio.
+                                    resetEjercicio();
+                                    // Se obtiene y muestra un nuevo ejercicio.
+                                    mEstado.ejercicio = BD.getRandomEjercicio();
+                                    showEjercicio();
+                                }
+                            }, INTERVALO_ENTRE_EJERCICIOS_MS);
+                        }
+                        // Si no ha acertado.
+                        else {
+                            // Si sólo queda la tarjeta correcta comprobar, se
+                            // marca y se
+                            // comprueba automáticamente.
+                            if (soloQuedaCorrecta()) {
+                                marcarTarjeta(mEstado.ejercicio.getCorrecta());
+                                checkRespuestaCorrecta();
+                            } else {
+                                // Se habilita el botón de comprobación.
+                                btnComprobar.setEnabled(true);
+                            }
+                        }
+                        v.clearAnimation();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+                });
+    }
+
+    // Realiza la animación de agrandar la tarjeta.
+    private void animarAgrandar(final View v) {
+        v.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200)
+                .setListener(new AnimatorListener() {
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        v.clearAnimation();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+                });
+    }
+
+    // Realiza la animación de disminuir la tarjeta.
+    private void animarDisminuir(final View v) {
+        v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200)
+                .setListener(new AnimatorListener() {
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        v.clearAnimation();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+                });
+    }
+
 }
