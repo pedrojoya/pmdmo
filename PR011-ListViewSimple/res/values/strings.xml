@@ -15,4 +15,7 @@
         <item>Atanasio</item>
 	</string-array>
     <string name="ha_pulsado_sobre">"Ha pulsado sobre "</string>
+    <string name="nombre">(Nombre)</string>
+    <string name="agregar">Agregar</string>
+    <string name="no_hay_alumnos">No hay alumnos</string>
 </resources>
