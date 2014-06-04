@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="padding_medium">8dp</dimen>
+    <!-- Tarjeta (fondo) -->
+    <dimen name="tarjeta_strokeWidth">2.0dp</dimen>
+    <dimen name="tarjeta_cornersRadius">2.0dp</dimen>
+    <dimen name="tarjeta_padding">5dp</dimen>
+    <!-- Tarjeta -->
+    <dimen name="tarjeta_foto_width">100dp</dimen>
+    <dimen name="tarjeta_foto_height">100dp</dimen>
+    <dimen name="tarjeta_margin">8dp</dimen>
+    
+    
+</resources>

@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 
         public AdaptadorAlumno(Context contexto, Alumno[] alumnos) {
             // Debo llamar al constructor de ArrayAdapter.
-            super(contexto, R.layout.fila, alumnos);
+            super(contexto, R.layout.tarjeta, alumnos);
             // Realizo una copia local de los datos pasados al constructor.
             this.alumnos = alumnos;
             // Obtengo el objeto inflador.
@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
             // Si no puedo reciclar.
             if (convertView == null) {
                 // Inflo el layout y obtengo la vista-fila.
-                fila = inflador.inflate(R.layout.fila, parent, false);
+                fila = inflador.inflate(R.layout.tarjeta, parent, false);
                 // Creo un nuevo contenedor de vistas.
                 contenedor = new ContenedorVistas();
                 // Guardo en el contenedor las referencias a las vistas
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
         // Llamo al onCreate del padre.
         super.onCreate(savedInstanceState);
         // Establezco el layout que mostrará la actividad.
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
         // Obtengo las vistas.
         getVistas();
     }
@@ -103,8 +103,9 @@ public class MainActivity extends Activity {
     private void getVistas() {
         lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
         Alumno[] alumnos = new Alumno[] {
-                new Alumno("Pedro", 22, "CFGS", "2º"),
-                new Alumno("Antonio", 16, "CFGM", "1º") };
+                new Alumno("Germán Ginés Gómez Giménez", 22, "CFGS DAM", "2ºA"),
+                new Alumno("Baldomero LLégate Ligero", 16, "CFGM SMR", "1ºA") };
+        // lstAlumnos.setEmptyView((TextView) findViewById(R.id.lblEmpty));
         lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
         lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> lst, View v, int posicion,
