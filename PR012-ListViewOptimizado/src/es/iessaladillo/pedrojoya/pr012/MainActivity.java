@@ -1,128 +1,146 @@
 package es.iessaladillo.pedrojoya.pr012;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnItemClickListener {
 
-    // Variables a nivel de clase.
+    // Vistas.
     private ListView lstAlumnos;
 
-    // Clase interna privada contenedor de vistas.
-    private class ContenedorVistas {
-        // Variables miembro.
-        TextView lblNombre;
-        TextView lblCiclo;
-        TextView lblCurso;
+    // Al crear la actividad.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
+    }
+
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
+        lstAlumnos.setEmptyView((TextView) findViewById(R.id.lblEmpty));
+        // Se crea el ArrayList de datos, el adaptador y se asigna a la lista.
+        ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+        alumnos.add(new Alumno(R.drawable.foto1, "Dolores Fuertes Barriga", 22,
+                "CFGS DAM", "2ºA", false, 7, 8));
+        alumnos.add(new Alumno(R.drawable.foto2, "Baldomero LLégate Ligero",
+                16, "CFGM SMR", "1ºA", true, 4, 6));
+        alumnos.add(new Alumno(R.drawable.foto3, "Jorge Jiménez Jaén", 20,
+                "CFGM DAM", "1ºA", false, 8, 9));
+        lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
+        lstAlumnos.setOnItemClickListener(this);
+    }
+
+    // Al pulsar sobre un elemento de la lista.
+    @Override
+    public void onItemClick(AdapterView<?> lst, View v, int position, long id) {
+        // Se muestra el alumno sobre el que se ha pulsado.
+        Alumno alumno = (Alumno) lst.getItemAtPosition(position);
+        Toast.makeText(this, alumno.getNombre(), Toast.LENGTH_SHORT).show();
     }
 
     // Clase interna privada para Adaptador.
     private class AdaptadorAlumno extends ArrayAdapter<Alumno> {
 
-        // Variables miembro.
-        Alumno[] alumnos; // Alumnos (datos).
-        LayoutInflater inflador; // Para inflar el layout de la fila.
+        // Clase interna privada contenedor de vistas.
+        private class ContenedorVistas {
+            // Variables miembro.
+            ImageView imgFoto;
+            TextView lblNombre;
+            TextView lblCiclo;
+            TextView lblCurso;
+            TextView lblEdad;
+            TextView lblRepetidor;
+            TextView lblNotaAndroid;
+            TextView lblNotaMultihilo;
+        }
 
-        public AdaptadorAlumno(Context contexto, Alumno[] alumnos) {
-            // Debo llamar al constructor de ArrayAdapter.
+        // Variables miembro.
+        ArrayList<Alumno> alumnos;
+        LayoutInflater inflador;
+
+        // Constructor.
+        public AdaptadorAlumno(Context contexto, ArrayList<Alumno> alumnos) {
             super(contexto, R.layout.tarjeta, alumnos);
-            // Realizo una copia local de los datos pasados al constructor.
             this.alumnos = alumnos;
-            // Obtengo el objeto inflador.
+            // Se obtiene el objeto inflador de layouts.
             inflador = LayoutInflater.from(contexto);
         }
 
+        // Antes de "pintar" cada fila.
         @Override
         public View getView(int posicion, View convertView, ViewGroup parent) {
             ContenedorVistas contenedor;
-            // Creo la vista-fila y le asigno la de reciclar.
-            View fila = convertView;
-            // Si no puedo reciclar.
+            // Si no se puede reciclar.
             if (convertView == null) {
-                // Inflo el layout y obtengo la vista-fila.
-                fila = inflador.inflate(R.layout.tarjeta, parent, false);
-                // Creo un nuevo contenedor de vistas.
+                // Se infla el layout.
+                convertView = inflador.inflate(R.layout.tarjeta, parent, false);
+                // Se crea el contenedor de vistas.
                 contenedor = new ContenedorVistas();
-                // Guardo en el contenedor las referencias a las vistas
-                // de dentro de la vista-fila.
-                contenedor.lblNombre = (TextView) fila
+                // Se obtienen las vistas y se guardan en el contenedor.
+                contenedor.imgFoto = (ImageView) convertView
+                        .findViewById(R.id.imgFoto);
+                contenedor.lblNombre = (TextView) convertView
                         .findViewById(R.id.lblNombre);
-                contenedor.lblCiclo = (TextView) fila
+                contenedor.lblCiclo = (TextView) convertView
                         .findViewById(R.id.lblCiclo);
-                contenedor.lblCurso = (TextView) fila
+                contenedor.lblCurso = (TextView) convertView
                         .findViewById(R.id.lblCurso);
-                // Guardo el contenedor en la propiedad Tag de la vista-fila.
-                fila.setTag(contenedor);
-            } else { // Si puedo reciclar.
-                     // Obtengo el contenedor desde la prop. Tag de la
-                     // vista-fila.
-                contenedor = (ContenedorVistas) fila.getTag();
+                contenedor.lblEdad = (TextView) convertView
+                        .findViewById(R.id.lblEdad);
+                contenedor.lblRepetidor = (TextView) convertView
+                        .findViewById(R.id.lblRepetidor);
+                contenedor.lblNotaAndroid = (TextView) convertView
+                        .findViewById(R.id.lblNotaAndroid);
+                contenedor.lblNotaMultihilo = (TextView) convertView
+                        .findViewById(R.id.lblNotaMultihilo);
+                convertView.setTag(contenedor);
             }
-            // Escribo los datos en las vistas de la fila.
-            contenedor.lblNombre.setText(alumnos[posicion].getNombre());
-            contenedor.lblCiclo.setText(alumnos[posicion].getCiclo());
-            contenedor.lblCurso.setText(alumnos[posicion].getCurso());
-            if (alumnos[posicion].getEdad() < 18) {
-                contenedor.lblNombre.setTextColor(getResources().getColor(
-                        R.color.rojo));
+            // Si se puede reciclar.
+            else {
+                // Se obtiene el contenedor de vistas desde la vista reciclada.
+                contenedor = (ContenedorVistas) convertView.getTag();
+            }
+            // Se obtiene el alumno que debe mostrar el elemento.
+            Alumno alumno = alumnos.get(posicion);
+            // Se configuran las vista según los datos del alumno.
+            contenedor.imgFoto.setImageResource(alumno.getFoto());
+            contenedor.lblNombre.setText(alumno.getNombre());
+            contenedor.lblCiclo.setText(alumno.getCiclo());
+            contenedor.lblCurso.setText(alumno.getCurso());
+            contenedor.lblEdad.setText(alumno.getEdad() + "");
+            contenedor.lblNotaAndroid.setText(alumno.getNotaAndroid() + "");
+            contenedor.lblNotaMultihilo.setText(alumno.getNotaMultihilo() + "");
+            if (alumno.getEdad() < 18) {
+                contenedor.lblEdad
+                        .setBackgroundResource(R.drawable.edad_fondo_menor);
             } else {
-                contenedor.lblNombre.setTextColor(getResources().getColor(
-                        R.color.negro));
+                contenedor.lblEdad
+                        .setBackgroundResource(R.drawable.edad_fondo_mayor);
             }
-            return fila;
+            if (alumno.isRepetidor()) {
+                contenedor.lblRepetidor.setVisibility(View.VISIBLE);
+            } else {
+                contenedor.lblRepetidor.setVisibility(View.INVISIBLE);
+            }
+            // Se retorna la vista-fila.
+            return convertView;
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        // Llamo al onCreate del padre.
-        super.onCreate(savedInstanceState);
-        // Establezco el layout que mostrará la actividad.
-        setContentView(R.layout.activity_main);
-        // Obtengo las vistas.
-        getVistas();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    private void getVistas() {
-        lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
-        Alumno[] alumnos = new Alumno[] {
-                new Alumno("Germán Ginés Gómez Giménez", 22, "CFGS DAM", "2ºA"),
-                new Alumno("Baldomero LLégate Ligero", 16, "CFGM SMR", "1ºA") };
-        // lstAlumnos.setEmptyView((TextView) findViewById(R.id.lblEmpty));
-        lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
-        lstAlumnos.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> lst, View v, int posicion,
-                    long id) {
-                // Obtengo el alumno sobre el que se ha pulsado.
-                Alumno alumno = (Alumno) lst.getItemAtPosition(posicion);
-                // Informo al usuario.
-                mostrarTostada(alumno.getNombre() + ", " + alumno.getCurso()
-                        + alumno.getCiclo());
-            }
-        });
-
-    }
-
-    private void mostrarTostada(String mensaje) {
-        Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT)
-                .show();
     }
 
 }

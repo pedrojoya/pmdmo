@@ -7,6 +7,8 @@
     <!-- Tarjeta -->
     <dimen name="tarjeta_foto_width">100dp</dimen>
     <dimen name="tarjeta_foto_height">100dp</dimen>
+    <dimen name="tarjeta_nombre_padding">4dp</dimen>
+    <dimen name="tarjeta_divider_height">1dp</dimen>
     <dimen name="tarjeta_margin">8dp</dimen>
     
     

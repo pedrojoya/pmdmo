@@ -24,14 +24,16 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f050007;
+        public static final int activity_horizontal_margin=0x7f050009;
         public static final int padding_medium=0x7f050000;
         public static final int tarjeta_cornersRadius=0x7f050002;
+        public static final int tarjeta_divider_height=0x7f050007;
         public static final int tarjeta_foto_height=0x7f050005;
         /**  Tarjeta 
          */
         public static final int tarjeta_foto_width=0x7f050004;
-        public static final int tarjeta_margin=0x7f050006;
+        public static final int tarjeta_margin=0x7f050008;
+        public static final int tarjeta_nombre_padding=0x7f050006;
         public static final int tarjeta_padding=0x7f050003;
         /**  Tarjeta (fondo) 
          */
@@ -39,12 +41,16 @@ public final class R {
     }
     public static final class drawable {
         public static final int asignatura_fondo=0x7f020000;
-        public static final int edad_fondo=0x7f020001;
-        public static final int foto=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int nota_fondo=0x7f020004;
-        public static final int tag_fondo=0x7f020005;
-        public static final int tarjeta_fondo=0x7f020006;
+        public static final int edad_fondo_mayor=0x7f020001;
+        public static final int edad_fondo_menor=0x7f020002;
+        public static final int foto=0x7f020003;
+        public static final int foto1=0x7f020004;
+        public static final int foto2=0x7f020005;
+        public static final int foto3=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int nota_fondo=0x7f020008;
+        public static final int tag_fondo=0x7f020009;
+        public static final int tarjeta_fondo=0x7f02000a;
     }
     public static final class id {
         public static final int divider=0x7f090005;

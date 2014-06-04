@@ -1,51 +1,93 @@
 package es.iessaladillo.pedrojoya.pr012;
 
+
 // Clase para modelar el alumno.
 public class Alumno {
-	// Variables miembro.
-	private String nombre;
-	private int edad;
-	private String ciclo;
-	private String curso;
+    // Variables miembro.
+    private int foto;
+    private String nombre;
+    private int edad;
+    private String ciclo;
+    private String curso;
+    private boolean repetidor;
+    private int notaAndroid;
+    private int notaMultihilo;
 
-	// Constructor.
-	public Alumno(String nombre, int edad, String ciclo, String curso) {
-		this.nombre = nombre;
-		this.edad = edad;
-		this.ciclo = ciclo;
-		this.curso = curso;
-	}
+    // Constructor.
+    public Alumno(int foto, String nombre, int edad, String ciclo,
+            String curso, boolean repetidor, int notaAndroid, int notaMultihilo) {
+        this.foto = foto;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.ciclo = ciclo;
+        this.curso = curso;
+        this.repetidor = repetidor;
+        this.notaAndroid = notaAndroid;
+        this.notaMultihilo = notaMultihilo;
+    }
 
-	// Getters y Setters.
-	protected String getNombre() {
-		return nombre;
-	}
+    public int getFoto() {
+        return foto;
+    }
 
-	protected void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setFoto(int foto) {
+        this.foto = foto;
+    }
 
-	protected int getEdad() {
-		return edad;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	protected void setEdad(int edad) {
-		this.edad = edad;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	protected String getCiclo() {
-		return ciclo;
-	}
+    public int getEdad() {
+        return edad;
+    }
 
-	protected void setCiclo(String ciclo) {
-		this.ciclo = ciclo;
-	}
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
 
-	protected String getCurso() {
-		return curso;
-	}
+    public String getCiclo() {
+        return ciclo;
+    }
 
-	protected void setCurso(String curso) {
-		this.curso = curso;
-	}
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public boolean isRepetidor() {
+        return repetidor;
+    }
+
+    public void setRepetidor(boolean repetidor) {
+        this.repetidor = repetidor;
+    }
+
+    public int getNotaAndroid() {
+        return notaAndroid;
+    }
+
+    public void setPmdmo(int pmdmo) {
+        this.notaAndroid = pmdmo;
+    }
+
+    public int getNotaMultihilo() {
+        return notaMultihilo;
+    }
+
+    public void setPspro(int pspro) {
+        this.notaMultihilo = pspro;
+    }
+
 }

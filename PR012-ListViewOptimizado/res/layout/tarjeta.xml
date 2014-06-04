@@ -24,16 +24,14 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imgFoto"
         android:gravity="center"
-        android:padding="4dp"
-        android:text="Mario Alberto Fernández Gil de Sagredo"
-        android:textStyle="bold"
+        android:padding="@dimen/tarjeta_nombre_padding"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:ignore="HardcodedText" />
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/tarjeta_divider_height"
         android:layout_alignBottom="@+id/imgFoto"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/imgFoto"
@@ -44,11 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/divider"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:layout_marginLeft="@dimen/tarjeta_margin"
         android:layout_toRightOf="@+id/imgFoto"
         android:background="@drawable/tag_fondo"
-        android:text="CFGS DAM"
         android:textAllCaps="true" />
 
     <TextView
@@ -56,11 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/divider"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:layout_marginLeft="@dimen/tarjeta_margin"
         android:layout_toRightOf="@+id/lblCiclo"
         android:background="@drawable/tag_fondo"
-        android:text="2º"
         android:textAllCaps="true" />
 
     <TextView
@@ -68,17 +64,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/divider"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:layout_marginLeft="@dimen/tarjeta_margin"
         android:layout_toRightOf="@+id/lblCurso"
-        android:background="@drawable/edad_fondo"
-        android:textColor="#FFFFFF"
-        android:text="19" />
+        android:background="@drawable/edad_fondo_mayor"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/lblRepetidor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/lblNotaMultihilo"
         android:layout_alignParentRight="true"
         android:background="#0000FF"
         android:paddingBottom="5dp"
@@ -86,11 +82,10 @@
         android:paddingRight="40dp"
         android:paddingTop="5dp"
         android:rotation="-45"
-        android:layout_alignBottom="@+id/lblNotaMultihilo"
         android:text="REP"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/white"
         android:translationX="30dp"
-        android:translationY="-5dp"
+        android:translationY="-10dp"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -98,48 +93,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/tarjeta_margin"
         android:background="@drawable/asignatura_fondo"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAllCaps="true" 
-        android:text="PMDMO" />    
+        android:text="PMDMO"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white" />
+
     <TextView
         android:id="@+id/lblNotaAndroid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblAndroid"
         android:layout_alignLeft="@+id/lblAndroid"
         android:layout_alignRight="@+id/lblAndroid"
-        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/lblAndroid"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
         android:background="@drawable/nota_fondo"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center"
-        android:text="7" />    
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <TextView
         android:id="@+id/lblMutihilo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="@dimen/tarjeta_margin"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/lblAndroid"
         android:background="@drawable/asignatura_fondo"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="PSPRO"
         android:textAllCaps="true"
-        android:layout_toRightOf="@+id/lblAndroid" 
-        android:text="PSPRO" />    
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white" />
+
     <TextView
         android:id="@+id/lblNotaMultihilo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblMutihilo"
         android:layout_alignLeft="@+id/lblMutihilo"
         android:layout_alignRight="@+id/lblMutihilo"
-        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/lblMutihilo"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
         android:background="@drawable/nota_fondo"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center"
-        android:text="8" />    
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>
