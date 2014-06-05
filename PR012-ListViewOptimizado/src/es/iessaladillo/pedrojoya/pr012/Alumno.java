@@ -1,6 +1,5 @@
 package es.iessaladillo.pedrojoya.pr012;
 
-
 // Clase para modelar el alumno.
 public class Alumno {
     // Variables miembro.
@@ -78,16 +77,16 @@ public class Alumno {
         return notaAndroid;
     }
 
-    public void setPmdmo(int pmdmo) {
-        this.notaAndroid = pmdmo;
+    public void setNotaAndroid(int notaAndroid) {
+        this.notaAndroid = notaAndroid;
     }
 
     public int getNotaMultihilo() {
         return notaMultihilo;
     }
 
-    public void setPspro(int pspro) {
-        this.notaMultihilo = pspro;
+    public void setNotaMultihilo(int notaMultihilo) {
+        this.notaMultihilo = notaMultihilo;
     }
 
 }

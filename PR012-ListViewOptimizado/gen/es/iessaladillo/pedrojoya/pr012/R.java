@@ -13,6 +13,7 @@ public final class R {
     public static final class color {
         public static final int negro=0x7f040001;
         public static final int rojo=0x7f040000;
+        public static final int tarjeta_repetidor_background=0x7f040003;
         /**  Tarjeta 
          */
         public static final int tarjeta_strokeColor=0x7f040002;
@@ -24,7 +25,7 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f050009;
+        public static final int activity_horizontal_margin=0x7f05000d;
         public static final int padding_medium=0x7f050000;
         public static final int tarjeta_cornersRadius=0x7f050002;
         public static final int tarjeta_divider_height=0x7f050007;
@@ -35,6 +36,10 @@ public final class R {
         public static final int tarjeta_margin=0x7f050008;
         public static final int tarjeta_nombre_padding=0x7f050006;
         public static final int tarjeta_padding=0x7f050003;
+        public static final int tarjeta_repetidor_horizontalPadding=0x7f05000a;
+        public static final int tarjeta_repetidor_translationX=0x7f05000b;
+        public static final int tarjeta_repetidor_translationY=0x7f05000c;
+        public static final int tarjeta_repetidor_verticalPadding=0x7f050009;
         /**  Tarjeta (fondo) 
          */
         public static final int tarjeta_strokeWidth=0x7f050001;

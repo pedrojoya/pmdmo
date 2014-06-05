@@ -76,16 +76,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/lblNotaMultihilo"
         android:layout_alignParentRight="true"
-        android:background="#0000FF"
-        android:paddingBottom="5dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:paddingTop="5dp"
+        android:background="@color/tarjeta_repetidor_background"
+        android:paddingBottom="@dimen/tarjeta_repetidor_verticalPadding"
+        android:paddingLeft="@dimen/tarjeta_repetidor_horizontalPadding"
+        android:paddingRight="@dimen/tarjeta_repetidor_horizontalPadding"
+        android:paddingTop="@dimen/tarjeta_repetidor_verticalPadding"
         android:rotation="-45"
         android:text="REP"
         android:textColor="@android:color/white"
-        android:translationX="30dp"
-        android:translationY="-10dp"
+        android:translationX="@dimen/tarjeta_repetidor_translationX"
+        android:translationY="@dimen/tarjeta_repetidor_translationY"
         tools:ignore="HardcodedText" />
 
     <TextView
