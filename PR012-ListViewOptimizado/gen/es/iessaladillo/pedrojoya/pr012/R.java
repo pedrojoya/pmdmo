@@ -25,7 +25,7 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f05000d;
+        public static final int activity_horizontal_margin=0x7f050010;
         public static final int padding_medium=0x7f050000;
         public static final int tarjeta_cornersRadius=0x7f050002;
         public static final int tarjeta_divider_height=0x7f050007;
@@ -34,12 +34,15 @@ public final class R {
          */
         public static final int tarjeta_foto_width=0x7f050004;
         public static final int tarjeta_margin=0x7f050008;
+        public static final int tarjeta_modulo_textSize=0x7f05000e;
+        public static final int tarjeta_modulo_width=0x7f05000f;
         public static final int tarjeta_nombre_padding=0x7f050006;
         public static final int tarjeta_padding=0x7f050003;
-        public static final int tarjeta_repetidor_horizontalPadding=0x7f05000a;
-        public static final int tarjeta_repetidor_translationX=0x7f05000b;
-        public static final int tarjeta_repetidor_translationY=0x7f05000c;
-        public static final int tarjeta_repetidor_verticalPadding=0x7f050009;
+        public static final int tarjeta_repetidor_horizontalPadding=0x7f05000b;
+        public static final int tarjeta_repetidor_textSize=0x7f050009;
+        public static final int tarjeta_repetidor_translationX=0x7f05000c;
+        public static final int tarjeta_repetidor_translationY=0x7f05000d;
+        public static final int tarjeta_repetidor_verticalPadding=0x7f05000a;
         /**  Tarjeta (fondo) 
          */
         public static final int tarjeta_strokeWidth=0x7f050001;
@@ -60,18 +63,31 @@ public final class R {
     public static final class id {
         public static final int divider=0x7f090005;
         public static final int imgFoto=0x7f090002;
-        public static final int lblAndroid=0x7f09000a;
         public static final int lblCiclo=0x7f090004;
         public static final int lblCurso=0x7f090006;
         public static final int lblEdad=0x7f090007;
         public static final int lblEmpty=0x7f090001;
-        public static final int lblMutihilo=0x7f09000c;
+        public static final int lblModulo1=0x7f09000a;
+        public static final int lblModulo2=0x7f09000b;
+        public static final int lblModulo3=0x7f09000e;
+        public static final int lblModulo4=0x7f090010;
+        public static final int lblModulo5=0x7f090012;
+        public static final int lblModulo6=0x7f090014;
+        public static final int lblModulo7=0x7f090016;
+        public static final int lblModulo8=0x7f090018;
         public static final int lblNombre=0x7f090003;
-        public static final int lblNotaAndroid=0x7f09000b;
-        public static final int lblNotaMultihilo=0x7f090009;
+        public static final int lblNotaModulo1=0x7f09000c;
+        public static final int lblNotaModulo2=0x7f09000d;
+        public static final int lblNotaModulo3=0x7f09000f;
+        public static final int lblNotaModulo4=0x7f090011;
+        public static final int lblNotaModulo5=0x7f090013;
+        public static final int lblNotaModulo6=0x7f090015;
+        public static final int lblNotaModulo7=0x7f090017;
+        public static final int lblNotaModulo8=0x7f090019;
         public static final int lblRepetidor=0x7f090008;
         public static final int lstAlumnos=0x7f090000;
-        public static final int menu_settings=0x7f09000d;
+        public static final int menu_settings=0x7f09001a;
+        public static final int vCentroHorizontal=0x7f090009;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

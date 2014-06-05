@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr012;
 
+import java.util.HashMap;
+
 // Clase para modelar el alumno.
 public class Alumno {
     // Variables miembro.
@@ -9,20 +11,18 @@ public class Alumno {
     private String ciclo;
     private String curso;
     private boolean repetidor;
-    private int notaAndroid;
-    private int notaMultihilo;
+    private HashMap<String, Integer> notas;
 
     // Constructor.
     public Alumno(int foto, String nombre, int edad, String ciclo,
-            String curso, boolean repetidor, int notaAndroid, int notaMultihilo) {
+            String curso, boolean repetidor, HashMap<String, Integer> notas) {
         this.foto = foto;
         this.nombre = nombre;
         this.edad = edad;
         this.ciclo = ciclo;
         this.curso = curso;
         this.repetidor = repetidor;
-        this.notaAndroid = notaAndroid;
-        this.notaMultihilo = notaMultihilo;
+        this.notas = notas;
     }
 
     public int getFoto() {
@@ -73,20 +73,12 @@ public class Alumno {
         this.repetidor = repetidor;
     }
 
-    public int getNotaAndroid() {
-        return notaAndroid;
+    public HashMap<String, Integer> getNotas() {
+        return notas;
     }
 
-    public void setNotaAndroid(int notaAndroid) {
-        this.notaAndroid = notaAndroid;
-    }
-
-    public int getNotaMultihilo() {
-        return notaMultihilo;
-    }
-
-    public void setNotaMultihilo(int notaMultihilo) {
-        this.notaMultihilo = notaMultihilo;
+    public void setNotas(HashMap<String, Integer> notas) {
+        this.notas = notas;
     }
 
 }

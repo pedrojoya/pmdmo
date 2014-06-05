@@ -74,8 +74,8 @@
         android:id="@+id/lblRepetidor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/lblNotaMultihilo"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:background="@color/tarjeta_repetidor_background"
         android:paddingBottom="@dimen/tarjeta_repetidor_verticalPadding"
         android:paddingLeft="@dimen/tarjeta_repetidor_horizontalPadding"
@@ -84,60 +84,247 @@
         android:rotation="-45"
         android:text="REP"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_repetidor_textSize"
         android:translationX="@dimen/tarjeta_repetidor_translationX"
         android:translationY="@dimen/tarjeta_repetidor_translationY"
         tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/lblAndroid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/divider"
-        android:layout_marginTop="@dimen/tarjeta_margin"
-        android:background="@drawable/asignatura_fondo"
-        android:text="PMDMO"
-        android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/white" />
+    <View
+        android:id="@+id/vCentroHorizontal"
+        android:layout_width="@dimen/tarjeta_margin"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/divider" />
 
     <TextView
-        android:id="@+id/lblNotaAndroid"
+        android:id="@+id/lblModulo1"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_toLeftOf="@+id/lblModulo2"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:background="@drawable/asignatura_fondo"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 1"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lblAndroid"
-        android:layout_alignRight="@+id/lblAndroid"
-        android:layout_below="@+id/lblAndroid"
-        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:layout_alignLeft="@+id/lblModulo1"
+        android:layout_alignRight="@+id/lblModulo1"
+        android:layout_below="@+id/lblModulo1"
         android:background="@drawable/nota_fondo"
         android:gravity="center"
         android:text="-"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/lblMutihilo"
-        android:layout_width="wrap_content"
+        android:id="@+id/lblModulo2"
+        android:layout_width="@dimen/tarjeta_modulo_width"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider"
         android:layout_marginLeft="@dimen/tarjeta_margin"
         android:layout_marginTop="@dimen/tarjeta_margin"
-        android:layout_toRightOf="@+id/lblAndroid"
+        android:layout_toLeftOf="@+id/vCentroHorizontal"
         android:background="@drawable/asignatura_fondo"
-        android:text="PSPRO"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 2"
         android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
 
     <TextView
-        android:id="@+id/lblNotaMultihilo"
+        android:id="@+id/lblNotaModulo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lblMutihilo"
-        android:layout_alignRight="@+id/lblMutihilo"
-        android:layout_below="@+id/lblMutihilo"
+        android:layout_alignLeft="@+id/lblModulo2"
+        android:layout_alignRight="@+id/lblModulo2"
+        android:layout_below="@+id/lblModulo2"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lblModulo3"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/vCentroHorizontal"
+        android:background="@drawable/asignatura_fondo"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 3"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo3"
+        android:layout_alignRight="@+id/lblModulo3"
+        android:layout_below="@+id/lblModulo3"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lblModulo4"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="@dimen/tarjeta_margin"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/lblModulo3"
+        android:background="@drawable/asignatura_fondo"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 4"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo4"
+        android:layout_alignRight="@+id/lblModulo4"
+        android:layout_below="@+id/lblModulo4"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lblModulo5"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblNotaModulo1"
+        android:layout_alignLeft="@+id/lblNotaModulo1"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:background="@drawable/asignatura_fondo"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 5"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo5"
+        android:layout_alignRight="@+id/lblModulo5"
+        android:layout_below="@+id/lblModulo5"
         android:layout_marginBottom="@dimen/tarjeta_margin"
         android:background="@drawable/nota_fondo"
         android:gravity="center"
         android:text="-"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/lblModulo6"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblNotaModulo2"
+        android:layout_alignLeft="@+id/lblNotaModulo2"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/lblModulo5"
+        android:background="@drawable/asignatura_fondo"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 6"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo6"
+        android:layout_alignRight="@+id/lblModulo6"
+        android:layout_below="@+id/lblModulo6"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lblModulo7"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblNotaModulo3"
+        android:layout_alignLeft="@+id/lblNotaModulo3"        
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/lblModulo6"
+        android:background="@drawable/asignatura_fondo"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 7"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo7"
+        android:layout_alignRight="@+id/lblModulo7"
+        android:layout_below="@+id/lblModulo7"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lblModulo8"
+        android:layout_width="@dimen/tarjeta_modulo_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblNotaModulo4"
+        android:layout_alignLeft="@+id/lblNotaModulo4"
+        android:layout_marginTop="@dimen/tarjeta_margin"
+        android:layout_toRightOf="@+id/lblModulo7"
+        android:background="@drawable/asignatura_fondo"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="MOD 8"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tarjeta_modulo_textSize" />
+
+    <TextView
+        android:id="@+id/lblNotaModulo8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblModulo8"
+        android:layout_alignRight="@+id/lblModulo8"
+        android:layout_below="@+id/lblModulo8"
+        android:layout_marginBottom="@dimen/tarjeta_margin"
+        android:background="@drawable/nota_fondo"
+        android:gravity="center"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
 </RelativeLayout>

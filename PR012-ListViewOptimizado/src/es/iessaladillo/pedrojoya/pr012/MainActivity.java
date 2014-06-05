@@ -1,6 +1,10 @@
 package es.iessaladillo.pedrojoya.pr012;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,15 +38,41 @@ public class MainActivity extends Activity implements OnItemClickListener {
     private void getVistas() {
         lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
         lstAlumnos.setEmptyView((TextView) findViewById(R.id.lblEmpty));
-        // Se crea el ArrayList de datos, el adaptador y se asigna a la lista.
+        // Se crea el ArrayList de datos.
         ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-        alumnos.add(new Alumno(R.drawable.foto1, "Dolores Fuertes Barriga", 22,
-                "CFGS DAM", "2ºA", false, 7, 8));
-        alumnos.add(new Alumno(R.drawable.foto2, "Baldomero LLégate Ligero",
-                16, "CFGM SMR", "1ºA", true, 4, 6));
-        alumnos.add(new Alumno(R.drawable.foto3, "Jorge Jiménez Jaén", 20,
-                "CFGM DAM", "1ºA", false, 8, 9));
+        // Primer alumno.
+        HashMap<String, Integer> notas = new HashMap<String, Integer>();
+        notas.put("PMDMO", 7);
+        notas.put("PSPRO", 6);
+        notas.put("DI", 5);
+        notas.put("ACCDAT", 9);
+        notas.put("HLC", 4);
+        notas.put("SGE", 3);
+        notas.put("EMPIE", 9);
+        Alumno alumno = new Alumno(R.drawable.foto1,
+                "Dolores Fuertes de Barriga", 22, "CFGS DAM", "2º", false,
+                notas);
+        alumnos.add(alumno);
+        // Segundo alumno.
+        notas = new HashMap<String, Integer>();
+        notas.put("APLWEB", 4);
+        notas.put("SERVRED", 7);
+        notas.put("SOR", 8);
+        alumno = new Alumno(R.drawable.foto2, "Baldomero LLégate Ligero", 17,
+                "CFGm SMR", "2º", true, notas);
+        alumnos.add(alumno);
+        // Tercer alumno.
+        notas = new HashMap<String, Integer>();
+        notas.put("PROGR", 8);
+        notas.put("ENTDES", 3);
+        notas.put("BD", 1);
+        notas.put("LENMAR", 4);
+        alumno = new Alumno(R.drawable.foto3, "Jorge Javier Jiménez Jaén", 36,
+                "CFGS DAM", "1º", false, notas);
+        alumnos.add(alumno);
+        // Se crea el adaptador y se asigna a la lista.
         lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
+        // La actividad actuará como listener cuando se pulse un elemento.
         lstAlumnos.setOnItemClickListener(this);
     }
 
@@ -66,8 +96,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
             TextView lblCurso;
             TextView lblEdad;
             TextView lblRepetidor;
-            TextView lblNotaAndroid;
-            TextView lblNotaMultihilo;
+            TextView[] lblModulos = new TextView[8];
+            TextView[] lblNotas = new TextView[8];
         }
 
         // Variables miembro.
@@ -105,10 +135,38 @@ public class MainActivity extends Activity implements OnItemClickListener {
                         .findViewById(R.id.lblEdad);
                 contenedor.lblRepetidor = (TextView) convertView
                         .findViewById(R.id.lblRepetidor);
-                contenedor.lblNotaAndroid = (TextView) convertView
-                        .findViewById(R.id.lblNotaAndroid);
-                contenedor.lblNotaMultihilo = (TextView) convertView
-                        .findViewById(R.id.lblNotaMultihilo);
+                contenedor.lblModulos[0] = (TextView) convertView
+                        .findViewById(R.id.lblModulo1);
+                contenedor.lblNotas[0] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo1);
+                contenedor.lblModulos[1] = (TextView) convertView
+                        .findViewById(R.id.lblModulo2);
+                contenedor.lblNotas[1] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo2);
+                contenedor.lblModulos[2] = (TextView) convertView
+                        .findViewById(R.id.lblModulo3);
+                contenedor.lblNotas[2] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo3);
+                contenedor.lblModulos[3] = (TextView) convertView
+                        .findViewById(R.id.lblModulo4);
+                contenedor.lblNotas[3] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo4);
+                contenedor.lblModulos[4] = (TextView) convertView
+                        .findViewById(R.id.lblModulo5);
+                contenedor.lblNotas[4] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo5);
+                contenedor.lblModulos[5] = (TextView) convertView
+                        .findViewById(R.id.lblModulo6);
+                contenedor.lblNotas[5] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo6);
+                contenedor.lblModulos[6] = (TextView) convertView
+                        .findViewById(R.id.lblModulo7);
+                contenedor.lblNotas[6] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo7);
+                contenedor.lblModulos[7] = (TextView) convertView
+                        .findViewById(R.id.lblModulo8);
+                contenedor.lblNotas[7] = (TextView) convertView
+                        .findViewById(R.id.lblNotaModulo8);
                 convertView.setTag(contenedor);
             }
             // Si se puede reciclar.
@@ -118,14 +176,29 @@ public class MainActivity extends Activity implements OnItemClickListener {
             }
             // Se obtiene el alumno que debe mostrar el elemento.
             Alumno alumno = alumnos.get(posicion);
-            // Se configuran las vista según los datos del alumno.
+            // Se escriben los datos del alumno en las vistas.
             contenedor.imgFoto.setImageResource(alumno.getFoto());
             contenedor.lblNombre.setText(alumno.getNombre());
             contenedor.lblCiclo.setText(alumno.getCiclo());
             contenedor.lblCurso.setText(alumno.getCurso());
             contenedor.lblEdad.setText(alumno.getEdad() + "");
-            contenedor.lblNotaAndroid.setText(alumno.getNotaAndroid() + "");
-            contenedor.lblNotaMultihilo.setText(alumno.getNotaMultihilo() + "");
+            //
+            Set<Entry<String, Integer>> notas = alumno.getNotas().entrySet();
+
+            int i = 0;
+            for (Map.Entry<String, Integer> elemento : notas) {
+                contenedor.lblModulos[i].setText(elemento.getKey());
+                contenedor.lblNotas[i].setText(elemento.getValue().toString());
+                contenedor.lblModulos[i].setVisibility(View.VISIBLE);
+                contenedor.lblNotas[i].setVisibility(View.VISIBLE);
+                i++;
+                if (i >= 8)
+                    break;
+            }
+            for (; i < 8; i++) {
+                contenedor.lblModulos[i].setVisibility(View.GONE);
+                contenedor.lblNotas[i].setVisibility(View.GONE);
+            }
             if (alumno.getEdad() < 18) {
                 contenedor.lblEdad
                         .setBackgroundResource(R.drawable.edad_fondo_menor);
