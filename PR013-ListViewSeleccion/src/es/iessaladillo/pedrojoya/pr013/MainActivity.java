@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         // Constructor.
         public AdaptadorAlumno(Context contexto, Alumno[] alumnos) {
             // Llamo al constructor del padre (obligatorio).
-            super(contexto, R.layout.fila, alumnos);
+            super(contexto, R.layout.activity_main_item, alumnos);
             // Realizo la copia local de los datos.
             this.alumnos = alumnos;
             // Obtengo un objeto inflador de layouts.
@@ -53,7 +53,8 @@ public class MainActivity extends Activity {
             // Si no puedo reciclar.
             if (convertView == null) {
                 // Inflo el layout y obtengo la vista-fila.
-                fila = inflador.inflate(R.layout.fila, parent, false);
+                fila = inflador.inflate(R.layout.activity_main_item, parent,
+                        false);
                 // Creo un nuevo contenedor de vistas.
                 contenedor = new ContenedorVistas();
                 // Guardo en el contenedor las referencias a las vistas
@@ -85,30 +86,33 @@ public class MainActivity extends Activity {
             // Establezco el fondo de la vista-fila dependiendo de si dicho
             // elemento está
             // seleccionado o no.
-            if (lstAlumnos.isItemChecked(posicion)) {
-                fila.setBackgroundColor(getResources().getColor(
-                        R.color.seleccionado));
-            } else {
-                fila.setBackgroundColor(getResources().getColor(
-                        R.color.desseleccionado));
-            }
+            // if (lstAlumnos.isItemChecked(posicion)) {
+            // fila.setBackgroundColor(getResources().getColor(
+            // R.color.seleccionado));
+            // } else {
+            // fila.setBackgroundColor(getResources().getColor(
+            // R.color.desseleccionado));
+            // }
             // Hago que el elemento cambie el estado de selección cuando se
             // pulsa en la fila.
+            // lstAlumnos.setItemChecked(posicion, true);
             fila.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
-                    if (lstAlumnos.isItemChecked(posicion)) {
-                        // Si ya estaba seleccionado lo desselecciono y cambio
-                        // el fondo.
-                        v.setBackgroundColor(getResources().getColor(
-                                R.color.desseleccionado));
-                        lstAlumnos.setItemChecked(posicion, false);
-                    } else {
-                        // Si no estaba seleccionado lo selecciono y cambio el
-                        // fondo.
-                        v.setBackgroundColor(getResources().getColor(
-                                R.color.seleccionado));
-                        lstAlumnos.setItemChecked(posicion, true);
-                    }
+                    lstAlumnos.setItemChecked(posicion,
+                            !lstAlumnos.isItemChecked(posicion));
+                    // if (lstAlumnos.isItemChecked(posicion)) {
+                    // // Si ya estaba seleccionado lo desselecciono y cambio
+                    // // el fondo.
+                    // v.setBackgroundColor(getResources().getColor(
+                    // R.color.desseleccionado));
+                    // lstAlumnos.setItemChecked(posicion, false);
+                    // } else {
+                    // // Si no estaba seleccionado lo selecciono y cambio el
+                    // // fondo.
+                    // v.setBackgroundColor(getResources().getColor(
+                    // R.color.seleccionado));
+                    // lstAlumnos.setItemChecked(posicion, true);
+                    // }
                 }
             });
             // Retorno la vista-fila
@@ -121,7 +125,7 @@ public class MainActivity extends Activity {
         // Llamo al onCreate del padre.
         super.onCreate(savedInstanceState);
         // Establezco el layout que mostrará la actividad.
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
         // Obtengo las vistas.
         getVistas();
     }
