@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Encuesta sobre labor docente</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="titulo_encuesta">Encuesta de opinión sobre la labor docente</string>
+    <string name="texto_encuesta">Deseamos conocer tu opinión sobre nuestra labor como profesores. \nAyúdanos contestando las siguientes preguntas de manera totalmente anónima.</string>
+    <string name="realizar_encuesta">Realizar encuesta</string>
+    <string name="ver_resultados">Ver resultados</string>
+    <string name="title_activity_encuesta">Labor docente</string>
+    <string name="pregunta">Pregunta</string>
+    <string name="nada">Nada</string>
+    <string name="poco">Poco</string>
+    <string name="bastante">Bastante</string>
+    <string name="mucho">Mucho</string>
+    <string name="siguiente_pregunta">Siguiente pregunta</string>
+    <string name="pregunta_anterior">Pregunta anterior</string>
+
+</resources>
