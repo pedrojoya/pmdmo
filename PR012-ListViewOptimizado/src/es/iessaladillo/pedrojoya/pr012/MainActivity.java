@@ -39,6 +39,15 @@ public class MainActivity extends Activity implements OnItemClickListener {
         lstAlumnos = (ListView) this.findViewById(R.id.lstAlumnos);
         lstAlumnos.setEmptyView((TextView) findViewById(R.id.lblEmpty));
         // Se crea el ArrayList de datos.
+        ArrayList<Alumno> alumnos = getDatos();
+        // Se crea el adaptador y se asigna a la lista.
+        lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
+        // La actividad actuará como listener cuando se pulse un elemento.
+        lstAlumnos.setOnItemClickListener(this);
+    }
+
+    // Crea el ArrayList de datos.
+    private ArrayList<Alumno> getDatos() {
         ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
         // Primer alumno.
         HashMap<String, Integer> notas = new HashMap<String, Integer>();
@@ -70,10 +79,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
         alumno = new Alumno(R.drawable.foto3, "Jorge Javier Jiménez Jaén", 36,
                 "CFGS DAM", "1º", false, notas);
         alumnos.add(alumno);
-        // Se crea el adaptador y se asigna a la lista.
-        lstAlumnos.setAdapter(new AdaptadorAlumno(this, alumnos));
-        // La actividad actuará como listener cuando se pulse un elemento.
-        lstAlumnos.setOnItemClickListener(this);
+        // Se retorna el ArrayList.
+        return alumnos;
     }
 
     // Al pulsar sobre un elemento de la lista.
@@ -112,7 +119,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
             inflador = LayoutInflater.from(contexto);
         }
 
-        // Antes de "pintar" cada fila.
+        // Retorna la vista que se debe "dibujar" para un determinado elemento.
         @Override
         public View getView(int posicion, View convertView, ViewGroup parent) {
             ContenedorVistas contenedor;
@@ -182,7 +189,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
             contenedor.lblCiclo.setText(alumno.getCiclo());
             contenedor.lblCurso.setText(alumno.getCurso());
             contenedor.lblEdad.setText(alumno.getEdad() + "");
-            //
+            // Se recorre el conjunto de notas del alumno, escribiéndolas
+            // en las vistas correspondientes, que se hacen visibles.
             Set<Entry<String, Integer>> notas = alumno.getNotas().entrySet();
 
             int i = 0;
@@ -192,13 +200,17 @@ public class MainActivity extends Activity implements OnItemClickListener {
                 contenedor.lblModulos[i].setVisibility(View.VISIBLE);
                 contenedor.lblNotas[i].setVisibility(View.VISIBLE);
                 i++;
+                // Si hay más de 8 notas salimos.
                 if (i >= 8)
                     break;
             }
+            // Se ocultan las vistas para notas no usadas.
             for (; i < 8; i++) {
                 contenedor.lblModulos[i].setVisibility(View.GONE);
                 contenedor.lblNotas[i].setVisibility(View.GONE);
             }
+            // El fondo del TextView con la edad es diferente si es menor de
+            // edad.
             if (alumno.getEdad() < 18) {
                 contenedor.lblEdad
                         .setBackgroundResource(R.drawable.edad_fondo_menor);
@@ -206,12 +218,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
                 contenedor.lblEdad
                         .setBackgroundResource(R.drawable.edad_fondo_mayor);
             }
+            // Si el alumno es repetidor se muestra el TextView correspondiente.
             if (alumno.isRepetidor()) {
                 contenedor.lblRepetidor.setVisibility(View.VISIBLE);
             } else {
                 contenedor.lblRepetidor.setVisibility(View.INVISIBLE);
             }
-            // Se retorna la vista-fila.
+            // Se retorna la vista que representa el elemento.
             return convertView;
         }
     }
