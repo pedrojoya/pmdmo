@@ -6,45 +6,12 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/lblListado"
-        android:layout_width="fill_parent"
+        android:id="@+id/lblCuentaAtras"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/listado_de_alumnos"
-        tools:context=".MainActivity" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/fondo_encabezado"
-        android:orientation="horizontal"
-        android:padding="5dp" >
-
-        <TextView
-            android:id="@+id/lblEncNombre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="@string/alumno" />
-
-        <TextView
-            android:id="@+id/lblEncCiclo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center_horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/ciclo" />
-
-        <TextView
-            android:id="@+id/lblEncCurso"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="@string/curso" />
-    </LinearLayout>
+        android:text="60"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+         />
 
     <ListView
         android:id="@+id/lstAlumnos"
