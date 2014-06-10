@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr013;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +9,6 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -96,25 +97,25 @@ public class MainActivity extends Activity {
             // Hago que el elemento cambie el estado de selección cuando se
             // pulsa en la fila.
             // lstAlumnos.setItemChecked(posicion, true);
-            fila.setOnClickListener(new OnClickListener() {
-                public void onClick(View v) {
-                    lstAlumnos.setItemChecked(posicion,
-                            !lstAlumnos.isItemChecked(posicion));
-                    // if (lstAlumnos.isItemChecked(posicion)) {
-                    // // Si ya estaba seleccionado lo desselecciono y cambio
-                    // // el fondo.
-                    // v.setBackgroundColor(getResources().getColor(
-                    // R.color.desseleccionado));
-                    // lstAlumnos.setItemChecked(posicion, false);
-                    // } else {
-                    // // Si no estaba seleccionado lo selecciono y cambio el
-                    // // fondo.
-                    // v.setBackgroundColor(getResources().getColor(
-                    // R.color.seleccionado));
-                    // lstAlumnos.setItemChecked(posicion, true);
-                    // }
-                }
-            });
+            // fila.setOnClickListener(new OnClickListener() {
+            // public void onClick(View v) {
+            // lstAlumnos.setItemChecked(posicion,
+            // !lstAlumnos.isItemChecked(posicion));
+            // // if (lstAlumnos.isItemChecked(posicion)) {
+            // // // Si ya estaba seleccionado lo desselecciono y cambio
+            // // // el fondo.
+            // // v.setBackgroundColor(getResources().getColor(
+            // // R.color.desseleccionado));
+            // // lstAlumnos.setItemChecked(posicion, false);
+            // // } else {
+            // // // Si no estaba seleccionado lo selecciono y cambio el
+            // // // fondo.
+            // // v.setBackgroundColor(getResources().getColor(
+            // // R.color.seleccionado));
+            // // lstAlumnos.setItemChecked(posicion, true);
+            // // }
+            // }
+            // });
             // Retorno la vista-fila
             return fila;
         }
@@ -160,29 +161,28 @@ public class MainActivity extends Activity {
         lstAlumnos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // Inicializo todos los elementos de la lista para que no estén
         // seleccionados inicialmente (OJO! si no no funciona misteriosamente).
-        for (int i = 0; i < lstAlumnos.getCount(); i++) {
-            lstAlumnos.setItemChecked(i, false);
-        }
+        // for (int i = 0; i < lstAlumnos.getCount(); i++) {
+        // lstAlumnos.setItemChecked(i, false);
+        // }
     }
 
     // Al hacer click en el botón btnMostrar.
     public void btnMostrarOnClick(View v) {
+        // Alumno alumno = (Alumno) lstAlumnos.getItemAtPosition(lstAlumnos
+        // .getCheckedItemPosition());
+        // mostrarTostada(alumno.getNombre());
         // Cadena con los nombres de los alumnos seleccionados.
+
         StringBuilder sAlumnos = new StringBuilder();
         sAlumnos.append("");
-        // Alumno que estamos tratando en ese momento.
-        Alumno alumno;
         // Obtengo los alumnos seleccionados en un array de booleanos.
-        SparseBooleanArray seleccionados = lstAlumnos.getCheckedItemPositions();
+        ArrayList<Alumno> seleccionados = getElementosSeleccionados(lstAlumnos,
+                false);
+
         // Recorro el array.
-        for (int i = 0; i < seleccionados.size(); i++) {
-            // Si está seleccionado (tiene true).
-            if (seleccionados.get(i)) {
-                // Obtengo el alumno desde el adaptador de la lista.
-                alumno = (Alumno) lstAlumnos.getAdapter().getItem(i);
-                // Añado su nombre a la cadena.
-                sAlumnos.append(alumno.getNombre() + " ");
-            }
+        for (Alumno alumno : seleccionados) {
+            // Añado su nombre a la cadena.
+            sAlumnos.append(alumno.getNombre() + " ");
         }
         // Informo al usuario.
         String sMensaje = sAlumnos.toString();
@@ -190,6 +190,29 @@ public class MainActivity extends Activity {
             sMensaje = getString(R.string.no_ha_seleccionado_ningun_alumno);
         }
         mostrarTostada(sMensaje);
+    }
+
+    // Retorna la lista de elementos seleccionados. Recibe el ListView
+    // y si se les debe quitar la selección una vez procesados.
+    private ArrayList<Alumno> getElementosSeleccionados(ListView lst,
+            boolean uncheck) {
+        ArrayList<Alumno> datos = new ArrayList<Alumno>();
+        // Se obtienen los elementos seleccionados de la lista.
+        SparseBooleanArray selec = lst.getCheckedItemPositions();
+        for (int i = 0; i < selec.size(); i++) {
+            // Si está seleccionado.
+            if (selec.valueAt(i)) {
+                // Se obtiene la posición del elemento.
+                int position = selec.keyAt(i);
+                // Si se ha indicado, se le quita la selección al elemento.
+                if (uncheck) {
+                    lst.setItemChecked(position, false);
+                }
+                // Se añade el elemento a la lista a retornar.
+                datos.add((Alumno) lst.getItemAtPosition(selec.keyAt(i)));
+            }
+        }
+        return datos;
     }
 
     // Muestra un Toast.
