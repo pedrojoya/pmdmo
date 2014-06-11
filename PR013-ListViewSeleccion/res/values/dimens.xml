@@ -1,3 +1,4 @@
 <resources>
     <dimen name="padding_medium">8dp</dimen>
+    <dimen name="activity_margin">10dp</dimen>
 </resources>

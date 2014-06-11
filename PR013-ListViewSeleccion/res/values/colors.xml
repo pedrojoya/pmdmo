@@ -5,4 +5,12 @@
     <color name="seleccionado">#0000FF</color>
     <color name="desseleccionado">#FFFFFF</color>
     <color name="fondo_encabezado">#F2F2F2</color>
+    
+    
+    <!-- Esquema de color -->
+    <color name="activity_fondo">#F0E2EC</color>
+    <color name="pregunta_fondo">#975B99</color>
+    <color name="respuesta_fondo">#611E63</color>
+    <color name="respuesta_fondo_seleccionada">#725073</color>
+    
 </resources>

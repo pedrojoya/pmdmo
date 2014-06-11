@@ -1,29 +1,54 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/activity_fondo"
+    android:padding="10dp"
+    tools:ignore="HardcodedText" >
+
+    <TextView
+        android:id="@+id/lblPregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:background="@drawable/pregunta_fondo"
+        android:gravity="center"
+        android:text="¿De qué color es el caballo blanco de Santiago?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <ListView
+        android:id="@+id/lstRespuestas"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lblCuentaAtras"
+        android:layout_below="@+id/lblPregunta"
+        android:layout_centerHorizontal="true"
+        android:dividerHeight="20dp"
+        android:divider="@android:color/transparent"
+        tools:listitem="@layout/respuesta" />
 
     <TextView
         android:id="@+id/lblCuentaAtras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="60"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-         />
-
-    <ListView
-        android:id="@+id/lstAlumnos"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_above="@+id/btnComprobar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:text="30"
+        android:background="@drawable/contador_fondo"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/btnMostrar"
-        android:layout_width="match_parent"
+        android:id="@+id/btnComprobar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnMostrarOnClick"
-        android:text="@string/mostrar" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:text="Comprobar" />
 
-</LinearLayout>
+</RelativeLayout>
