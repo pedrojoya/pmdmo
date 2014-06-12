@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--  Cuando se ha seleccionado -->
     <item android:state_activated="true" android:drawable="@drawable/cloud_activated">
         <shape android:shape="rectangle">
-            <corners android:radius="8dp" />
+            <corners android:radius="@dimen/respuesta_cornersRadius" />
             <solid android:color="@color/respuesta_fondo_seleccionada" />
         </shape>
     </item>
+    <!-- En el resto de estados -->
     <item android:drawable="@drawable/cloud" />
     
 </selector>

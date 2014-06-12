@@ -4,9 +4,9 @@
     	<!-- Cuando el botón está deshabilitado -->
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <corners android:radius="8dp" />
+            <corners android:radius="@dimen/boton_cornersRadius" />
             <solid android:color="@color/boton_disabled" />
-            <size android:height="68dp" android:width="136dp" />
+            <size android:height="@dimen/boton_height" android:width="@dimen/boton_width" />
         </shape>
     </item>
 
@@ -17,25 +17,35 @@
             <!-- Capa de fondo -->
             <item>
                 <shape android:shape="rectangle">
-                    <corners android:radius="8dp" />
+                    <corners android:radius="@dimen/boton_cornersRadius" />
                     <solid android:color="@color/pregunta_fondo" />
-                    <size android:height="68dp" android:width="136dp" />
+                    <size android:height="@dimen/boton_height" 
+                        android:width="@dimen/boton_width" />
                 </shape>
             </item>
             <!-- Capa de anillo claro -->
-            <item android:bottom="4dp" android:left="4dp" android:right="4dp" android:top="4dp">
+            <item android:bottom="@dimen/boton_central_layer_offset" 
+                android:left="@dimen/boton_central_layer_offset" 
+                android:right="@dimen/boton_central_layer_offset" 
+                android:top="@dimen/boton_central_layer_offset">
                 <shape android:shape="rectangle">
-                    <corners android:radius="8dp" />
-                    <size android:height="64dp" android:width="128dp" />
+                    <corners android:radius="@dimen/boton_cornersRadius" />
+                    <size android:height="@dimen/boton_central_layer_height" 
+                        android:width="@dimen/boton_central_layer_width" />
                     <solid android:color="@color/activity_fondo" />
                 </shape>
             </item>
             <!-- Capa de primer plano -->
-            <item android:bottom="8dp" android:left="8dp" android:right="8dp" android:top="8dp">
+            <item android:bottom="@dimen/boton_inner_layer_offset" 
+                android:left="@dimen/boton_inner_layer_offset" 
+                android:right="@dimen/boton_inner_layer_offset" 
+                android:top="@dimen/boton_inner_layer_offset">
                 <shape android:shape="rectangle">
-                    <corners android:radius="8dp" />
-                    <size android:height="60dp" android:width="1200dp" />
-                    <gradient android:angle="0" android:endColor="@color/respuesta_fondo" android:startColor="@color/pregunta_fondo" />
+                    <corners android:radius="@dimen/boton_cornersRadius" />
+                    <size android:height="@dimen/boton_inner_layer_height" 
+                        android:width="@dimen/boton_inner_layer_width" />
+                    <gradient android:angle="0" android:endColor="@color/respuesta_fondo" 
+                        android:startColor="@color/pregunta_fondo" />
                 </shape>
             </item>
         </layer-list>

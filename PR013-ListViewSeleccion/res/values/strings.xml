@@ -9,5 +9,6 @@
     <string name="ciclo">Ciclo</string>
     <string name="curso">Curso</string>
     <string name="no_ha_seleccionado_ningun_alumno">No ha seleccionado ningún alumno</string>
+    <string name="caballo">¿De qué color es el caballo blanco de Santiago?</string>
 
 </resources>
