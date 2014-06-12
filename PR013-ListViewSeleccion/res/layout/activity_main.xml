@@ -23,10 +23,22 @@
         android:layout_above="@+id/frlContador"
         android:layout_below="@+id/lblPregunta"
         android:layout_centerHorizontal="true"
-        android:listSelector="@android:color/transparent"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
+        android:listSelector="@android:color/transparent"
         tools:listitem="@layout/respuesta" />
+
+    <TextView
+        android:id="@+id/lblPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lstRespuestas"
+        android:layout_centerHorizontal="true"
+        android:text="-50"
+        android:background="@drawable/puntuacion_fondo"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <FrameLayout
         android:id="@+id/frlContador"
@@ -58,8 +70,8 @@
             android:layout_height="68dp"
             android:layout_marginTop="@dimen/activity_margin"
             android:background="@drawable/boton_fondo"
-            android:text="Comprobar"
             android:enabled="false"
+            android:text="Comprobar"
             android:textColor="@android:color/white"
             android:visibility="gone" />
     </FrameLayout>
