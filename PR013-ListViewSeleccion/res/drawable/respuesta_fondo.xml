@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_activated="true">
+    <item android:state_activated="true" android:drawable="@drawable/cloud_activated">
         <shape android:shape="rectangle">
             <corners android:radius="8dp" />
             <solid android:color="@color/respuesta_fondo_seleccionada" />
         </shape>
     </item>
-    <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="8dp" />
-            <solid android:color="@color/respuesta_fondo" />
-        </shape>
-    </item>
+    <item android:drawable="@drawable/cloud" />
     
 </selector>

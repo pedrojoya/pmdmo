@@ -12,5 +12,6 @@
     <color name="pregunta_fondo">#975B99</color>
     <color name="respuesta_fondo">#611E63</color>
     <color name="respuesta_fondo_seleccionada">#725073</color>
+    <color name="boton_disabled">#7A747A</color>
     
 </resources>

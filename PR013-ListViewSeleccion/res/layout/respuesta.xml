@@ -6,7 +6,5 @@
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:layout_gravity="center_horizontal"
     android:text="Respuesta"
-    android:textColor="@android:color/white"
     android:gravity="center"
-    android:padding="8dp"
     android:background="@drawable/respuesta_fondo" />
