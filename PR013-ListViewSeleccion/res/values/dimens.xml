@@ -6,6 +6,8 @@
     <dimen name="listview_dividerHeight">8dp</dimen>
     <!-- Respuesta (fondo) -->
     <dimen name="respuesta_cornersRadius">8dp</dimen>
+    <!-- Respuesta -->
+    <dimen name="respuesta_width">180dp</dimen>
     <!-- Boton (fondo) -->
     <dimen name="boton_height">58dp</dimen>
     <dimen name="boton_width">120dp</dimen>
@@ -22,4 +24,7 @@
     <dimen name="contador_central_layer_height">54dp</dimen>
     <dimen name="contador_inner_layer_offset">8dp</dimen>
     <dimen name="contador_inner_layer_height">50dp</dimen>
+    <!-- Puntuación (fondo) -->
+    <dimen name="puntuacion_borde_width">2dp</dimen>
+    <dimen name="puntuacion_padding">10dp</dimen>
 </resources>

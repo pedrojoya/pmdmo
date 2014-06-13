@@ -53,8 +53,8 @@
 
         <Button
             android:id="@+id/btnComprobar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/boton_width"
+            android:layout_height="@dimen/boton_height"
             android:layout_marginTop="@dimen/activity_margin"
             android:background="@drawable/boton_fondo"
             android:enabled="false"

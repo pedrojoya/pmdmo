@@ -19,6 +19,10 @@ public final class R {
         public static final int fondo_encabezado=0x7f040004;
         public static final int negro=0x7f040001;
         public static final int pregunta_fondo=0x7f040006;
+        public static final int puntuacion_borde_correcto=0x7f04000b;
+        public static final int puntuacion_borde_incorrecto=0x7f04000d;
+        public static final int puntuacion_fondo_correcto=0x7f04000a;
+        public static final int puntuacion_fondo_incorrecto=0x7f04000c;
         public static final int respuesta_fondo=0x7f040007;
         public static final int respuesta_fondo_seleccionada=0x7f040008;
         public static final int rojo=0x7f040000;
@@ -31,34 +35,41 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f050013;
+        public static final int activity_horizontal_margin=0x7f050016;
         /**  Actividad 
          */
         public static final int activity_margin=0x7f050001;
-        public static final int boton_central_layer_height=0x7f050009;
-        public static final int boton_central_layer_offset=0x7f050008;
-        public static final int boton_central_layer_width=0x7f05000a;
-        public static final int boton_cornersRadius=0x7f050007;
+        public static final int boton_central_layer_height=0x7f05000a;
+        public static final int boton_central_layer_offset=0x7f050009;
+        public static final int boton_central_layer_width=0x7f05000b;
+        public static final int boton_cornersRadius=0x7f050008;
         /**  Boton (fondo) 
          */
-        public static final int boton_height=0x7f050005;
-        public static final int boton_inner_layer_height=0x7f05000c;
-        public static final int boton_inner_layer_offset=0x7f05000b;
-        public static final int boton_inner_layer_width=0x7f05000d;
-        public static final int boton_width=0x7f050006;
-        public static final int contador_central_layer_height=0x7f050010;
-        public static final int contador_central_layer_offset=0x7f05000f;
-        public static final int contador_inner_layer_height=0x7f050012;
-        public static final int contador_inner_layer_offset=0x7f050011;
+        public static final int boton_height=0x7f050006;
+        public static final int boton_inner_layer_height=0x7f05000d;
+        public static final int boton_inner_layer_offset=0x7f05000c;
+        public static final int boton_inner_layer_width=0x7f05000e;
+        public static final int boton_width=0x7f050007;
+        public static final int contador_central_layer_height=0x7f050011;
+        public static final int contador_central_layer_offset=0x7f050010;
+        public static final int contador_inner_layer_height=0x7f050013;
+        public static final int contador_inner_layer_offset=0x7f050012;
         /**  Contador (fondo) 
          */
-        public static final int contador_width=0x7f05000e;
+        public static final int contador_width=0x7f05000f;
         public static final int listview_dividerHeight=0x7f050003;
         public static final int listview_width=0x7f050002;
         public static final int padding_medium=0x7f050000;
+        /**  Puntuación (fondo) 
+         */
+        public static final int puntuacion_borde_width=0x7f050014;
+        public static final int puntuacion_padding=0x7f050015;
         /**  Respuesta (fondo) 
          */
         public static final int respuesta_cornersRadius=0x7f050004;
+        /**  Respuesta 
+         */
+        public static final int respuesta_width=0x7f050005;
     }
     public static final class drawable {
         public static final int boton_fondo=0x7f020000;
@@ -66,12 +77,11 @@ public final class R {
         public static final int cloud=0x7f020002;
         public static final int cloud_activated=0x7f020003;
         public static final int contador_fondo=0x7f020004;
-        public static final int elemento_fondo=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int puntuacion_fondo_correcto=0x7f020007;
-        public static final int puntuacion_fondo_incorrecto=0x7f020008;
-        public static final int respuesta_fondo=0x7f020009;
-        public static final int star=0x7f02000a;
+        public static final int ic_launcher=0x7f020005;
+        public static final int puntuacion_fondo_correcto=0x7f020006;
+        public static final int puntuacion_fondo_incorrecto=0x7f020007;
+        public static final int respuesta_fondo=0x7f020008;
+        public static final int star=0x7f020009;
     }
     public static final class id {
         public static final int btnComprobar=0x7f080005;

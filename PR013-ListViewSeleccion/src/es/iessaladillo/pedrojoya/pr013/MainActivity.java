@@ -36,8 +36,8 @@ public class MainActivity extends Activity implements OnClickListener,
     private boolean mCorrecta = false;
 
     // Constantes.
-    private long CONTADOR_INICIAL = 5000;
-    private long CONTADOR_INTERVALO = 1000;
+    private long CONTADOR_INICIAL = 5000; // milisegundos
+    private long CONTADOR_INTERVALO = 1000; // milisegundos
     private TextView lblPuntuacion;
 
     // Al crear la actividad.
@@ -64,8 +64,8 @@ public class MainActivity extends Activity implements OnClickListener,
         respuestas.add("Verde");
         respuestas.add("Blanco");
         respuestas.add("Negro");
-        mAdaptador = new ArrayAdapter<String>(this, R.layout.activity_main_respuesta,
-                R.id.lblRespuesta, respuestas);
+        mAdaptador = new ArrayAdapter<String>(this,
+                R.layout.activity_main_respuesta, R.id.lblRespuesta, respuestas);
         lstRespuestas.setAdapter(mAdaptador);
         // Se trata de una lista de selección simple.
         lstRespuestas.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -82,7 +82,7 @@ public class MainActivity extends Activity implements OnClickListener,
         // Se inicia la cuenta atrás.
         new CountDownTimer(CONTADOR_INICIAL, CONTADOR_INTERVALO) {
 
-            // Cuando pasa un intervalo
+            // Cuando pasa un intervalo.
             public void onTick(long millisUntilFinished) {
                 // Se actualiza el TextView con el valor del contador.
                 lblContador.setText((millisUntilFinished / 1000) + "");
@@ -117,6 +117,7 @@ public class MainActivity extends Activity implements OnClickListener,
     // Cuando se hace click en un elemento de la lista.
     @Override
     public void onItemClick(AdapterView<?> lst, View v, int position, long id) {
+        // Se activa el botón de comprobación.
         btnComprobar.setEnabled(true);
     }
 
@@ -128,34 +129,36 @@ public class MainActivity extends Activity implements OnClickListener,
         String elemSeleccionado = (String) lstRespuestas
                 .getItemAtPosition(posSeleccionado);
         // Se comprueba si la respuesta es correcta.
-        mCorrecta = TextUtils.equals(elemSeleccionado, "Blanco");
-        if (mCorrecta) {
+        boolean correcta = TextUtils.equals(elemSeleccionado, "Blanco");
+        if (correcta) {
             // Se muestra la puntuación.
             lblPuntuacion.setText("+ " + mPuntuacion);
-            lblPuntuacion.setBackgroundResource(R.drawable.puntuacion_fondo_correcto);
-            animarPuntuacion();
+            animarPuntuacion(correcta);
         } else {
-            // Se quita la puntuación.
+            // Se disminuye la puntuación.
             int disminucion = mPuntuacion == 100 ? 50 : 25;
             mPuntuacion -= disminucion;
+            // Se muestra la puntuación.
             lblPuntuacion.setText("- " + disminucion);
-            lblPuntuacion
-                    .setBackgroundResource(R.drawable.puntuacion_fondo_incorrecto);
-            animarPuntuacion();
-            // Se quita la selección.
-            lstRespuestas.setItemChecked(posSeleccionado, false);
-            // Se elimina dicha respuesta del adaptador y se fuerza
+            animarPuntuacion(correcta);
+            // Se elimina la respuesta seleccionada del adaptador y se fuerza
             // el repintado de la lista.
+            lstRespuestas.setItemChecked(posSeleccionado, false);
             mAdaptador.remove(elemSeleccionado);
             mAdaptador.notifyDataSetChanged();
-            // Se desactiva el botón.
+            // Se desactiva el botón de comprobación.
             btnComprobar.setEnabled(false);
         }
-
     }
 
-    // Realiza una animación para mostrar la puntuación.
-    private void animarPuntuacion() {
+    // Realiza una animación para mostrar la puntuación. Recibe si la respuesta
+    // ha sido correcta o no.
+    private void animarPuntuacion(final boolean correcta) {
+        // Se establece el fondo dependiendo de si es correcta o no.
+        lblPuntuacion
+                .setBackgroundResource(correcta ? R.drawable.puntuacion_fondo_correcto
+                        : R.drawable.puntuacion_fondo_incorrecto);
+        // Se realiza la animación.
         lblPuntuacion.setVisibility(View.VISIBLE);
         lblPuntuacion.animate().scaleX(1.2f).scaleY(1.2f).translationY(30)
                 .setDuration(3000).setInterpolator(new BounceInterpolator())
@@ -169,10 +172,11 @@ public class MainActivity extends Activity implements OnClickListener,
                     public void onAnimationRepeat(Animator animation) {
                     }
 
+                    // Cuando termina la animación.
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        // Si se ha acertado se finaliza la actividad.
-                        if (mCorrecta) {
+                        // Si era la respuesta correcta se finaliza la activdad.
+                        if (correcta) {
                             finish();
                         } else {
                             // Si la respuesta estaba equivocada, se recoloca
