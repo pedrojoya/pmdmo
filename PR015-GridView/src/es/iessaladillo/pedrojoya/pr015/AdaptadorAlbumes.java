@@ -63,7 +63,7 @@ class AdaptadorAlbumes extends BaseAdapter {
 		View fila = convertView;
 		if (fila == null) {
 			// Inflo la vista-fila a partir de la especificación XML.
-			fila = inflador.inflate(R.layout.celda, null);
+			fila = inflador.inflate(R.layout.activity_main_celda, null);
 			// Creo un objeto contenedor con las referencias a las vistas
 			// de la fila y lo almaceno en el Tag de la vista-fila.
 			contenedor = new ContenedorVistas();

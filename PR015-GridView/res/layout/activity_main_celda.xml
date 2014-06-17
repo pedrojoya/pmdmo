@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="90dp"
+    android:layout_width="@dimen/grid_columnWidth"
     android:layout_height="wrap_content"
-    android:background="#F7F2E0"
-    android:padding="5dp" >
+    android:background="@drawable/tarjeta_fondo"
+    android:padding="@dimen/cell_margin" >
     <ImageView
         android:id="@+id/imgFoto"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/foto_width"
+        android:layout_height="@dimen/foto_height"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/cell_margin"
         android:contentDescription="@string/arte_del_album" />
     <TextView
         android:id="@+id/lblNombre"
         android:layout_width="match_parent"
-        android:layout_height="32sp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/imgFoto"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="@dimen/cell_margin"
         android:gravity="center"
-        android:textSize="12sp" />
+        android:lines="2"
+        android:ellipsize="end"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     <TextView
         android:id="@+id/lblAnio"
         android:layout_width="match_parent"
-        android:layout_height="18sp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/lblNombre"
         android:gravity="center"
-        android:textSize="10sp" />
+        android:textSize="@dimen/anio_textSize" />
 </RelativeLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tarjeta -->
+    <color name="tarjeta_strokeColor">#FFDDDDDD</color>    
+    <color name="tarjeta_repetidor_background">#220000FF</color>    
+</resources>

@@ -21,14 +21,14 @@ public class MainActivity extends Activity {
 		// Llamo al onCreate del padre.
 		super.onCreate(savedInstanceState);
 		// Establezco el layout que mostrará la actividad.
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		// Obtengo e inicializa las vistas.
 		getVistas();
 	}
 
 	// Obtiene e inicializa las vistas.
 	private void getVistas() {
-		grdCuadricula = (GridView) this.findViewById(R.id.grdCuadricula);
+		grdCuadricula = (GridView) this.findViewById(R.id.grdAlbumes);
 		// Creo el array de datos.
 		ArrayList<Album> albumes = new ArrayList<Album>();
 		albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
