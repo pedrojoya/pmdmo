@@ -61,37 +61,32 @@ public final class R {
         public static final int tarjeta_fondo=0x7f02000a;
     }
     public static final class id {
-        public static final int divider=0x7f090005;
-        public static final int imgFoto=0x7f090002;
-        public static final int lblCiclo=0x7f090004;
-        public static final int lblCurso=0x7f090006;
-        public static final int lblEdad=0x7f090007;
+        public static final int divider=0x7f090007;
+        public static final int imgFoto=0x7f090004;
+        public static final int lblCiclo=0x7f090006;
+        public static final int lblCurso=0x7f090008;
+        public static final int lblEdad=0x7f090009;
         public static final int lblEmpty=0x7f090001;
-        public static final int lblModulo1=0x7f09000a;
-        public static final int lblModulo2=0x7f09000b;
-        public static final int lblModulo3=0x7f09000e;
-        public static final int lblModulo4=0x7f090010;
-        public static final int lblModulo5=0x7f090012;
-        public static final int lblModulo6=0x7f090014;
-        public static final int lblModulo7=0x7f090016;
-        public static final int lblModulo8=0x7f090018;
-        public static final int lblNombre=0x7f090003;
-        public static final int lblNotaModulo1=0x7f09000c;
-        public static final int lblNotaModulo2=0x7f09000d;
-        public static final int lblNotaModulo3=0x7f09000f;
-        public static final int lblNotaModulo4=0x7f090011;
-        public static final int lblNotaModulo5=0x7f090013;
-        public static final int lblNotaModulo6=0x7f090015;
-        public static final int lblNotaModulo7=0x7f090017;
-        public static final int lblNotaModulo8=0x7f090019;
-        public static final int lblRepetidor=0x7f090008;
+        public static final int lblModulo=0x7f090002;
+        public static final int lblNombre=0x7f090005;
+        public static final int lblNotaModulo=0x7f090003;
+        public static final int lblRepetidor=0x7f09000a;
+        public static final int llModulo1=0x7f09000c;
+        public static final int llModulo2=0x7f09000d;
+        public static final int llModulo3=0x7f09000e;
+        public static final int llModulo4=0x7f09000f;
+        public static final int llModulo5=0x7f090010;
+        public static final int llModulo6=0x7f090011;
+        public static final int llModulo7=0x7f090012;
+        public static final int llModulo8=0x7f090013;
         public static final int lstAlumnos=0x7f090000;
-        public static final int menu_settings=0x7f09001a;
-        public static final int vCentroHorizontal=0x7f090009;
+        public static final int menu_settings=0x7f090014;
+        public static final int vCentroHorizontal=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int tarjeta=0x7f030001;
+        public static final int modulo=0x7f030001;
+        public static final int tarjeta=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f080000;

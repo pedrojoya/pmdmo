@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -142,38 +143,54 @@ public class MainActivity extends Activity implements OnItemClickListener {
                         .findViewById(R.id.lblEdad);
                 contenedor.lblRepetidor = (TextView) convertView
                         .findViewById(R.id.lblRepetidor);
-                contenedor.lblModulos[0] = (TextView) convertView
-                        .findViewById(R.id.lblModulo1);
-                contenedor.lblNotas[0] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo1);
-                contenedor.lblModulos[1] = (TextView) convertView
-                        .findViewById(R.id.lblModulo2);
-                contenedor.lblNotas[1] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo2);
-                contenedor.lblModulos[2] = (TextView) convertView
-                        .findViewById(R.id.lblModulo3);
-                contenedor.lblNotas[2] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo3);
-                contenedor.lblModulos[3] = (TextView) convertView
-                        .findViewById(R.id.lblModulo4);
-                contenedor.lblNotas[3] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo4);
-                contenedor.lblModulos[4] = (TextView) convertView
-                        .findViewById(R.id.lblModulo5);
-                contenedor.lblNotas[4] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo5);
-                contenedor.lblModulos[5] = (TextView) convertView
-                        .findViewById(R.id.lblModulo6);
-                contenedor.lblNotas[5] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo6);
-                contenedor.lblModulos[6] = (TextView) convertView
-                        .findViewById(R.id.lblModulo7);
-                contenedor.lblNotas[6] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo7);
-                contenedor.lblModulos[7] = (TextView) convertView
-                        .findViewById(R.id.lblModulo8);
-                contenedor.lblNotas[7] = (TextView) convertView
-                        .findViewById(R.id.lblNotaModulo8);
+                LinearLayout llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo1);
+                contenedor.lblModulos[0] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[0] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo2);
+                contenedor.lblModulos[1] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[1] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo3);
+                contenedor.lblModulos[2] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[2] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo4);
+                contenedor.lblModulos[3] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[3] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo5);
+                contenedor.lblModulos[4] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[4] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo6);
+                contenedor.lblModulos[5] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[5] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo7);
+                contenedor.lblModulos[6] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[6] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
+                llModulo = (LinearLayout) convertView
+                        .findViewById(R.id.llModulo8);
+                contenedor.lblModulos[7] = (TextView) llModulo
+                        .findViewById(R.id.lblModulo);
+                contenedor.lblNotas[7] = (TextView) llModulo
+                        .findViewById(R.id.lblNotaModulo);
                 convertView.setTag(contenedor);
             }
             // Si se puede reciclar.
