@@ -5,7 +5,7 @@
     <dimen name="cell_margin">5dp</dimen>
     <dimen name="foto_width">80dp</dimen>
     <dimen name="foto_height">80dp</dimen>
-    <dimen name="anio_textSize">8sp</dimen>    
+    <dimen name="spanish_textSize">10sp</dimen>    
         <!-- Tarjeta (fondo) -->
     <dimen name="tarjeta_strokeWidth">2.0dp</dimen>
     <dimen name="tarjeta_cornersRadius">2.0dp</dimen>

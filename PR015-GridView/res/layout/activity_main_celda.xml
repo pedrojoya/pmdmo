@@ -13,20 +13,18 @@
         android:layout_marginBottom="@dimen/cell_margin"
         android:contentDescription="@string/arte_del_album" />
     <TextView
-        android:id="@+id/lblNombre"
+        android:id="@+id/lblEnglish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgFoto"
         android:layout_marginBottom="@dimen/cell_margin"
         android:gravity="center"
-        android:lines="2"
-        android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     <TextView
-        android:id="@+id/lblAnio"
+        android:id="@+id/lblSpanish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lblNombre"
+        android:layout_below="@id/lblEnglish"
         android:gravity="center"
-        android:textSize="@dimen/anio_textSize" />
+        android:textSize="@dimen/spanish_textSize" />
 </RelativeLayout>

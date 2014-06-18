@@ -25,11 +25,11 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f050009;
         public static final int activity_margin=0x7f050000;
-        public static final int anio_textSize=0x7f050005;
         public static final int cell_margin=0x7f050002;
         public static final int foto_height=0x7f050004;
         public static final int foto_width=0x7f050003;
         public static final int grid_columnWidth=0x7f050001;
+        public static final int spanish_textSize=0x7f050005;
         public static final int tarjeta_cornersRadius=0x7f050007;
         public static final int tarjeta_padding=0x7f050008;
         /**  Tarjeta (fondo) 
@@ -37,23 +37,23 @@ public final class R {
         public static final int tarjeta_strokeWidth=0x7f050006;
     }
     public static final class drawable {
-        public static final int cantecito=0x7f020000;
-        public static final int carinio=0x7f020001;
-        public static final int hombre=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int mecanico=0x7f020004;
-        public static final int paloma=0x7f020005;
-        public static final int pollo=0x7f020006;
-        public static final int puro=0x7f020007;
-        public static final int ratito=0x7f020008;
-        public static final int tarjeta_fondo=0x7f020009;
-        public static final int veneno=0x7f02000a;
+        public static final int animal=0x7f020000;
+        public static final int bridge=0x7f020001;
+        public static final int flag=0x7f020002;
+        public static final int food=0x7f020003;
+        public static final int fruit=0x7f020004;
+        public static final int glass=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int plant=0x7f020007;
+        public static final int science=0x7f020008;
+        public static final int sea=0x7f020009;
+        public static final int tarjeta_fondo=0x7f02000a;
     }
     public static final class id {
         public static final int grdAlbumes=0x7f080000;
         public static final int imgFoto=0x7f080001;
-        public static final int lblAnio=0x7f080003;
-        public static final int lblNombre=0x7f080002;
+        public static final int lblEnglish=0x7f080002;
+        public static final int lblSpanish=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
