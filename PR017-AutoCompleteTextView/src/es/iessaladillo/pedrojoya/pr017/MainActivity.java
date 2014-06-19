@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 		public AdaptadorAlbumes(Context contexto, ArrayList<Album> albumes) {
 			// Llamo al constructor del padre. El segundo parámetro es exigido
 			// aunque no sirve para nada porque se sobrecarga getView().
-			super(contexto, R.layout.fila, R.id.lblAlbum, albumes);
+			super(contexto, R.layout.activity_main_item, R.id.lblAlbum, albumes);
 			// Hago las copias locales.
 			this.albumes = albumes;
 			this.todos = (ArrayList<Album>) this.albumes.clone(); // Copia del
@@ -143,7 +143,7 @@ public class MainActivity extends Activity {
 			View fila = convertView;
 			if (fila == null) {
 				// Inflo el layout.
-				fila = getLayoutInflater().inflate(R.layout.fila, null);
+				fila = getLayoutInflater().inflate(R.layout.activity_main_item, null);
 				// Creo el contenedor de vistas.
 				contenedor = new ContenedorVistas();
 				contenedor.imgFoto = (ImageView) fila
@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
 		// Llamo al onCreate del padre.
 		super.onCreate(savedInstanceState);
 		// Establezo el layout que mostrará la actividad.
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		// Obtengo e inicializo las vistas.
 		getVistas();
 	}
