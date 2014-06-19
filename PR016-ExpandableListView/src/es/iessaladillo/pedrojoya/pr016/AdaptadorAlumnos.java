@@ -79,7 +79,7 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 		View fila = convertview;
 		if (fila == null) {
 			// Inflo el layout de fila.
-			fila = inflador.inflate(R.layout.fila, null);
+			fila = inflador.inflate(R.layout.activity_main_fila, null);
 			// Creo el contenedor de vistas para la fila.
 			contenedor = new ContenedorVistasHijo();
 			contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
@@ -139,7 +139,7 @@ class AdaptadorAlumnos extends BaseExpandableListAdapter {
 		View fila = convertview;
 		if (fila == null) {
 			// Inflo el layout de la fila.
-			fila = inflador.inflate(R.layout.grupo, null);
+			fila = inflador.inflate(R.layout.activity_main_grupo, null);
 			// Creo el contenedor de vistas para la fila.
 			contenedor = new ContenedorVistasGrupo();
 			contenedor.lblEncCiclo = (TextView) fila

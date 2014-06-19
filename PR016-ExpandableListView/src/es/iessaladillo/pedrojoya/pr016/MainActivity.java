@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 		// Llamo al onCreate del padre.
 		super.onCreate(savedInstanceState);
 		// Establezco el layout que debe mostrar la actividad.
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		// Obtengo e inicializo las vistas.
 		getVistas();
 	}
