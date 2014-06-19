@@ -17,28 +17,36 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
+        public static final int activity_horizontal_margin=0x7f040005;
+        /**  Actividad 
+         */
+        public static final int activity_margin=0x7f040000;
+        /**  Concepto 
+         */
+        public static final int concepto_padding=0x7f040002;
+        public static final int foto_height=0x7f040003;
+        public static final int foto_marginRight=0x7f040004;
+        public static final int lblConcepto_paddingLeft=0x7f040001;
     }
     public static final class drawable {
-        public static final int cantecito=0x7f020000;
-        public static final int carinio=0x7f020001;
-        public static final int hombre=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int mecanico=0x7f020004;
-        public static final int paloma=0x7f020005;
-        public static final int pollo=0x7f020006;
-        public static final int puro=0x7f020007;
-        public static final int ratito=0x7f020008;
-        public static final int veneno=0x7f020009;
+        public static final int animal=0x7f020000;
+        public static final int bridge=0x7f020001;
+        public static final int flag=0x7f020002;
+        public static final int food=0x7f020003;
+        public static final int fruit=0x7f020004;
+        public static final int glass=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int plant=0x7f020007;
+        public static final int science=0x7f020008;
+        public static final int sea=0x7f020009;
     }
     public static final class id {
         public static final int btnMostrar=0x7f080002;
         public static final int imgFoto=0x7f080003;
-        public static final int lblAlbum=0x7f080000;
-        public static final int lblAnio=0x7f080005;
-        public static final int lblNombre=0x7f080004;
-        public static final int menu_settings=0x7f080006;
-        public static final int txtAlbum=0x7f080001;
+        public static final int lblConcepto=0x7f080000;
+        public static final int lblEnglish=0x7f080004;
+        public static final int menu_settings=0x7f080005;
+        public static final int txtConcepto=0x7f080001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -51,10 +59,14 @@ public final class R {
         public static final int album=0x7f050003;
         public static final int app_name=0x7f050000;
         public static final int arte_del_album=0x7f050006;
+        public static final int concepto=0x7f050007;
+        public static final int concepto_en_ingles=0x7f050008;
+        public static final int foto_del_concepto=0x7f05000a;
         public static final int menu_settings=0x7f050001;
         public static final int mostrar=0x7f050005;
         public static final int nombre_del_album=0x7f050004;
         public static final int title_activity_main=0x7f050002;
+        public static final int traducir=0x7f050009;
     }
     public static final class style {
         /** 

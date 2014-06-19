@@ -2,34 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="45dp" >
+    android:padding="@dimen/activity_margin" >
     <TextView
-        android:id="@+id/lblAlbum"
-        android:layout_width="match_parent"
+        android:id="@+id/lblConcepto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/album"
-        tools:context=".MainActivity" />
+        android:text="@string/concepto"
+        android:paddingLeft="@dimen/lblConcepto_paddingLeft"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginBottom="@dimen/activity_margin" />
     <AutoCompleteTextView
-        android:id="@+id/txtAlbum"
-        android:layout_width="0dp"
+        android:id="@+id/txtConcepto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/lblAlbum"
-        android:layout_marginTop="14dp"
-        android:textColor="#000000"
+        android:layout_below="@+id/lblConcepto"
+        android:layout_marginBottom="@dimen/activity_margin"
         android:completionThreshold="1"
-        android:hint="@string/nombre_del_album" >
+        android:hint="@string/concepto_en_ingles" >
         <requestFocus />
     </AutoCompleteTextView>
     <Button
         android:id="@+id/btnMostrar"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/txtAlbum"
-        android:layout_marginTop="14dp"
-        android:onClick="btnMostrarOnClick"
+        android:layout_below="@+id/txtConcepto"
+        android:layout_marginTop="@dimen/activity_margin"
         android:text="@string/mostrar" />
 </RelativeLayout>

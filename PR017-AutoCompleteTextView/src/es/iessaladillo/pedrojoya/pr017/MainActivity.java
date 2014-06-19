@@ -6,219 +6,201 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
 
-	// Variables a nivel de clase.
-	private AutoCompleteTextView txtAlbum;
+    // Vistas.
+    private AutoCompleteTextView txtConcepto;
 
-	// Clase privada para adaptador de albums
-	// Extendemos de ArrayAdapter porque éste hereda de ListAdapter
-	// y además implementa la intefaz Filterable,
-	// como requiere el AutoCompleteTextView.
-	private class AdaptadorAlbumes extends ArrayAdapter<Album> {
+    // Al crear la actividad.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
+    }
 
-		// Variables miembro.
-		private ArrayList<Album> albumes; // Se verá modificado por el filtro.
-		private ArrayList<Album> todos; // Todos los álbumes manejados.
-		private ArrayList<Album> sugerencias; // Sugerencias para el filtro.
+    // Obtiene e inicializa las vistas de la actividad.
+    private void getVistas() {
+        txtConcepto = (AutoCompleteTextView) findViewById(R.id.txtConcepto);
+        txtConcepto.setAdapter(new ConceptosAdapter(this, getDatos()));
+        ((Button) findViewById(R.id.btnMostrar)).setOnClickListener(this);
+    }
 
-		// Clase privada para contenedor de vistas.
-		private class ContenedorVistas {
-			// Variables miembro.
-			ImageView imgFoto;
-			TextView lblNombre;
-			TextView lblAnio;
-		}
+    // Construye y retorna el ArrayList de conceptos.
+    private ArrayList<Concepto> getDatos() {
+        ArrayList<Concepto> conceptos = new ArrayList<Concepto>();
+        conceptos.add(new Concepto(R.drawable.animal, "Animal", "Animal"));
+        conceptos.add(new Concepto(R.drawable.bridge, "Bridge", "Puente"));
+        conceptos.add(new Concepto(R.drawable.flag, "Flag", "Bandera"));
+        conceptos.add(new Concepto(R.drawable.food, "Food", "Comida"));
+        conceptos.add(new Concepto(R.drawable.fruit, "Fruit", "Fruta"));
+        conceptos.add(new Concepto(R.drawable.glass, "Glass", "Vaso"));
+        conceptos.add(new Concepto(R.drawable.plant, "Plant", "Planta"));
+        conceptos.add(new Concepto(R.drawable.science, "Science", "Ciencia"));
+        conceptos.add(new Concepto(R.drawable.sea, "Sea", "Mar"));
+        return conceptos;
+    }
 
-		@SuppressWarnings("unchecked")
-		public AdaptadorAlbumes(Context contexto, ArrayList<Album> albumes) {
-			// Llamo al constructor del padre. El segundo parámetro es exigido
-			// aunque no sirve para nada porque se sobrecarga getView().
-			super(contexto, R.layout.activity_main_item, R.id.lblAlbum, albumes);
-			// Hago las copias locales.
-			this.albumes = albumes;
-			this.todos = (ArrayList<Album>) this.albumes.clone(); // Copia del
-																	// original.
-			this.sugerencias = new ArrayList<Album>();
-		}
+    // Al hacer click sobre btnTraducir.
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.btnMostrar:
+            Toast.makeText(this, txtConcepto.getText().toString(),
+                    Toast.LENGTH_SHORT).show();
+            break;
+        }
+    }
 
-		// Obtiene el objeto Filter que va a filtrar el adaptador.
-		@Override
-		public Filter getFilter() {
-			// Retorno un nuevo filtro subclase de Filter (inline).
-			return new Filter() {
-				// Se ejecuta cuando se debe filtrar. Recibe la cadena ya
-				// introducida.
-				@Override
-				protected FilterResults performFiltering(CharSequence constraint) {
-					// Si ya se ha introducido texto.
-					if (constraint != null) {
-						// Vacío las sugerencias.
-						sugerencias.clear();
-						// Compruebo uno a uno todos los álbumes por si debemos
-						// incluirlo en las sugerencias.
-						// OJO compruebo en el ArrayList con TODOS los álbumes.
-						for (Album album : todos) {
-							// Si comienza igual.
-							if (album
-									.getNombre()
-									.toLowerCase(Locale.getDefault())
-									.contains(
-											constraint.toString().toLowerCase(
-													Locale.getDefault()))) {
-								sugerencias.add(album);
-							}
-						}
-						// Creo el objeto resultado del filtro y lo retorno.
-						FilterResults filterResults = new FilterResults();
-						filterResults.values = sugerencias; // Valores de las
-															// sugerencias.
-						filterResults.count = sugerencias.size(); // Número de
-																	// sugerencias.
-						return filterResults;
-					} else {
-						// Si no se ha introducido texto retorno un resultado
-						// vacío.
-						return new FilterResults();
-					}
-				}
+    // Clase privada para adaptador de conceptos
+    // Extendemos de ArrayAdapter porque éste hereda de ListAdapter
+    // y además implementa la intefaz Filterable,
+    // como requiere el AutoCompleteTextView.
+    private class ConceptosAdapter extends ArrayAdapter<Concepto> {
 
-				// Se encarga de publicar el resultado seleccionado en el
-				// widget.
-				@Override
-				protected void publishResults(CharSequence constraint,
-						FilterResults results) {
-					// Si hay sugerencias.
-					if (results != null && results.count > 0) {
-						// Las obtengo.
-						@SuppressWarnings("unchecked")
-						ArrayList<Album> albumesFiltrados = (ArrayList<Album>) results.values;
-						// Lleno el array de álbumes con la lista de álbumes
-						// filtrados.
-						// OJO! Se debe usar clear() y add() del adaptador, para
-						// modificar
-						// el array de datos que maneja el adaptador.
-						clear();
-						for (Album album : albumesFiltrados) {
-							add(album);
-						}
-						// Notifico que se han producido cambios en el conjunto
-						// de datos
-						// para que la vistas se repinten. (¿obligatorio en este
-						// caso?)
-						notifyDataSetChanged();
-					}
+        // Variables miembro.
+        private ArrayList<Concepto> mConceptos;
+        private ArrayList<Concepto> mSugerencias;
+        private LayoutInflater mInflador;
 
-				}
+        // Clase privada para contenedor de vistas.
+        private class ContenedorVistas {
+            // Variables miembro.
+            ImageView imgFoto;
+            TextView lblEnglish;
+        }
 
-				// Retorna la cadena que debe escribirse en el widget. Recibe el
-				// objeto seleccionado
-				@Override
-				public CharSequence convertResultToString(Object resultValue) {
-					// Se escribirá el nombre del álbum y el anio.
-					Album album = (Album) resultValue;
-					return album.getNombre() + " (" + album.getAnio() + ")";
-				}
+        @SuppressWarnings("unchecked")
+        public ConceptosAdapter(Context contexto, ArrayList<Concepto> conceptos) {
+            // Se llama al constructor del padre. El segundo parámetro no es
+            // usado. El tercer parámetro corresponde al resId del TextView que
+            // contendrá el texto.
+            super(contexto, R.layout.activity_main_item, R.id.lblEnglish,
+                    conceptos);
+            // Se obtiene el inflador de layouts.
+            mInflador = LayoutInflater.from(contexto);
+            // Se crea una copia del ArrayList de datos, ya que se verá afectado
+            // por el filtro.
+            mConceptos = (ArrayList<Concepto>) conceptos.clone();
+            // El ArrayList de sugerencias está inicialmente vacío.
+            mSugerencias = new ArrayList<Concepto>();
+        }
 
-			};
-		}
+        // Retorna el objeto Filter que va a filtrar el adaptador.
+        @Override
+        public Filter getFilter() {
+            // Se retorna un nuevo filtro subclase de Filter (inline).
+            return new Filter() {
+                // Se ejecuta cuando se debe filtrar. Recibe la cadena ya
+                // introducida.
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+                    // Se crea el objeto resultado del filtro, inicialmente
+                    // vacío.
+                    FilterResults filterResults = new FilterResults();
+                    // Si ya se ha introducido texto.
+                    if (constraint != null) {
+                        // Se vacía el ArrayList de sugerencias.
+                        mSugerencias.clear();
+                        // Se comprueba concepto a concepto para incluirlo o no
+                        // en las sugerencias.
+                        // OJO se comprueba en el ArrayList con TODOS los
+                        // conceptos.
+                        for (Concepto concepto : mConceptos) {
+                            // Si comienza igual se añade a las sugerencias.
+                            if (concepto
+                                    .getEnglish()
+                                    .toLowerCase(Locale.getDefault())
+                                    .contains(
+                                            constraint.toString().toLowerCase(
+                                                    Locale.getDefault()))) {
+                                mSugerencias.add(concepto);
+                            }
+                        }
+                        // Se establecen las sugerencias como resultado del
+                        // filtro.
+                        filterResults.values = mSugerencias;
+                        filterResults.count = mSugerencias.size();
+                    }
+                    // Se retorna el resultado del filtrado.
+                    return filterResults;
+                }
 
-		// Obtiene la vista-fila que se va a mostrar para un elemento dada su
-		// posición.
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// Contenedor de vistas.
-			ContenedorVistas contenedor;
-			// Intento reciclar.
-			View fila = convertView;
-			if (fila == null) {
-				// Inflo el layout.
-				fila = getLayoutInflater().inflate(R.layout.activity_main_item, null);
-				// Creo el contenedor de vistas.
-				contenedor = new ContenedorVistas();
-				contenedor.imgFoto = (ImageView) fila
-						.findViewById(R.id.imgFoto);
-				contenedor.lblNombre = (TextView) fila
-						.findViewById(R.id.lblNombre);
-				contenedor.lblAnio = (TextView) fila.findViewById(R.id.lblAnio);
-				fila.setTag(contenedor);
-			} else {
-				// Obtengo el contenedor.
-				contenedor = (ContenedorVistas) fila.getTag();
-			}
-			// Escribo los datos en las vistas
-			// OJO! usar getItem del Adaptador para obtener el album
-			// correspondiente
-			// ya que el array de datos del adaptador se está viendo modificado
-			// por el filtro.
-			Album album = getItem(position);
-			contenedor.imgFoto.setImageResource(album.getFotoResId());
-			contenedor.lblNombre.setText(album.getNombre());
-			contenedor.lblAnio.setText(album.getAnio());
-			// Retorno la vista-fila.
-			return fila;
-		}
+                // Se encarga de publicar el resultado seleccionado en el
+                // widget.
+                @SuppressWarnings("unchecked")
+                @Override
+                protected void publishResults(CharSequence constraint,
+                        FilterResults results) {
+                    // Si hay sugerencias se añaden los resultados filtrados
+                    // como únicos datos del adaptador.
+                    if (results != null && results.count > 0) {
+                        clear();
+                        for (Concepto concepto : (ArrayList<Concepto>) results.values) {
+                            add(concepto);
+                        }
+                        // Se fuerza el repintado.
+                        notifyDataSetChanged();
+                    }
+                }
 
-	}
+                // Retorna la cadena que debe escribirse en el widget. Recibe el
+                // objeto seleccionado
+                @Override
+                public CharSequence convertResultToString(Object resultValue) {
+                    // Se obtiene el concepto y se retorna la cadena.
+                    Concepto concepto = (Concepto) resultValue;
+                    return concepto.getEnglish();
+                }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// Llamo al onCreate del padre.
-		super.onCreate(savedInstanceState);
-		// Establezo el layout que mostrará la actividad.
-		setContentView(R.layout.activity_main);
-		// Obtengo e inicializo las vistas.
-		getVistas();
-	}
+            };
+        }
 
-	// Obtiene e inicializa las vistas de la actividad.
-	private void getVistas() {
-		txtAlbum = (AutoCompleteTextView) findViewById(R.id.txtAlbum);
-		// Creo el array de datos.
-		ArrayList<Album> albumes = new ArrayList<Album>();
-		albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
-		albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
-				"1981"));
-		albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
-				"1992"));
-		albumes.add(new Album(R.drawable.carinio,
-				"Está muy bien eso del cariño", "1995"));
-		albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
-		albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
-		albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
-		albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
-		albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
-		// Establezco el adaptador para el AutoCompleteTextView.
-		AdaptadorAlbumes adaptador = new AdaptadorAlbumes(this, albumes);
-		txtAlbum.setAdapter(adaptador);
-	}
-
-	// Al hacer click sobre btnMostrar.
-	public void btnMostrarOnClick(View v) {
-		// Informo al usuario.
-		mostrarTostada(txtAlbum.getText().toString());
-	}
-
-	// Muestra un Toast.
-	private void mostrarTostada(String mensaje) {
-		Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT)
-				.show();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+        // Retorna la vista a mostrar para un elemento dado.
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ContenedorVistas contenedor;
+            // Si no se puede reciclar.
+            if (convertView == null) {
+                // Inflo el layout.
+                convertView = mInflador.inflate(R.layout.activity_main_item,
+                        parent, false);
+                // Se obtienen las vistas y se almacenan en el contenedor.
+                contenedor = new ContenedorVistas();
+                contenedor.imgFoto = (ImageView) convertView
+                        .findViewById(R.id.imgFoto);
+                contenedor.lblEnglish = (TextView) convertView
+                        .findViewById(R.id.lblEnglish);
+                // Se almacena el contenedor en el tag de la vista.
+                convertView.setTag(contenedor);
+            } else {
+                // Si se puede reciclar, se obtiene el contenedor desde el tag.
+                contenedor = (ContenedorVistas) convertView.getTag();
+            }
+            // Se escriben los datos en las vistas.
+            // OJO! usar getItem del Adaptador para obtener el album
+            // correspondiente ya que puede que del array de datos original
+            // algunos hayan sido filtrados, por lo que sólo debemos tener en
+            // cuenta los incluidos en el adaptador.
+            Concepto concepto = getItem(position);
+            contenedor.imgFoto.setImageResource(concepto.getFotoResId());
+            contenedor.lblEnglish.setText(concepto.getEnglish());
+            // Se retorna la vista.
+            return convertView;
+        }
+    }
 
 }
