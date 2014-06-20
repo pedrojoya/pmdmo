@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/fondo_encabezado"
+    android:background="@color/fondo_grupo"
     android:orientation="vertical" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/fondo_subgrupo"
         android:padding="5dp" >
 	    <TextView
 	        android:id="@+id/lblEncCiclo"
@@ -17,6 +18,7 @@
 	        android:gravity="center_horizontal"
 	        android:padding="5dp"
 	        android:layout_weight="1"
+	        android:textColor="@android:color/white"
 	        android:textStyle="bold" />
 	    <ImageView
 	        android:id="@+id/imgIndicador"
