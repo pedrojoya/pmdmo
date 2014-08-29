@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fragment_lista_item_seleccionado">#DDD</color>
+    <color name="fragment_lista_item_lblAutor">#666</color>
+    
+</resources>

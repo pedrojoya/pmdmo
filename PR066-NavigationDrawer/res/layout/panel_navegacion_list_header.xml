@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="fill_parent"
-   android:layout_height="wrap_content"
-   android:clickable="false"
-   >
-    
-    <TextView
-       android:id="@+id/lblText"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:textSize="18sp"
-       android:paddingTop="7dp"
-       android:paddingBottom="7dp"
-       android:clickable="false"
-       android:textColor="#FFFFFF"
-       style="?android:attr/listSeparatorTextViewStyle" />
-
-</RelativeLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lblText"
+    style="?android:attr/listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/header_padding"
+    android:paddingTop="@dimen/header_padding"
+    android:textColor="@android:color/white"
+    android:textSize="@dimen/header_textSize" />

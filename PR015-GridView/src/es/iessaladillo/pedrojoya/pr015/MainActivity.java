@@ -45,6 +45,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
         conceptos.add(new Concepto(R.drawable.plant, "Plant", "Planta"));
         conceptos.add(new Concepto(R.drawable.science, "Science", "Ciencia"));
         conceptos.add(new Concepto(R.drawable.sea, "Sea", "Mar"));
+        conceptos.add(new Concepto(R.drawable.space, "Space", "Espacio"));
+        conceptos.add(new Concepto(R.drawable.art, "Art", "Arte"));
+        conceptos.add(new Concepto(R.drawable.furniture, "Furniture",
+                "Mobiliario"));
         return conceptos;
     }
 

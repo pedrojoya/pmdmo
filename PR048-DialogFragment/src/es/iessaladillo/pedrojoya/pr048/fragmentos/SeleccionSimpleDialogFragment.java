@@ -3,47 +3,50 @@ package es.iessaladillo.pedrojoya.pr048.fragmentos;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import es.iessaladillo.pedrojoya.pr048.R;
 
 public class SeleccionSimpleDialogFragment extends DialogFragment {
 
-    private Dialog dialogo = null;
-    private SeleccionSimpleDialogListener listener = null;
-    private int turnoSeleccionado = 0;
+    // Variables.
+    private SeleccionSimpleDialogListener mListener = null;
+    private int mTurnoSeleccionado = 0;
 
     // Interfaz pública para comunicación con la actividad.
     public interface SeleccionSimpleDialogListener {
         public void onNeutralButtonClick(DialogFragment dialog, int which);
     }
 
+    // Al crear el diálogo. Retorna el diálogo configurado.
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder b = new AlertDialog.Builder(this.getActivity());
         b.setTitle(R.string.turno);
-        b.setSingleChoiceItems(R.array.turnos, turnoSeleccionado,
+        b.setSingleChoiceItems(R.array.turnos, mTurnoSeleccionado,
                 new OnClickListener() {
+                    // Al seleccionar un elemento.
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        turnoSeleccionado = which;
+                        mTurnoSeleccionado = which;
                     }
                 });
         b.setIcon(R.drawable.ic_launcher);
         b.setNeutralButton(R.string.aceptar, new OnClickListener() {
+            // Al pulsar el botón neutro.
             @Override
             public void onClick(DialogInterface d, int arg1) {
-                // Cierro el diálogo.
+                // Se cierra el diálogo.
                 d.dismiss();
-                // Notifico al listener.
-                listener.onNeutralButtonClick(
-                        SeleccionSimpleDialogFragment.this, turnoSeleccionado);
+                // Se notifica el evento al listener indicando el índice del
+                // elemento seleccionado.
+                mListener.onNeutralButtonClick(
+                        SeleccionSimpleDialogFragment.this, mTurnoSeleccionado);
             }
         });
-        dialogo = b.create();
-        return dialogo;
+        return b.create();
     }
 
     @Override
@@ -51,7 +54,7 @@ public class SeleccionSimpleDialogFragment extends DialogFragment {
         super.onAttach(activity);
         // Establece la actividad como listener de los eventos del diálogo.
         try {
-            listener = (SeleccionSimpleDialogListener) activity;
+            mListener = (SeleccionSimpleDialogListener) activity;
         } catch (ClassCastException e) {
             // La actividad no implementa la interfaz, se lanza excepción.
             throw new ClassCastException(activity.toString()

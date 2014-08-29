@@ -5,12 +5,12 @@
     android:addStatesFromChildren="true"
     android:focusable="true"
     android:gravity="center"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp" >
+    android:paddingLeft="@dimen/progreso_paddingLeft"
+    android:paddingRight="@dimen/progreso_paddingRight" >
 
     <ProgressBar
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/progreso_layoutWidth"
+        android:layout_height="@dimen/progreso_layoutHeight"
         android:focusable="true" />
 
 </LinearLayout>

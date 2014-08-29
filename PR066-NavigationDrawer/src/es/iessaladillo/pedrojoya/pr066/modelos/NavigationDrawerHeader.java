@@ -10,10 +10,10 @@ public class NavigationDrawerHeader implements NavigationDrawerItem {
         this.text = text;
     }
 
-    // Retorna si es ítem de cabecera de sección.
+    // Retorna el tipo de elemento de la lista (cabecera).
     @Override
-    public boolean isHeader() {
-        return true;
+    public int getType() {
+        return NavigationDrawerHeader.TYPE_HEADER;
     }
 
     // Getters y setters.

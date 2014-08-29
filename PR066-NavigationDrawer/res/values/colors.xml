@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- activity_main -->
+    <color name="drawer_listBackground">#111</color>
+    
+    <!-- panel_navegacion_list_item -->
+    <color name="item_textColor">#fff</color>
+
+</resources>

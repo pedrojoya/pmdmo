@@ -3,37 +3,51 @@ package es.iessaladillo.pedrojoya.pr049.fragmentos;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import es.iessaladillo.pedrojoya.pr049.R;
-import es.iessaladillo.pedrojoya.pr049.adaptadores.AlbumesAdapter;
-import es.iessaladillo.pedrojoya.pr049.modelos.Album;
+import es.iessaladillo.pedrojoya.pr049.adaptadores.ObrasAdapter;
+import es.iessaladillo.pedrojoya.pr049.modelos.Obra;
 
-public class ListaFragment extends Fragment {
+public class ListaFragment extends Fragment implements OnItemClickListener {
 
     // Interfaz para notificación de eventos desde el fragmento.
-    public interface OnAlbumSelectedListener {
-        // Cuando se selecciona un álbum.
-        public void onAlbumSelected(Album album);
+    public interface OnObraSelectedListener {
+        // Cuando se selecciona una obra.
+        public void onObraSelected(Obra obra, int position);
     }
 
-    private ListView lstAlbumes;
-    private AlbumesAdapter adaptador;
-    private OnAlbumSelectedListener listener;
-    boolean dosPaneles;
-    int elemSeleccionado = 0;
+    // Vistas.
+    private ListView lstObras;
+    private ImageView imgCabecera;
+
+    // Variables.
+    private ObrasAdapter mAdaptador;
+    private OnObraSelectedListener mListener;
+    private boolean mDosPaneles;
+    private int mItemSeleccionado = 0;
+
+    // Cuando se crea el fragmento.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Se mantendrá la instancia del fragmento al cambiar la configuración.
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
+    }
 
     // Retorna la vista que mostrará el fragmento.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Inflo el layout del fragmento y retorno la vista correspondiente.
+        // Se infla el layout del fragmento y se retorna la vista.
         return inflater.inflate(R.layout.fragment_lista, container, false);
     }
 
@@ -42,92 +56,103 @@ public class ListaFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            // Establece que la propia actividad sea el listener al que
-            // informará el fragmento cuando el usuario seleccione un álbum.
-            listener = (OnAlbumSelectedListener) activity;
+            // La actividad actuará como listener cuando se seleccione una obra.
+            mListener = (OnObraSelectedListener) activity;
         } catch (ClassCastException e) {
-            // La actividad no implementa la interfaz.
+            // La actividad no implementa la interfaz necesaria.
             throw new ClassCastException(activity.toString()
-                    + " debe implementar OnAlbumSeleccionadoListener");
+                    + " debe implementar OnObraSeleccionadoListener");
         }
     }
 
-    // Cuando se ha terminado de crear la actividad completa.
+    // Cuando se desvincula el fragmento de la actividad.
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    // Cuando se ha terminado de crear la actividad al completo.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // Siempre tenemos que llamar al padre.
         super.onActivityCreated(savedInstanceState);
-        // Ya se puede crear el adaptador y asignárselo al ListView.
-        lstAlbumes = (ListView) this.getView().findViewById(R.id.lstAlbumes);
-        adaptador = new AlbumesAdapter(this.getActivity(), getDatos());
-        lstAlbumes.setAdapter(adaptador);
+        // Se obtienen e inicializan las vistas.
+        getVistas();
         // Se comprueba si existe el fragmento de detalle y por tanto se usan
         // dos paneles.
-        View flDetalle = getActivity().findViewById(R.id.flDetalle);
-        dosPaneles = flDetalle != null
+        FrameLayout flDetalle = (FrameLayout) getActivity().findViewById(
+                R.id.flDetalle);
+        mDosPaneles = flDetalle != null
                 && flDetalle.getVisibility() == View.VISIBLE;
-        // Si tenemos estado previo.
-        if (savedInstanceState != null) {
-            // Obtengo la posición de la lista en la que se encontraba (por
-            // defecto, el primero).
-            elemSeleccionado = savedInstanceState.getInt("elemSeleccionado", 0);
-        }
-        // Si tenemos dos paneles,
-        if (dosPaneles) {
-            // Ponemos el modo de la lista en selección simple, para que el
-            // elemento seleccionado quede marcado.
-            lstAlbumes.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            // Mostramos el detalle del elemento seleccionado, que inicialmente
-            // será el primero.
-            notificarSeleccion();
-        }
-        // Cuando se haga click sobre un elemento del ListView.
-        lstAlbumes.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                // Se actualiza el elemento seleccionado en la lista.
-                elemSeleccionado = position;
-                // Se notifica al listener el cambio de selección.
-                notificarSeleccion();
-            }
-        });
-    }
-
-    // Notifica al listener que se ha seleccionado un elemento en la lista.
-    private void notificarSeleccion() {
-        // Establecemos que dicho elemento de la lista ha sido seleccionado.
-        lstAlbumes.setItemChecked(elemSeleccionado, true);
-        // Llama al método onAlbumSelected del listener que debe ser
-        // informado cuando se seleccione un álbum.
-        if (listener != null) {
-            listener.onAlbumSelected((Album) lstAlbumes
-                    .getItemAtPosition(elemSeleccionado));
+        // El fragmento actuará como listener cuando se pulse sobre un elemento
+        // de la lista.
+        lstObras.setOnItemClickListener(this);
+        if (mDosPaneles) {
+            pulsarItem(mItemSeleccionado);
+        } else {
+            marcarObra(mItemSeleccionado);
         }
     }
 
+    // Cuando se "pulsa" sobre un elemento. Recibe la posición.
+    private void pulsarItem(int position) {
+        // Se marca la obra seleccionada (por defecto la 0).
+        marcarObra(position);
+        // Se muestra el detalle de la obra.
+        if (mListener != null) {
+            // Se llama al método correspondiente del listener.
+            mListener.onObraSelected(
+                    (Obra) lstObras.getItemAtPosition(position), position);
+        }
+    }
+
+    // Marca la obra seleccionada. Recibe la obra.
+    public void marcarObra(int position) {
+        mItemSeleccionado = position;
+        Obra obra = (Obra) lstObras.getItemAtPosition(mItemSeleccionado);
+        lstObras.setItemChecked(mItemSeleccionado, true);
+        lstObras.setSelection(mItemSeleccionado);
+        imgCabecera.setImageResource(obra.getFotoResId());
+        getActivity().setTitle(obra.getNombre());
+    }
+
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        imgCabecera = (ImageView) getView().findViewById(R.id.imgCabecera);
+        // Se crea el adaptador y se asigna al ListView.
+        lstObras = (ListView) getView().findViewById(R.id.lstObras);
+        mAdaptador = new ObrasAdapter(this.getActivity(), getDatos());
+        lstObras.setAdapter(mAdaptador);
+    }
+
+    // Retorna el ArrayList de datos para la lista.
+    private ArrayList<Obra> getDatos() {
+        ArrayList<Obra> obras = new ArrayList<Obra>();
+        obras.add(new Obra(R.drawable.light_bulb, "La luz del mundo",
+                "Simon Funk", 2011));
+        obras.add(new Obra(R.drawable.beach, "Verano en la playa",
+                "Simon Funk", 2005));
+        obras.add(new Obra(R.drawable.bench, "Merecido descanso", "Simon Funk",
+                2001));
+        obras.add(new Obra(R.drawable.buildings, "Rascando el cielo",
+                "Simon Funk", 2006));
+        obras.add(new Obra(R.drawable.capitol, "La cara del poder",
+                "Simon Funk", 2012));
+        obras.add(new Obra(R.drawable.house, "En mitad de la nada",
+                "Simon Funk", 2013));
+        obras.add(new Obra(R.drawable.number4, "Fuego en el corazón",
+                "Simon Funk", 2007));
+        obras.add(new Obra(R.drawable.old_man, "Mirar para otro lado",
+                "Simon Funk", 2000));
+        return obras;
+    }
+
+    // Al pulsar sobre un elemento de la lista.
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("elemSeleccionado", elemSeleccionado);
-    }
-
-    // Creo los datos para la lista.
-    private ArrayList<Album> getDatos() {
-        ArrayList<Album> albumes = new ArrayList<Album>();
-        albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
-        albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
-                "1981"));
-        albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
-                "1992"));
-        albumes.add(new Album(R.drawable.carinio,
-                "Está muy bien eso del cariño", "1995"));
-        albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
-        albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
-        albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
-        albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
-        albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
-        return albumes;
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        // Se pulsa sobre el item.
+        pulsarItem(position);
     }
 
 }

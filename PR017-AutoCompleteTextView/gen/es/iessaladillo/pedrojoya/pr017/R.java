@@ -10,23 +10,20 @@ package es.iessaladillo.pedrojoya.pr017;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int editext_focused=0x7f040000;
+        public static final int editext_notfocused=0x7f040001;
+    }
     public static final class dimen {
-        /** 
-         Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 820dp of available width. This
-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
-    
-         */
-        public static final int activity_horizontal_margin=0x7f040005;
         /**  Actividad 
          */
-        public static final int activity_margin=0x7f040000;
+        public static final int activity_margin=0x7f050000;
         /**  Concepto 
          */
-        public static final int concepto_padding=0x7f040002;
-        public static final int foto_height=0x7f040003;
-        public static final int foto_marginRight=0x7f040004;
-        public static final int lblConcepto_paddingLeft=0x7f040001;
+        public static final int concepto_padding=0x7f050002;
+        public static final int foto_height=0x7f050003;
+        public static final int foto_marginRight=0x7f050004;
+        public static final int lblConcepto_paddingLeft=0x7f050001;
     }
     public static final class drawable {
         public static final int animal=0x7f020000;
@@ -41,32 +38,31 @@ public final class R {
         public static final int sea=0x7f020009;
     }
     public static final class id {
-        public static final int btnMostrar=0x7f080002;
-        public static final int imgFoto=0x7f080003;
-        public static final int lblConcepto=0x7f080000;
-        public static final int lblEnglish=0x7f080004;
-        public static final int menu_settings=0x7f080005;
-        public static final int txtConcepto=0x7f080001;
+        public static final int btnTraducir=0x7f090002;
+        public static final int imgFoto=0x7f090004;
+        public static final int lblConcepto=0x7f090000;
+        public static final int lblEnglish=0x7f090005;
+        public static final int menu_settings=0x7f090006;
+        public static final int txtConcepto=0x7f090001;
+        public static final int wvWeb=0x7f090003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_main_item=0x7f030001;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int album=0x7f050003;
-        public static final int app_name=0x7f050000;
-        public static final int arte_del_album=0x7f050006;
-        public static final int concepto=0x7f050007;
-        public static final int concepto_en_ingles=0x7f050008;
-        public static final int foto_del_concepto=0x7f05000a;
-        public static final int menu_settings=0x7f050001;
-        public static final int mostrar=0x7f050005;
-        public static final int nombre_del_album=0x7f050004;
-        public static final int title_activity_main=0x7f050002;
-        public static final int traducir=0x7f050009;
+        public static final int album=0x7f060003;
+        public static final int app_name=0x7f060000;
+        public static final int concepto=0x7f060005;
+        public static final int foto_del_concepto=0x7f060007;
+        public static final int ingles=0x7f060008;
+        public static final int menu_settings=0x7f060001;
+        public static final int nombre_del_album=0x7f060004;
+        public static final int title_activity_main=0x7f060002;
+        public static final int traducir=0x7f060006;
     }
     public static final class style {
         /** 
@@ -90,10 +86,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

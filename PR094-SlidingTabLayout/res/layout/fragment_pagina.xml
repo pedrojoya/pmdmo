@@ -11,8 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="3"
         android:textIsSelectable="true"
-        android:textSize="120sp" />
+        android:textSize="@dimen/pagina_textSize" />
 
 </RelativeLayout>

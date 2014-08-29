@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="seleccionado_solidColor">#FBF2EF</color>
+    <color name="seleccionado_strokeColor">#FFAA22</color>
+    
+</resources>

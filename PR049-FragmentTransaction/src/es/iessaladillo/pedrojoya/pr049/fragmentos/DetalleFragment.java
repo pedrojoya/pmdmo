@@ -1,28 +1,45 @@
 package es.iessaladillo.pedrojoya.pr049.fragmentos;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import es.iessaladillo.pedrojoya.pr049.R;
-import es.iessaladillo.pedrojoya.pr049.actividades.MainActivity;
-import es.iessaladillo.pedrojoya.pr049.modelos.Album;
+import es.iessaladillo.pedrojoya.pr049.modelos.Obra;
 
 public class DetalleFragment extends Fragment {
 
+    // Interfaz para notificación de eventos desde el fragmento.
+    public interface OnDetalleShownListener {
+        // Cuando se selecciona una obra.
+        public void onDetalleShown(int position);
+    }
+
+    // Constantes.
+    public static final String EXTRA_OBRA = "obra";
+    public static final String EXTRA_POSITION = "position";
+
+    // Vistas.
     private ImageView imgFoto;
     private TextView lblNombre;
-    private TextView lblAnio;
-    private Album album;
+    private TextView lblAutor;
+
+    // Variables
+    private Obra mObra;
+    private int mPosition;
+    private OnDetalleShownListener mListener;
 
     // Retorna una nueva instancia del fragmento configurado.
-    public static DetalleFragment newInstance(Album album) {
+    public static DetalleFragment newInstance(Obra obra, int position) {
         DetalleFragment frgDetalle = new DetalleFragment();
         Bundle argumentos = new Bundle();
-        argumentos.putParcelable(MainActivity.EXTRA_ALBUM, album);
+        argumentos.putParcelable(EXTRA_OBRA, obra);
+        argumentos.putInt(EXTRA_POSITION, position);
         frgDetalle.setArguments(argumentos);
         return frgDetalle;
     }
@@ -31,30 +48,67 @@ public class DetalleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Infla el layout, obtiene la referencia a las vistas y lo retorna.
-        View v = inflater.inflate(R.layout.fragment_detalle, container, false);
-        imgFoto = (ImageView) v.findViewById(R.id.imgFoto);
-        lblNombre = (TextView) v.findViewById(R.id.lblNombre);
-        lblAnio = (TextView) v.findViewById(R.id.lblAnio);
-        return v;
+        // Se infla el layout y se retorna la vista.
+        return inflater.inflate(R.layout.fragment_detalle, container, false);
     }
 
+    // Cuando se vincula el fragmento a la actividad.
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            // La actividad actuará como listener cuando se seleccione una obra.
+            mListener = (OnDetalleShownListener) activity;
+        } catch (ClassCastException e) {
+            // La actividad no implementa la interfaz necesaria.
+            throw new ClassCastException(activity.toString()
+                    + " debe implementar OnDetalleShownListener");
+        }
+    }
+
+    // Cuando se desvincula el fragmento de la actividad.
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    // Al terminarse de crear la actividad al completo.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        // Se obtienen e inicializan las vistas.
+        getVistas();
         // Se obtiene el álbum desde el bundle de parámetros.
-        album = this.getArguments().getParcelable(MainActivity.EXTRA_ALBUM);
+        mObra = this.getArguments().getParcelable(EXTRA_OBRA);
+        mPosition = getArguments().getInt(EXTRA_POSITION);
         // Si hay álbum, se muestra.
-        if (album != null) {
+        if (mObra != null) {
             mostrarDetalle();
         }
         super.onActivityCreated(savedInstanceState);
     }
 
+    // Obtiene e inicializa las vistas.
+    private void getVistas() {
+        imgFoto = (ImageView) getView().findViewById(R.id.imgFoto);
+        lblNombre = (TextView) getView().findViewById(R.id.lblNombre);
+        lblAutor = (TextView) getView().findViewById(R.id.lblAutor);
+        lblNombre.setTypeface(Typeface.createFromAsset(getActivity()
+                .getAssets(), "fonts/alegreya-boldItalic.ttf"));
+        lblAutor.setTypeface(Typeface.createFromAsset(
+                getActivity().getAssets(), "fonts/alegreya-bold.ttf"));
+    }
+
     // Muestra el detalle de un album en las vistas correspondientes.
     public void mostrarDetalle() {
         // Escribo los datos en las vistas.
-        imgFoto.setImageResource(album.getFotoResId());
-        lblNombre.setText(album.getNombre());
-        lblAnio.setText(album.getAnio());
+        getActivity().setTitle(mObra.getNombre());
+        imgFoto.setImageResource(mObra.getFotoResId());
+        lblNombre.setText(mObra.getNombre());
+        lblAutor.setText(mObra.getAutor());
+        // Se notifica a la actividad.
+        if (mListener != null) {
+            mListener.onDetalleShown(mPosition);
+        }
     }
 }

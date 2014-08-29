@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         // Se obtiene el ítem de menú de refrescar.
         mnuRefrescar = menu.findItem(R.id.mnuRefrescar);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

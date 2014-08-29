@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PR100-IntentService</string>
+
+    <string-array name="alumnos">
+        <item>Baldomero</item>
+        <item>Germán Ginés</item>
+        <item>Godolfredo</item>
+        <item>Atanasio</item>
+        <item>Rigoberto</item>
+        <item>Filomeno</item>
+        <item>Fulgencio</item>
+        <item>Armando</item>
+        <item>Gumersindo</item>
+        <item>Rodolfo</item>
+        <item>Casimiro</item>
+        <item>Dionisio</item>
+        <item>Emiliano</item>
+    </string-array>
+    <string name="exportar">Exportar</string>
+
+</resources>

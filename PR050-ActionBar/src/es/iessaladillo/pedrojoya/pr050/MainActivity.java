@@ -2,32 +2,40 @@ package es.iessaladillo.pedrojoya.pr050;
 
 import java.lang.reflect.Field;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
-import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements FotoFragment.Listener,
+        InfoFragment.Listener {
+
+    // Constantes.
+    private static final String TAG_FOTO_FRAGMENT = "fotoFragment";
+    private static final String TAG_INFO_FRAGMENT = "infoFragment";
 
     // Cuando se crea la actividad.
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Se llama al constructor del padre.
         super.onCreate(savedInstanceState);
-        // Se establece el layout que mostrará la actividad.
         setContentView(R.layout.activity_main);
-        // Se muestra el icono de navegación junto al icono de la aplicación.
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         // Se activa el ítem de overflow en dispositivos con botón físico de
         // menú.
-        // overflowEnDispositivoConTeclaMenu();
+        overflowEnDispositivoConTeclaMenu();
+        // Se carga el fragmento con la foto (sólo si no está ya).
+        FotoFragment frg = (FotoFragment) getFragmentManager()
+                .findFragmentByTag(TAG_FOTO_FRAGMENT);
+        if (frg == null) {
+            frg = FotoFragment.newInstance(R.drawable.bench);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frmFragmento, frg, TAG_FOTO_FRAGMENT)
+                    .commit();
+        }
     }
 
-    // Al crear la primera vez el menú.
+    // Al crearse el menú de opciones.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Se infla el menú a partir del XML.
@@ -36,43 +44,54 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    // Cuando se pulsa un elemento del menú.
+    // Cuando se pulsa un ítem del menú de opciones.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Dependiendo del item pulsado se realiza la acción deseada.
         switch (item.getItemId()) {
-            case android.R.id.home:
-                mostrarTostada(getString(R.string.ir_a_la_actividad_superior));
-                break;
-            case R.id.mnuAgregar:
-                mostrarTostada(getString(R.string.agregar));
-                break;
-            case R.id.mnuCargar:
-                mostrarTostada(getString(R.string.cargar));
-                break;
-            case R.id.mnuEditar:
-                mostrarTostada(item.getTitle().toString());
-                break;
-            case R.id.mnuEliminar:
-                mostrarTostada(getString(R.string.eliminar));
-                break;
-            case R.id.mnuBuscar:
-                mostrarTostada(getString(R.string.buscar));
-                break;
-            case R.id.mnuCompartir:
-                mostrarTostada(getString(R.string.compartir));
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.mnuPreferencias:
+            mostrarPreferencias();
+            break;
+        default:
+            // Se propaga el evento porque no ha sido resuelto.
+            return super.onOptionsItemSelected(item);
         }
-        // Retorna que ya ha sido gestionado.
+        // Retorna que el evento ya ha sido gestionado.
         return true;
     }
 
-    // Muestra una tostada.
-    private void mostrarTostada(String mensaje) {
-        Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT)
-                .show();
+    // Muestra la actividad de preferencias.
+    private void mostrarPreferencias() {
+        Intent intent = new Intent(this, PreferenciasActivity.class);
+        startActivity(intent);
+    }
+
+    // Cuando se solicita la Info.
+    @Override
+    public void onInfo(int fotoResId) {
+        // Se carga el fragmento Info en la actividad, agregándolo a la
+        // BackStack.
+        InfoFragment frg = (InfoFragment) getFragmentManager()
+                .findFragmentByTag(TAG_INFO_FRAGMENT);
+        if (frg == null) {
+            frg = new InfoFragment();
+        }
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frmFragmento, frg, TAG_INFO_FRAGMENT)
+                .addToBackStack(TAG_INFO_FRAGMENT).commit();
+    }
+
+    // Cuando se solicita la foto.
+    @Override
+    public void onFoto(int fotoResId) {
+        // Se carga el fragmento Foto en la actividad.
+        FotoFragment frg = (FotoFragment) getFragmentManager()
+                .findFragmentByTag(TAG_FOTO_FRAGMENT);
+        if (frg == null) {
+            frg = FotoFragment.newInstance(fotoResId);
+        }
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frmFragmento, frg, TAG_FOTO_FRAGMENT).commit();
     }
 
     // Activa el ítem de overflow en dispositivos con botón físico de menú.

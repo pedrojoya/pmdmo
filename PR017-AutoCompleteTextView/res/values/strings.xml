@@ -4,10 +4,8 @@
     <string name="title_activity_main">AutoCompleteTextView</string>
     <string name="album">Álbum</string>
     <string name="nombre_del_album">Nombre del álbum</string>
-    <string name="mostrar">Mostrar</string>
-    <string name="arte_del_album">Arte del álbum</string>
     <string name="concepto">Concepto</string>
-    <string name="concepto_en_ingles">Concepto en inglés</string>
     <string name="traducir">Traducir</string>
     <string name="foto_del_concepto">Foto del concepto</string>
+    <string name="ingles">(inglés)</string>
 </resources>

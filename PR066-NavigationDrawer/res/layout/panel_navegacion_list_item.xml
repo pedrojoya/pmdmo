@@ -5,14 +5,14 @@
     android:background="?android:attr/activatedBackgroundIndicator"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:padding="@dimen/item_padding"
     tools:ignore="SelectableText" >
 
     <ImageView
         android:id="@+id/imgFotoItem"
         android:layout_width="?android:attr/listPreferredItemHeight"
         android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_image_marginRight"
         android:contentDescription="@string/arte_del_album" />
 
     <TextView
@@ -22,6 +22,6 @@
         android:ellipsize="marquee"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="#fff" />
+        android:textColor="@color/item_textColor" />
 
 </LinearLayout>

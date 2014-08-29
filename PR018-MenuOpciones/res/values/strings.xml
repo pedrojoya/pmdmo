@@ -1,14 +1,10 @@
 <resources>
-    <string name="app_name">PR018-MenuOpciones</string>
+    <string name="app_name">Menú de opciones</string>
     <string name="title_activity_main">Menú de opciones</string>
-    <string name="alumno">Alumno</string>
-    <string name="agregar">Agregar</string>
-    <string name="editar">Editar</string>
-    <string name="refrescar">Refrescar</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="buscar">Buscar</string>
-    <string name="compartir">Compartir</string>
-    <string name="refrescar_completamente">Refrescar completamente</string>
-    <string name="refrescar_parcialmente">Refrescar parcialmente</string>
-    <string name="cargar">Cargar</string>
+    <string name="escala_de_grises">Escala de grises</string>
+    <string name="sepia">Sepia</string>
+    <string name="azulado">Azulado</string>
+    <string name="verdoso">Verdoso</string>
+    <string name="fotografia">Fotografía</string>
+    <string name="original">Original</string>
 </resources>

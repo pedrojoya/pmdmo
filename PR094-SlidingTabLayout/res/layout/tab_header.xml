@@ -4,9 +4,9 @@
     android:gravity="center_vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="12sp"
+    android:textSize="@dimen/header_textSize"
     android:textStyle="bold"
-    android:padding="15dp"
+    android:padding="@dimen/header_padding"
     android:textAllCaps="true"
     android:id="@+id/lblTab" />
 

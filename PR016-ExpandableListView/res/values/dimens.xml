@@ -1,3 +1,11 @@
 <resources>
-    <dimen name="padding_medium">8dp</dimen>
+    <!-- Grupo (layout) -->
+    <dimen name="grupo_padding">10dp</dimen>
+    <!-- Grupo (fondo) -->
+    <dimen name="grupo_strokeWidth">2dp</dimen>
+    <!-- Encabezado (fondo)-->
+    <dimen name="encabezado_height">32dp</dimen>
+    <dimen name="encabezado_lineWidth">2dp</dimen>
+    <dimen name="encabezado_paddingLeft">5dp</dimen>
+    
 </resources>

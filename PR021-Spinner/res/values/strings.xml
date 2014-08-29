@@ -4,4 +4,7 @@
     <string name="album">Álbum</string>
     <string name="mostrar">Mostrar</string>
     <string name="arte_del_album">Arte del álbum</string>
+    <string name="bandera">Bandera</string>
+    <string name="pais">País</string>
+    <string name="elija_un_pais">[Elija un país]</string>
 </resources>

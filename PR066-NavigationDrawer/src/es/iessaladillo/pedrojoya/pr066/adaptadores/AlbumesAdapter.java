@@ -2,7 +2,7 @@ package es.iessaladillo.pedrojoya.pr066.adaptadores;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,25 +17,10 @@ import es.iessaladillo.pedrojoya.pr066.modelos.NavigationDrawerItem;
 // Clase adaptador del grid.
 public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
 
-    // Constantes.
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ALBUM = 1;
-    private static final int NUM_TYPES = 2;
-
     // Variables miembro.
-    private Activity contexto; // Actividad que lo usa.
-    private ArrayList<NavigationDrawerItem> albumes; // Array de datos.
-    private LayoutInflater inflador; // Inflador de layouts.
-
-    public AlbumesAdapter(Activity contexto,
-            ArrayList<NavigationDrawerItem> albumes) {
-        super(contexto, R.layout.panel_navegacion_list_item, albumes);
-        // Hago una copia de los parámetros del constructor.
-        this.contexto = contexto;
-        this.albumes = albumes;
-        // Obtengo un objeto inflador de layouts.
-        inflador = this.contexto.getLayoutInflater();
-    }
+    private Context mContexto; // Actividad que lo usa.
+    private ArrayList<NavigationDrawerItem> mAlbumes; // Array de datos.
+    private LayoutInflater mInflador; // Inflador de layouts.
 
     // Clase interna para contener las vistas de un álbum.
     private class ContenedorVistasAlbum {
@@ -48,16 +33,29 @@ public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
         TextView lblText;
     }
 
+    public AlbumesAdapter(Context contexto,
+            ArrayList<NavigationDrawerItem> albumes) {
+        super(contexto, R.layout.panel_navegacion_list_item, albumes);
+        // Hago una copia de los parámetros del constructor.
+        this.mContexto = contexto;
+        this.mAlbumes = albumes;
+        // Obtengo un objeto inflador de layouts.
+        mInflador = LayoutInflater.from(contexto);
+    }
+
     // Cuando se va a pintar un elemento de la lista.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = null;
-        // Se obtiene el elemento
+        // Dependiendo del tipo de elemento se retorna una vista u otra.
         NavigationDrawerItem elemento = this.getItem(position);
-        if (elemento.isHeader()) {
+        switch (elemento.getType()) {
+        case NavigationDrawerItem.TYPE_HEADER:
             v = getHeaderView(convertView, parent, elemento);
-        } else {
+            break;
+        default:
             v = getAlbumView(convertView, parent, elemento);
+            break;
         }
         return v;
     }
@@ -66,14 +64,14 @@ public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
     // Retorna el tipo de vista para una posición. Necesario para que la
     // reutilización de vistas de ítems se realice de acuerdo al tipo de vista.
     public int getItemViewType(int position) {
-        return albumes.get(position).isHeader() ? TYPE_HEADER : TYPE_ALBUM;
+        return mAlbumes.get(position).getType();
     }
 
     // Retorna el número de tipos de ítems distintos existentes en la lista.
     // Necesario para la reutilización correcta de ítems.
     @Override
     public int getViewTypeCount() {
-        return NUM_TYPES;
+        return NavigationDrawerItem.NUM_TYPES;
     }
 
     // Retorna la vista a mostrar para un ítem que corresponde a un album.
@@ -83,8 +81,8 @@ public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
         // Si se puede reutilizar.
         if (convertView == null) {
             // Se infla la vista-fila a partir de la especificación XML.
-            convertView = inflador.inflate(R.layout.panel_navegacion_list_item,
-                    parent, false);
+            convertView = mInflador.inflate(
+                    R.layout.panel_navegacion_list_item, parent, false);
             // Se crea un objeto contenedor con las referencias a las vistas
             // de la fila y se almacena en el Tag de la vista-fila.
             contenedor = new ContenedorVistasAlbum();
@@ -113,7 +111,7 @@ public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
         // Si se puede reutilizar.
         if (convertView == null) {
             // Se infla la vista-fila a partir de la especificación XML.
-            convertView = inflador.inflate(
+            convertView = mInflador.inflate(
                     R.layout.panel_navegacion_list_header, parent, false);
             // Se crea un objeto contenedor con las referencias a las vistas
             // de la fila y se almacena en el Tag de la vista-fila.
@@ -132,7 +130,7 @@ public class AlbumesAdapter extends ArrayAdapter<NavigationDrawerItem> {
         convertView.setOnClickListener(null);
         convertView.setOnLongClickListener(null);
         convertView.setLongClickable(false);
-        // Retorno la vista-fila.
+        // Se retorna la vista-fila.
         return convertView;
     }
 

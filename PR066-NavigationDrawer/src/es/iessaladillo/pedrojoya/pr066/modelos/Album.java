@@ -29,9 +29,9 @@ public class Album implements NavigationDrawerItem, Parcelable {
         this.anio = parcel.readString();
     }
 
-    // Retorna si es ítem de cabecera de sección.
-    public boolean isHeader() {
-        return false;
+    // Retorna el tipo de elemento de la lista.
+    public int getType() {
+        return NavigationDrawerItem.TYPE_ALBUM;
     }
 
     // Getters y Setters.

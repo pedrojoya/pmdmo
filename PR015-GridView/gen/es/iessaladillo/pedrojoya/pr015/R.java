@@ -38,16 +38,19 @@ public final class R {
     }
     public static final class drawable {
         public static final int animal=0x7f020000;
-        public static final int bridge=0x7f020001;
-        public static final int flag=0x7f020002;
-        public static final int food=0x7f020003;
-        public static final int fruit=0x7f020004;
-        public static final int glass=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int plant=0x7f020007;
-        public static final int science=0x7f020008;
-        public static final int sea=0x7f020009;
-        public static final int tarjeta_fondo=0x7f02000a;
+        public static final int art=0x7f020001;
+        public static final int bridge=0x7f020002;
+        public static final int flag=0x7f020003;
+        public static final int food=0x7f020004;
+        public static final int fruit=0x7f020005;
+        public static final int furniture=0x7f020006;
+        public static final int glass=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int plant=0x7f020009;
+        public static final int science=0x7f02000a;
+        public static final int sea=0x7f02000b;
+        public static final int space=0x7f02000c;
+        public static final int tarjeta_fondo=0x7f02000d;
     }
     public static final class id {
         public static final int grdAlbumes=0x7f080000;

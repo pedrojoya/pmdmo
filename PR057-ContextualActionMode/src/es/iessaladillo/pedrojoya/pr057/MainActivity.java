@@ -14,44 +14,52 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private TextView txtAlumno;
+    // Vistas.
+    private EditText txtAlumno;
     private ListView lstAsignaturas;
+
+    // Variables.
     private ArrayList<String> asignaturas;
     private ArrayAdapter<String> adaptador;
 
+    // Al crear la actividad.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Se obtienen y configuran las vistas.
         configTxtAlumno();
         configLstAsignaturas();
     }
 
+    // Obtiene y configura txtAlumno.
     private void configTxtAlumno() {
         // Se establece el listener para onLongClick sobre txtAlumno.
-        txtAlumno = (TextView) this.findViewById(R.id.txtAlumno);
+        txtAlumno = (EditText) findViewById(R.id.txtAlumno);
         txtAlumno.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 // Se activa el modo de acción contextual.
                 activarModoContextualIndividual(v);
-                // Se retorna que se ha procesado el evento.
+                // Se retorna que el evento ya ha sido procesado.
                 return true;
             }
         });
     }
 
+    // Activa el modo de acción contextual individual.
     private void activarModoContextualIndividual(View v) {
         // Se inicia el modo de acción contextual pasándole el objeto listener
         // que atenderá a los eventos del modo de acción contextual, que creamos
         // de forma inline.
         startActionMode(new ActionMode.Callback() {
+
             // Al preparar el modo.
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
@@ -64,7 +72,8 @@ public class MainActivity extends Activity {
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 // Se infla la especificación del menú contextual en el menú.
                 mode.getMenuInflater().inflate(R.menu.txtalumnos_menu, menu);
-                // Se retorna que se ha procesado la creación del modo de acción
+                // Se retorna que ya se ha procesado la creación del modo de
+                // acción
                 // contextual.
                 return true;
             }
@@ -72,7 +81,7 @@ public class MainActivity extends Activity {
             // Al pulsar sobre un ítem de acción del modo contextual.
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                // Dependiendo del elemento pulsado.
+                // Dependiendo del ítem de menú pulsado.
                 switch (item.getItemId()) {
                 case R.id.mnuAprobar:
                     Toast.makeText(
@@ -93,7 +102,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onDestroyActionMode(ActionMode arg0) {
-                // TODO Auto-generated method stub
+                // No se hace nada.
             }
 
         });
@@ -101,6 +110,7 @@ public class MainActivity extends Activity {
         v.setSelected(true);
     }
 
+    // Obtiene y configura lstAsignaturas.
     private void configLstAsignaturas() {
         // Se establece el modo de selección múltiple modal.
         lstAsignaturas = (ListView) this.findViewById(R.id.lstAsignaturas);
@@ -165,7 +175,8 @@ public class MainActivity extends Activity {
                                     Toast.LENGTH_LONG).show();
                             break;
                         case R.id.mnuEliminar:
-                            // Se obtienen los elementos seleccionados.
+                            // Se obtienen los elementos seleccionados (y se
+                            // quita la selección).
                             ArrayList<String> elems = getElementosSeleccionados(
                                     lstAsignaturas, true);
                             // Se eliminan del adaptador.
@@ -196,6 +207,7 @@ public class MainActivity extends Activity {
 
                     }
                 });
+        // Un click simple ya activa el modo de acción contextual.
         lstAsignaturas.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
@@ -207,8 +219,11 @@ public class MainActivity extends Activity {
         });
     }
 
+    // Retorna un ArrayList con los elementos seleccionados. Recibe la lista y
+    // si debe quitarse la selección una vez obtenidos los elementos.
     private ArrayList<String> getElementosSeleccionados(ListView lst,
             boolean uncheck) {
+        // ArrayList resultado.
         ArrayList<String> datos = new ArrayList<String>();
         // Se obtienen los elementos seleccionados de la lista.
         SparseBooleanArray selec = lst.getCheckedItemPositions();
@@ -216,12 +231,15 @@ public class MainActivity extends Activity {
             // Si está seleccionado.
             if (selec.valueAt(i)) {
                 int position = selec.keyAt(i);
+                // Se quita de la selección (si hay que hacerlo).
                 if (uncheck) {
                     lst.setItemChecked(position, false);
                 }
+                // Se añade al resultado.
                 datos.add((String) lst.getItemAtPosition(selec.keyAt(i)));
             }
         }
+        // Se retorna el resultado.
         return datos;
     }
 

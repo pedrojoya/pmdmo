@@ -3,55 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/fondo_grupo"
     android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/fondo_grupo"
         android:orientation="horizontal"
-        android:background="@color/fondo_subgrupo"
-        android:padding="5dp" >
-	    <TextView
-	        android:id="@+id/lblEncCiclo"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:gravity="center_horizontal"
-	        android:padding="5dp"
-	        android:layout_weight="1"
-	        android:textColor="@android:color/white"
-	        android:textStyle="bold" />
-	    <ImageView
-	        android:id="@+id/imgIndicador"
-	        android:layout_width="30dp"
-	        android:layout_height="30dp"
-	        android:layout_gravity="center_vertical" 
-	        android:contentDescription="@string/expandir_contraer_grupo" />	        
-	</LinearLayout>
-	<View
-	    android:id="@+id/separador" 
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#3AAA" />    	    
+        android:padding="@dimen/grupo_padding" >
+
+        <TextView
+            android:id="@+id/lblEncCiclo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/grupo_padding"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgIndicador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/expandir_contraer_grupo"
+            android:src="@drawable/ic_action_navigation_expand" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/llEncColumnas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp" >
+        android:paddingLeft="@dimen/grupo_padding"
+        android:paddingRight="@dimen/grupo_padding" >
+
         <TextView
             android:id="@+id/lblEncNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_marginRight="@dimen/grupo_padding"
+            android:layout_weight="3"
+            android:background="@drawable/fondo_encabezado"
+            android:gravity="center_vertical"
             android:text="@string/alumno"
+            android:paddingLeft="@dimen/encabezado_paddingLeft"
+            android:textAllCaps="true"
+            android:textColor="@color/fondo_grupo"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/lblEncCurso"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:background="@drawable/fondo_encabezado"
+            android:gravity="center"
             android:text="@string/curso"
+            android:textAllCaps="true"
+            android:textColor="@color/fondo_grupo"
             android:textStyle="bold" />
     </LinearLayout>
+
 </LinearLayout>

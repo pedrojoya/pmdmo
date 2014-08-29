@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rlDatos"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="5dp" >
+    android:layout_height="match_parent" >
 
     <ImageView
         android:id="@+id/imgFoto"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/arte_del_album" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/obra"
+        android:scaleType="centerCrop"
+        android:src="@drawable/light_bulb" />
 
     <TextView
         android:id="@+id/lblNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgFoto"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textIsSelectable="true" />
+        android:layout_above="@+id/lblAutor"
+        android:layout_alignParentRight="true"
+        android:text="No te digo trigo"
+        android:layout_marginRight="10dp"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/lblAnio"
+        android:id="@+id/lblAutor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblNombre"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Baldomero Fdez."
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textIsSelectable="true" />
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

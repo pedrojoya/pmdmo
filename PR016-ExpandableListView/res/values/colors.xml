@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="rojo">#FF0000</color>
-    <color name="negro">#000000</color>
-    <color name="fondo_grupo">#CEB28B</color>
-    <color name="fondo_subgrupo">#AC8C5E</color>
-    <color name="fondo_fila">#F9E4C8</color>
+    <color name="menor_de_edad">#A47088</color>
+    <color name="mayor_de_edad">#000000</color>
+    <color name="fondo_grupo">#785A81</color>
+    <color name="subgrupo">#947C9B</color>
 </resources>

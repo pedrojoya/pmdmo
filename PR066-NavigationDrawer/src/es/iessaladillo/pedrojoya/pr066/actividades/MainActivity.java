@@ -3,8 +3,6 @@ package es.iessaladillo.pedrojoya.pr066.actividades;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,27 +29,49 @@ import es.iessaladillo.pedrojoya.pr066.modelos.NavigationDrawerItem;
 public class MainActivity extends Activity implements OnItemClickListener {
 
     // Constantes.
-    private static final String PANEL_YA_ABIERTO = "prefPanelYaAbierto";
+    private static final String PREF_PANEL_YA_ABIERTO = "prefPanelYaAbierto";
 
-    // Variables miembro.
+    // Vistas.
     private DrawerLayout panelNavegacion;
     private ListView lstPanelNavegacion;
     private ActionBarDrawerToggle conmutadorPanelNavegacion;
-    private CharSequence tituloPanelNavegacion;
-    private CharSequence tituloContenido;
-    private AlbumesAdapter adaptador;
-    private FragmentManager gestorFragmentos;
 
+    // Variables miembro.
+    private CharSequence sTituloPanelNavegacion;
+    private CharSequence sTituloContenido;
+
+    // Al crear la actividad.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Se obtiene el gestor de fragmentos
-        gestorFragmentos = getFragmentManager();
         // Inicialmente el título del panel de navegación, como el del contenido
         // principal coincide con el de la actividad.
-        tituloContenido = tituloPanelNavegacion = getTitle();
-        // Se establecemos el drawable que actúa como sombra del contenido
+        sTituloContenido = sTituloPanelNavegacion = getTitle();
+        // Se configura el navigation drawer.
+        configPanel();
+        // Se selecciona el primer elemento de la lista del panel de navegación
+        // para que el contenedor de la actividad principal no se muestre vacío
+        // inicialmente.
+        if (savedInstanceState == null) {
+            panelNavegacionItemSelected(1);
+        }
+        // Se abre automáticamente el panel si es la primera vez que se usa la
+        // aplicación. Para comprobarlo se usa una preferencia.
+        SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
+        if (!preferencias.getBoolean(PREF_PANEL_YA_ABIERTO, false)) {
+            // Se abre el panel de navegación con su lista.
+            panelNavegacion.openDrawer(lstPanelNavegacion);
+            // Se actualiza la preferencia.
+            SharedPreferences.Editor editor = preferencias.edit();
+            editor.putBoolean(PREF_PANEL_YA_ABIERTO, true);
+            editor.commit();
+        }
+    }
+
+    // Configura el navigation drawer.
+    private void configPanel() {
+        // Se establece el drawable que actúa como sombra del contenido
         // principal cuando se abre el panel de navegación.
         panelNavegacion = (DrawerLayout) findViewById(R.id.drawer_layout);
         panelNavegacion.setDrawerShadow(R.drawable.drawer_shadow,
@@ -60,8 +80,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         // propia la que responda a la pulsación sobre los elementos de la
         // lista.
         lstPanelNavegacion = (ListView) findViewById(R.id.left_drawer);
-        adaptador = new AlbumesAdapter(this, getDatos());
-        lstPanelNavegacion.setAdapter(adaptador);
+        lstPanelNavegacion.setAdapter(new AlbumesAdapter(this, getDatos()));
         lstPanelNavegacion.setOnItemClickListener(this);
         // Se crea el objeto de vínculo entre la ActionBar y el panel de
         // navegación. El constructor recibe la actividad, el panel de
@@ -75,7 +94,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
             public void onDrawerClosed(View view) {
                 // Se reestablece el título de la ActionBar al valor que tuviera
                 // antes de abrir el panel de navegación.
-                getActionBar().setTitle(tituloContenido);
+                getActionBar().setTitle(sTituloContenido);
                 // Se recarga el menú de la ActionBar.
                 invalidateOptionsMenu();
             }
@@ -84,7 +103,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
             public void onDrawerOpened(View drawerView) {
                 // Se establece como título de la ActionBar el nombre de la
                 // actividad.
-                getActionBar().setTitle(tituloPanelNavegacion);
+                getActionBar().setTitle(sTituloPanelNavegacion);
                 // Se recarga el menú de la ActionBar.
                 invalidateOptionsMenu();
             }
@@ -94,24 +113,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
         getActionBar().setHomeButtonEnabled(true);
         // Se vincula el conmutador con el panel de navegación.
         panelNavegacion.setDrawerListener(conmutadorPanelNavegacion);
-        // Se selecciona el primer elemento de la lista del panel de navegación
-        // para que el contenedor de la actividad principal no se muestre vacío
-        // inicialmente.
-        if (savedInstanceState == null) {
-            panelNavegacionItemSelected(1);
-        }
-        // Se obtiene la preferencia PANEL_YA_ABIERTO (false por defecto)
-        SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
-        if (!preferencias.getBoolean(PANEL_YA_ABIERTO, false)) {
-            // Se abre el panel de navegación con su lista.
-            panelNavegacion.openDrawer(lstPanelNavegacion);
-            // Se actualiza la preferencia.
-            SharedPreferences.Editor editor = preferencias.edit();
-            editor.putBoolean(PANEL_YA_ABIERTO, true);
-            editor.commit();
-        }
     }
 
+    // Al crear el menú de opciones.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -119,13 +123,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
         return super.onCreateOptionsMenu(menu);
     }
 
-    // Llamado automáticamente tras cada llamada a invalidateOptionsMenu()
+    // Llamado automáticamente tras cada llamada a invalidateOptionsMenu().
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Si el panel de navegación está abierto, se ocultan los ítems de menú
-        // de la
-        // ActionBar relacionados con contenido (ya que éste está oculto tras el
-        // panel de navegación).
+        // de la ActionBar relacionados con contenido (ya que éste está oculto
+        // tras el panel de navegación).
         boolean abierto = panelNavegacion.isDrawerOpen(lstPanelNavegacion);
         menu.findItem(R.id.mnuBuscar).setVisible(!abierto);
         return super.onPrepareOptionsMenu(menu);
@@ -136,8 +139,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Si se ha pulsado sobre icono de activación del panel de navegación no
         // se debe hacer nada más, ya que el activador ya se encarga por
-        // nosotros de
-        // abrir o cerrar el panel de navegación.
+        // nosotros de abrir o cerrar el panel de navegación.
         if (conmutadorPanelNavegacion.onOptionsItemSelected(item)) {
             return true;
         }
@@ -175,18 +177,15 @@ public class MainActivity extends Activity implements OnItemClickListener {
         // Se obtienen los datos del álbum sobre el que se ha pulsado.
         Album album = (Album) lstPanelNavegacion.getItemAtPosition(position);
         // Se carga en la actividad principal el fragmento correspondiente.
-        Fragment frgDetalle = new DetalleFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(DetalleFragment.ARG_ALBUM, album);
-        frgDetalle.setArguments(args);
-        gestorFragmentos.beginTransaction()
+        DetalleFragment frgDetalle = DetalleFragment.newInstance(album);
+        getFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, frgDetalle).commit();
         // Se marca como seleccionado dicho elemento en la lista.
         lstPanelNavegacion.setItemChecked(position, true);
         // Se actualiza el título que debe mostrar la ActionBar, acorde al
         // fragmento que se ha cargado.
-        tituloContenido = album.getNombre();
-        getActionBar().setTitle(tituloContenido);
+        sTituloContenido = album.getNombre();
+        getActionBar().setTitle(sTituloContenido);
         // Se cierra el panel de navegación.
         panelNavegacion.closeDrawer(lstPanelNavegacion);
     }
@@ -207,24 +206,22 @@ public class MainActivity extends Activity implements OnItemClickListener {
         conmutadorPanelNavegacion.onConfigurationChanged(newConfig);
     }
 
-    // Creo los datos para la lista.
+    // Retorna la lista de datos.
     private ArrayList<NavigationDrawerItem> getDatos() {
         ArrayList<NavigationDrawerItem> albumes = new ArrayList<NavigationDrawerItem>();
         albumes.add(new NavigationDrawerHeader("Los inicios"));
-        albumes.add(new Album(R.drawable.veneno, "Veneno", "1977"));
-        albumes.add(new Album(R.drawable.mecanico, "Seré mecánico por ti",
-                "1981"));
+        albumes.add(new Album(R.drawable.animal, "Veneno", "1977"));
+        albumes.add(new Album(R.drawable.art, "Seré mecánico por ti", "1981"));
         albumes.add(new NavigationDrawerHeader("Llega la fama"));
-        albumes.add(new Album(R.drawable.cantecito, "Echate un cantecito",
-                "1992"));
-        albumes.add(new Album(R.drawable.carinio,
-                "Está muy bien eso del cariño", "1995"));
-        albumes.add(new Album(R.drawable.paloma, "Punta Paloma", "1997"));
-        albumes.add(new Album(R.drawable.puro, "Puro Veneno", "1998"));
-        albumes.add(new Album(R.drawable.pollo, "La familia pollo", "2000"));
+        albumes.add(new Album(R.drawable.bridge, "Echate un cantecito", "1992"));
+        albumes.add(new Album(R.drawable.flag, "Está muy bien eso del cariño",
+                "1995"));
+        albumes.add(new Album(R.drawable.food, "Punta Paloma", "1997"));
+        albumes.add(new Album(R.drawable.fruit, "Puro Veneno", "1998"));
+        albumes.add(new Album(R.drawable.furniture, "La familia pollo", "2000"));
         albumes.add(new NavigationDrawerHeader("Sin discográfica"));
-        albumes.add(new Album(R.drawable.ratito, "Un ratito de gloria", "2001"));
-        albumes.add(new Album(R.drawable.hombre, "El hombre invisible", "2005"));
+        albumes.add(new Album(R.drawable.glass, "Un ratito de gloria", "2001"));
+        albumes.add(new Album(R.drawable.plant, "El hombre invisible", "2005"));
         return albumes;
     }
 

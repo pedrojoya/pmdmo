@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<es.iessaladillo.pedrojoya.pr049.utils.LinearLayoutCheckeable xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:background="@drawable/fondo"
-    android:orientation="horizontal"
-    android:padding="2dp"
-    tools:ignore="SelectableText" >
-    <ImageView
-        android:id="@+id/imgFotoItem"
-        android:layout_width="?android:attr/listPreferredItemHeight"
-        android:layout_height="match_parent"
-        android:layout_marginRight="5dp"
-        android:contentDescription="@string/arte_del_album" />
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/item_paddingTop"
+    android:paddingLeft="@dimen/item_paddingLeft"
+    android:paddingRight="@dimen/item_paddingLeft"
+    android:background="@drawable/fragment_lista_item_fondo"
+    android:paddingTop="@dimen/item_paddingTop" >
+
     <TextView
-        android:id="@+id/lblNombreItem"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ellipsize="marquee"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-</es.iessaladillo.pedrojoya.pr049.utils.LinearLayoutCheckeable>
+        android:id="@+id/lblNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/lblNombre_textSize" />
+
+    <TextView
+        android:id="@+id/lblAutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblNombre"
+        android:textSize="@dimen/lblAutor_textSize"
+        android:textColor="@color/fragment_lista_item_lblAutor" />
+
+    <TextView
+        android:id="@+id/lblAnio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/lblAnio"
+        android:layout_centerVertical="true"
+        android:background="@drawable/lblanio_fondo"
+        android:text="2012"
+        android:textSize="@dimen/lblAnio_textSize"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

@@ -1,7 +1,13 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Actividad -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- actionview_progreso -->
+    <dimen name="progreso_paddingLeft">5dp</dimen>
+    <dimen name="progreso_paddingRight">5dp</dimen>
+    <dimen name="progreso_layoutWidth">30dp</dimen>
+    <dimen name="progreso_layoutHeight">30dp</dimen>
 
 </resources>

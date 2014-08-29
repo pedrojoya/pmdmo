@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PR052-ActionBarTabs</string>
-    <string name="alumno">Alumno</string>
-    <string name="notas_del_alumno">Notas del alumno</string>
-    <string name="refrescar">Refrescar</string>
-    <string name="agregar">Agregar</string>
-    <string name="cargar">Cargar</string>
-    <string name="editar">Editar</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="buscar">Buscar</string>
-    <string name="compartir">Compartir</string>
-    <string name="ir_a_la_actividad_superior">Ir a la actividad superior</string>
-    <string name="notas">Notas</string>
+
+    <string name="app_name">ActionBarTabs</string>
+    <string name="actionbar">ActionBar</string>
+    <string name="fotografia">Fotografía</string>
+    <string name="acerca_de">Info</string>
+    <string name="original">Original</string>
+    <string name="escala_de_grises">Escala de grises</string>
+    <string name="sepia">Sepia</string>
+    <string name="azulado">Azulado</string>
+    <string name="verdoso">Verdoso</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="art">Bench, by Simon Funk</string>
+    <string name="esta_ser_la_actividad_de_preferencias">Esta será la actividad de preferencias</string>
+    <string name="title_activity_preferencias">Preferencias</string>
+    <string name="foto">Foto</string>
+    <string name="_debe_implementar_fotofragment_listener">" debe implementar FotoFragment.Listener"</string>
+    <string name="me_gusta">Me gusta</string>
+    <string name="info">Info</string>
+
 </resources>

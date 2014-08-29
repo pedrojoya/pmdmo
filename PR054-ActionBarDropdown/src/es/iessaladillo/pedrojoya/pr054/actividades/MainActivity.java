@@ -1,32 +1,42 @@
 package es.iessaladillo.pedrojoya.pr054.actividades;
 
+import java.lang.reflect.Field;
+
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 import es.iessaladillo.pedrojoya.pr054.R;
-import es.iessaladillo.pedrojoya.pr054.fragmentos.AlumnoFragment;
-import es.iessaladillo.pedrojoya.pr054.fragmentos.NotasFragment;
+import es.iessaladillo.pedrojoya.pr054.fragmentos.FotoFragment;
+import es.iessaladillo.pedrojoya.pr054.fragmentos.InfoFragment;
 
 public class MainActivity extends Activity implements
         ActionBar.OnNavigationListener {
 
+    // Constantes.
+    private static final int POS_OPCION_FOTO = 0;
+    private static final int POS_OPCION_INFO = 1;
+    private static final String TAG_FRG_FOTO = "fotoFragment";
+    private static final String TAG_FRG_INFO = "infoFragment";
+    private static final String STATE_OPCION = "opcion";
+
+    // Variables.
+    private FotoFragment frgFoto;
+    private InfoFragment frgInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Se activa el ítem de overflow en dispositivos con botón físico de
+        // menú.
+        overflowEnDispositivoConTeclaMenu();
         // Se configura para action bar para que tenga un spinner de navegación,
-        // NO muestre el título (para que haya más espacio), pero sí muestre el
-        // icono de navegación junto al icono de la aplicación.
+        // y NO muestre el título (para que haya más espacio).
         ActionBar ab = getActionBar();
         ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        ab.setDisplayShowTitleEnabled(false);
-        ab.setDisplayHomeAsUpEnabled(true);
         // Se crea el adaptador para el Spinner a partir de un array de
         // constantes de cadena. Se usará como layout uno similar a
         // android.R.layout.simple_spinner_dropdown_item pero con el texto en
@@ -39,59 +49,91 @@ public class MainActivity extends Activity implements
         // Si venimos de un estado anterior.
         if (savedInstanceState != null) {
             // Se coloca en la opción en la que estaba.
-            ab.setSelectedNavigationItem(savedInstanceState.getInt("opcion"));
+            ab.setSelectedNavigationItem(savedInstanceState
+                    .getInt(STATE_OPCION));
         }
+    }
+
+    // Cuando se produce un cambio de configuración.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Almacena qué pestaña tenemos seleccionada.
+        outState.putInt(STATE_OPCION, getActionBar()
+                .getSelectedNavigationIndex());
+        super.onSaveInstanceState(outState);
     }
 
     // Al seleccionar un elemento del spinner de la action bar.
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         // Se crea el fragmento correspondiente al elemento seleccionado.
-        Fragment frg = null;
         switch (itemPosition) {
-        case 0:
-            frg = new AlumnoFragment();
+        case POS_OPCION_FOTO:
+            cargarFragmentoFoto();
             break;
-        case 1:
-            frg = new NotasFragment();
+        case POS_OPCION_INFO:
+            cargarFragmentoInfo();
             break;
         }
-        // Se muestra el fragmento en el contenedor del layout de la actividad.
-        FragmentTransaction transaccion = getFragmentManager()
-                .beginTransaction();
-        transaccion.replace(android.R.id.content, frg);
-        transaccion.commit();
         // Se retorna que ya ha sido procesada la selección.
         return true;
     }
 
-    // Al crear el menú.
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Se infla el menú a partir del XML.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // Cuando se pulsa un elemento del menú.
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Dependiendo del item pulsado se realiza la acción deseada.
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            Toast.makeText(getApplicationContext(),
-                    R.string.ir_a_la_actividad_superior, Toast.LENGTH_SHORT)
-                    .show();
-            return true;
+    // Carga el fragmento de la foto
+    private void cargarFragmentoFoto() {
+        // Se busca el fragmento
+        frgFoto = (FotoFragment) getFragmentManager().findFragmentByTag(
+                TAG_FRG_FOTO);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        // Si no se encuentra, se crea y se añade al contenedor.
+        if (frgFoto == null) {
+            frgFoto = FotoFragment.newInstance(R.drawable.bench);
+            ft.add(android.R.id.content, frgFoto, TAG_FRG_FOTO);
+        } else {
+            // Si se encuentra se enlaza con el contenedor.
+            ft.attach(frgFoto);
         }
-        return super.onOptionsItemSelected(item);
+        // Se desvincula el otro fragmento del contenedor.
+        if (frgInfo != null) {
+            ft.detach(frgInfo);
+        }
+        ft.commit();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        // Almacena qué pestaña tenemos seleccionada.
-        outState.putInt("opcion", getActionBar().getSelectedNavigationIndex());
-        super.onSaveInstanceState(outState);
+    // Carga el fragmento de la info.
+    private void cargarFragmentoInfo() {
+        // Se busca el fragmento.
+        frgInfo = (InfoFragment) getFragmentManager().findFragmentByTag(
+                TAG_FRG_INFO);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        // Si no se encuentra, se crea y se añade al contenedor.
+        if (frgInfo == null) {
+            frgInfo = new InfoFragment();
+            ft.add(android.R.id.content, frgInfo, TAG_FRG_INFO);
+        } else {
+            // Si se encuentra se enlaza con el contenedor.
+            ft.attach(frgInfo);
+        }
+        // Se desvincula el otro fragmento del contenedor.
+        if (frgFoto != null) {
+            ft.detach(frgFoto);
+        }
+        ft.commit();
+    }
+
+    // Activa el ítem de overflow en dispositivos con botón físico de menú.
+    private void overflowEnDispositivoConTeclaMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class
+                    .getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignorar
+        }
     }
 
 }

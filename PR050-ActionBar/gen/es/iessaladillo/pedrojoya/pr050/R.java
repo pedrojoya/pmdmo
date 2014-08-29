@@ -21,44 +21,48 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ic_menu_add=0x7f020001;
-        public static final int ic_menu_delete=0x7f020002;
-        public static final int ic_menu_edit=0x7f020003;
-        public static final int ic_menu_refresh=0x7f020004;
-        public static final int ic_menu_search=0x7f020005;
-        public static final int ic_menu_share=0x7f020006;
-        public static final int ic_menu_upload=0x7f020007;
+        public static final int bench=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int lblAlumno=0x7f080000;
-        public static final int mnuAgregar=0x7f080002;
-        public static final int mnuBuscar=0x7f080007;
-        public static final int mnuCargar=0x7f080006;
-        public static final int mnuCompartir=0x7f080008;
-        public static final int mnuEditar=0x7f080003;
-        public static final int mnuEliminar=0x7f080004;
-        public static final int mnuRefrescar=0x7f080005;
-        public static final int txtAlumno=0x7f080001;
+        public static final int frmFragmento=0x7f080000;
+        public static final int imgFoto=0x7f080001;
+        public static final int mnuAzulado=0x7f080007;
+        public static final int mnuFoto=0x7f080009;
+        public static final int mnuGrises=0x7f080005;
+        public static final int mnuInfo=0x7f080003;
+        public static final int mnuOriginal=0x7f080004;
+        public static final int mnuPreferencias=0x7f080002;
+        public static final int mnuSepia=0x7f080006;
+        public static final int mnuVerdoso=0x7f080008;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int activity_preferencias=0x7f030001;
+        public static final int fragment_foto=0x7f030002;
+        public static final int fragment_info=0x7f030003;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
+        public static final int fragment_foto=0x7f070001;
+        public static final int fragment_info=0x7f070002;
     }
     public static final class string {
+        public static final int _debe_implementar_fotofragment_listener=0x7f05000e;
+        public static final int acerca_de=0x7f050003;
         public static final int actionbar=0x7f050001;
-        public static final int agregar=0x7f050004;
-        public static final int alumno=0x7f050002;
         public static final int app_name=0x7f050000;
-        public static final int buscar=0x7f050008;
-        public static final int cargar=0x7f050005;
-        public static final int compartir=0x7f050009;
-        public static final int editar=0x7f050006;
-        public static final int eliminar=0x7f050007;
-        public static final int ir_a_la_actividad_superior=0x7f05000a;
-        public static final int refrescar=0x7f050003;
+        public static final int art=0x7f05000a;
+        public static final int azulado=0x7f050007;
+        public static final int escala_de_grises=0x7f050005;
+        public static final int esta_ser_la_actividad_de_preferencias=0x7f05000b;
+        public static final int foto=0x7f05000d;
+        public static final int fotografia=0x7f050002;
+        public static final int original=0x7f050004;
+        public static final int preferencias=0x7f050009;
+        public static final int sepia=0x7f050006;
+        public static final int title_activity_preferencias=0x7f05000c;
+        public static final int verdoso=0x7f050008;
     }
     public static final class style {
         /** 

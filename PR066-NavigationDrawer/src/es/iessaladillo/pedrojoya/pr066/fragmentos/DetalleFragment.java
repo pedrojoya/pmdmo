@@ -12,12 +12,23 @@ import es.iessaladillo.pedrojoya.pr066.modelos.Album;
 
 public class DetalleFragment extends Fragment {
 
+    // Constantes.
     public static final String ARG_ALBUM = "argAlbum";
 
+    // Vistas.
     private ImageView imgFoto;
     private TextView lblNombre;
     private TextView lblAnio;
-    private Album album;
+
+    // Retorna una instancia del fragmento ya configurada.
+    // Recibe el album que debe mostrar el fragmento.
+    public static DetalleFragment newInstance(Album album) {
+        DetalleFragment frgDetalle = new DetalleFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_ALBUM, album);
+        frgDetalle.setArguments(args);
+        return frgDetalle;
+    }
 
     // Retorna la vista que debe mostrar el fragmento.
     @Override
@@ -31,19 +42,20 @@ public class DetalleFragment extends Fragment {
         return v;
     }
 
+    // Cuando la actividad ha sido creada completamente.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // Se obtiene el álbum desde el bundle de parámetros.
-        album = this.getArguments().getParcelable(ARG_ALBUM);
+        Album album = this.getArguments().getParcelable(ARG_ALBUM);
         // Si hay álbum, se muestra.
         if (album != null) {
-            mostrarDetalle();
+            mostrarDetalle(album);
         }
         super.onActivityCreated(savedInstanceState);
     }
 
     // Muestra el detalle de un album en las vistas correspondientes.
-    public void mostrarDetalle() {
+    public void mostrarDetalle(Album album) {
         // Escribo los datos en las vistas.
         imgFoto.setImageResource(album.getFotoResId());
         lblNombre.setText(album.getNombre());

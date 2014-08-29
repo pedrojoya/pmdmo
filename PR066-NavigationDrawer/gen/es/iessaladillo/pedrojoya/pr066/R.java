@@ -10,33 +10,58 @@ package es.iessaladillo.pedrojoya.pr066;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        /**  activity_main 
+         */
+        public static final int drawer_listBackground=0x7f040000;
+        /**  panel_navegacion_list_item 
+         */
+        public static final int item_textColor=0x7f040001;
+    }
+    public static final class dimen {
+        public static final int drawer_dividerHeight=0x7f050001;
+        /**  activity_main 
+         */
+        public static final int drawer_listWidth=0x7f050000;
+        /**  panel_navegacion_list_header 
+         */
+        public static final int header_padding=0x7f050004;
+        public static final int header_textSize=0x7f050005;
+        public static final int item_image_marginRight=0x7f050003;
+        /**  panel_navegacion_list_item 
+         */
+        public static final int item_padding=0x7f050002;
+    }
     public static final class drawable {
         public static final int action_search=0x7f020000;
-        public static final int cantecito=0x7f020001;
-        public static final int carinio=0x7f020002;
-        public static final int drawer_shadow=0x7f020003;
-        public static final int hombre=0x7f020004;
-        public static final int ic_drawer=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int mecanico=0x7f020007;
-        public static final int paloma=0x7f020008;
-        public static final int pollo=0x7f020009;
-        public static final int puro=0x7f02000a;
-        public static final int ratito=0x7f02000b;
-        public static final int veneno=0x7f02000c;
+        public static final int animal=0x7f020001;
+        public static final int art=0x7f020002;
+        public static final int bridge=0x7f020003;
+        public static final int drawer_shadow=0x7f020004;
+        public static final int flag=0x7f020005;
+        public static final int food=0x7f020006;
+        public static final int fruit=0x7f020007;
+        public static final int furniture=0x7f020008;
+        public static final int glass=0x7f020009;
+        public static final int ic_drawer=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int plant=0x7f02000c;
+        public static final int science=0x7f02000d;
+        public static final int sea=0x7f02000e;
+        public static final int space=0x7f02000f;
     }
     public static final class id {
-        public static final int content_frame=0x7f060001;
-        public static final int drawer_layout=0x7f060000;
-        public static final int imgFoto=0x7f060004;
-        public static final int imgFotoItem=0x7f060008;
-        public static final int lblAnio=0x7f060006;
-        public static final int lblNombre=0x7f060005;
-        public static final int lblNombreItem=0x7f060009;
-        public static final int lblText=0x7f060007;
-        public static final int left_drawer=0x7f060002;
-        public static final int mnuBuscar=0x7f06000a;
-        public static final int rlDatos=0x7f060003;
+        public static final int content_frame=0x7f080001;
+        public static final int drawer_layout=0x7f080000;
+        public static final int imgFoto=0x7f080004;
+        public static final int imgFotoItem=0x7f080008;
+        public static final int lblAnio=0x7f080006;
+        public static final int lblNombre=0x7f080005;
+        public static final int lblNombreItem=0x7f080009;
+        public static final int lblText=0x7f080007;
+        public static final int left_drawer=0x7f080002;
+        public static final int mnuBuscar=0x7f08000a;
+        public static final int rlDatos=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -45,14 +70,14 @@ public final class R {
         public static final int panel_navegacion_list_item=0x7f030003;
     }
     public static final class menu {
-        public static final int main=0x7f050000;
+        public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int arte_del_album=0x7f040005;
-        public static final int buscar=0x7f040003;
-        public static final int drawer_close=0x7f040002;
-        public static final int drawer_open=0x7f040001;
-        public static final int sin_navegador=0x7f040004;
+        public static final int app_name=0x7f060000;
+        public static final int arte_del_album=0x7f060005;
+        public static final int buscar=0x7f060003;
+        public static final int drawer_close=0x7f060002;
+        public static final int drawer_open=0x7f060001;
+        public static final int sin_navegador=0x7f060004;
     }
 }

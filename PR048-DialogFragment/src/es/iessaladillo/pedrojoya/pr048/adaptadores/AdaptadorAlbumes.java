@@ -16,17 +16,8 @@ import es.iessaladillo.pedrojoya.pr048.modelos.Album;
 public class AdaptadorAlbumes extends BaseAdapter {
 
     // Variables miembro.
-    private Activity contexto; // Actividad que lo usa.
-    private ArrayList<Album> albumes; // Array de datos.
-    private LayoutInflater inflador; // Inflador de layouts.
-
-    public AdaptadorAlbumes(Activity contexto, ArrayList<Album> albumes) {
-        // Hago una copia de los parámetros del constructor.
-        this.contexto = contexto;
-        this.albumes = albumes;
-        // Obtengo un objeto inflador de layouts.
-        inflador = this.contexto.getLayoutInflater();
-    }
+    private ArrayList<Album> mAlbumes; // Array de datos.
+    private LayoutInflater mInflador; // Inflador de layouts.
 
     // Clase interna para contener las vistas.
     private class ContenedorVistas {
@@ -35,18 +26,26 @@ public class AdaptadorAlbumes extends BaseAdapter {
         TextView lblAnio;
     }
 
+    // Constructor.
+    public AdaptadorAlbumes(Activity contexto, ArrayList<Album> albumes) {
+        // Hago una copia de los parámetros del constructor.
+        this.mAlbumes = albumes;
+        // Obtengo un objeto inflador de layouts.
+        mInflador = LayoutInflater.from(contexto);
+    }
+
     // Retorna cuántos elementos de datos maneja el adaptador.
     @Override
     public int getCount() {
         // Retorno el número de elementos del ArrayList.
-        return albumes.size();
+        return mAlbumes.size();
     }
 
     // Obtiene un dato.
     @Override
     public Object getItem(int position) {
         // Retorno el id de la imagen solicitada.
-        return albumes.get(position);
+        return mAlbumes.get(position);
     }
 
     // Obtiene el identificador de un dato.
@@ -62,28 +61,30 @@ public class AdaptadorAlbumes extends BaseAdapter {
         // Variables locales.
         ContenedorVistas contenedor; // Contenedor de vistas.
         // Intento reutilizar.
-        View fila = convertView;
-        if (fila == null) {
-            // Inflo la vista-fila a partir de la especificación XML.
-            fila = inflador.inflate(R.layout.fila, null);
-            // Creo un objeto contenedor con las referencias a las vistas
-            // de la fila y lo almaceno en el Tag de la vista-fila.
+        if (convertView == null) {
+            // Se infla la vista-fila a partir de la especificación XML.
+            convertView = mInflador.inflate(R.layout.activity_main_item, parent, false);
+            // Se crea el contenedor de vistas y se almacenan en el tag de la
+            // vista.
             contenedor = new ContenedorVistas();
-            contenedor.imgFoto = (ImageView) fila.findViewById(R.id.imgFoto);
-            contenedor.lblNombre = (TextView) fila.findViewById(R.id.lblNombre);
-            contenedor.lblAnio = (TextView) fila.findViewById(R.id.lblAnio);
-            fila.setTag(contenedor);
+            contenedor.imgFoto = (ImageView) convertView
+                    .findViewById(R.id.imgFoto);
+            contenedor.lblNombre = (TextView) convertView
+                    .findViewById(R.id.lblNombre);
+            contenedor.lblAnio = (TextView) convertView
+                    .findViewById(R.id.lblAnio);
+            convertView.setTag(contenedor);
         } else {
-            // Obtengo el contenedor desde la propiedad Tag de la vista-fila.
-            contenedor = (ContenedorVistas) fila.getTag();
+            // Se obtiene el contenedor desde la propiedad Tag de la vista.
+            contenedor = (ContenedorVistas) convertView.getTag();
         }
-        // Escribo lo valores correspondientes de las vistas de la fila.
-        Album album = albumes.get(position);
+        // Se escriben los valores en las vistas.
+        Album album = mAlbumes.get(position);
         contenedor.imgFoto.setImageResource(album.getFotoResId());
         contenedor.lblNombre.setText(album.getNombre());
         contenedor.lblAnio.setText(album.getAnio());
-        // Retorno la vista-fila.
-        return fila;
+        // Se retorna la vista.
+        return convertView;
     }
 
 }
