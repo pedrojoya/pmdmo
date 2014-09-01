@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="es.iessaladillo.pedrojoya.pr100"
+    package="es.iessaladillo.pedrojoya.pr101"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,6 +26,14 @@
         <service
             android:name="ExportarService"
             android:exported="false" />
+
+        <receiver
+            android:name="ExportarReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="es.iessaladillo.pedrojoya.pr101.action_completada" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

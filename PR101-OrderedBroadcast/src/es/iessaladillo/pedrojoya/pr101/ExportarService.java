@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr100;
+package es.iessaladillo.pedrojoya.pr101;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -8,14 +8,13 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.content.LocalBroadcastManager;
 
 public class ExportarService extends IntentService {
 
     // Constantes.
     public static final String EXTRA_DATOS = "extra_datos";
     public static final String EXTRA_FILENAME = "extra_filename";
-    public static final String ACTION_COMPLETADA = "es.iessaladillo.pedrojoya.pr100.action_completada";
+    public static final String ACTION_COMPLETADA = "es.iessaladillo.pedrojoya.pr101.action_completada";
     private static final long ESPERA = 2;
     private static final String NOMBRE_ARCHIVO = "alumnos.txt";
 
@@ -48,8 +47,7 @@ public class ExportarService extends IntentService {
             Intent respuestaIntent = new Intent(ACTION_COMPLETADA);
             respuestaIntent.putExtra(EXTRA_FILENAME, Uri.fromFile(outputFile)
                     .toString());
-            LocalBroadcastManager.getInstance(this).sendBroadcast(
-                    respuestaIntent);
+            sendOrderedBroadcast(respuestaIntent, null);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package es.iessaladillo.pedrojoya.pr100;
+package es.iessaladillo.pedrojoya.pr101;
 
 public final class R {
     public static final class array {
