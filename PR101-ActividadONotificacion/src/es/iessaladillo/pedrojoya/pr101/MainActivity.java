@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr100;
+package es.iessaladillo.pedrojoya.pr101;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -21,13 +20,15 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    // Constantes.
+    private static final int PRIORIDAD_SUPERIOR = 2;
+
     // Vistas.
     private ListView lstAlumnos;
 
     // Variables.
     private BroadcastReceiver mExportarReceiver;
     private ArrayAdapter<String> mAdaptador;
-    private LocalBroadcastManager mGestor;
 
     // Al crear la actividad.
     @Override
@@ -36,8 +37,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         // Se obtienen e inicializan las vistas.
         getVistas();
-        // Se obtiene el gestor de broadcast locales.
-        mGestor = LocalBroadcastManager.getInstance(this);
         // Se crea el receptor de mensajes desde el servicio.
         mExportarReceiver = new BroadcastReceiver() {
 
@@ -47,6 +46,9 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         intent.getStringExtra(ExportarService.EXTRA_FILENAME),
                         Toast.LENGTH_LONG).show();
+                // Se aborta la propagación del broadcast para que no lo reciba
+                // nadie más.
+                abortBroadcast();
             }
         };
     }
@@ -57,16 +59,17 @@ public class MainActivity extends Activity {
         super.onResume();
         // Se crea el filtro para al receptor.
         IntentFilter exportarFilter = new IntentFilter(
-                ExportarService.ACTION_COMPLETADA);
+                "es.iessaladillo.pedrojoya.pr101.action.EXPORTED");
+        exportarFilter.setPriority(PRIORIDAD_SUPERIOR);
         // Se registra el receptor para dicha acción.
-        mGestor.registerReceiver(mExportarReceiver, exportarFilter);
+        registerReceiver(mExportarReceiver, exportarFilter);
     }
 
     // Al dejar de estar en primer plano la actividad.
     @Override
     protected void onPause() {
         // Se desregistra el receptor para dicha acción.
-        mGestor.unregisterReceiver(mExportarReceiver);
+        unregisterReceiver(mExportarReceiver);
         super.onPause();
     }
 

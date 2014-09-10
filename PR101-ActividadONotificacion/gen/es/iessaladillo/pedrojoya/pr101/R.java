@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package es.iessaladillo.pedrojoya.pr100;
+package es.iessaladillo.pedrojoya.pr101;
 
 public final class R {
     public static final class array {
@@ -35,6 +35,9 @@ public final class R {
         public static final int de=0x7f040003;
         public static final int eliminar=0x7f040002;
         public static final int exportar=0x7f040001;
+        public static final int fichero_generado_con_exito=0x7f040006;
+        public static final int lista_de_alumnos_exportada=0x7f040007;
+        public static final int listado_de_alumnos=0x7f040005;
         public static final int no_hay_alumnos_en_la_lista=0x7f040004;
     }
     public static final class style {
